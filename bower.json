@@ -1,0 +1,20 @@
+{
+  "name": "rehApp",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Aplikacja webowa na potrzeby pracy inżynierskiej. Temat: 'Projekt i implementacja systemu wspomagającego zarządzanie prywatnym gabinetem rehabilitacyjnym z aplikacją mobilną.'",
+  "homepage": "https://github.com/pamigomp/rehAppAngularJS",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "bootstrap": "~3.3.5",
+    "angular-chart.js": "~0.8.4",
+    "font-awesome": "~4.4.0",
+    "angular-ui-router": "~0.2.15",
+    "metisMenu": "~2.1.0",
+    "jquery": "~2.1.4",
+    "angular-bootstrap": "~0.13.4"
+  }
+}

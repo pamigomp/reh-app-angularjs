@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="RehApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="RehApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="RehApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="pl" data-ng-app="RehApp" class="no-js rehapp"> <!--<![endif]-->
+    <head>
+        <meta charset="ISO-8859-2">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title data-ng-controller="PageTitleController" data-ng-bind="getPageTitle()"></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.min.css">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.min.css">
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+
+        <div data-ng-include="'views/master.html'"></div>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="bower_components/Chart.js/Chart.min.js"></script>
+        <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/RehAppController.js"></script>
+        <script src="scripts/controllers/LoginController.js"></script>
+        <script src="scripts/controllers/navigation/BreadcrumbsController.js"></script>
+        <script src="scripts/controllers/navigation/MenuController.js"></script>
+        <script src="scripts/controllers/navigation/PageTitleController.js"></script>
+        <script src="scripts/services/application/ApplicationMetadataService.js"></script>
+        <script src="scripts/services/data/DataStorageService.js"></script>
+        <script src="scripts/controllers/patients/PatientsListController.js"></script>
+    </body>
+</html>
