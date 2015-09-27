@@ -3,43 +3,55 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li>
-                    <a href="#/dashboard"> 
+                    <a href="#/dashboard">
                         <i class="fa fa-dashboard fa-fw"></i>
                         Panel
                     </a>
                 </li>
                 <li>
-                    <a href="#/terms"> 
+                    <a href="#">
                         <i class="fa fa-calendar fa-fw"></i>
                         Terminy
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#/terms/list">
-                                <i class="fa fa-calendar fa-fw"></i>
-                                Szczegóły
-                            </a> 
-                        </li> 
+                            <a href="#/terms/pending">
+                                <i class="fa fa-spinner fa-fw"></i>
+                                Oczekujące
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/terms/cancelled">
+                                <i class="fa fa-ban fa-fw"></i>
+                                Odwołane
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/terms/completed">
+                                <i class="fa fa-check-circle-o fa-fw"></i>
+                                Zrealizowane
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#/patients"> 
-                        <i class="fa fa-user fa-fw"></i>
+                    <a href="#">
+                        <i class="fa fa-wheelchair fa-fw"></i>
                         Pacjenci
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="#/patients/list">
-                                <i class="fa fa-user fa-fw"></i>
-                                Szczegóły
-                            </a> 
-                        </li> 
+                                <i class="fa fa-list fa-fw"></i>
+                                Lista
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#/employees"> 
+                    <a href="#">
                         <i class="fa fa-users fa-fw"></i>
                         Pracownicy
                         <span class="fa arrow"></span>
@@ -47,40 +59,37 @@
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="#/employees/list">
-                                <i class="fa fa-users fa-fw"></i>
-                                Szczegóły
-                            </a> 
-                        </li> 
+                                <i class="fa fa-list fa-fw"></i>
+                                Lista
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#/charts"> 
+                    <a href="#">
                         <i class="fa fa-bar-chart fa-fw"></i>
                         Wykresy
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#/charts/list">
-                                <i class="fa fa-bar-chart fa-fw"></i>
-                                Szczegóły
-                            </a> 
-                        </li> 
-                    </ul>
-                </li>
-                <li>
-                    <a href="#/reports"> 
-                        <i class="fa fa-line-chart fa-fw"></i>
-                        Raporty
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="#/reports/list">
+                            <a href="#/charts/general">
                                 <i class="fa fa-line-chart fa-fw"></i>
-                                Szczegóły
-                            </a> 
-                        </li> 
+                                Ogólne
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/charts/patients">
+                                <i class="fa fa-pie-chart fa-fw"></i>
+                                Pacjenci
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/charts/treatments">
+                                <i class="fa fa-bar-chart fa-fw"></i>
+                                Zabiegi
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -89,4 +98,3 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
-
