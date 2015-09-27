@@ -7,6 +7,10 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
             $urlRouterProvider.when('/', '/dashboard');
             $urlRouterProvider.when('/patients', '/patients/list');
             $urlRouterProvider.when('/patients/', '/patients/list');
+            $urlRouterProvider.when('/employees', '/employees/list');
+            $urlRouterProvider.when('/employees/', '/employees/list');
+            $urlRouterProvider.when('/charts', '/charts/general');
+            $urlRouterProvider.when('/terms/', '/terms/pending');
             $urlRouterProvider.otherwise('/dashboard');
 
             $stateProvider
@@ -135,6 +139,75 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                         }
                     })
 
+                    .state('root.patients.list_empty', {
+                        url: '/list',
+                        data: {
+                            title: 'Lista Pacjentów',
+                            breadcrumb: 'Lista'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/patients/list_empty.html',
+                                controller: 'PatientsListController'
+                            }
+                        }
+                    })
+                    .state('root.patients.list_error', {
+                        url: '/list',
+                        data: {
+                            title: 'Lista Pacjentów',
+                            breadcrumb: 'Lista'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/patients/list_error.html',
+                                controller: 'PatientsListController'
+                            }
+                        }
+                    })
+
+                    .state('root.patients.new', {
+                        url: '/new',
+                        data: {
+                            title: 'Nowy pacjent',
+                            breadcrumb: 'Nowy pacjent'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/patients/patient/create.html',
+                                controller: 'PatientCreateController'
+                            }
+                        }
+                    })
+
+                    .state('root.patients.patient', {
+                        abstract: true,
+                        url: '/:patientPesel',
+                        data: {
+                            title: '[PESEL]',
+                            breadcrumb: '[PESEL]'
+                        },
+                        views: {
+                            'content@': {
+                                template: '<div data-ui-view=""></div>'
+                            }
+                        }
+                    })
+
+                    .state('root.patients.patient.details', {
+                        url: '/details',
+                        data: {
+                            title: 'Szczegóły pacjenta',
+                            breadcrumb: 'Szczegóły'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/patients/patient/details.html',
+                                controller: 'PatientDetailsController'
+                            }
+                        }
+                    })
+
                     .state('root.employees', {
                         abstract: true,
                         url: '/employees',
@@ -159,6 +232,76 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                             '': {
                                 templateUrl: 'views/employees/list.html',
                                 controller: 'EmployeesListController'
+                            }
+                        }
+                    })
+
+                    .state('root.employees.list_empty', {
+                        url: '/list',
+                        data: {
+                            title: 'Lista Pracowników',
+                            breadcrumb: 'Lista'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/employees/list_empty.html',
+                                controller: 'EmployeesListController'
+                            }
+                        }
+                    })
+
+                    .state('root.employees.list_error', {
+                        url: '/list',
+                        data: {
+                            title: 'Lista Pracowników',
+                            breadcrumb: 'Lista'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/employees/list_error.html',
+                                controller: 'EmployeesListController'
+                            }
+                        }
+                    })
+
+                    .state('root.employees.new', {
+                        url: '/new',
+                        data: {
+                            title: 'Nowy pracownik',
+                            breadcrumb: 'Nowy pracownik'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/employees/employee/create.html',
+                                controller: 'EmployeeCreateController'
+                            }
+                        }
+                    })
+
+                    .state('root.employees.employee', {
+                        abstract: true,
+                        url: '/:employeeId',
+                        data: {
+                            title: '[ID]',
+                            breadcrumb: '[ID]'
+                        },
+                        views: {
+                            'content@': {
+                                template: '<div data-ui-view=""></div>'
+                            }
+                        }
+                    })
+
+                    .state('root.employees.employee.details', {
+                        url: '/details',
+                        data: {
+                            title: 'Szczegóły pracownika',
+                            breadcrumb: 'Szczegóły'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/employees/employee/details.html',
+                                controller: 'EmployeeDetailsController'
                             }
                         }
                     })

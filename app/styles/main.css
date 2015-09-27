@@ -37,6 +37,10 @@ body {
     }
 }
 
+.navbar-brand {
+    font-size: 26px;
+}
+
 .navbar-top-links {
     margin-right: 0;
 }
