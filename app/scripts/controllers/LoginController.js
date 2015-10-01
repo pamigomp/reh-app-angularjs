@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('RehApp')
 
         .controller('LoginController', function ($scope, $state) {

@@ -1,5 +1,5 @@
-<div class="navbar navbar-default navbar-static-top" data-ng-controller="BreadcrumbsController" style="margin-bottom: 0; min-height: 35px;">
-    <ol class="breadcrumb" style="background-color: #F8F8F8; margin-bottom: 0">
+<div class="navbar navbar-default navbar-static-top" data-ng-controller="BreadcrumbsController" style=" min-height: 35px;">
+    <ol class="breadcrumb">
         <li data-ng-repeat="state in $state.$current.path" data-ng-class="{active: $last}">
             <span data-ng-switch="$last">
                 <span data-ng-switch-when="false"> <a href="#{{state.url.format($stateParams)}}">{{state.data.breadcrumb}}</a> </span>

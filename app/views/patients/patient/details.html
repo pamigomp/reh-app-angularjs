@@ -1,10 +1,116 @@
-<div id="page-wrapper">
+<div id="page-wrapper" data-ng-init="loadPatientDetails()">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Szczegóły pacjenta</h1>
         </div>
     </div>
-    <div class="row">
-        ...
-    </div>
+    <form class="row" role="form" name="new_patient">
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Dane personalne</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group required">
+                            <label class="control-label" for="pesel">PESEL</label>
+                            <input id="pesel" type="text" class="form-control" data-ng-model="patientDetails.pesel" placeholder="PESEL" required="required">
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="surname">Nazwisko</label>
+                            <input id="surname" type="text" class="form-control" data-ng-model="patientDetails.surname" placeholder="Nazwisko" required="required">
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="name">Imię</label>
+                            <input id="name" type="text" class="form-control" data-ng-model="patientDetails.name" placeholder="Imię" required="required">
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="sex">Płeć</label>
+                            <div class="radio">
+                                <label>
+                                    <input value="K" data-ng-model="patientDetails.sex" type="radio" required="required">Kobieta
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input value="M" data-ng-model="patientDetails.sex" type="radio" required="required">Mężczyzna
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="dob">Data urodzenia</label>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <select class="form-control">
+                                        <option selected disabled style="display: none">Dzień</option>
+                                        <option data-ng-repeat="n in rangeDays()" value="{{n}}">{{n}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select class="form-control">
+                                        <option selected disabled style="display: none">Miesiąc</option>
+                                        <option value="1">Styczeń</option>
+                                        <option value="2">Luty</option>
+                                        <option value="3">Marzec</option>
+                                        <option value="4">Kwiecień</option>
+                                        <option value="5">Maj</option>
+                                        <option value="6">Czerwiec</option>
+                                        <option value="7">Lipiec</option>
+                                        <option value="8">Sierpień</option>
+                                        <option value="9">Wrzesień</option>
+                                        <option value="10">Październik</option>
+                                        <option value="11">Listopad</option>
+                                        <option value="12">Grudzień</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select class="form-control">
+                                        <option selected disabled style="display: none">Rok</option>
+                                        <option data-ng-repeat="n in rangeYears(2050, 1900)" value="{{n}}">{{n}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="email">E-mail</label>
+                            <input id="email" type="email" data-ng-model="patientDetails.email" class="form-control" placeholder="E-mail">
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="phone">Telefon kontaktowy</label>
+                            <input id="phone" type="text" data-ng-model="patientDetails.phonenumber" class="form-control" placeholder="Telefon kontaktowy" required="required">
+                        </div>
+                        <div class="form-group" data-ng-model="patientDetails.informations">
+                            <label class="control-label" for="informations">Dodatkowe informacje</label>
+                            <textarea id="informations" class="form-control" maxlength="512" cols="5" placeholder="Dodatkowe informacje"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Adres zamieszkania</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group required">
+                            <label class="control-label" for="street">Ulica</label>
+                            <input id="street" type="text" class="form-control" placeholder="Ulica" required="required">
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="postal_code">Kod pocztowy</label>
+                            <input id="postal_code" type="text" class="form-control" placeholder="Kod pocztowy" required="required">
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="city">Miejscowość</label>
+                            <input id="city" type="text" class="form-control" placeholder="Miejscowość" required="required">
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="country">Kraj</label>
+                            <input id="country" type="text" class="form-control" placeholder="Kraj" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </form>
+    <button type="submit" class="btn btn-primary" data-ng-click="savePatientDetails()" data-ng-disabled="new_patient.$invalid"><i class="fa fa-plus"></i> Dodaj</button>
 </div>

@@ -2,7 +2,7 @@
 
 angular.module('RehApp')
 
-        .factory('EmployeesDataService', function ($q, DataStorageService) {
+        .factory('EmployeesDataService', function ($q, $state, DataStorageService) {
             var EmployeesDataService = {};
 
             EmployeesDataService.getEmployeesList = function () {
@@ -18,10 +18,68 @@ angular.module('RehApp')
                         },
                         function () {
                             deferred.reject();
-                        });
+                        }
+                );
                 return deferred.promise;
             };
-            
+
+            EmployeesDataService.getEmployeeDetails = function (employeeId) {
+                var deferred = $q.defer();
+
+                DataStorageService.getEmployee(employeeId).then(
+                        function (employeeData) {
+                            deferred.resolve(employeeData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            EmployeesDataService.saveEmployeeDetails = function (employeeDetails) {
+                var deferred = $q.defer();
+
+                DataStorageService.saveEmployee(employeeDetails).then(
+                        function () {
+                            $state.go('root.employees.list');
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            EmployeesDataService.removeEmployee = function (chosenEmployee) {
+                var deferred = $q.defer();
+
+                DataStorageService.removeEmployee(chosenEmployee).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            EmployeesDataService.updateEmployeeDetails = function (employeeDetails) {
+                var deferred = $q.defer();
+
+                DataStorageService.updateEmployeeDetails(employeeDetails).then(
+                        function () {
+                            deferred.resolve(employeeDetails);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
             return EmployeesDataService;
         });
         

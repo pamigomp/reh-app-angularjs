@@ -6,6 +6,10 @@
     </div>
     <div class="row">
         <div class="col-lg-12" data-ng-init="loadEmployeesList()">
+            <div class="alert alert-danger" role="alert" data-ng-show="errorRemove">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Błąd!</strong> Wystąpił problem podczas usuwania pracownika.
+            </div>
             <div class="form-group">
                 <div class="input-group search-bar">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -17,8 +21,8 @@
                     <thead>
                         <tr>
                             <th class="col-xs-2">ID</th>
-                            <th class="col-xs-3">Imię</th>
                             <th class="col-xs-3">Nazwisko</th>
+                            <th class="col-xs-3">Imię</th>
                             <th class="col-xs-2">Status</th>
                             <th class="col-xs-2">Akcja</th>
                         </tr>
@@ -26,17 +30,25 @@
                     <tbody>
                         <tr data-ng-repeat="employee in employees| orderBy:'id' | filter:employeeFilter">
                             <td>{{employee.employeeid}}</td>
-                            <td>{{employee.name}}</td> 
-                            <td>{{employee.surname}}</td>
+                            <td>{{employee.surname}}</td> 
+                            <td>{{employee.name}}</td>
                             <td>{{employee.status}}</td>
-                            <td><button class="btn btn-sm btn-primary" data-ui-sref="root.employees.employee.details({employeeId: employee.employeeid})"><i class="fa fa-search"></i></button> <button class="btn btn-sm btn-primary"><i class="fa fa-remove"></i></button></td>
-                        </tr>
+                            <td><button class="btn btn-sm btn-primary" data-ui-sref="root.employees.employee.details({employeeId: employee.employeeid})" data-toggle="tooltip" title="Szczegóły pracownika"><i class="fa fa-search"></i> Szczegóły</button> 
+                                <button class="btn btn-sm btn-primary" data-ng-click="setChosen(employee.employeeid)" data-toggle="modal" data-target="#modal" data-ng-hide="employee.status === 'Nieaktywny'"  data-toggle="tooltip" title="Usuń pracownika"><i class="fa fa-remove"></i> Usuń</button>
+                    <modal-directive
+                        title="Usuwanie pracownika"
+                        body="Czy na pewno chcesz usunąć pracownika {{employee.surname}} {{employee.name}}?"
+                        confirm-button="removeEmployee(employee.employeeid)" 
+                        cancel-button="">
+                    </modal-directive>
+                    </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
             <p align="center"><img src="images/spinner.gif" style="height: 30px;" data-ng-show="loading"></p>
             <div class="pull-right">
-                <button class="btn btn-sm btn-primary" data-ui-sref="root.employees.new">Dodaj nowego pracownika</button>
+                <button class="btn btn-sm btn-primary" data-ui-sref="root.employees.new" data-toggle="tooltip" title="Dodaj nowego pracownika"><i class="fa fa-plus"></i> Dodaj</button>
             </div>
         </div>
     </div>

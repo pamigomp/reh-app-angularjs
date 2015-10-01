@@ -2,7 +2,7 @@
 
 angular.module('RehApp')
 
-        .factory('PatientsDataService', function ($q, DataStorageService) {
+        .factory('PatientsDataService', function ($q, $state, DataStorageService) {
             var PatientsDataService = {};
 
             PatientsDataService.getPatientsList = function () {
@@ -18,10 +18,68 @@ angular.module('RehApp')
                         },
                         function () {
                             deferred.reject();
-                        });
+                        }
+                );
                 return deferred.promise;
             };
-            
+
+            PatientsDataService.getPatientDetails = function (patientPesel) {
+                var deferred = $q.defer();
+
+                DataStorageService.getPatient(patientPesel).then(
+                        function (patientData) {
+                            deferred.resolve(patientData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            PatientsDataService.savePatientDetails = function (patientDetails) {
+                var deferred = $q.defer();
+
+                DataStorageService.savePatient(patientDetails).then(
+                        function () {
+                            $state.go('root.patients.list');
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            PatientsDataService.removePatient = function (chosenPatient) {
+                var deferred = $q.defer();
+
+                DataStorageService.removePatient(chosenPatient).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            PatientsDataService.updateCustomerDetails = function (patientDetails) {
+                var deferred = $q.defer();
+
+                DataStorageService.updatePatientDetails(patientDetails).then(
+                        function () {
+                            deferred.resolve(patientDetails);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
             return PatientsDataService;
         });
         

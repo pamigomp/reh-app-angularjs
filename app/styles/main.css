@@ -23,7 +23,7 @@ body {
 }
 
 #page-wrapper {
-    padding: 0 15px;
+    padding: 0 15px 15px 15px;
     min-height: 568px;
     background-color: #fff;
 }
@@ -32,9 +32,13 @@ body {
     #page-wrapper {
         position: inherit;
         margin: 0 0 0 250px;
-        padding: 0 30px;
+        padding: 0 30px 30px 30px;
         border-left: 1px solid #e7e7e7;
     }
+}
+
+.navbar {
+    margin-bottom: 0;
 }
 
 .navbar-brand {
@@ -146,7 +150,7 @@ body {
         z-index: 1;
         position: absolute;
         width: 250px;
-        margin-top: 51px;
+        margin-top: 0px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -154,6 +158,20 @@ body {
     .navbar-top-links .dropdown-alerts {
         margin-left: auto;
     }
+}
+
+.breadcrumb {
+    background-color: #F8F8F8;
+    margin-bottom: 0;
+}
+
+.page-header {
+    margin-top: 20px;
+}
+
+.form-group.required .control-label:after { 
+   content: " *";
+   color: red;
 }
 
 .btn-outline {
