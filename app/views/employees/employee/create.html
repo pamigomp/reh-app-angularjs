@@ -21,22 +21,54 @@
                 <div class="panel-body">
                     <div class="form-group required">
                         <label class="control-label" for="surname">Nazwisko</label>
-                        <input id="surname" type="text" class="form-control" data-ng-model="employeeDetails.surname" placeholder="Nazwisko" required="required">
+                        <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="employeeDetails.surname" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required="required">
+                        <p class="help-block" data-ng-show="surnameBlur && new_employee.surname.$error.minlength">
+                            Wprowadź nazwisko pracownika, składające się z minimum 2 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="surnameBlur && new_employee.surname.$error.maxlength">
+                            Wprowadź nazwisko pracownika, składające się z maksymalnie 32 znaków.
+                        </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="name">Imię</label>
-                        <input id="name" type="text" class="form-control" data-ng-model="employeeDetails.name" placeholder="Imię" required="required">
+                        <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="employeeDetails.name" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required="required">
+                        <p class="help-block" data-ng-show="nameBlur && new_employee.name.$error.minlength">
+                            Wprowadź imię pracownika, składające się z minimum 2 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="nameBlur && new_employee.name.$error.maxlength">
+                            Wprowadź imię pracownika, składające się z maksymalnie 32 znaków.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="degree">Stopień</label>
+                        <input name="degree" type="text" class="form-control" data-ng-blur="degreeBlur = true" data-ng-model="employeeDetails.degree" data-ng-minlength="2" data-ng-maxlength="16" placeholder="Stopień">
+                        <p class="help-block" data-ng-show="degreeBlur && new_employee.degree.$error.minlength">
+                            Wprowadź stopień pracownika, składający się z minimum 2 znaków. Np. mgr, lek. itp.
+                        </p>
+                        <p class="help-block" data-ng-show="degreeBlur && new_employee.degree.$error.maxlength">
+                            Wprowadź stopień pracownika, składający się z minimum 16 znaków. Np. mgr, lek. itp.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="position">Stanowisko</label>
+                        <input name="position" type="text" data-ng-model="employeeDetails.position" class="form-control" data-ng-blur="positionBlur = true" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Stanowisko" required="required">
+                        <p class="help-block" data-ng-show="positionBlur && new_employee.position.$error.minlength">
+                            Wprowadź stanowisko pracownika, składające się z minimum 3 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="positionBlur && new_employee.position.$error.maxlength">
+                            Wprowadź stanowisko pracownika, składające się z maksymalnie 64 znaków.
+                        </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="sex">Płeć</label>
                         <div class="radio">
                             <label>
-                                <input value="K" data-ng-model="employeeDetails.sex" type="radio" required="required">Kobieta
+                                <input value="K" data-ng-model="employeeDetails.sex" type="radio" ng-required="!employeeDetails.sex">Kobieta
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input value="M" data-ng-model="employeeDetails.sex" type="radio" required="required">Mężczyzna
+                                <input value="M" data-ng-model="employeeDetails.sex" type="radio" ng-required="!employeeDetails.sex">Mężczyzna
                             </label>
                         </div>
                     </div>
@@ -44,13 +76,13 @@
                         <label class="control-label" for="dob">Data urodzenia</label>
                         <div class="row">
                             <div class="col-xs-4">
-                                <select class="form-control">
-                                    <option selected disabled style="display: none">Dzień</option>
+                                <select class="form-control" name="day" data-ng-blur="dayBlur = true" required="required">
+                                    <option selected disabled style="display: none" value=''>Dzień</option>
                                     <option data-ng-repeat="n in rangeDays()" value="{{n}}">{{n}}</option>
                                 </select>
                             </div>
                             <div class="col-xs-4">
-                                <select class="form-control">
+                                <select class="form-control" name="month" data-ng-blur="monthBlur = true" required="required">
                                     <option selected disabled style="display: none">Miesiąc</option>
                                     <option value="1">Styczeń</option>
                                     <option value="2">Luty</option>
@@ -67,24 +99,40 @@
                                 </select>
                             </div>
                             <div class="col-xs-4">
-                                <select class="form-control">
+                                <select class="form-control" name="year" data-ng-blur="yearBlur = true" required="required">
                                     <option selected disabled style="display: none">Rok</option>
-                                    <option data-ng-repeat="n in rangeYears(2050, 1900)" value="{{n}}">{{n}}</option>
+                                    <option data-ng-repeat="n in range(2050, 1900)" value="{{n}}">{{n}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">E-mail</label>
-                        <input id="email" type="email" data-ng-model="employeeDetails.email" class="form-control" placeholder="E-mail">
+                        <input name="email" type="email" data-ng-model="employeeDetails.email" data-ng-blur="emailBlur = true" data-ng-minlength="5" data-ng-maxlength="64" class="form-control" placeholder="E-mail">
+                        <p class="help-block" data-ng-show="emailBlur && new_employee.email.$error.minlength && !new_employee.email.$error.email">
+                            Wprowadź e-mail pracownika, składający się z minimum 5 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="emailBlur && new_employee.email.$error.maxlength && !new_employee.email.$error.email">
+                            Wprowadź e-mail pracownika, składający się z maksymalnie 64 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="emailBlur && new_employee.email.$error.email">
+                            Wprowadź poprawny format e-maila pracownika, np. przyklad@rehapp.pl 
+                        </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="phone">Telefon kontaktowy</label>
-                        <input id="phone" type="text" data-ng-model="employeeDetails.phonenumber" class="form-control" placeholder="Telefon kontaktowy" required="required">
+                        <input name="phone" type="text" data-ng-model="employeeDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-minlength="" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy" required="required">
+                        <p class="help-block" data-ng-show="phoneBlur && new_employee.phone.$error.pattern">
+                            Wprowadź poprawny format telefonu pracownika (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>Zdjęcie</label>
+                        <input name="image" type="file" data-ng-model="employeeDetails.image" placeholder="Zdjęcie">
                     </div>
                     <div class="form-group" data-ng-model="employeeDetails.informations">
                         <label class="control-label" for="informations">Dodatkowe informacje</label>
-                        <textarea id="informations" class="form-control" maxlength="512" cols="5" placeholder="Dodatkowe informacje"></textarea>
+                        <textarea name="informations" class="form-control" maxlength="512" cols="5" placeholder="Dodatkowe informacje"></textarea>
                     </div>
                 </div>
             </div>
@@ -98,23 +146,46 @@
                 <div class="panel-body">
                     <div class="form-group required">
                         <label class="control-label" for="street">Ulica</label>
-                        <input id="street" type="text" class="form-control" placeholder="Ulica" required="required">
+                        <input name="street" type="text" class="form-control" data-ng-model="employeeDetails.street" data-ng-blur="streetBlur = true" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required="required">
+                        <p class="help-block" data-ng-show="streetBlur && new_employee.street.$error.minlength">
+                            Nazwa ulicy powinna składać się z minimum 3 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="streetBlur && new_employee.street.$error.maxlength">
+                            Nazwa ulicy powinna składać się z maksymalnie 32 znaków.
+                        </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="postal_code">Kod pocztowy</label>
-                        <input id="postal_code" type="text" class="form-control" placeholder="Kod pocztowy" required="required">
+                        <input name="postal_code" type="text" class="form-control" data-ng-model="employeeDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required="required">
+                        <p class="help-block" data-ng-show="postalCodeBlur && new_employee.postal_code.$error.pattern">
+                            Wprowadź poprawny format kodu pocztowego, np. 87-800.
+                        </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="city">Miejscowość</label>
-                        <input id="city" type="text" class="form-control" placeholder="Miejscowość" required="required">
+                        <input name="city" type="text" class="form-control" data-ng-model="employeeDetails.city" data-ng-blur="cityBlur = true" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required="required">
+                        <p class="help-block" data-ng-show="cityBlur && new_employee.city.$error.minlength">
+                            Nazwa miejscowości powinna składać się z minimum 3 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="cityBlur && new_employee.city.$error.maxlength">
+                            Nazwa miejscowości powinna składać się z maksymalnie 32 znaków.
+                        </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="country">Kraj</label>
-                        <input id="country" type="text" class="form-control" placeholder="Kraj" required="required">
+                        <input name="country" type="text" class="form-control" data-ng-model="employeeDetails.country" data-ng-blur="countryBlur = true" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required="required">
+                        <p class="help-block" data-ng-show="countryBlur && new_employee.country.$error.minlength">
+                            Nazwa państwa powinna składać się z minimum 3 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="countryBlur && new_employee.country.$error.maxlength">
+                            Nazwa państwa powinna składać się z maksymalnie 64 znaków.
+                        </p>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </form>
-    <button type="submit" class="btn btn-primary" data-ng-click="saveEmployeeDetails()" data-ng-disabled="new_employee.$invalid"><i class="fa fa-plus"></i> Dodaj</button>
+    <button type="submit" class="btn btn-primary" data-ng-click="saveEmployeeDetails()" data-ng-hide="submitting" data-ng-disabled="new_employee.$invalid" data-toggle="tooltip" title="Dodaj nowego pracownika"><i class="fa fa-plus"></i> Dodaj</button>
+    <button class="btn btn-default" data-ui-sref="root.employees.list" data-ng-hide="submitting" data-toggle="tooltip" title="Wróć na listę pracowników"><i class="fa fa-times"></i> Anuluj</button>
+    <p align="center"><img src="images/spinner.gif" style="height: 30px;" data-ng-show="submitting"></p>
 </div>

@@ -21,11 +21,14 @@ angular.module('RehApp')
             };
 
             $scope.savePatientDetails = function () {
+                $scope.submitting = true;
                 PatientsDataService.savePatientDetails($scope.patientDetails).then(
                         function () {
                             $scope.errorCreate = false;
+                            $scope.submitting = false;
                         }, function () {
                     $scope.errorCreate = true;
+                    $scope.submitting = false;
                 });
             };
         });

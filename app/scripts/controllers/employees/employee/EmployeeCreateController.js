@@ -21,11 +21,14 @@ angular.module('RehApp')
             };
 
             $scope.saveEmployeeDetails = function () {
+                $scope.submitting = true;
                 EmployeesDataService.saveEmployeeDetails($scope.employeeDetails).then(
                         function () {
                             $scope.errorCreate = false;
+                            $scope.submitting = false;
                         }, function () {
                     $scope.errorCreate = true;
+                    $scope.submitting = false;
                 });
             };
         });
