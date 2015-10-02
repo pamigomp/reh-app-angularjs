@@ -69,9 +69,9 @@ angular.module('RehApp')
             EmployeesDataService.updateEmployeeDetails = function (employeeDetails) {
                 var deferred = $q.defer();
 
-                DataStorageService.updateEmployeeDetails(employeeDetails).then(
+                DataStorageService.updateEmployee(employeeDetails).then(
                         function () {
-                            deferred.resolve(employeeDetails);
+                            deferred.resolve();
                         },
                         function () {
                             deferred.reject();

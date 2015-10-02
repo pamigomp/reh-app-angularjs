@@ -19,24 +19,25 @@ angular.module('RehApp')
             };
 
             DataStorageService.saveEmployee = function (employeeDetails) {
+                console.log(employeeDetails);
                 return $http({
-                    method: "post",
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/',
+                    method: "POST",
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees',
                     data: employeeDetails
                 });
             };
 
             DataStorageService.removeEmployee = function (employeeId) {
                 return $http({
-                    method: "delete",
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/'  + employeeId
+                    method: "DELETE",
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeId
                 });
             };
 
-            DataStorageService.updateEmployeeDetails = function (employeeDetails) {
+            DataStorageService.updateEmployee = function (employeeDetails) {
                 return $http({
-                    method: 'put',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees',
+                    method: 'PUT',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeDetails.employeeId,
                     data: employeeDetails
                 });
             };
@@ -57,7 +58,7 @@ angular.module('RehApp')
 
             DataStorageService.savePatient = function (patientDetails) {
                 return $http({
-                    method: "post",
+                    method: "POST",
                     url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients',
                     data: patientDetails
                 });
@@ -65,18 +66,25 @@ angular.module('RehApp')
 
             DataStorageService.removePatient = function (patientPesel) {
                 return $http({
-                    method: "delete",
+                    method: "DELETE",
                     url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel
                 });
             };
 
-            DataStorageService.updatePatientDetails = function (patientDetails) {
+            DataStorageService.updatePatient = function (patientDetails) {
                 return $http({
-                    method: 'put',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients',
+                    method: 'PUT',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientDetails.pesel,
                     data: patientDetails
                 });
             };
-            
+
+            DataStorageService.resetPatientPassword = function (patientPesel) {
+                return $http({
+                    method: 'PUT',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel + '/password'
+                });
+            };
+
             return DataStorageService;
         });

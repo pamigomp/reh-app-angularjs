@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="patient in patients| orderBy:'id' | filter:patientFilter">
+                        <tr data-ng-repeat="patient in patients| orderBy:'pesel' | filter:patientFilter">
                             <td>{{patient.pesel}}</td>
                             <td>{{patient.surname}}</td> 
                             <td>{{patient.name}}</td>

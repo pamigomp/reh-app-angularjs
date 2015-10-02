@@ -27,7 +27,7 @@ angular.module('RehApp')
                 $scope.errorRemove = false;
 
                 PatientsDataService.removePatient($scope.chosenPatient).then(function () {
-                    if ($scope.employees.length - 1 === 0)
+                    if ($scope.patients.length - 1 === 0)
                         $state.go('root.patients.list_empty');
                     else
                         $scope.loadPatientsList();

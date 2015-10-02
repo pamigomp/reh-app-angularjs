@@ -66,12 +66,12 @@ angular.module('RehApp')
                 return deferred.promise;
             };
 
-            PatientsDataService.updateCustomerDetails = function (patientDetails) {
+            PatientsDataService.updatePatientDetails = function (patientDetails) {
                 var deferred = $q.defer();
 
-                DataStorageService.updatePatientDetails(patientDetails).then(
+                DataStorageService.updatePatient(patientDetails).then(
                         function () {
-                            deferred.resolve(patientDetails);
+                            deferred.resolve();
                         },
                         function () {
                             deferred.reject();
@@ -80,6 +80,20 @@ angular.module('RehApp')
                 return deferred.promise;
             };
 
+            PatientsDataService.resetPatientPassword = function (patientPesel) {
+                var deferred = $q.defer();
+
+                DataStorageService.resetPatientPassword(patientPesel).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+            
             return PatientsDataService;
         });
         

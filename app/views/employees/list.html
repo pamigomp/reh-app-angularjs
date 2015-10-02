@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="employee in employees| orderBy:'id' | filter:employeeFilter">
+                        <tr data-ng-repeat="employee in employees| orderBy:'employeeid' | filter:employeeFilter">
                             <td>{{employee.employeeid}}</td>
                             <td>{{employee.surname}}</td> 
                             <td>{{employee.name}}</td>

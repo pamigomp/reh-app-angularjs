@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="col-xs-4">
                                 <select class="form-control" name="day" data-ng-blur="dayBlur = true" required="required">
-                                    <option selected disabled style="display: none" value=''>Dzień</option>
+                                    <option selected disabled style="display: none">Dzień</option>
                                     <option data-ng-repeat="n in rangeDays()" value="{{n}}">{{n}}</option>
                                 </select>
                             </div>
@@ -88,7 +88,7 @@
                             <div class="col-xs-4">
                                 <select class="form-control" name="year" data-ng-blur="yearBlur = true" required="required">
                                     <option selected disabled style="display: none">Rok</option>
-                                    <option data-ng-repeat="n in range(2050, 1900)" value="{{n}}">{{n}}</option>
+                                    <option data-ng-repeat="n in rangeYears(2016, 1900)" value="{{n}}">{{n}}</option>
                                 </select>
                             </div>
                         </div>
@@ -113,9 +113,9 @@
                             Wprowadź poprawny format telefonu pacjenta (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
                         </p>
                     </div>
-                    <div class="form-group" data-ng-model="patientDetails.informations">
+                    <div class="form-group">
                         <label class="control-label" for="informations">Dodatkowe informacje</label>
-                        <textarea name="informations" class="form-control" maxlength="512" cols="5" placeholder="Dodatkowe informacje"></textarea>
+                        <textarea name="informations" class="form-control" data-ng-model="patientDetails.informations" maxlength="512" cols="5" placeholder="Dodatkowe informacje"></textarea>
                     </div>
                 </div>
             </div>
