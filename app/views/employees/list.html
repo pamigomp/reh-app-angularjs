@@ -34,11 +34,12 @@
                             <td>{{employee.name}}</td>
                             <td>{{employee.status}}</td>
                             <td><button class="btn btn-sm btn-primary" data-ui-sref="root.employees.employee.details({employeeId: employee.employeeid})" data-toggle="tooltip" title="Szczegóły pracownika"><i class="fa fa-search"></i> Szczegóły</button> 
-                                <button class="btn btn-sm btn-primary" data-ng-click="setChosen(employee.employeeid)" data-toggle="modal" data-target="#modal" data-ng-hide="employee.status === 'Nieaktywny'"  data-toggle="tooltip" title="Usuń pracownika"><i class="fa fa-remove"></i> Usuń</button>
+                                <button class="btn btn-sm btn-primary" data-ui-sref="root.employees.employee.terms({employeeId: employee.employeeid})" data-ng-show="employee.position === 'Fizjoterapeuta' || employee.position === 'Masażysta'" data-toggle="tooltip" title="Terminy zabiegów pracownika"><i class="fa fa-calendar"></i> Terminy</button>
+                                <button class="btn btn-sm btn-primary" data-ng-click="setChosen(employee)" data-toggle="modal" data-target="#modal" data-ng-hide="employee.status === 'Nieaktywny'"  data-toggle="tooltip" title="Usuń pracownika"><i class="fa fa-remove"></i> Usuń</button>
                     <modal-directive
                         title="Usuwanie pracownika"
-                        body="Czy na pewno chcesz usunąć pracownika {{employee.surname}} {{employee.name}}?"
-                        confirm-button="removeEmployee(employee.employeeid)" 
+                        body="Czy na pewno chcesz usunąć pracownika {{chosenEmployee.surname}} {{chosenEmployee.name}}?"
+                        confirm-button="removeEmployee()" 
                         cancel-button="">
                     </modal-directive>
                     </td>

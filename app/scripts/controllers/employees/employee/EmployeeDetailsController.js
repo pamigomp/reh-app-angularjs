@@ -42,7 +42,7 @@ angular.module('RehApp')
 
             $scope.updateEmployeeDetails = function () {
                 $scope.updating = true;
-                if (angular.isDefined($stateParams.employeePesel)) {
+                if (angular.isDefined($stateParams.employeeId)) {
                     EmployeesDataService.updateEmployeeDetails($scope.employeeDetails).then(function () {
                         $scope.updating = false;
                         $scope.errorEdit = false;

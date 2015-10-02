@@ -26,7 +26,7 @@ angular.module('RehApp')
                 $scope.removing = true;
                 $scope.errorRemove = false;
 
-                PatientsDataService.removePatient($scope.chosenPatient).then(function () {
+                PatientsDataService.removePatient($scope.chosenPatient.pesel).then(function () {
                     if ($scope.patients.length - 1 === 0)
                         $state.go('root.patients.list_empty');
                     else
@@ -37,7 +37,7 @@ angular.module('RehApp')
                 });
             };
 
-            $scope.setChosen = function (pesel) {
-                $scope.chosenPatient = pesel;
+            $scope.setChosen = function (patient) {
+                $scope.chosenPatient = patient;
             };
         });

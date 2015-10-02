@@ -35,9 +35,10 @@ angular.module('RehApp')
             };
 
             DataStorageService.updateEmployee = function (employeeDetails) {
+                console.log(employeeDetails);
                 return $http({
                     method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeDetails.employeeId,
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeDetails.employeeid,
                     data: employeeDetails
                 });
             };
@@ -82,7 +83,7 @@ angular.module('RehApp')
             DataStorageService.resetPatientPassword = function (patientPesel) {
                 return $http({
                     method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel + '/password'
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/password/' + patientPesel
                 });
             };
 

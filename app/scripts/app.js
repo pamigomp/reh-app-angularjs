@@ -83,6 +83,34 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                         }
                     })
 
+                    .state('root.terms.pending.term', {
+                        abstract: true,
+                        url: '/:termId',
+                        data: {
+                            title: '[ID]',
+                            breadcrumb: '[ID]'
+                        },
+                        views: {
+                            'content@': {
+                                template: '<div data-ui-view=""></div>'
+                            }
+                        }
+                    })
+
+                    .state('root.terms.pending.term.details', {
+                        url: '/details',
+                        data: {
+                            title: 'Szczegóły zabiegu',
+                            breadcrumb: 'Szczegóły'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/pending/details.html',
+                                controller: 'PendingDetailsController'
+                            }
+                        }
+                    })
+
                     .state('root.terms.cancelled', {
                         url: '/cancelled',
                         data: {
@@ -208,6 +236,20 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                         }
                     })
 
+                    .state('root.patients.patient.terms', {
+                        url: '/terms',
+                        data: {
+                            title: 'Terminy zabiegów pacjenta',
+                            breadcrumb: 'Terminy'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/patients/patient/terms.html',
+                                controller: 'PatientTermsController'
+                            }
+                        }
+                    })
+
                     .state('root.employees', {
                         abstract: true,
                         url: '/employees',
@@ -302,6 +344,20 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                             '': {
                                 templateUrl: 'views/employees/employee/details.html',
                                 controller: 'EmployeeDetailsController'
+                            }
+                        }
+                    })
+
+                    .state('root.employees.employee.terms', {
+                        url: '/terms',
+                        data: {
+                            title: 'Terminy zabiegów pracownika',
+                            breadcrumb: 'Terminy'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/employees/employee/terms.html',
+                                controller: 'EmployeeTermsController'
                             }
                         }
                     })

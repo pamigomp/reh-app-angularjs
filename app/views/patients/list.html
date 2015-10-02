@@ -35,11 +35,12 @@
                             <td>{{patient.status}}</td>
                             <td>
                                 <button class="btn btn-sm btn-primary" data-ui-sref="root.patients.patient.details({patientPesel: patient.pesel})" data-toggle="tooltip" title="Szczegóły pacjenta"><i class="fa fa-search"></i> Szczegóły</button> 
-                                <button class="btn btn-sm btn-primary" data-ng-click="setChosen(patient.pesel)" data-toggle="modal" data-target="#modal" data-ng-hide="patient.status === 'Nieaktywny'" data-toggle="tooltip" title="Usuń pacjenta"><i class="fa fa-remove"></i> Usuń</button>
+                                <button class="btn btn-sm btn-primary" data-ui-sref="root.patients.patient.terms({patientPesel: patient.pesel})" data-toggle="tooltip" title="Terminy zabiegów pacjenta"><i class="fa fa-calendar"></i> Terminy</button>
+                                <button class="btn btn-sm btn-primary" data-ng-click="setChosen(patient)" data-toggle="modal" data-target="#modal" data-ng-hide="patient.status === 'Nieaktywny'" data-toggle="tooltip" title="Usuń pacjenta"><i class="fa fa-remove"></i> Usuń</button>
                     <modal-directive
                         title="Usuwanie pacjenta"
-                        body="Czy na pewno chcesz usunąć pacjenta {{patient.surname}} {{patient.name}}?"
-                        confirm-button="removePatient(patient.pesel)" 
+                        body="Czy na pewno chcesz usunąć pacjenta {{chosenPatient.surname}} {{chosenPatient.name}}?"
+                        confirm-button="removePatient()" 
                         cancel-button="">
                     </modal-directive>
                     </td>

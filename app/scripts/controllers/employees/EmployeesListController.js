@@ -26,7 +26,7 @@ angular.module('RehApp')
                 $scope.removing = true;
                 $scope.errorRemove = false;
 
-                EmployeesDataService.removeEmployee($scope.chosenEmployee).then(function () {
+                EmployeesDataService.removeEmployee($scope.chosenEmployee.employeeid).then(function () {
                     if ($scope.employees.length - 1 === 0)
                         $state.go('root.employees.list_empty');
                     else
@@ -37,7 +37,7 @@ angular.module('RehApp')
                 });
             };
 
-            $scope.setChosen = function (id) {
-                $scope.chosenEmployee = id;
+            $scope.setChosen = function (employee) {
+                $scope.chosenEmployee = employee;
             };
         });
