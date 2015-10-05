@@ -93,7 +93,63 @@ angular.module('RehApp')
                 );
                 return deferred.promise;
             };
-            
+
+            PatientsDataService.getPatientTermsPending = function (patientPesel) {
+                var deferred = $q.defer();
+
+                DataStorageService.getPatientTermsPending(patientPesel).then(
+                        function (patientData) {
+                            deferred.resolve(patientData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            PatientsDataService.getPatientTermsCancelled = function (patientPesel) {
+                var deferred = $q.defer();
+
+                DataStorageService.getPatientTermsCancelled(patientPesel).then(
+                        function (patientData) {
+                            deferred.resolve(patientData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            PatientsDataService.getPatientTermsCompleted = function (patientPesel) {
+                var deferred = $q.defer();
+
+                DataStorageService.getPatientTermsCompleted(patientPesel).then(
+                        function (patientData) {
+                            deferred.resolve(patientData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            PatientsDataService.cancelPatientTerm = function (patienttreatmentid) {
+                var deferred = $q.defer();
+
+                DataStorageService.cancelTerm(patienttreatmentid).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
             return PatientsDataService;
         });
         

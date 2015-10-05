@@ -10,6 +10,8 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
             $urlRouterProvider.when('/employees', '/employees/list');
             $urlRouterProvider.when('/employees/', '/employees/list');
             $urlRouterProvider.when('/charts', '/charts/general');
+            $urlRouterProvider.when('/charts/', '/charts/general');
+            $urlRouterProvider.when('/terms', '/terms/pending');
             $urlRouterProvider.when('/terms/', '/terms/pending');
             $urlRouterProvider.otherwise('/dashboard');
 

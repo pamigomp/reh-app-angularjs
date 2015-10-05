@@ -3,7 +3,6 @@
 angular.module('RehApp')
 
         .controller('PatientsListController', function ($scope, $state, PatientsDataService) {
-            $scope.chosenPatient;
 
             $scope.loadPatientsList = function () {
                 $scope.loading = true;
