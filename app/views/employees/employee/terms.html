@@ -49,7 +49,7 @@
                                                     <td>{{term.patienttreatmentid}}</td>
                                                     <td>{{term.datehour|date: 'dd.MM.yyyy'}}</td>
                                                     <td>{{term.datehour|date: 'HH:mm'}}</td>
-                                                    <td>{{term.name}} {{term.surname}}</td>
+                                                    <td>{{term.patient_surname}} {{term.patient_name}}</td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary" data-ui-sref="root.employees.employee.terms.term.details({termId: term.employeetreatmentid})" data-toggle="tooltip" title="Szczegóły zabiegu"><i class="fa fa-search"></i> Szczegóły</button> 
                                                         <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#modal" data-toggle="tooltip" title="Odwołaj zabieg"><i class="fa fa-remove"></i> Odwołaj</button>
@@ -104,7 +104,7 @@
                                                     <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
                                                     <td>{{term.kindoftreatment}}</td>
                                                     <td>{{term.roomnumber}}</td>
-                                                    <td>{{term.name}} {{term.surname}}</td>
+                                                    <td>{{term.patient_surname}} {{term.patient_name}}</td>
                                                     <td>{{term.kindofvisit}}</td>
                                                     <td><span data-ng-if="term.kindofvisit === 'Prywatna'">{{term.price}} zł</span><span data-ng-if="term.kindofvisit === 'NFZ'">- zł</span></td>
                                                     <td>{{term.additionalinformations}}</td>
@@ -152,7 +152,7 @@
                                                     <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
                                                     <td>{{term.kindoftreatment}}</td>
                                                     <td>{{term.roomnumber}}</td>
-                                                    <td>{{term.name}} {{term.surname}}</td>
+                                                    <td>{{term.patient_surname}} {{term.patient_name}}</td>
                                                     <td>{{term.kindofvisit}}</td>
                                                     <td><span data-ng-if="term.kindofvisit === 'Prywatna'">{{term.price}} zł</span><span data-ng-if="term.kindofvisit === 'NFZ'">- zł</span></td>
                                                     <td>{{term.additionalinformations}}</td>

@@ -5,6 +5,7 @@ angular.module('RehApp')
         .controller('EmployeeCreateController', function ($scope, EmployeesDataService) {
             $scope.employeeDetails = {};
             $scope.errorCreate = false;
+            $scope.employeeDetails.country = "Polska";
 
             $scope.rangeDays = function () {
                 var input = [];

@@ -4,6 +4,34 @@ angular.module('RehApp')
         .factory('DataStorageService', function ($http) {
             var DataStorageService = {};
 
+            DataStorageService.getTermsPending = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending'
+                });
+            };
+
+            DataStorageService.getTermsCancelled = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancelled'
+                });
+            };
+
+            DataStorageService.getTermsCompleted = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/completed'
+                });
+            };
+
+            DataStorageService.cancelTerm = function (patienttreatmentid) {
+                return $http({
+                    method: 'PUT',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/' + patienttreatmentid
+                });
+            };
+            
             DataStorageService.getEmployees = function () {
                 return $http({
                     method: 'GET',
@@ -126,13 +154,6 @@ angular.module('RehApp')
                 return $http({
                     method: 'GET',
                     url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/cancelled/' + patientPesel
-                });
-            };
-
-            DataStorageService.cancelTerm = function (patienttreatmentid) {
-                return $http({
-                    method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/terms/' + patienttreatmentid
                 });
             };
 

@@ -14,7 +14,7 @@ angular.module('RehApp')
                                     $scope.emptyPending = true;
                                 }
                                 else {
-                                    $state.get('root.patients.patient').data.breadcrumb = pendingTerms[0].surname + ' ' + pendingTerms[0].name;
+                                    $state.get('root.patients.patient').data.breadcrumb = pendingTerms[0].patient_surname + ' ' + pendingTerms[0].patient_name;
                                     $scope.pendingTerms = pendingTerms;
                                     $scope.loadingPending = false;
                                     $scope.errorLoading = false;
@@ -40,7 +40,7 @@ angular.module('RehApp')
                                     $scope.emptyCancelled = true;
                                 }
                                 else {
-                                    $state.get('root.patients.patient').data.breadcrumb = cancelledTerms[0].surname + ' ' + cancelledTerms[0].name;
+                                    $state.get('root.patients.patient').data.breadcrumb = cancelledTerms[0].patient_surname + ' ' + cancelledTerms[0].patient_name;
                                     $scope.cancelledTerms = cancelledTerms;
                                     $scope.loadingCancelled = false;
                                     $scope.errorLoading = false;
@@ -66,7 +66,7 @@ angular.module('RehApp')
                                     $scope.emptyCompleted = true;
                                 }
                                 else {
-                                    $state.get('root.patients.patient').data.breadcrumb = completedTerms[0].surname + ' ' + completedTerms[0].name;
+                                    $state.get('root.patients.patient').data.breadcrumb = completedTerms[0].patient_surname + ' ' + completedTerms[0].patient_name;
                                     $scope.completedTerms = completedTerms;
                                     $scope.loadingCompleted = false;
                                     $scope.errorLoading = false;

@@ -85,6 +85,35 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                         }
                     })
 
+                    .state('root.terms.pending_empty', {
+                        url: '/pending',
+                        data: {
+                            title: 'Lista oczekujących terminów',
+                            breadcrumb: 'Oczekujące'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/pending_list_empty.html',
+                                controller: 'TermsPendingController'
+                            }
+                        }
+                    })
+                    
+                    .state('root.terms.pending_error', {
+                        url: '/pending',
+                        data: {
+                            title: 'Lista oczekujących terminów',
+                            breadcrumb: 'Oczekujące'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/pending_list_error.html',
+                                controller: 'TermsPendingController'
+                            }
+                        }
+                    })
+                    
+                    
                     .state('root.terms.pending.term', {
                         abstract: true,
                         url: '/:termId',
@@ -127,6 +156,34 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                         }
                     })
 
+                    .state('root.terms.cancelled_empty', {
+                        url: '/cancelled',
+                        data: {
+                            title: 'Lista odwołanych terminów',
+                            breadcrumb: 'Odwołane'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/cancelled_list_empty.html',
+                                controller: 'TermsCancelledController'
+                            }
+                        }
+                    })
+                    
+                    .state('root.terms.cancelled_error', {
+                        url: '/cancelled',
+                        data: {
+                            title: 'Lista odwołanych terminów',
+                            breadcrumb: 'Odwołane'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/cancelled_list_error.html',
+                                controller: 'TermsCancelledController'
+                            }
+                        }
+                    })
+                    
                     .state('root.terms.completed', {
                         url: '/completed',
                         data: {
@@ -136,6 +193,34 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                         views: {
                             '': {
                                 templateUrl: 'views/terms/completed.html',
+                                controller: 'TermsCompletedController'
+                            }
+                        }
+                    })
+
+                    .state('root.terms.completed_empty', {
+                        url: '/completed',
+                        data: {
+                            title: 'Lista zrealizowanych terminów',
+                            breadcrumb: 'Zrealizowane'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/completed_list_empty.html',
+                                controller: 'TermsCompletedController'
+                            }
+                        }
+                    })
+                    
+                    .state('root.terms.completed_error', {
+                        url: '/completed',
+                        data: {
+                            title: 'Lista zrealizowanych terminów',
+                            breadcrumb: 'Zrealizowane'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/completed_list_error.html',
                                 controller: 'TermsCompletedController'
                             }
                         }
@@ -182,6 +267,7 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
                             }
                         }
                     })
+                    
                     .state('root.patients.list_error', {
                         url: '/list',
                         data: {
