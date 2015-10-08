@@ -4,7 +4,59 @@
             <h1 class="page-header">Szczegóły zabiegu</h1>
         </div>
     </div>
-    <div class="row">
-        ...
-    </div>
+    <form class="row" role="form" name="term_pending_details" data-ng-init="loadTermPendingDetails()">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Szczegóły zabiegu</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group required">
+                        <label class="control-label" for="id">ID</label>
+                        <input name="id" type="text" class="form-control" data-ng-blur="idBlur = true" data-ng-value="termPendingDetails.patienttreatmentid" data-ng-disabled="true" placeholder="ID" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="date">Dzień</label>
+                        <input name="date" type="text" class="form-control" data-ng-blur="dateBlur = true" data-ng-value="termPendingDetails.datehour"  data-ng-disabled="!allowEdit" placeholder="Dzień" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="hour">Godzina</label>
+                        <input name="hour" type="text" class="form-control" data-ng-blur="hourBlur = true" data-ng-value="termPendingDetails.datehour"  data-ng-disabled="!allowEdit" placeholder="Godzina" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
+                        <input name="kindoftreatment" type="text" class="form-control" data-ng-blur="kindoftreatmentBlur = true" data-ng-value="termPendingDetails.kindoftreatment"  data-ng-disabled="!allowEdit" placeholder="Rodzaj zabiegu" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="roomNumber">Numer pokoju</label>
+                        <input name="roomNumber" type="text" class="form-control" data-ng-blur="roomNumberBlur = true" data-ng-value="termPendingDetails.roomnumber"  data-ng-disabled="!allowEdit" placeholder="Numer pokoju" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="employee">Pracownik</label>
+                        <input name="employee" type="text" class="form-control" data-ng-blur="employeeBlur = true" data-ng-value="termPendingDetails.name"  data-ng-disabled="!allowEdit" placeholder="Pracownik" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="patient">Pacjent</label>
+                        <input name="patient" type="text" class="form-control" data-ng-blur="patientBlur = true" data-ng-value="termPendingDetails.patient_name"  data-ng-disabled="!allowEdit" placeholder="Pacjent" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="kindofvisit">Rodzaj wizyty</label>
+                        <input name="kindofvisit" type="text" class="form-control" data-ng-blur="kindofvisitBlur = true" data-ng-value="termPendingDetails.kindofvisit"  data-ng-disabled="!allowEdit" placeholder="Rodzaj wizyty" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="price">Cena</label>
+                        <input name="price" type="text" class="form-control" data-ng-blur="priceBlur = true" data-ng-value="termPendingDetails.price"  data-ng-disabled="!allowEdit" placeholder="Cena" required="required">
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="additionalinformations">Dodatkowe informacje</label>
+                        <input name="additionalinformations" type="text" class="form-control" data-ng-blur="additionalInformationsBlur = true" data-ng-value="termPendingDetails.additionalinformations"  data-ng-disabled="!allowEdit" placeholder="Dodatkowe informacje">
+                    </div>
+                </div>
+            </div>
+    </form>
+    <button type="submit" class="btn btn-primary" data-ng-show="!allowEdit && !updating" data-ng-click="startEdit()" data-toggle="tooltip" title="Edytuj szczegóły terminu"><i class="fa fa-pencil"></i> Edytuj</button>
+    <button class="btn btn-primary" data-ng-show="allowEdit && !updating" data-ng-click="saveEdit()" data-ng-disabled="term_pending_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
+    <button class="btn btn-warning" data-ng-show="allowEdit && !updating" data-ng-click="cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
+    <button class="btn btn-default pull-right" data-ng-hide="updating" data-ui-sref="root.terms.pending" data-toggle="tooltip" title="Wróć na listę terminów"><i class="fa fa-arrow-left"></i> Wróć</button>
+    <p align="center"><img src="images/spinner.gif" style="height: 30px;" data-ng-show="updating"></p>
 </div>

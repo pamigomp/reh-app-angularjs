@@ -5,6 +5,7 @@ angular.module('RehApp')
         .directive('modalDirective', function () {
             return {
                 scope: {
+                    modalId: '@',
                     title: '@',
                     body: '@',
                     confirmButton: '&',

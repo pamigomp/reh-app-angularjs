@@ -98,4 +98,17 @@ angular.module('RehApp')
                     $scope.errorCancel = true;
                 });
             };
+            
+            $scope.completeTerm = function (patienttreatmentid) {
+                $scope.completing = true;
+                PatientsDataService.completePatientTerm(patienttreatmentid).then(function () {
+                    $scope.loadPatientTermsPending();
+                    $scope.loadPatientTermsCompleted();
+                    $scope.completing = false;
+                    $scope.errorComplete = false;
+                }, function () {
+                    $scope.completing = false;
+                    $scope.errorComplete = true;
+                });
+            };
         });

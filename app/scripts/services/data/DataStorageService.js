@@ -11,6 +11,21 @@ angular.module('RehApp')
                 });
             };
 
+            DataStorageService.getTermPending = function (termId) {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending/' + termId
+                });
+            };
+
+            DataStorageService.updateTermPending = function (termPendingDetails) {
+                return $http({
+                    method: 'PUT',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending/' + termPendingDetails.patienttreatmentid,
+                    data: termPendingDetails
+                });
+            };
+
             DataStorageService.getTermsCancelled = function () {
                 return $http({
                     method: 'GET',
@@ -28,10 +43,17 @@ angular.module('RehApp')
             DataStorageService.cancelTerm = function (patienttreatmentid) {
                 return $http({
                     method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/' + patienttreatmentid
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancel/' + patienttreatmentid
                 });
             };
-            
+
+            DataStorageService.completeTerm = function (patienttreatmentid) {
+                return $http({
+                    method: 'PUT',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/complete/' + patienttreatmentid
+                });
+            };
+
             DataStorageService.getEmployees = function () {
                 return $http({
                     method: 'GET',
@@ -47,7 +69,6 @@ angular.module('RehApp')
             };
 
             DataStorageService.saveEmployee = function (employeeDetails) {
-                console.log(employeeDetails);
                 return $http({
                     method: "POST",
                     url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees',
@@ -63,7 +84,6 @@ angular.module('RehApp')
             };
 
             DataStorageService.updateEmployee = function (employeeDetails) {
-                console.log(employeeDetails);
                 return $http({
                     method: 'PUT',
                     url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeDetails.employeeid,

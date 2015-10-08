@@ -19,6 +19,34 @@ angular.module('RehApp')
                 return deferred.promise;
             };
 
+            TermsDataService.getTermPendingDetails = function (termId) {
+                var deferred = $q.defer();
+
+                DataStorageService.getTermPending(termId).then(
+                        function (termPendingData) {
+                            deferred.resolve(termPendingData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            TermsDataService.updateTermPendingDetails = function (termPendingDetails) {
+                var deferred = $q.defer();
+
+                DataStorageService.updateTermPending(termPendingDetails).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
             TermsDataService.getTermsCancelled = function () {
                 var deferred = $q.defer();
 
@@ -51,6 +79,20 @@ angular.module('RehApp')
                 var deferred = $q.defer();
 
                 DataStorageService.cancelTerm(patienttreatmentid).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            TermsDataService.completeTerm = function (patienttreatmentid) {
+                var deferred = $q.defer();
+
+                DataStorageService.completeTerm(patienttreatmentid).then(
                         function () {
                             deferred.resolve();
                         },

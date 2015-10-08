@@ -30,7 +30,6 @@ angular.module('RehApp')
                 $scope.cancelling = true;
                 TermsDataService.cancelTerm(patienttreatmentid).then(function () {
                     $scope.loadTermsPending();
-                    $scope.loadTermsCancelled();
                     $scope.cancelling = false;
                     $scope.errorCancel = false;
                 }, function () {
@@ -39,5 +38,15 @@ angular.module('RehApp')
                 });
             };
 
-
+            $scope.completeTerm = function (patienttreatmentid) {
+                $scope.completing = true;
+                TermsDataService.completeTerm(patienttreatmentid).then(function () {
+                    $scope.loadTermsPending();
+                    $scope.completing = false;
+                    $scope.errorComplete = false;
+                }, function () {
+                    $scope.completing = false;
+                    $scope.errorComplete = true;
+                });
+            };
         });

@@ -52,11 +52,20 @@
                                                     <td>{{term.degree}} {{term.name}} {{term.surname}}</td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary" data-ui-sref="root.patients.patient.terms.term.details({termId: term.patienttreatmentid})" data-toggle="tooltip" title="Szczegóły zabiegu"><i class="fa fa-search"></i> Szczegóły</button> 
-                                                        <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#modal" data-toggle="tooltip" title="Odwołaj zabieg"><i class="fa fa-remove"></i> Odwołaj</button>
+                                                        <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#cancel" data-toggle="tooltip" title="Odwołaj zabieg"><i class="fa fa-remove"></i> Odwołaj</button>
+                                                        <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#complete" data-toggle="tooltip" title="Zrealizuj zabieg"><i class="fa fa-remove"></i> Zrealizuj</button>
                                             <modal-directive
+                                                modal-id="cancel"
                                                 title="Odwoływanie wizyty"
                                                 body="Czy na pewno chcesz odwołać wizytę z dnia {{chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{chosenTerm.datehour|date: 'HH:mm'}}?"
                                                 confirm-button="cancelTerm(chosenTerm.patienttreatmentid)" 
+                                                cancel-button="">
+                                            </modal-directive>
+                                            <modal-directive
+                                                modal-id="complete"
+                                                title="Realizowanie wizyty"
+                                                body="Czy na pewno chcesz zrealizować wizytę z dnia {{chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{chosenTerm.datehour|date: 'HH:mm'}}?"
+                                                confirm-button="completeTerm(chosenTerm.patienttreatmentid)" 
                                                 cancel-button="">
                                             </modal-directive>
                                             </td>

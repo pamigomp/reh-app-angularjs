@@ -150,6 +150,20 @@ angular.module('RehApp')
                 return deferred.promise;
             };
 
+            PatientsDataService.completePatientTerm = function (patienttreatmentid) {
+                var deferred = $q.defer();
+
+                DataStorageService.completeTerm(patienttreatmentid).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+            
             return PatientsDataService;
         });
         
