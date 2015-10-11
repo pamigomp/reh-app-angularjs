@@ -6,15 +6,56 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <canvas id="line" class="chart chart-line" chart-data="data"
-                    chart-labels="labels" chart-legend="true" chart-series="series"
-                    chart-click="onClick" >
-            </canvas> 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ilość zarobionych pieniędzy</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar" chart-data="data"
+                            chart-labels="labels" chart-series="series">
+                    </canvas>
+                </div>
+            </div>
         </div>
+        
         <div class="col-lg-6">
-            <canvas id="bar" class="chart chart-bar"
-                    chart-data="data" chart-labels="labels">
-            </canvas
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ilość wyrobionych punktów NFZ</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar" chart-data="data4"
+                            chart-labels="labels4" chart-series="series4">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ilość zarobionych pieniędzy z podziałem na pracownika</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="line" class="chart chart-line" chart-data="data2"
+                            chart-labels="labels2" chart-series="series2" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ilość zarobionych pieniędzy z podziałem na rodzaj zabiegu</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="line" class="chart chart-line" chart-data="data3"
+                            chart-labels="labels3" chart-series="series3" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
         </div>
     </div>
 </div>
