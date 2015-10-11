@@ -55,7 +55,7 @@
                                                     <td>{{term.datehour|date: 'HH:mm'}}</td>
                                                     <td>{{term.patient_surname}} {{term.patient_name}}</td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-primary" data-ui-sref="root.employees.employee.terms.term.details({termId: term.employeetreatmentid})" data-toggle="tooltip" title="Szczegóły zabiegu"><i class="fa fa-search"></i> Szczegóły</button> 
+                                                        <!--<button class="btn btn-sm btn-primary" data-ui-sref="root.employees.employee.terms.term.details({termId: term.employeetreatmentid})" data-toggle="tooltip" title="Szczegóły zabiegu"><i class="fa fa-search"></i> Szczegóły</button>--> 
                                                         <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#cancel" data-toggle="tooltip" title="Odwołaj zabieg"><i class="fa fa-remove"></i> Odwołaj</button>
                                                         <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#complete" data-toggle="tooltip" title="Zrealizuj zabieg"><i class="fa fa-remove"></i> Zrealizuj</button>
                                             <modal-directive

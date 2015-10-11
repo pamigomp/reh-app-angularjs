@@ -103,6 +103,47 @@ angular.module('RehApp')
                 return deferred.promise;
             };
 
+            TermsDataService.getEmployeesList = function () {
+                var deferred = $q.defer();
+
+                DataStorageService.getEmployees().then(
+                        function (employeeData) {
+                            deferred.resolve(employeeData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+            
+            TermsDataService.getRoomsList = function () {
+                var deferred = $q.defer();
+
+                DataStorageService.getRooms().then(
+                        function (roomData) {
+                            deferred.resolve(roomData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+            
+            TermsDataService.getTreatmentsList = function () {
+                var deferred = $q.defer();
+
+                DataStorageService.getTreatments().then(
+                        function (treatmentData) {
+                            deferred.resolve(treatmentData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
             return TermsDataService;
         });
         

@@ -5,7 +5,7 @@ angular.module('RehApp')
         .controller('PatientDetailsController', function ($scope, $state, $stateParams, PatientsDataService) {
             $scope.allowEdit = false;
             $scope.defaultPatientDetails = {};
-            
+
             $scope.rangeDays = function () {
                 var input = [];
                 for (var i = 1; i <= 31; i++)
@@ -65,7 +65,7 @@ angular.module('RehApp')
                     });
                 }
             };
-            
+
             $scope.restorePatientDetails = function () {
                 angular.copy($scope.defaultPatientDetails, $scope.patientDetails);
             };
@@ -91,5 +91,21 @@ angular.module('RehApp')
             $scope.cancelEdit = function () {
                 $scope.allowEdit = false;
                 $scope.restorePatientDetails();
+            };
+
+            $scope.maxDate = new Date();
+            $scope.valuationDatePickerIsOpen = false;
+
+            $scope.dateOptions = {
+                'starting-day': 1
+            };
+
+            $scope.valuationDatePickerOpen = function ($event) {
+                if ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                }
+
+                $scope.valuationDatePickerIsOpen = true;
             };
         });

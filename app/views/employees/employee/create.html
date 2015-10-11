@@ -75,34 +75,23 @@
                     <div class="form-group required">
                         <label class="control-label" for="dob">Data urodzenia</label>
                         <div class="row">
-                            <div class="col-xs-4">
-                                <select class="form-control" name="day" data-ng-blur="dayBlur = true" required="required">
-                                    <option selected disabled style="display: none">Dzień</option>
-                                    <option data-ng-repeat="n in rangeDays()" value="{{n}}">{{n}}</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-4">
-                                <select class="form-control" name="month" data-ng-blur="monthBlur = true" required="required">
-                                    <option selected disabled style="display: none">Miesiąc</option>
-                                    <option value="1">Styczeń</option>
-                                    <option value="2">Luty</option>
-                                    <option value="3">Marzec</option>
-                                    <option value="4">Kwiecień</option>
-                                    <option value="5">Maj</option>
-                                    <option value="6">Czerwiec</option>
-                                    <option value="7">Lipiec</option>
-                                    <option value="8">Sierpień</option>
-                                    <option value="9">Wrzesień</option>
-                                    <option value="10">Październik</option>
-                                    <option value="11">Listopad</option>
-                                    <option value="12">Grudzień</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-4">
-                                <select class="form-control" name="year" data-ng-blur="yearBlur = true" required="required">
-                                    <option selected disabled style="display: none">Rok</option>
-                                    <option data-ng-repeat="n in rangeYears(2016, 1900)" value="{{n}}">{{n}}</option>
-                                </select>
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                           datepicker-popup="dd.MM.yyyy"
+                                           show-button-bar="false"
+                                           max-date="maxDate"
+                                           datepicker-options="dateOptions"
+                                           is-open="valuationDatePickerIsOpen"
+                                           placeholder="Data urodzenia"
+                                           data-ng-click="valuationDatePickerOpen()" 
+                                           data-ng-model="employeeDetails.dob" required="required"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" data-ng-click="valuationDatePickerOpen($event)">
+                                            <i class="fa fa-calendar" ></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -125,6 +114,29 @@
                         <p class="help-block" data-ng-show="phoneBlur && new_employee.phone.$error.pattern">
                             Wprowadź poprawny format telefonu pracownika (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
                         </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="employmentdate">Data zatrudnienia</label>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                           datepicker-popup="dd.MM.yyyy"
+                                           show-button-bar="false"
+                                           max-date="maxDate"
+                                           datepicker-options="dateOptions"
+                                           is-open="valuationDatePickerIsOpen2"
+                                           placeholder="Data zatrudnienia"
+                                           data-ng-click="valuationDatePickerOpen2()" 
+                                           data-ng-model="employeeDetails.employmentdate" required="required"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" data-ng-click="valuationDatePickerOpen2($event)">
+                                            <i class="fa fa-calendar" ></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Zdjęcie</label>

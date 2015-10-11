@@ -32,4 +32,30 @@ angular.module('RehApp')
                     $scope.submitting = false;
                 });
             };
+
+            $scope.maxDate = new Date();
+            $scope.valuationDatePickerIsOpen = false;
+            $scope.valuationDatePickerIsOpen2 = false;
+
+            $scope.dateOptions = {
+                'starting-day': 1
+            };
+
+            $scope.valuationDatePickerOpen = function ($event) {
+                if ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                }
+
+                $scope.valuationDatePickerIsOpen = true;
+            };
+            
+            $scope.valuationDatePickerOpen2 = function ($event) {
+                if ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                }
+
+                $scope.valuationDatePickerIsOpen2 = true;
+            };
         });

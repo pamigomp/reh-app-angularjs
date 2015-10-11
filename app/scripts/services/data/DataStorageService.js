@@ -177,5 +177,18 @@ angular.module('RehApp')
                 });
             };
 
+            DataStorageService.getRooms = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/rooms'
+                });
+            };
+
+            DataStorageService.getTreatments = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments'
+                });
+            };
             return DataStorageService;
         });

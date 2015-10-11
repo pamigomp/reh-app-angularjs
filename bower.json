@@ -8,6 +8,7 @@
   "dependencies": {
     "angular": "~1.4.0",
     "angular-route": "~1.4.0",
+    "angular-animate": "~1.4.0",
     "angular-mocks": "~1.4.0",
     "bootstrap": "~3.3.5",
     "angular-chart.js": "~0.8.4",
@@ -15,6 +16,6 @@
     "angular-ui-router": "~0.2.15",
     "metisMenu": "~2.1.0",
     "jquery": "~2.1.4",
-    "angular-bootstrap": "~0.13.4"
+    "angular-bootstrap": "~0.14.0"
   }
 }

@@ -1,9 +1,10 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js'])
+angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
 
         .config(function ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.when('', '/dashboard');
             $urlRouterProvider.when('/', '/dashboard');
             $urlRouterProvider.when('/patients', '/patients/list');
             $urlRouterProvider.when('/patients/', '/patients/list');

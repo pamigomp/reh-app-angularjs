@@ -78,34 +78,22 @@
                     <div class="form-group required">
                         <label class="control-label" for="dob">Data urodzenia</label>
                         <div class="row">
-                            <div class="col-xs-4">
-                                <select class="form-control" name="day" data-ng-blur="dayBlur = true" data-ng-disabled="!allowEdit" required="required">
-                                    <option selected disabled style="display: none">Dzień</option>
-                                    <option data-ng-repeat="n in rangeDays()" value="{{n}}">{{n}}</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-4">
-                                <select class="form-control" name="month" data-ng-blur="monthBlur = true" data-ng-disabled="!allowEdit" required="required">
-                                    <option selected disabled style="display: none">Miesiąc</option>
-                                    <option value="1">Styczeń</option>
-                                    <option value="2">Luty</option>
-                                    <option value="3">Marzec</option>
-                                    <option value="4">Kwiecień</option>
-                                    <option value="5">Maj</option>
-                                    <option value="6">Czerwiec</option>
-                                    <option value="7">Lipiec</option>
-                                    <option value="8">Sierpień</option>
-                                    <option value="9">Wrzesień</option>
-                                    <option value="10">Październik</option>
-                                    <option value="11">Listopad</option>
-                                    <option value="12">Grudzień</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-4">
-                                <select class="form-control" name="year" data-ng-blur="yearBlur = true" data-ng-disabled="!allowEdit" required="required">
-                                    <option selected disabled style="display: none">Rok</option>
-                                    <option data-ng-repeat="n in rangeYears(2016, 1900)" value="{{n}}">{{n}}</option>
-                                </select>
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="dob"
+                                           datepicker-popup="dd.MM.yyyy"
+                                           show-button-bar="false"
+                                           max-date="maxDate"
+                                           datepicker-options="dateOptions"
+                                           is-open="valuationDatePickerIsOpen" 
+                                           data-ng-click="valuationDatePickerOpen()" 
+                                           data-ng-model="patientDetails.dob" data-ng-disabled="!allowEdit"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" data-ng-disabled="!allowEdit" data-ng-click="valuationDatePickerOpen($event)">
+                                            <i class="fa fa-calendar" ></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
