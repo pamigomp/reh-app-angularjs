@@ -116,7 +116,7 @@ angular.module('RehApp')
                 );
                 return deferred.promise;
             };
-            
+
             TermsDataService.getRoomsList = function () {
                 var deferred = $q.defer();
 
@@ -130,13 +130,41 @@ angular.module('RehApp')
                 );
                 return deferred.promise;
             };
-            
+
             TermsDataService.getTreatmentsList = function () {
                 var deferred = $q.defer();
 
                 DataStorageService.getTreatments().then(
                         function (treatmentData) {
                             deferred.resolve(treatmentData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            TermsDataService.getPatientsList = function () {
+                var deferred = $q.defer();
+
+                DataStorageService.getPatients().then(
+                        function (patientData) {
+                            deferred.resolve(patientData.data.items);
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+
+            TermsDataService.getIcdsList = function () {
+                var deferred = $q.defer();
+
+                DataStorageService.getIcds().then(
+                        function (icdData) {
+                            deferred.resolve(icdData.data.items);
                         },
                         function () {
                             deferred.reject();

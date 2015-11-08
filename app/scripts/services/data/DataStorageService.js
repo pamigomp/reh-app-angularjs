@@ -190,5 +190,13 @@ angular.module('RehApp')
                     url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments'
                 });
             };
+
+            DataStorageService.getIcds = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/icds'
+                });
+            };
+
             return DataStorageService;
         });

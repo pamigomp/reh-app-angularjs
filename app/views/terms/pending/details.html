@@ -69,7 +69,7 @@
                                     <input type="text" class="form-control"
                                            uib-datepicker-popup="dd.MM.yyyy"
                                            show-button-bar="false"
-                                           max-date="maxDate"
+                                           min-date="minDate"
                                            datepicker-options="dateOptions"
                                            is-open="isOpen" 
                                            data-ng-click="open()" 
@@ -89,7 +89,6 @@
                             <uib-timepicker  ng-model="termPendingDetails.datehour" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="false" data-ng-disabled="!allowEdit" required="required"></uib-timepicker>
                         </fieldset>
                     </div>
-
                     <div class="form-group required" data-ng-init="loadTreatmentsList()">
                         <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
                         <select class="form-control" data-ng-model="termPendingDetails.treatmentid" name="kindoftreatment" data-ng-disabled="!allowEdit" required="required">
@@ -108,7 +107,6 @@
                             <option data-ng-repeat="employee in employeesList |orderBy: 'surname'" data-ng-value="{{employee.employeeid}}" value="{{employee.employeeid}}">{{employee.degree}} {{employee.surname}} {{employee.name}}</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label class="control-label" for="additionalinformations">Dodatkowe informacje</label>
                         <textarea name="additionalinformations" data-ng-model="termPendingDetails.additionalinformations" class="form-control" maxlength="512" rows="5" data-ng-disabled="!allowEdit" placeholder="Dodatkowe informacje"></textarea>

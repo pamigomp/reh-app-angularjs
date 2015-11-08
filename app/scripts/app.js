@@ -227,6 +227,20 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                         }
                     })
 
+                    .state('root.terms.new', {
+                        url: '/new',
+                        data: {
+                            title: 'Nowy termin',
+                            breadcrumb: 'Nowy termin'
+                        },
+                        views: {
+                            '': {
+                                templateUrl: 'views/terms/term/create.html',
+                                controller: 'TermCreateController'
+                            }
+                        }
+                    })
+                    
                     .state('root.patients', {
                         abstract: true,
                         url: '/patients',

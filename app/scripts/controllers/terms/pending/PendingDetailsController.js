@@ -116,7 +116,7 @@ angular.module('RehApp')
             };
 
             //DATEPICKER
-            $scope.maxDate = new Date();
+            $scope.minDate = new Date();
             $scope.isOpen = false;
 
             $scope.dateOptions = {
