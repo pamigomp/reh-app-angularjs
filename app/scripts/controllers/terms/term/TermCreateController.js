@@ -2,19 +2,33 @@
 
 angular.module('RehApp')
 
-        .controller('TermCreateController', function ($scope, TermsDataService) {
+        .controller('TermCreateController', function ($scope, $state, TermsDataService) {
             $scope.termDetails = {};
             $scope.errorCreate = false;
             $scope.today = new Date().getTime();
             $scope.terms = [];
             $scope.index = 0;
-            
-            $scope.saveTerm = function() {
+
+            $scope.saveTerms = function () {
+                $scope.submitting = true;
+                for (var x in $scope.terms) {
+                    TermsDataService.saveTerms($scope.terms[x]).then(
+                            function () {
+                                $scope.errorCreate = false;
+                                $scope.submitting = false;
+                            }, function () {
+                        $scope.errorCreate = true;
+                        $scope.submitting = false;
+                    });
+                }
+                $state.go('root.terms.pending');
+            };
+
+            $scope.saveTerm = function () {
                 $scope.terms[$scope.index] = angular.copy($scope.termDetails);
                 $scope.index += 1;
-                console.log($scope.terms);
             };
-            
+
             $scope.loadPatientsList = function () {
                 $scope.loadingPatients = true;
                 $scope.errorLoadingPatients = false;
@@ -46,7 +60,7 @@ angular.module('RehApp')
                         }
                 );
             };
-            
+
             $scope.loadEmployeesList = function () {
                 $scope.loadingEmployees = true;
                 $scope.errorLoadingEmployees = false;
@@ -98,6 +112,7 @@ angular.module('RehApp')
             $scope.minDate = new Date();
             $scope.maxDate = new Date();
             $scope.isOpen = false;
+            $scope.isOpen2 = false;
 
             $scope.dateOptions = {
                 'starting-day': 1
@@ -110,6 +125,14 @@ angular.module('RehApp')
                 }
 
                 $scope.isOpen = true;
+            };
+            $scope.open2 = function ($event) {
+                if ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                }
+
+                $scope.isOpen2 = true;
             };
             //DATEPICKER END
 

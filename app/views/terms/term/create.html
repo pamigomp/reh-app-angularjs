@@ -123,7 +123,7 @@
                         <div class="form-group required" data-ng-init="loadIcdsList()">
                             <label class="control-label" for="icd10">ICD-10</label>
                             <select class="form-control" data-ng-model="termDetails.icd10" name="icd10" required="required">
-                                <option data-ng-repeat="icd in icdsList|orderBy:'code'" data-ng-value="{{icd.icdId}}" value="{{icd.icdId}}">{{icd.code}}</option>
+                                <option data-ng-repeat="icd in icdsList|orderBy:'code'" data-ng-value="{{icd.icdId}}" value="{{icd.icdId}}">{{icd.code}} ({{icd.name}})kręgo</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -158,11 +158,11 @@
                                                show-button-bar="false"
                                                min-date="minDate"
                                                datepicker-options="dateOptions"
-                                               is-open="isOpen" 
-                                               data-ng-click="open()" 
+                                               is-open="isOpen2" 
+                                               data-ng-click="open2()" 
                                                data-ng-model="termDetails.datehour"/>
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" data-ng-click="open($event)">
+                                            <button type="button" class="btn btn-default" data-ng-click="open2($event)">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
@@ -221,6 +221,38 @@
             </div>
         </div>
     </form>
-    <!--<button class="btn btn-default" data-ui-sref="root.dashboard" data-ng-hide="submitting" data-toggle="tooltip" title="Wróć do panelu nawigacyjnego"><i class="fa fa-times"></i> Anuluj</button>
-        <p align="center"><img src="images/spinner.gif" style="height: 30px;" data-ng-show="submitting"></p>-->
+    <div class="row" data-ng-show="terms.length">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" data-ng-show="termDetails.visitId === '1'">Krok 5. Zrealizowanie skierowania</h3>
+                    <h3 class="panel-title" data-ng-show="termDetails.visitId === '2'">Krok 4. Zrealizowanie skierowania</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" data-ng-hide="loading">
+                        <table class="table table-striped table-condensed table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-3">Data i godzina</th>
+                                    <th class="col-xs-3">Rodzaj zabiegu</th>
+                                    <th class="col-xs-3">Numer pokoju</th>
+                                    <th class="col-xs-3">Pracownik</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="term in terms| orderBy:'datehour'">
+                                    <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
+                                    <td>{{term.treatmentId}}</td>
+                                    <td>{{term.roomId}}</td> 
+                                    <td>{{term.employeeId}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p align="center"><img src="images/spinner.gif" style="height: 30px;" data-ng-show="submitting"></p>
+                    <button type="submit" class="btn btn-primary" data-ng-click="saveTerms()" data-ng-hide="submitting" data-toggle="tooltip" title="Zatweirdź wybrane terminy"><i class="fa fa-check"></i> Zatwierdź</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

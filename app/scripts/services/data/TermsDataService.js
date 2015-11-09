@@ -172,6 +172,21 @@ angular.module('RehApp')
                 );
                 return deferred.promise;
             };
+            
+            TermsDataService.saveTerms = function (terms) {
+                var deferred = $q.defer();
+
+                DataStorageService.saveTerms(terms).then(
+                        function () {
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.reject();
+                        }
+                );
+                return deferred.promise;
+            };
+            
             return TermsDataService;
         });
         

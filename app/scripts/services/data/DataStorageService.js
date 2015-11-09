@@ -198,5 +198,13 @@ angular.module('RehApp')
                 });
             };
 
+            DataStorageService.saveTerms = function (terms) {
+                return $http({
+                    method: "POST",
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending',
+                    data: terms
+                });
+            };
+
             return DataStorageService;
         });
