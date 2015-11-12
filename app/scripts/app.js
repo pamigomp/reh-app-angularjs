@@ -1,7 +1,17 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
+angular.module('RehApp', ['ui.router', 'ngMockE2E', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
+
+        .constant('AUTH_EVENTS', {
+            sessionTimeout: 'auth-session-timeout',
+            notAuthenticated: 'auth-not-authenticated',
+            notAuthorized: 'auth-not-authorized'
+        })
+
+        .constant('USER_ROLES', {
+            user: 'user_role'
+        })
 
         .config(function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.when('', '/dashboard');
@@ -14,7 +24,10 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
             $urlRouterProvider.when('/charts/', '/charts/general');
             $urlRouterProvider.when('/terms', '/terms/pending');
             $urlRouterProvider.when('/terms/', '/terms/pending');
-            $urlRouterProvider.otherwise('/dashboard');
+            $urlRouterProvider.otherwise(function ($injector, $location) {
+                var $state = $injector.get("$state");
+                $state.go("root.dashboard");
+            });
 
             $stateProvider
 
@@ -99,7 +112,7 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     })
-                    
+
                     .state('root.terms.pending_error', {
                         url: '/pending',
                         data: {
@@ -113,8 +126,8 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     })
-                    
-                    
+
+
                     .state('root.terms.pending.term', {
                         abstract: true,
                         url: '/:termId',
@@ -170,7 +183,7 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     })
-                    
+
                     .state('root.terms.cancelled_error', {
                         url: '/cancelled',
                         data: {
@@ -184,7 +197,7 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     })
-                    
+
                     .state('root.terms.completed', {
                         url: '/completed',
                         data: {
@@ -212,7 +225,7 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     })
-                    
+
                     .state('root.terms.completed_error', {
                         url: '/completed',
                         data: {
@@ -240,7 +253,7 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     })
-                    
+
                     .state('root.patients', {
                         abstract: true,
                         url: '/patients',
@@ -282,7 +295,7 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     })
-                    
+
                     .state('root.patients.list_error', {
                         url: '/list',
                         data: {
@@ -539,4 +552,34 @@ angular.module('RehApp', ['ui.router', 'ui.bootstrap', 'chart.js', 'ngAnimate'])
                             }
                         }
                     });
-        });
+        })
+        .run(function ($state, $rootScope) {
+            $rootScope.$state = $state;
+        })
+        .run(function ($httpBackend) {
+            $httpBackend.whenGET(/views\/\w+.*/).passThrough();
+            $httpBackend.whenGET(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
+            $httpBackend.whenPUT(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
+            $httpBackend.whenPOST(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
+            $httpBackend.whenDELETE(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
+        })
+        .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+            $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
+
+                if ('data' in next && 'authorizedRoles' in next.data) {
+                    var authorizedRoles = next.data.authorizedRoles;
+                    if (!AuthService.isAuthorized(authorizedRoles)) {
+                        event.preventDefault();
+                        $state.go($state.current, {}, {reload: true});
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                    }
+                }
+
+                if (!AuthService.isAuthenticated()) {
+                    if (next.name !== 'root.login') {
+                        event.preventDefault();
+                        $state.go('root.login');
+                    }
+                }
+            });
+         });

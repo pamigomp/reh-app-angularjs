@@ -206,5 +206,12 @@ angular.module('RehApp')
                 });
             };
 
+            DataStorageService.verifyCredentials = function (email) {
+               return $http({
+                    method: 'GET',
+                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/verify/' + email
+                });
+            };
+            
             return DataStorageService;
         });

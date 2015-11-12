@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="term in pendingTerms| orderBy:'patienttreatmentid' | filter:termsFilter">
+                        <tr data-ng-repeat="term in pendingTerms| orderBy:'datehour' | filter:termsFilter">
                             <td>{{term.patienttreatmentid}}</td>
                             <td>{{term.datehour|date: 'dd.MM.yyyy'}}</td>
                             <td>{{term.datehour|date: 'HH:mm'}}</td>

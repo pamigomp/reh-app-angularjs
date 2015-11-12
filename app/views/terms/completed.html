@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="term in completedTerms| orderBy:'patienttreatmentid' | filter:termsFilter">
+                        <tr data-ng-repeat="term in completedTerms| orderBy:'datehour' | filter:termsFilter">
                             <td>{{term.patienttreatmentid}}</td>
                             <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
                             <td>{{term.kindoftreatment}}</td>
