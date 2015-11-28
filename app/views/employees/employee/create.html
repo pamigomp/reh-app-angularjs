@@ -110,11 +110,31 @@
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="phone">Telefon kontaktowy</label>
-                        <input name="phone" type="text" data-ng-model="employeeDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-minlength="" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy" required="required">
+                        <input name="phone" type="text" data-ng-model="employeeDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy" required="required">
                         <p class="help-block" data-ng-show="phoneBlur && new_employee.phone.$error.pattern">
                             Wprowadź poprawny format telefonu pracownika (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
                         </p>
                     </div>
+                    
+                    
+                    <div class="form-group required">
+                        <label class="control-label" for="password">Hasło</label>
+                        <input name="password" type="password" data-ng-model="employeeDetails.password" class="form-control" data-ng-blur="passwordBlur = true" data-ng-minlength="6" data-ng-maxlength="32" placeholder="Hasło" required="required">
+                        <p class="help-block" data-ng-show="passwordBlur && new_employee.password.$error.minlength">
+                            Wprowadź hasło składające się z minimum 6 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="passwordBlur && new_employee.password.$error.maxlength">
+                            Wprowadź hasło składające się z maksymalnie 32 znaków.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="confirmPassword">Potwierdź hasło</label>
+                        <input name="confirmPassword" type="password" data-ng-model="confirmPassword" class="form-control" data-ng-blur="confirmPasswordBlur = true" data-ng-minlength="6" data-ng-maxlength="32" data-ng-disabled="new_employee.password.$invalid" placeholder="Potwierdź hasło" required="required">
+                        <p class="help-block" data-ng-show="confirmPasswordBlur && employeeDetails.password!==confirmPassword">
+                            Wprowadź takie same hasła.
+                        </p>
+                    </div>
+                    
                     <div class="form-group required">
                         <label class="control-label" for="employmentdate">Data zatrudnienia</label>
                         <div class="row">
@@ -197,7 +217,7 @@
             </div>
         </div>
     </form>
-    <button type="submit" class="btn btn-primary" data-ng-click="saveEmployeeDetails()" data-ng-hide="submitting" data-ng-disabled="new_employee.$invalid" data-toggle="tooltip" title="Dodaj nowego pracownika"><i class="fa fa-plus"></i> Dodaj</button>
+    <button type="submit" class="btn btn-primary" data-ng-click="saveEmployeeDetails()" data-ng-hide="submitting" data-ng-disabled="new_employee.$invalid || employeeDetails.password!==confirmPassword" data-toggle="tooltip" title="Dodaj nowego pracownika"><i class="fa fa-plus"></i> Dodaj</button>
     <button class="btn btn-default" data-ui-sref="root.employees.list" data-ng-hide="submitting" data-toggle="tooltip" title="Wróć na listę pracowników"><i class="fa fa-times"></i> Anuluj</button>
     <p align="center"><img src="images/spinner.gif" style="height: 30px;" data-ng-show="submitting"></p>
 </div>

@@ -92,7 +92,7 @@
                     <div class="form-group required" data-ng-init="loadTreatmentsList()">
                         <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
                         <select class="form-control" data-ng-model="termPendingDetails.treatmentid" name="kindoftreatment" data-ng-disabled="!allowEdit" required="required">
-                            <option data-ng-repeat="treatment in treatmentsList" data-ng-value="{{treatment.treatmentid}}" value="{{treatment.treatmentid}}">{{treatment.kindoftreatment}} ({{treatment.price}} zł/{{treatment.time}} min.)</option>
+                            <option data-ng-repeat="treatment in treatmentsList" data-ng-value="{{treatment.treatmentid}}" value="{{treatment.treatmentid}}">{{treatment.kindoftreatment}} ({{treatment.price}} zł/{{treatment.duration}} min.)</option>
                         </select>
                     </div>
                     <div class="form-group required" data-ng-init="loadRoomsList()">

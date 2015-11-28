@@ -2,7 +2,7 @@
 
 angular.module('RehApp')
 
-        .controller('TermCreateController', function ($scope, $state, TermsDataService) {
+        .controller('TermCreateController', function ($scope, $timeout, $state, TermsDataService) {
             $scope.termDetails = {};
             $scope.errorCreate = false;
             $scope.today = new Date().getTime();
@@ -21,7 +21,10 @@ angular.module('RehApp')
                         $scope.submitting = false;
                     });
                 }
-                $state.go('root.terms.pending');
+                $timeout(function() {
+                    $state.go('root.terms.pending');
+                }, 2000);
+                
             };
 
             $scope.saveTerm = function () {

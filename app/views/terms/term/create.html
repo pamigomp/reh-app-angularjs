@@ -194,13 +194,9 @@
                                 <option data-ng-repeat="employee in employeesList|orderBy: 'surname'" data-ng-value="{{employee.employeeid}}" value="{{employee.employeeid}}">{{employee.degree}} {{employee.surname}} {{employee.name}}</option>
                             </select>
                         </div>
-                        <!--                        <div class="form-group required">
-                                                    <label class="control-label" for="repsnumber">Ilość powtórzeń</label>
-                                                    <input name="repsnumber" type="number" class="form-control" data-ng-model="termDetails.repsNumber" placeholder="Ilość powtórzeń" required="required">
-                                                </div>-->
                         <label class="control-label required" for="time">Czas trwania</label>
                         <div class="form-group input-group required">
-                            <input name="time" type="number" class="form-control" data-ng-model="termDetails.time" placeholder="Czas trwania" min="0" max="480" required="required">
+                            <input name="time" type="number" class="form-control" data-ng-model="termDetails.duration" placeholder="Czas trwania" min="0" max="480" required="required">
                             <span class="input-group-addon">min.</span>
                         </div>
                         <div class="form-group">
