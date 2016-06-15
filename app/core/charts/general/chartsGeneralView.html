@@ -1,0 +1,61 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Wykresy ogólne</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość zarobionych pieniędzy</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar" chart-data="CGC.data"
+                            chart-labels="CGC.labels" chart-series="CGC.series">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość wyrobionych punktów NFZ</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar" chart-data="CGC.data4"
+                            chart-labels="CGC.labels4" chart-series="CGC.series4">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość zarobionych pieniędzy z podziałem na pracownika</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="line" class="chart chart-line" chart-data="CGC.data2"
+                            chart-labels="CGC.labels2" chart-series="CGC.series2" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość zarobionych pieniędzy z podziałem na rodzaj zabiegu</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="line" class="chart chart-line" chart-data="CGC.data3"
+                            chart-labels="CGC.labels3" chart-series="CGC.series3" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

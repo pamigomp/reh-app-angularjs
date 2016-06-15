@@ -1,217 +1,217 @@
 'use strict';
 
-angular.module('rehApp')
-        .factory('DataStorageService', function ($http) {
-            var DataStorageService = {};
+angular.module('rehApp.dataStorageService', [])
+        .factory('dataStorageService', ['$http', function ($http) {
+                var dataStorageService = {};
 
-            DataStorageService.getTermsPending = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending'
-                });
-            };
+                dataStorageService.getTermsPending = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending'
+                    });
+                };
 
-            DataStorageService.getTermPending = function (termId) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending/' + termId
-                });
-            };
+                dataStorageService.getTermPending = function (termId) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending/' + termId
+                    });
+                };
 
-            DataStorageService.updateTermPending = function (termPendingDetails) {
-                return $http({
-                    method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending/' + termPendingDetails.patienttreatmentid,
-                    data: termPendingDetails
-                });
-            };
+                dataStorageService.updateTermPending = function (termPendingDetails) {
+                    return $http({
+                        method: 'PUT',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending/' + termPendingDetails.patienttreatmentid,
+                        data: termPendingDetails
+                    });
+                };
 
-            DataStorageService.getTermsCancelled = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancelled'
-                });
-            };
+                dataStorageService.getTermsCancelled = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancelled'
+                    });
+                };
 
-            DataStorageService.getTermsCompleted = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/completed'
-                });
-            };
+                dataStorageService.getTermsCompleted = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/completed'
+                    });
+                };
 
-            DataStorageService.cancelTerm = function (patienttreatmentid) {
-                return $http({
-                    method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancel/' + patienttreatmentid
-                });
-            };
+                dataStorageService.cancelTerm = function (patienttreatmentid) {
+                    return $http({
+                        method: 'PUT',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancel/' + patienttreatmentid
+                    });
+                };
 
-            DataStorageService.completeTerm = function (patienttreatmentid) {
-                return $http({
-                    method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/complete/' + patienttreatmentid
-                });
-            };
+                dataStorageService.completeTerm = function (patienttreatmentid) {
+                    return $http({
+                        method: 'PUT',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/complete/' + patienttreatmentid
+                    });
+                };
 
-            DataStorageService.getEmployees = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees'
-                });
-            };
+                dataStorageService.getEmployees = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees'
+                    });
+                };
 
-            DataStorageService.getEmployee = function (employeeId) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeId
-                });
-            };
+                dataStorageService.getEmployee = function (employeeId) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeId
+                    });
+                };
 
-            DataStorageService.saveEmployee = function (employeeDetails) {
-                return $http({
-                    method: "POST",
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees',
-                    data: employeeDetails
-                });
-            };
+                dataStorageService.saveEmployee = function (employeeDetails) {
+                    return $http({
+                        method: "POST",
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees',
+                        data: employeeDetails
+                    });
+                };
 
-            DataStorageService.removeEmployee = function (employeeId) {
-                return $http({
-                    method: "DELETE",
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeId
-                });
-            };
+                dataStorageService.removeEmployee = function (employeeId) {
+                    return $http({
+                        method: "DELETE",
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeId
+                    });
+                };
 
-            DataStorageService.updateEmployee = function (employeeDetails) {
-                return $http({
-                    method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeDetails.employeeid,
-                    data: employeeDetails
-                });
-            };
+                dataStorageService.updateEmployee = function (employeeDetails) {
+                    return $http({
+                        method: 'PUT',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeDetails.employeeid,
+                        data: employeeDetails
+                    });
+                };
 
-            DataStorageService.getEmployeeTermsPending = function (employeeId) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/pending/' + employeeId
-                });
-            };
+                dataStorageService.getEmployeeTermsPending = function (employeeId) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/pending/' + employeeId
+                    });
+                };
 
-            DataStorageService.getEmployeeTermsCompleted = function (employeeId) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/completed/' + employeeId
-                });
-            };
+                dataStorageService.getEmployeeTermsCompleted = function (employeeId) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/completed/' + employeeId
+                    });
+                };
 
-            DataStorageService.getEmployeeTermsCancelled = function (employeeId) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/cancelled/' + employeeId
-                });
-            };
+                dataStorageService.getEmployeeTermsCancelled = function (employeeId) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/cancelled/' + employeeId
+                    });
+                };
 
-            DataStorageService.getPatients = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients'
-                });
-            };
+                dataStorageService.getPatients = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients'
+                    });
+                };
 
-            DataStorageService.getPatient = function (patientPesel) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel
-                });
-            };
+                dataStorageService.getPatient = function (patientPesel) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel
+                    });
+                };
 
-            DataStorageService.savePatient = function (patientDetails) {
-                return $http({
-                    method: "POST",
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients',
-                    data: patientDetails
-                });
-            };
+                dataStorageService.savePatient = function (patientDetails) {
+                    return $http({
+                        method: "POST",
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients',
+                        data: patientDetails
+                    });
+                };
 
-            DataStorageService.removePatient = function (patientPesel) {
-                return $http({
-                    method: "DELETE",
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel
-                });
-            };
+                dataStorageService.removePatient = function (patientPesel) {
+                    return $http({
+                        method: "DELETE",
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel
+                    });
+                };
 
-            DataStorageService.updatePatient = function (patientDetails) {
-                return $http({
-                    method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientDetails.pesel,
-                    data: patientDetails
-                });
-            };
+                dataStorageService.updatePatient = function (patientDetails) {
+                    return $http({
+                        method: 'PUT',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientDetails.pesel,
+                        data: patientDetails
+                    });
+                };
 
-            DataStorageService.resetPatientPassword = function (patientPesel) {
-                return $http({
-                    method: 'PUT',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/passwords/' + patientPesel
-                });
-            };
+                dataStorageService.resetPatientPassword = function (patientPesel) {
+                    return $http({
+                        method: 'PUT',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/passwords/' + patientPesel
+                    });
+                };
 
-            DataStorageService.getPatientTermsPending = function (patientPesel) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/pending/' + patientPesel
-                });
-            };
+                dataStorageService.getPatientTermsPending = function (patientPesel) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/pending/' + patientPesel
+                    });
+                };
 
-            DataStorageService.getPatientTermsCompleted = function (patientPesel) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/completed/' + patientPesel
-                });
-            };
+                dataStorageService.getPatientTermsCompleted = function (patientPesel) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/completed/' + patientPesel
+                    });
+                };
 
-            DataStorageService.getPatientTermsCancelled = function (patientPesel) {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/cancelled/' + patientPesel
-                });
-            };
+                dataStorageService.getPatientTermsCancelled = function (patientPesel) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/cancelled/' + patientPesel
+                    });
+                };
 
-            DataStorageService.getRooms = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/rooms'
-                });
-            };
+                dataStorageService.getRooms = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/rooms'
+                    });
+                };
 
-            DataStorageService.getTreatments = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments'
-                });
-            };
+                dataStorageService.getTreatments = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments'
+                    });
+                };
 
-            DataStorageService.getIcds = function () {
-                return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/icds'
-                });
-            };
+                dataStorageService.getIcds = function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/icds'
+                    });
+                };
 
-            DataStorageService.saveTerms = function (terms) {
-                return $http({
-                    method: "POST",
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending',
-                    data: terms
-                });
-            };
+                dataStorageService.saveTerms = function (terms) {
+                    return $http({
+                        method: "POST",
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending',
+                        data: terms
+                    });
+                };
 
-            DataStorageService.verifyCredentials = function (email) {
-               return $http({
-                    method: 'GET',
-                    url: 'https://apex.oracle.com/pls/apex/pwr/webapp/verify/' + email
-                });
-            };
-            
-            return DataStorageService;
-        });
+                dataStorageService.verifyCredentials = function (email) {
+                    return $http({
+                        method: 'GET',
+                        url: 'https://apex.oracle.com/pls/apex/pwr/webapp/verify/' + email
+                    });
+                };
+
+                return dataStorageService;
+            }]);

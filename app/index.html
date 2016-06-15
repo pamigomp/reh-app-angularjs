@@ -4,9 +4,9 @@
 <!--[if IE 8]>         <html lang="pl" data-ng-app="rehApp" data-ng-strict-di class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="pl" data-ng-app="rehApp" data-ng-strict-di class="no-js"> <!--<![endif]-->
     <head>
-        <meta charset="ISO-8859-2">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title data-ng-controller="PageTitleController">{{getPageTitle()}}</title>
+        <title data-ng-controller="PageTitleController as PTC">{{PTC.getPageTitle()}}</title>
         <meta name="description" content="RehApp">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
@@ -17,9 +17,9 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/animate.css">
     </head>
-    <body data-ng-controller="IndexController">
+    <body>
 
-        <div data-ng-include="'core/navigation/master.html'"></div>
+        <div data-ng-include="'core/navigation/masterView.html'"></div>
 
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -44,36 +44,38 @@
         <!-- Application scripts: -->
         <script src="core/app.js"></script>
         <script src="core/app.routes.js"></script>
-        <script src="core/applicationMetadataService.js"></script>
+        <script src="core/pageTitleController.js"></script>
         <script src="core/dataStorageService.js"></script>
-        <script src="core/indexController.js"></script>
-        <script src="core/login/LoginController.js"></script>
-        <script src="core/navigation/BreadcrumbsController.js"></script>
-        <script src="core/navigation/MenuController.js"></script>
-        <script src="core/navigation/PageTitleController.js"></script>
-        <script src="core/dashboard/DashboardController.js"></script>
-        <script src="core/terms/TermsPendingController.js"></script>
-        <script src="core/terms/TermsCancelledController.js"></script>
-        <script src="core/terms/TermsCompletedController.js"></script>
-        <script src="core/terms/pending/PendingDetailsController.js"></script>
-        <script src="core/terms/term/TermCreateController.js"></script>
-        <script src="core/patients/PatientsListController.js"></script>
-        <script src="core/patients/patient/PatientCreateController.js"></script>
-        <script src="core/patients/patient/PatientDetailsController.js"></script>
-        <script src="core/patients/patient/PatientTermsController.js"></script>
-        <script src="core/employees/EmployeesListController.js"></script>
-        <script src="core/employees/employee/EmployeeCreateController.js"></script>
-        <script src="core/employees/employee/EmployeeDetailsController.js"></script>
-        <script src="core/employees/employee/EmployeeTermsController.js"></script>
-        <script src="core/charts/ChartsGeneralController.js"></script>
-        <script src="core/charts/ChartsPatientsController.js"></script>
-        <script src="core/charts/ChartsTreatmentsController.js"></script>
-        <script src="core/charts/ChartsDataService.js"></script>
-        <script src="core/dashboard/DashboardDataService.js"></script>
-        <script src="core/employees/EmployeesDataService.js"></script>
-        <script src="core/login/LoginDataService.js"></script>
-        <script src="core/patients/PatientsDataService.js"></script>
-        <script src="core/terms/TermsDataService.js"></script>
+        <script src="core/charts/general/chartsGeneralController.js"></script>
+        <script src="core/charts/patients/chartsPatientsController.js"></script>
+        <script src="core/charts/treatments/chartsTreatmentsController.js"></script>
+        <script src="core/charts/chartsService.js"></script>
+        <script src="core/dashboard/dashboardController.js"></script>
+        <script src="core/dashboard/dashboardService.js"></script>
+        <script src="core/employees/list/employeesListController.js"></script>
+        <script src="core/employees/create/employeeCreateController.js"></script>
+        <script src="core/employees/details/employeeDetailsController.js"></script>
+        <script src="core/employees/terms/employeeTermsController.js"></script>
+        <script src="core/employees/employeesService.js"></script>
+        <script src="core/login/loginController.js"></script>
+        <script src="core/login/loginService.js"></script>
+        <script src="core/navigation/breadcrumbs/breadcrumbsController.js"></script>
+        <script src="core/navigation/footer/footerController.js"></script>
+        <script src="core/navigation/header/headerController.js"></script>
+        <script src="core/navigation/menu/menuController.js"></script>
+        <script src="core/navigation/masterController.js"></script>
+        <script src="core/patients/list/patientsListController.js"></script>
+        <script src="core/patients/create/patientCreateController.js"></script>
+        <script src="core/patients/details/patientDetailsController.js"></script>
+        <script src="core/patients/terms/patientTermsController.js"></script>
+        <script src="core/patients/patientsService.js"></script>
+        <script src="core/terms/cancelled/termsCancelledListController.js"></script>
+        <script src="core/terms/completed/termsCompletedListController.js"></script>
+        <script src="core/terms/create/termCreateController.js"></script>
+        <script src="core/terms/pending/details/termPendingDetailsController.js"></script>
+        <script src="core/terms/pending/termsPendingListController.js"></script>
+        <script src="core/terms/termsService.js"></script>
+
         <script src="common/constants/constants.js"></script>
         <script src="common/directives/modalDirective.js"></script>
     </body>

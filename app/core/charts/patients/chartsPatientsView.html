@@ -1,0 +1,47 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Wykresy pacjentów</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość nowych pacjentów</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar" chart-data="CPC.data3"
+                            chart-labels="CPC.labels3" chart-series="CPC.series3">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość pacjentów z podziałem na wiek</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="pie" class="chart chart-pie"
+                            chart-data="CPC.data2" chart-labels="CPC.labels2" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość pacjentów z podziałem na płeć</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="pie" class="chart chart-pie"
+                            chart-data="CPC.data" chart-labels="CPC.labels" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Panel nawigacyjny</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-4 col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-5">
+                            <i class="fa fa-user fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+                <a data-ui-sref="root.patients.new">
+                    <div class="panel-footer">
+                        <span class="pull-left">Dodaj nowego pacjenta</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4 col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-5">
+                            <i class="fa fa-user-md fa-5x center"></i>
+                        </div>
+                    </div>
+                </div>
+                <a data-ui-sref="root.employees.new">
+                    <div class="panel-footer">
+                        <span class="pull-left">Dodaj nowego pracownika</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-5">
+                            <i class="fa fa-file-text-o fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+                <a data-ui-sref="root.terms.new">
+                    <div class="panel-footer">
+                        <span class="pull-left">Umów na nowy termin</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość zarobionych pieniędzy</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar" chart-data="DC.data"
+                            chart-labels="DC.labels" chart-series="DC.series">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Ilość wyrobionych punktów NFZ</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar" chart-data="DC.data2"
+                            chart-labels="DC.labels2" chart-series="DC.series2">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

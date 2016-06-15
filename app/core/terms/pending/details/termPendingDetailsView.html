@@ -1,0 +1,123 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Szczegóły zabiegu</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger" role="alert" data-ng-show="errorEdit">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Błąd!</strong> Wystąpił problem podczas edytowania terminu zabiegu.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger" role="alert" data-ng-show="errorLoading || errorLoadingEmployees || errorLoadingTreatments || errorLoadingRooms">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Błąd!</strong> Wystąpił problem podczas pobierania szczegółów dotyczących terminu zabiegu.
+            </div>
+        </div>
+    </div>
+    <form class="row" role="form" name="term_pending_details" data-ng-init="loadTermPendingDetails()">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Szczegóły zabiegu</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label style="padding-top: 7px; padding-bottom: 7px;">ID</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <p class="form-control-static">{{termPendingDetails.patienttreatmentid}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label style="padding-top: 7px; padding-bottom: 7px;">Pacjent</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <p class="form-control-static">{{termPendingDetails.patient_surname}} {{termPendingDetails.patient_name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label style="padding-top: 7px; padding-bottom: 7px;">Rodzaj wizyty</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <p class="form-control-static">{{termPendingDetails.kindofvisit}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label style="padding-top: 7px; padding-bottom: 7px;">Cena</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <p data-ng-show="termPendingDetails.kindofvisit === 'NFZ'" class="form-control-static">- zł</p>
+                            <p data-ng-show="termPendingDetails.kindofvisit === 'Prywatna'" class="form-control-static">{{termPendingDetails.price}} zł</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group required">
+                        <label class="control-label" for="date">Dzień</label>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                           uib-datepicker-popup="dd.MM.yyyy"
+                                           show-button-bar="false"
+                                           min-date="minDate"
+                                           datepicker-options="dateOptions"
+                                           is-open="isOpen" 
+                                           data-ng-click="open()" 
+                                           data-ng-model="termPendingDetails.datehour" data-ng-disabled="!allowEdit"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" data-ng-disabled="!allowEdit" data-ng-click="open($event)">
+                                            <i class="fa fa-calendar" ></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group required" data-ng-disabled="!allowEdit">
+                        <label class="control-label" for="hour">Godzina</label>
+                        <fieldset data-ng-disabled="!allowEdit">
+                            <uib-timepicker  data-ng-model="termPendingDetails.datehour" data-ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="false" data-ng-disabled="!allowEdit" required="required"></uib-timepicker>
+                        </fieldset>
+                    </div>
+                    <div class="form-group required" data-ng-init="loadTreatmentsList()">
+                        <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
+                        <select class="form-control" data-ng-model="termPendingDetails.treatmentid" name="kindoftreatment" data-ng-disabled="!allowEdit" required="required">
+                            <option data-ng-repeat="treatment in treatmentsList" data-ng-value="{{treatment.treatmentid}}" value="{{treatment.treatmentid}}">{{treatment.kindoftreatment}} ({{treatment.price}} zł/{{treatment.duration}} min.)</option>
+                        </select>
+                    </div>
+                    <div class="form-group required" data-ng-init="loadRoomsList()">
+                        <label class="control-label" for="roomNumber">Numer pokoju</label>
+                        <select class="form-control" data-ng-model="termPendingDetails.roomid" name="roomNumber" data-ng-disabled="!allowEdit" required="required">
+                            <option data-ng-repeat="room in roomsList" data-ng-value="{{room.roomid}}" value="{{room.roomid}}">p. {{room.roomnumber}} ({{room.roomname}})</option>
+                        </select>
+                    </div>
+                    <div class="form-group required" data-ng-init="loadEmployeesList()">
+                        <label class="control-label" for="employee">Pracownik</label>
+                        <select class="form-control" data-ng-model="termPendingDetails.employeeid" name="employee" data-ng-disabled="!allowEdit" required="required">
+                            <option data-ng-repeat="employee in employeesList |orderBy: 'surname'" data-ng-value="{{employee.employeeid}}" value="{{employee.employeeid}}">{{employee.degree}} {{employee.surname}} {{employee.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="additionalinformations">Dodatkowe informacje</label>
+                        <textarea name="additionalinformations" data-ng-model="termPendingDetails.additionalinformations" class="form-control" maxlength="512" rows="5" data-ng-disabled="!allowEdit" placeholder="Dodatkowe informacje"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button type="submit" class="btn btn-primary" data-ng-show="!allowEdit && !updating" data-ng-click="startEdit()" data-toggle="tooltip" title="Edytuj szczegóły terminu"><i class="fa fa-pencil"></i> Edytuj</button>
+    <button class="btn btn-primary" data-ng-show="allowEdit && !updating" data-ng-click="saveEdit()" data-ng-disabled="term_pending_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
+    <button class="btn btn-warning" data-ng-show="allowEdit && !updating" data-ng-click="cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
+    <button class="btn btn-default pull-right" data-ng-hide="updating" data-ui-sref="root.terms.pending" data-toggle="tooltip" title="Wróć na listę terminów"><i class="fa fa-arrow-left"></i> Wróć</button>
+    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="updating"></i></p>
+</div>

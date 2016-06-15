@@ -3,7 +3,7 @@
 angular.module('rehApp.directives.modal', [])
 
         .directive('modalDirective', function () {
-            return {
+            var directive = {
                 scope: {
                     modalId: '@',
                     title: '@',
@@ -11,12 +11,14 @@ angular.module('rehApp.directives.modal', [])
                     confirmButton: '&',
                     cancelButton: '&'
                 },
-                controller: function ($scope) {
-                    $scope.closeModal = function () {
-                        $(".modal-backdrop").remove();
-                        $(".modal-open").css("overflow", "auto");
-                    };
-                },
+                controller: ['$scope', function ($scope) {
+                        $scope.closeModal = function () {
+                            $(".modal-backdrop").remove();
+                            $(".modal-open").css("overflow", "auto");
+                        };
+                    }],
                 templateUrl: 'common/directives/modalView.html'
             };
+
+            return directive;
         });

@@ -1,0 +1,205 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Szczegóły pacjenta</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger" role="alert" data-ng-show="errorEdit">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Błąd!</strong> Wystąpił problem podczas edytowania pacjenta.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger" role="alert" data-ng-show="errorLoading">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Błąd!</strong> Wystąpił problem podczas pobierania szczegółów pacjenta.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger" role="alert" data-ng-show="errorReset">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Błąd!</strong> Wystąpił problem podczas resetowania hasła pacjenta.
+            </div>
+        </div>
+    </div>
+    <form class="row" role="form" name="patient_details" data-ng-init="loadPatientDetails()">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dane personalne</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group required">
+                        <label class="control-label" for="pesel">PESEL</label>
+                        <input name="pesel" type="text" class="form-control" data-ng-blur="peselBlur = true" data-ng-value="patientDetails.pesel" data-ng-disabled="true" data-ng-minlength="11" data-ng-maxlength="11" data-ng-pattern="/^[0-9]{11}$/" placeholder="PESEL" required="required">
+                        <p class="help-block" data-ng-show="peselBlur && patient_details.pesel.$invalid">
+                            Wprowadź PESEL pacjenta, składający się z 11 cyfr.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="surname">Nazwisko</label>
+                        <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="patientDetails.surname" data-ng-disabled="!allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required="required">
+                        <p class="help-block" data-ng-show="surnameBlur && patient_details.surname.$error.minlength">
+                            Wprowadź nazwisko pacjenta, składające się z minimum 2 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="surnameBlur && patient_details.surname.$error.maxlength">
+                            Wprowadź nazwisko pacjenta, składające się z maksymalnie 32 znaków.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="name">Imię</label>
+                        <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="patientDetails.name" data-ng-disabled="!allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required="required">
+                        <p class="help-block" data-ng-show="nameBlur && patient_details.name.$error.minlength">
+                            Wprowadź imię pacjenta, składające się z minimum 2 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="nameBlur && patient_details.name.$error.maxlength">
+                            Wprowadź imię pacjenta, składające się z maksymalnie 32 znaków.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="sex">Płeć</label>
+                        <div class="radio">
+                            <label>
+                                <input value="K" data-ng-model="patientDetails.sex" data-ng-disabled="!allowEdit" type="radio" data-ng-required="!patientDetails.sex">Kobieta
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input value="M" data-ng-model="patientDetails.sex" data-ng-disabled="!allowEdit" type="radio" data-ng-required="!patientDetails.sex">Mężczyzna
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="dob">Data urodzenia</label>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="dob"
+                                           uib-datepicker-popup="dd.MM.yyyy"
+                                           show-button-bar="false"
+                                           max-date="maxDate"
+                                           datepicker-options="dateOptions"
+                                           is-open="valuationDatePickerIsOpen" 
+                                           data-ng-click="valuationDatePickerOpen()" 
+                                           data-ng-model="patientDetails.dob" data-ng-disabled="!allowEdit"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" data-ng-disabled="!allowEdit" data-ng-click="valuationDatePickerOpen($event)">
+                                            <i class="fa fa-calendar" ></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="email">E-mail</label>
+                        <input name="email" type="email" data-ng-model="patientDetails.email" data-ng-blur="emailBlur = true" data-ng-disabled="!allowEdit" data-ng-minlength="5" data-ng-maxlength="64" class="form-control" placeholder="E-mail">
+                        <p class="help-block" data-ng-show="emailBlur && patient_details.email.$error.minlength && !patient_details.email.$error.email">
+                            Wprowadź e-mail pacjenta, składający się z minimum 5 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="emailBlur && patient_details.email.$error.maxlength && !patient_details.email.$error.email">
+                            Wprowadź e-mail pacjenta, składający się z maksymalnie 64 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="emailBlur && patient_details.email.$error.email">
+                            Wprowadź poprawny format e-maila pacjenta, np. przyklad@rehapp.pl 
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="phone">Telefon kontaktowy</label>
+                        <input name="phone" type="text" data-ng-model="patientDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-disabled="!allowEdit" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy">
+                        <p class="help-block" data-ng-show="phoneBlur && patient_details.phone.$error.pattern">
+                            Wprowadź poprawny format telefonu pacjenta (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="status">Status</label>
+                        <select class="form-control" data-ng-model="patientDetails.status" name="status" data-ng-blur="statusBlur = true" data-ng-disabled="!allowEdit" required="required">
+                            <option selected disabled style="display: none" value=''>Proszę wybrać status</option>
+                            <option value="Aktywny">Aktywny</option>
+                            <option value="Nieaktywny">Nieaktywny</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Hasło</label>
+                        <div class="row" data-ng-hide="resetting">
+                            <div class="col-lg-12">
+                                <button class="btn btn-danger" data-ng-disabled="!allowEdit" data-ng-click="resetPassword()" data-toggle="tooltip" title="Zresetuj hasło pacjenta"><i class="fa fa-refresh"></i> Resetuj hasło</button>
+                            </div>
+                        </div>
+                        <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="resetting"></i></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Data rejestracji</label>
+                        <p class="form-control-static">{{patientDetails.registerdate|date:'dd.MM.yyyy'}}</p>
+                    </div>
+                    <div class="form-group" data-ng-hide="patientDetails.dismissdate === undefined">
+                        <label>Data rezygnacji</label>
+                        <p class="form-control-static">{{patientDetails.dismissdate|date:'dd.MM.yyyy'}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="informations">Dodatkowe informacje</label>
+                        <textarea name="informations" data-ng-model="patientDetails.informations" class="form-control" maxlength="512" rows="5" data-ng-disabled="!allowEdit" placeholder="Dodatkowe informacje"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Adres zamieszkania</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group required">
+                        <label class="control-label" for="street">Ulica</label>
+                        <input name="street" type="text" class="form-control" data-ng-model="patientDetails.street" data-ng-blur="streetBlur = true" data-ng-disabled="!allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required="required">
+                        <p class="help-block" data-ng-show="streetBlur && patient_details.street.$error.minlength">
+                            Nazwa ulicy powinna składać się z minimum 3 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="streetBlur && patient_details.street.$error.maxlength">
+                            Nazwa ulicy powinna składać się z maksymalnie 32 znaków.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="postal_code">Kod pocztowy</label>
+                        <input name="postal_code" type="text" class="form-control" data-ng-model="patientDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-disabled="!allowEdit" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required="required">
+                        <p class="help-block" data-ng-show="postalCodeBlur && patient_details.postal_code.$error.pattern">
+                            Wprowadź poprawny format kodu pocztowego, np. 87-800.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="city">Miejscowość</label>
+                        <input name="city" type="text" class="form-control" data-ng-model="patientDetails.city" data-ng-blur="cityBlur = true" data-ng-disabled="!allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required="required">
+                        <p class="help-block" data-ng-show="cityBlur && patient_details.city.$error.minlength">
+                            Nazwa miejscowości powinna składać się z minimum 3 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="cityBlur && patient_details.city.$error.maxlength">
+                            Nazwa miejscowości powinna składać się z maksymalnie 32 znaków.
+                        </p>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label" for="country">Kraj</label>
+                        <input name="country" type="text" class="form-control" data-ng-model="patientDetails.country" data-ng-blur="countryBlur = true" data-ng-disabled="!allowEdit" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required="required">
+                        <p class="help-block" data-ng-show="countryBlur && patient_details.country.$error.minlength">
+                            Nazwa państwa powinna składać się z minimum 3 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="countryBlur && patient_details.country.$error.maxlength">
+                            Nazwa państwa powinna składać się z maksymalnie 64 znaków.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </form>
+    <button type="submit" class="btn btn-primary" data-ng-show="!allowEdit && !updating" data-ng-click="startEdit()" data-toggle="tooltip" title="Edytuj szczegóły pacjenta"><i class="fa fa-pencil"></i> Edytuj</button>
+    <button class="btn btn-primary" data-ng-show="allowEdit && !updating" data-ng-click="saveEdit()" data-ng-disabled="patient_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
+    <button class="btn btn-warning" data-ng-show="allowEdit && !updating" data-ng-click="cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
+    <button class="btn btn-default pull-right" data-ng-hide="updating" data-ui-sref="root.patients.list" data-toggle="tooltip" title="Wróć na listę pacjentów"><i class="fa fa-arrow-left"></i> Wróć</button>
+    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="updating"></i></p>
+</div>
