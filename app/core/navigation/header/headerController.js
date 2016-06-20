@@ -1,9 +1,15 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('rehApp.nav.header', [])
+    angular.module('rehApp.nav.header', [])
 
-        .controller('HeaderController', ['APP_NAME', function (APP_NAME) {
-                var vm = this;
+            .controller('HeaderController', HeaderController);
 
-                vm.appName = APP_NAME;
-            }]);
+    HeaderController.$inject = ['APP_NAME'];
+
+    function HeaderController(APP_NAME) {
+        var vm = this;
+
+        vm.appName = APP_NAME;
+    }
+})();

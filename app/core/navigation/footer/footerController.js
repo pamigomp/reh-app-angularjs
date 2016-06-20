@@ -1,7 +1,13 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('rehApp.nav.footer', [])
+    angular.module('rehApp.nav.footer', [])
 
-        .controller('FooterController', function () {
+            .controller('FooterController', FooterController);
 
-        });
+    FooterController.$inject = [];
+
+    function FooterController() {
+
+    }
+})();

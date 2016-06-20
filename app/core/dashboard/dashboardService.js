@@ -1,7 +1,13 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('rehApp.dashboardService', ['rehApp.dataStorageService'])
+    angular.module('rehApp.dashboardService', ['rehApp.dataStorageService'])
 
-        .factory('dashboardService', function () {
+            .factory('dashboardService', dashboardService);
 
-        });
+    dashboardService.$inject = [];
+
+    function dashboardService() {
+
+    }
+})();

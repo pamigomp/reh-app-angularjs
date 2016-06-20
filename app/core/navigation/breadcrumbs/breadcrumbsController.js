@@ -1,8 +1,14 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('rehApp.nav.breadcrumbs', [])
+    angular.module('rehApp.nav.breadcrumbs', [])
 
-        .controller('BreadcrumbsController', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
-                $scope.$state = $state;
-                $scope.$stateParams = $stateParams;
-            }]);
+            .controller('BreadcrumbsController', BreadcrumbsController);
+
+    BreadcrumbsController.$inject = ['$scope', '$state', '$stateParams'];
+
+    function BreadcrumbsController($scope, $state, $stateParams) {
+        $scope.$state = $state;
+        $scope.$stateParams = $stateParams;
+    }
+})();

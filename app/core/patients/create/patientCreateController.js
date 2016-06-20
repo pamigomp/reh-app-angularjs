@@ -1,51 +1,57 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('rehApp.patients.create', ['rehApp.patientsService'])
+    angular.module('rehApp.patients.create', ['rehApp.patientsService'])
 
-        .controller('PatientCreateController', ['$scope', 'patientsService', function ($scope, patientsService) {
-                $scope.patientDetails = {};
-                $scope.errorCreate = false;
-                $scope.patientDetails.country = "Polska";
+            .controller('PatientCreateController', PatientCreateController);
 
-                $scope.rangeDays = function () {
-                    var input = [];
-                    for (var i = 1; i <= 31; i++)
-                        input.push(i);
-                    return input;
-                };
+    PatientCreateController.$inject = ['$scope', 'patientsService'];
 
-                $scope.rangeYears = function (max, min) {
-                    var input = [];
-                    for (var i = max; i >= min; i -= 1)
-                        input.push(i);
-                    return input;
-                };
+    function PatientCreateController($scope, patientsService) {
+        $scope.patientDetails = {};
+        $scope.errorCreate = false;
+        $scope.patientDetails.country = "Polska";
 
-                $scope.savePatientDetails = function () {
-                    $scope.submitting = true;
-                    patientsService.savePatientDetails($scope.patientDetails).then(
-                            function () {
-                                $scope.errorCreate = false;
-                                $scope.submitting = false;
-                            }, function () {
-                        $scope.errorCreate = true;
+        $scope.rangeDays = function () {
+            var input = [];
+            for (var i = 1; i <= 31; i++)
+                input.push(i);
+            return input;
+        };
+
+        $scope.rangeYears = function (max, min) {
+            var input = [];
+            for (var i = max; i >= min; i -= 1)
+                input.push(i);
+            return input;
+        };
+
+        $scope.savePatientDetails = function () {
+            $scope.submitting = true;
+            patientsService.savePatientDetails($scope.patientDetails).then(
+                    function () {
+                        $scope.errorCreate = false;
                         $scope.submitting = false;
-                    });
-                };
+                    }, function () {
+                $scope.errorCreate = true;
+                $scope.submitting = false;
+            });
+        };
 
-                $scope.maxDate = new Date();
-                $scope.valuationDatePickerIsOpen = false;
+        $scope.maxDate = new Date();
+        $scope.valuationDatePickerIsOpen = false;
 
-                $scope.dateOptions = {
-                    'starting-day': 1
-                };
+        $scope.dateOptions = {
+            'starting-day': 1
+        };
 
-                $scope.valuationDatePickerOpen = function ($event) {
-                    if ($event) {
-                        $event.preventDefault();
-                        $event.stopPropagation();
-                    }
+        $scope.valuationDatePickerOpen = function ($event) {
+            if ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+            }
 
-                    $scope.valuationDatePickerIsOpen = true;
-                };
-            }]);
+            $scope.valuationDatePickerIsOpen = true;
+        };
+    }
+})();

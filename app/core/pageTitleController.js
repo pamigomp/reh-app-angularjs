@@ -1,18 +1,24 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('rehApp.pageTitle', [])
+    angular.module('rehApp.pageTitle', [])
 
-        .controller('PageTitleController', ['$state', 'APP_NAME', function ($state, APP_NAME) {
-                var vm = this;
+            .controller('PageTitleController', PageTitleController);
 
-                vm.getPageTitle = getPageTitle;
+    PageTitleController.$inject = ['$state', 'APP_NAME'];
 
-                function getPageTitle() {
-                    var title = '';
-                    if (angular.isDefined($state.current.data) && angular.isDefined($state.current.data.title)) {
-                        title += $state.$current.data.title + ' - ';
-                    }
-                    title += APP_NAME;
-                    return title;
-                }
-            }]);
+    function PageTitleController($state, APP_NAME) {
+        var vm = this;
+
+        vm.getPageTitle = getPageTitle;
+
+        function getPageTitle() {
+            var title = '';
+            if (angular.isDefined($state.current.data) && angular.isDefined($state.current.data.title)) {
+                title += $state.$current.data.title + ' - ';
+            }
+            title += APP_NAME;
+            return title;
+        }
+    }
+})();
