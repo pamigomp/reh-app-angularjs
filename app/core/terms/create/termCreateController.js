@@ -1,29 +1,34 @@
+/* jshint loopfunc:true */
+
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.create', ['rehApp.termsService'])
+    angular.module('rehApp.terms.create', ['rehApp.termsService', 'ui.router'])
 
             .controller('TermCreateController', TermCreateController);
 
-    TermCreateController.$inject = ['$scope', '$timeout', '$state', 'termsService'];
+    TermCreateController.$inject = ['$timeout', '$state', 'termsService'];
 
-    function TermCreateController($scope, $timeout, $state, termsService) {
-        $scope.termDetails = {};
-        $scope.errorCreate = false;
-        $scope.today = new Date().getTime();
-        $scope.terms = [];
-        $scope.index = 0;
+    function TermCreateController($timeout, $state, termsService) {
+        var vm = this;
 
-        $scope.saveTerms = function () {
-            $scope.submitting = true;
-            for (var x in $scope.terms) {
-                termsService.saveTerms($scope.terms[x]).then(
+        vm.termDetails = {};
+        vm.errorCreate = false;
+        vm.today = new Date().getTime();
+        vm.terms = [];
+        vm.index = 0;
+
+        vm.saveTerms = function () {
+            vm.submitting = true;
+            for (var i = 0; i < vm.terms.length; i++) {
+                //TODO Move the function outside the loop
+                termsService.saveTerms(vm.terms[i]).then(
                         function () {
-                            $scope.errorCreate = false;
-                            $scope.submitting = false;
+                            vm.errorCreate = false;
+                            vm.submitting = false;
                         }, function () {
-                    $scope.errorCreate = true;
-                    $scope.submitting = false;
+                    vm.errorCreate = true;
+                    vm.submitting = false;
                 });
             }
             $timeout(function () {
@@ -32,121 +37,121 @@
 
         };
 
-        $scope.saveTerm = function () {
-            $scope.terms[$scope.index] = angular.copy($scope.termDetails);
-            $scope.index += 1;
+        vm.saveTerm = function () {
+            vm.terms[vm.index] = angular.copy(vm.termDetails);
+            vm.index += 1;
         };
 
-        $scope.loadPatientsList = function () {
-            $scope.loadingPatients = true;
-            $scope.errorLoadingPatients = false;
+        vm.loadPatientsList = function () {
+            vm.loadingPatients = true;
+            vm.errorLoadingPatients = false;
             termsService.getPatientsList().then(
                     function (patientsList) {
-                        $scope.patientsList = patientsList;
-                        $scope.loadingPatients = false;
-                        $scope.errorLoadingPatients = false;
+                        vm.patientsList = patientsList;
+                        vm.loadingPatients = false;
+                        vm.errorLoadingPatients = false;
                     },
                     function () {
-                        $scope.loadingPatients = false;
-                        $scope.errorLoadingPatients = true;
+                        vm.loadingPatients = false;
+                        vm.errorLoadingPatients = true;
                     }
             );
         };
 
-        $scope.loadIcdsList = function () {
-            $scope.loadingIcds = true;
-            $scope.errorLoadingIcds = false;
+        vm.loadIcdsList = function () {
+            vm.loadingIcds = true;
+            vm.errorLoadingIcds = false;
             termsService.getIcdsList().then(
                     function (icdsList) {
-                        $scope.icdsList = icdsList;
-                        $scope.loadingIcds = false;
-                        $scope.errorLoadingIcds = false;
+                        vm.icdsList = icdsList;
+                        vm.loadingIcds = false;
+                        vm.errorLoadingIcds = false;
                     },
                     function () {
-                        $scope.loadingIcds = false;
-                        $scope.errorLoadingIcds = true;
+                        vm.loadingIcds = false;
+                        vm.errorLoadingIcds = true;
                     }
             );
         };
 
-        $scope.loadEmployeesList = function () {
-            $scope.loadingEmployees = true;
-            $scope.errorLoadingEmployees = false;
+        vm.loadEmployeesList = function () {
+            vm.loadingEmployees = true;
+            vm.errorLoadingEmployees = false;
             termsService.getEmployeesList().then(
                     function (employeesList) {
-                        $scope.employeesList = employeesList;
-                        $scope.loadingEmployees = false;
-                        $scope.errorLoadingEmployees = false;
+                        vm.employeesList = employeesList;
+                        vm.loadingEmployees = false;
+                        vm.errorLoadingEmployees = false;
                     },
                     function () {
-                        $scope.loadingEmployees = false;
-                        $scope.errorLoadingEmployees = true;
+                        vm.loadingEmployees = false;
+                        vm.errorLoadingEmployees = true;
                     }
             );
         };
 
-        $scope.loadRoomsList = function () {
-            $scope.loadingRooms = true;
-            $scope.errorLoadingRooms = false;
+        vm.loadRoomsList = function () {
+            vm.loadingRooms = true;
+            vm.errorLoadingRooms = false;
             termsService.getRoomsList().then(
                     function (roomsList) {
-                        $scope.roomsList = roomsList;
-                        $scope.loadingRooms = false;
-                        $scope.errorLoadingRooms = false;
+                        vm.roomsList = roomsList;
+                        vm.loadingRooms = false;
+                        vm.errorLoadingRooms = false;
                     },
                     function () {
-                        $scope.loadingRooms = false;
-                        $scope.errorLoadingRooms = true;
+                        vm.loadingRooms = false;
+                        vm.errorLoadingRooms = true;
                     }
             );
         };
 
-        $scope.loadTreatmentsList = function () {
-            $scope.loadingTreatments = true;
-            $scope.errorLoadingTreatments = false;
+        vm.loadTreatmentsList = function () {
+            vm.loadingTreatments = true;
+            vm.errorLoadingTreatments = false;
             termsService.getTreatmentsList().then(
                     function (treatmentsList) {
-                        $scope.treatmentsList = treatmentsList;
-                        $scope.loadingTreatments = false;
-                        $scope.errorLoadingTreatments = false;
+                        vm.treatmentsList = treatmentsList;
+                        vm.loadingTreatments = false;
+                        vm.errorLoadingTreatments = false;
                     },
                     function () {
-                        $scope.loadingTreatments = false;
-                        $scope.errorLoadingTreatments = true;
+                        vm.loadingTreatments = false;
+                        vm.errorLoadingTreatments = true;
                     }
             );
         };
         //DATEPICKER
-        $scope.minDate = new Date();
-        $scope.maxDate = new Date();
-        $scope.isOpen = false;
-        $scope.isOpen2 = false;
+        vm.minDate = new Date();
+        vm.maxDate = new Date();
+        vm.isOpen = false;
+        vm.isOpen2 = false;
 
-        $scope.dateOptions = {
+        vm.dateOptions = {
             'starting-day': 1
         };
 
-        $scope.open = function ($event) {
+        vm.open = function ($event) {
             if ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
             }
 
-            $scope.isOpen = true;
+            vm.isOpen = true;
         };
-        $scope.open2 = function ($event) {
+        vm.open2 = function ($event) {
             if ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
             }
 
-            $scope.isOpen2 = true;
+            vm.isOpen2 = true;
         };
         //DATEPICKER END
 
         //TIMEPICKER
-        $scope.hstep = 1;
-        $scope.mstep = 5;
+        vm.hstep = 1;
+        vm.mstep = 5;
         //TIMEPICKER END
     }
 })();

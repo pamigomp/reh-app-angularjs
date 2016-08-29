@@ -1,146 +1,148 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.pending.details', ['rehApp.termsService'])
+    angular.module('rehApp.terms.pending.details', ['rehApp.termsService', 'ui.router'])
 
             .controller('TermPendingDetailsController', TermPendingDetailsController);
 
-    TermPendingDetailsController.$inject = ['$scope', '$state', '$stateParams', 'termsService'];
+    TermPendingDetailsController.$inject = ['$state', '$stateParams', 'termsService'];
 
-    function TermPendingDetailsController($scope, $state, $stateParams, termsService) {
-        $scope.allowEdit = false;
-        $scope.defaultTermPendingDetails = {};
+    function TermPendingDetailsController($state, $stateParams, termsService) {
+        var vm = this;
 
-        $scope.loadTermPendingDetails = function () {
-            $scope.loading = true;
-            $scope.errorLoading = false;
+        vm.allowEdit = false;
+        vm.defaultTermPendingDetails = {};
+
+        vm.loadTermPendingDetails = function () {
+            vm.loading = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.termId)) {
                 termsService.getTermPendingDetails($stateParams.termId).then(
                         function (termPendingDetails) {
                             $state.get('root.terms.pending.term').data.breadcrumb = termPendingDetails[0].patienttreatmentid;
-                            $scope.termPendingDetails = termPendingDetails[0];
-                            $scope.saveDefaultTermPendingDetails();
-                            $scope.loading = false;
-                            $scope.errorLoading = false;
+                            vm.termPendingDetails = termPendingDetails[0];
+                            vm.saveDefaultTermPendingDetails();
+                            vm.loading = false;
+                            vm.errorLoading = false;
                         },
                         function () {
-                            $scope.loading = false;
-                            $scope.errorLoading = true;
+                            vm.loading = false;
+                            vm.errorLoading = true;
                         }
                 );
             }
         };
 
-        $scope.loadEmployeesList = function () {
-            $scope.loadingEmployees = true;
-            $scope.errorLoadingEmployees = false;
+        vm.loadEmployeesList = function () {
+            vm.loadingEmployees = true;
+            vm.errorLoadingEmployees = false;
             termsService.getEmployeesList().then(
                     function (employeesList) {
-                        $scope.employeesList = employeesList;
-                        $scope.loadingEmployees = false;
-                        $scope.errorLoadingEmployees = false;
+                        vm.employeesList = employeesList;
+                        vm.loadingEmployees = false;
+                        vm.errorLoadingEmployees = false;
                     },
                     function () {
-                        $scope.loadingEmployees = false;
-                        $scope.errorLoadingEmployees = true;
+                        vm.loadingEmployees = false;
+                        vm.errorLoadingEmployees = true;
                     }
             );
         };
 
-        $scope.loadRoomsList = function () {
-            $scope.loadingRooms = true;
-            $scope.errorLoadingRooms = false;
+        vm.loadRoomsList = function () {
+            vm.loadingRooms = true;
+            vm.errorLoadingRooms = false;
             termsService.getRoomsList().then(
                     function (roomsList) {
-                        $scope.roomsList = roomsList;
-                        $scope.loadingRooms = false;
-                        $scope.errorLoadingRooms = false;
+                        vm.roomsList = roomsList;
+                        vm.loadingRooms = false;
+                        vm.errorLoadingRooms = false;
                     },
                     function () {
-                        $scope.loadingRooms = false;
-                        $scope.errorLoadingRooms = true;
+                        vm.loadingRooms = false;
+                        vm.errorLoadingRooms = true;
                     }
             );
         };
 
-        $scope.loadTreatmentsList = function () {
-            $scope.loadingTreatments = true;
-            $scope.errorLoadingTreatments = false;
+        vm.loadTreatmentsList = function () {
+            vm.loadingTreatments = true;
+            vm.errorLoadingTreatments = false;
             termsService.getTreatmentsList().then(
                     function (treatmentsList) {
-                        $scope.treatmentsList = treatmentsList;
-                        $scope.loadingTreatments = false;
-                        $scope.errorLoadingTreatments = false;
+                        vm.treatmentsList = treatmentsList;
+                        vm.loadingTreatments = false;
+                        vm.errorLoadingTreatments = false;
                     },
                     function () {
-                        $scope.loadingTreatments = false;
-                        $scope.errorLoadingTreatments = true;
+                        vm.loadingTreatments = false;
+                        vm.errorLoadingTreatments = true;
                     }
             );
         };
 
-        $scope.updateTermPendingDetails = function () {
-            $scope.updating = true;
+        vm.updateTermPendingDetails = function () {
+            vm.updating = true;
             if (angular.isDefined($stateParams.termId)) {
-                termsService.updateTermPendingDetails($scope.termPendingDetails).then(function () {
-                    $scope.updating = false;
-                    $scope.errorEdit = false;
-                    $scope.loadTermPendingDetails();
+                termsService.updateTermPendingDetails(vm.termPendingDetails).then(function () {
+                    vm.updating = false;
+                    vm.errorEdit = false;
+                    vm.loadTermPendingDetails();
                 }, function () {
-                    $scope.updating = false;
-                    $scope.errorEdit = true;
+                    vm.updating = false;
+                    vm.errorEdit = true;
                 });
             }
         };
 
-        $scope.restoreTermPendingDetails = function () {
-            angular.copy($scope.defaultTermPendingDetails, $scope.termPendingDetails);
+        vm.restoreTermPendingDetails = function () {
+            angular.copy(vm.defaultTermPendingDetails, vm.termPendingDetails);
         };
 
-        $scope.saveDefaultTermPendingDetails = function () {
-            angular.copy($scope.termPendingDetails, $scope.defaultTermPendingDetails);
+        vm.saveDefaultTermPendingDetails = function () {
+            angular.copy(vm.termPendingDetails, vm.defaultTermPendingDetails);
         };
 
         //After clicking 'Edytuj' button, we would be able to make changes in the fields.
-        $scope.startEdit = function () {
-            $scope.allowEdit = true;
+        vm.startEdit = function () {
+            vm.allowEdit = true;
         };
 
         //After clicking 'Zapisz' button, we would not be able to make changes in the fields
         //and all changes are being saved.
-        $scope.saveEdit = function () {
-            $scope.allowEdit = false;
-            $scope.updateTermPendingDetails();
+        vm.saveEdit = function () {
+            vm.allowEdit = false;
+            vm.updateTermPendingDetails();
         };
 
         //After clicking 'Anuluj' button, we would not be able to make changes in the fields
         //and all changes are being discarded (loading previous termPending's details).
-        $scope.cancelEdit = function () {
-            $scope.allowEdit = false;
-            $scope.restoreTermPendingDetails();
+        vm.cancelEdit = function () {
+            vm.allowEdit = false;
+            vm.restoreTermPendingDetails();
         };
 
         //DATEPICKER
-        $scope.minDate = new Date();
-        $scope.isOpen = false;
+        vm.minDate = new Date();
+        vm.isOpen = false;
 
-        $scope.dateOptions = {
+        vm.dateOptions = {
             'starting-day': 1
         };
 
-        $scope.open = function ($event) {
+        vm.open = function ($event) {
             if ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
             }
 
-            $scope.isOpen = true;
+            vm.isOpen = true;
         };
         //DATEPICKER END
 
         //TIMEPICKER
-        $scope.hstep = 1;
-        $scope.mstep = 5;
+        vm.hstep = 1;
+        vm.mstep = 5;
         //TIMEPICKER END
     }
 })();

@@ -1,117 +1,121 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.patients.details', ['rehApp.patientsService'])
+    angular.module('rehApp.patients.details', ['rehApp.patientsService', 'ui.router'])
 
             .controller('PatientDetailsController', PatientDetailsController);
 
-    PatientDetailsController.$inject = ['$scope', '$state', '$stateParams', 'patientsService'];
+    PatientDetailsController.$inject = ['$state', '$stateParams', 'patientsService'];
 
-    function PatientDetailsController($scope, $state, $stateParams, patientsService) {
-        $scope.allowEdit = false;
-        $scope.defaultPatientDetails = {};
+    function PatientDetailsController($state, $stateParams, patientsService) {
+        var vm = this;
 
-        $scope.rangeDays = function () {
+        vm.allowEdit = false;
+        vm.defaultPatientDetails = {};
+
+        vm.rangeDays = function () {
             var input = [];
-            for (var i = 1; i <= 31; i++)
+            for (var i = 1; i <= 31; i++) {
                 input.push(i);
+            }
             return input;
         };
 
-        $scope.rangeYears = function (max, min) {
+        vm.rangeYears = function (max, min) {
             var input = [];
-            for (var i = max; i >= min; i -= 1)
+            for (var i = max; i >= min; i -= 1) {
                 input.push(i);
+            }
             return input;
         };
 
-        $scope.loadPatientDetails = function () {
-            $scope.loading = true;
-            $scope.errorLoading = false;
+        vm.loadPatientDetails = function () {
+            vm.loading = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.patientPesel)) {
                 patientsService.getPatientDetails($stateParams.patientPesel).then(
                         function (patientDetails) {
                             $state.get('root.patients.patient').data.breadcrumb = patientDetails[0].surname + ' ' + patientDetails[0].name;
-                            $scope.patientDetails = patientDetails[0];
-                            $scope.saveDefaultPatientDetails();
-                            $scope.loading = false;
-                            $scope.errorLoading = false;
+                            vm.patientDetails = patientDetails[0];
+                            vm.saveDefaultPatientDetails();
+                            vm.loading = false;
+                            vm.errorLoading = false;
                         },
                         function () {
-                            $scope.loading = false;
-                            $scope.errorLoading = true;
+                            vm.loading = false;
+                            vm.errorLoading = true;
                         }
                 );
             }
         };
 
-        $scope.updatePatientDetails = function () {
-            $scope.updating = true;
+        vm.updatePatientDetails = function () {
+            vm.updating = true;
             if (angular.isDefined($stateParams.patientPesel)) {
-                patientsService.updatePatientDetails($scope.patientDetails).then(function () {
-                    $scope.updating = false;
-                    $scope.errorEdit = false;
+                patientsService.updatePatientDetails(vm.patientDetails).then(function () {
+                    vm.updating = false;
+                    vm.errorEdit = false;
                 }, function () {
-                    $scope.updating = false;
-                    $scope.errorEdit = true;
+                    vm.updating = false;
+                    vm.errorEdit = true;
                 });
             }
         };
 
-        $scope.resetPassword = function () {
-            $scope.resetting = true;
+        vm.resetPassword = function () {
+            vm.resetting = true;
             if (angular.isDefined($stateParams.patientPesel)) {
-                patientsService.resetPatientPassword($scope.patientDetails.pesel).then(function () {
-                    $scope.resetting = false;
-                    $scope.errorReset = false;
+                patientsService.resetPatientPassword(vm.patientDetails.pesel).then(function () {
+                    vm.resetting = false;
+                    vm.errorReset = false;
                 }, function () {
-                    $scope.resetting = false;
-                    $scope.errorReset = true;
+                    vm.resetting = false;
+                    vm.errorReset = true;
                 });
             }
         };
 
-        $scope.restorePatientDetails = function () {
-            angular.copy($scope.defaultPatientDetails, $scope.patientDetails);
+        vm.restorePatientDetails = function () {
+            angular.copy(vm.defaultPatientDetails, vm.patientDetails);
         };
 
-        $scope.saveDefaultPatientDetails = function () {
-            angular.copy($scope.patientDetails, $scope.defaultPatientDetails);
+        vm.saveDefaultPatientDetails = function () {
+            angular.copy(vm.patientDetails, vm.defaultPatientDetails);
         };
 
         //After clicking 'Edytuj' button, we would be able to make changes in the fields.
-        $scope.startEdit = function () {
-            $scope.allowEdit = true;
+        vm.startEdit = function () {
+            vm.allowEdit = true;
         };
 
         //After clicking 'Zapisz' button, we would not be able to make changes in the fields
         //and all changes are being saved.
-        $scope.saveEdit = function () {
-            $scope.allowEdit = false;
-            $scope.updatePatientDetails();
+        vm.saveEdit = function () {
+            vm.allowEdit = false;
+            vm.updatePatientDetails();
         };
 
         //After clicking 'Anuluj' button, we would not be able to make changes in the fields
         //and all changes are being discarded (loading previous patient's details).
-        $scope.cancelEdit = function () {
-            $scope.allowEdit = false;
-            $scope.restorePatientDetails();
+        vm.cancelEdit = function () {
+            vm.allowEdit = false;
+            vm.restorePatientDetails();
         };
 
-        $scope.maxDate = new Date();
-        $scope.valuationDatePickerIsOpen = false;
+        vm.maxDate = new Date();
+        vm.valuationDatePickerIsOpen = false;
 
-        $scope.dateOptions = {
+        vm.dateOptions = {
             'starting-day': 1
         };
 
-        $scope.valuationDatePickerOpen = function ($event) {
+        vm.valuationDatePickerOpen = function ($event) {
             if ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
             }
 
-            $scope.valuationDatePickerIsOpen = true;
+            vm.valuationDatePickerIsOpen = true;
         };
     }
 })();

@@ -1,48 +1,50 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.patients.list', ['rehApp.patientsService'])
+    angular.module('rehApp.patients.list', ['rehApp.patientsService', 'ui.router'])
 
             .controller('PatientsListController', PatientsListController);
 
-    PatientsListController.$inject = ['$scope', '$state', 'patientsService'];
+    PatientsListController.$inject = ['$state', 'patientsService'];
 
-    function PatientsListController($scope, $state, patientsService) {
+    function PatientsListController($state, patientsService) {
+        var vm = this;
 
-        $scope.loadPatientsList = function () {
-            $scope.loading = true;
+        vm.loadPatientsList = function () {
+            vm.loading = true;
 
             patientsService.getPatientsList().then(function (patientsList) {
                 if (patientsList.length === 0) {
-                    $scope.loading = false;
+                    vm.loading = false;
                     $state.go('root.patients.list_empty');
                 } else {
-                    $scope.patients = patientsList;
-                    $scope.loading = false;
+                    vm.patients = patientsList;
+                    vm.loading = false;
                 }
             }, function () {
-                $scope.loading = false;
+                vm.loading = false;
                 $state.go('root.patients.list_error');
             });
         };
 
-        $scope.removePatient = function () {
-            $scope.removing = true;
-            $scope.errorRemove = false;
+        vm.removePatient = function () {
+            vm.removing = true;
+            vm.errorRemove = false;
 
-            patientsService.removePatient($scope.chosenPatient.pesel).then(function () {
-                if ($scope.patients.length - 1 === 0)
+            patientsService.removePatient(vm.chosenPatient.pesel).then(function () {
+                if (vm.patients.length - 1 === 0) {
                     $state.go('root.patients.list_empty');
-                else
-                    $scope.loadPatientsList();
+                } else {
+                    vm.loadPatientsList();
+                }
             }, function () {
-                $scope.removing = false;
-                $scope.errorRemove = true;
+                vm.removing = false;
+                vm.errorRemove = true;
             });
         };
 
-        $scope.setChosen = function (patient) {
-            $scope.chosenPatient = patient;
+        vm.setChosen = function (patient) {
+            vm.chosenPatient = patient;
         };
     }
 })();

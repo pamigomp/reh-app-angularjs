@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.patientsService', ['rehApp.dataStorageService'])
+    angular.module('rehApp.patientsService', ['rehApp.dataStorageService', 'ui.router'])
 
             .factory('patientsService', patientsService);
 

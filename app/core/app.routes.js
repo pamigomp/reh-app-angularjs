@@ -1,23 +1,18 @@
 (function () {
     'use strict';
-
     angular.module('rehApp')
 
             .config(config)
             .run(run);
-
     run.$inject = ['$state', '$rootScope', '$httpBackend', 'AuthService', 'AUTH_EVENTS'];
-
     function run($state, $rootScope, $httpBackend, AuthService, AUTH_EVENTS) {
         $rootScope.$state = $state;
-
         $httpBackend.whenGET(/core\/\w+.*/).passThrough();
         $httpBackend.whenGET(/common\/\w+.*/).passThrough();
         $httpBackend.whenGET(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
         $httpBackend.whenPUT(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
         $httpBackend.whenPOST(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
         $httpBackend.whenDELETE(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();
-
         $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
 
             if ('data' in next && 'authorizedRoles' in next.data) {
@@ -39,7 +34,6 @@
     }
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
-
     function config($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.when('', '/dashboard');
         $urlRouterProvider.when('/', '/dashboard');
@@ -52,8 +46,8 @@
         $urlRouterProvider.when('/terms', '/terms/pending');
         $urlRouterProvider.when('/terms/', '/terms/pending');
         $urlRouterProvider.otherwise(function ($injector) {
-            var $state = $injector.get("$state");
-            $state.go("root.dashboard");
+            var $state = $injector.get('$state');
+            $state.go('root.dashboard');
         });
         $stateProvider
 
@@ -115,7 +109,7 @@
                     },
                     views: {
                         'content@': {
-                            template: '<div data-ui-view=""></div>'
+                            template: '<div data-ui-view=\'\'></div>'
                         }
                     }
                 })
@@ -174,7 +168,7 @@
                     },
                     views: {
                         'content@': {
-                            template: '<div data-ui-view=""></div>'
+                            template: '<div data-ui-view=\'\'></div>'
                         }
                     }
                 })
@@ -308,7 +302,7 @@
                     },
                     views: {
                         'content@': {
-                            template: '<div data-ui-view=""></div>'
+                            template: '<div data-ui-view=\'\'></div>'
                         }
                     }
                 })
@@ -382,7 +376,7 @@
                     },
                     views: {
                         'content@': {
-                            template: '<div data-ui-view=""></div>'
+                            template: '<div data-ui-view=\'\'></div>'
                         }
                     }
                 })
@@ -426,7 +420,7 @@
                     },
                     views: {
                         'content@': {
-                            template: '<div data-ui-view=""></div>'
+                            template: '<div data-ui-view=\'\'></div>'
                         }
                     }
                 })
@@ -500,7 +494,7 @@
                     },
                     views: {
                         'content@': {
-                            template: '<div data-ui-view=""></div>'
+                            template: '<div data-ui-view=\'\'></div>'
                         }
                     }
                 })
@@ -544,7 +538,7 @@
                     },
                     views: {
                         'content@': {
-                            template: '<div data-ui-view=""></div>'
+                            template: '<div data-ui-view=\'\'></div>'
                         }
                     }
                 })

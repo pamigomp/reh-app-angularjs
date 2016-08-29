@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12" data-ng-init="loadPatientsList()">
+        <div class="col-lg-12" data-ng-init="PLC.loadPatientsList()">
             <div class="alert alert-danger" role="alert" data-ng-show="errorRemove">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>Błąd!</strong> Wystąpił problem podczas usuwania pacjenta.
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="patient in patients| orderBy:'pesel' | filter:patientFilter">
+                        <tr data-ng-repeat="patient in PLC.patients| orderBy:'pesel' | filter:patientFilter">
                             <td>{{patient.pesel}}</td>
                             <td>{{patient.surname}}</td> 
                             <td>{{patient.name}}</td>
@@ -36,7 +36,7 @@
                             <td>
                                 <button class="btn btn-sm btn-primary" data-ui-sref="root.patients.patient.details({patientPesel: patient.pesel})" data-toggle="tooltip" title="Szczegóły pacjenta"><i class="fa fa-search"></i> Szczegóły</button> 
                                 <button class="btn btn-sm btn-primary" data-ui-sref="root.patients.patient.terms({patientPesel: patient.pesel})" data-toggle="tooltip" title="Terminy zabiegów pacjenta"><i class="fa fa-calendar"></i> Terminy</button>
-                                <button class="btn btn-sm btn-primary" data-ng-click="setChosen(patient)" data-toggle="modal" data-target="#modal" data-ng-hide="patient.status === 'Nieaktywny'" data-toggle="tooltip" title="Usuń pacjenta"><i class="fa fa-remove"></i> Usuń</button>
+                                <button class="btn btn-sm btn-primary" data-ng-click="PLC.setChosen(patient)" data-toggle="modal" data-target="#modal" data-ng-hide="patient.status === 'Nieaktywny'" data-toggle="tooltip" title="Usuń pacjenta"><i class="fa fa-remove"></i> Usuń</button>
                     <modal-directive
                         title="Usuwanie pacjenta"
                         body="Czy na pewno chcesz usunąć pacjenta {{chosenPatient.surname}} {{chosenPatient.name}}?"

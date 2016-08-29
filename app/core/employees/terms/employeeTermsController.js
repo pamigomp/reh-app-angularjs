@@ -1,116 +1,117 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.employees.terms', ['rehApp.employeesService'])
+    angular.module('rehApp.employees.terms', ['rehApp.employeesService', 'ui.router'])
 
             .controller('EmployeeTermsController', EmployeeTermsController);
 
-    EmployeeTermsController.$inject = ['$scope', '$state', '$stateParams', 'employeesService'];
+    EmployeeTermsController.$inject = ['$state', '$stateParams', 'employeesService'];
 
-    function EmployeeTermsController($scope, $state, $stateParams, employeesService) {
+    function EmployeeTermsController($state, $stateParams, employeesService) {
+        var vm = this;
 
-        $scope.loadEmployeeTermsPending = function () {
-            $scope.loadingPending = true;
-            $scope.errorLoading = false;
+        vm.loadEmployeeTermsPending = function () {
+            vm.loadingPending = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.employeeId)) {
                 employeesService.getEmployeeTermsPending($stateParams.employeeId).then(
                         function (pendingTerms) {
                             if (pendingTerms.length === 0) {
-                                $scope.emptyPending = true;
+                                vm.emptyPending = true;
                             } else {
                                 $state.get('root.employees.employee').data.breadcrumb = pendingTerms[0].surname + ' ' + pendingTerms[0].name;
-                                $scope.pendingTerms = pendingTerms;
-                                $scope.loadingPending = false;
-                                $scope.errorLoading = false;
-                                $scope.emptyPending = false;
+                                vm.pendingTerms = pendingTerms;
+                                vm.loadingPending = false;
+                                vm.errorLoading = false;
+                                vm.emptyPending = false;
                             }
                         },
                         function () {
-                            $scope.loadingPending = false;
-                            $scope.errorLoading = true;
-                            $scope.emptyPending = false;
+                            vm.loadingPending = false;
+                            vm.errorLoading = true;
+                            vm.emptyPending = false;
                         }
                 );
             }
         };
 
-        $scope.loadEmployeeTermsCancelled = function () {
-            $scope.loadingCancelled = true;
-            $scope.errorLoading = false;
+        vm.loadEmployeeTermsCancelled = function () {
+            vm.loadingCancelled = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.employeeId)) {
                 employeesService.getEmployeeTermsCancelled($stateParams.employeeId).then(
                         function (cancelledTerms) {
                             if (cancelledTerms.length === 0) {
-                                $scope.emptyCancelled = true;
+                                vm.emptyCancelled = true;
                             } else {
                                 $state.get('root.employees.employee').data.breadcrumb = cancelledTerms[0].surname + ' ' + cancelledTerms[0].name;
-                                $scope.cancelledTerms = cancelledTerms;
-                                $scope.loadingCancelled = false;
-                                $scope.errorLoading = false;
-                                $scope.emptyCancelled = false;
+                                vm.cancelledTerms = cancelledTerms;
+                                vm.loadingCancelled = false;
+                                vm.errorLoading = false;
+                                vm.emptyCancelled = false;
                             }
                         },
                         function () {
-                            $scope.loadingCancelled = false;
-                            $scope.errorLoading = true;
-                            $scope.emptyCancelled = false;
+                            vm.loadingCancelled = false;
+                            vm.errorLoading = true;
+                            vm.emptyCancelled = false;
                         }
                 );
             }
         };
 
-        $scope.loadEmployeeTermsCompleted = function () {
-            $scope.loadingCompleted = true;
-            $scope.errorLoading = false;
+        vm.loadEmployeeTermsCompleted = function () {
+            vm.loadingCompleted = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.employeeId)) {
                 employeesService.getEmployeeTermsCompleted($stateParams.employeeId).then(
                         function (completedTerms) {
                             if (completedTerms.length === 0) {
-                                $scope.emptyCompleted = true;
+                                vm.emptyCompleted = true;
                             } else {
                                 $state.get('root.employees.employee').data.breadcrumb = completedTerms[0].surname + ' ' + completedTerms[0].name;
-                                $scope.completedTerms = completedTerms;
-                                $scope.loadingCompleted = false;
-                                $scope.errorLoading = false;
-                                $scope.emptyCompleted = false;
+                                vm.completedTerms = completedTerms;
+                                vm.loadingCompleted = false;
+                                vm.errorLoading = false;
+                                vm.emptyCompleted = false;
                             }
                         },
                         function () {
-                            $scope.loadingCompleted = false;
-                            $scope.errorLoading = true;
-                            $scope.emptyCompleted = false;
+                            vm.loadingCompleted = false;
+                            vm.errorLoading = true;
+                            vm.emptyCompleted = false;
                         }
                 );
             }
         };
 
-        $scope.setChosen = function (term) {
-            $scope.chosenTerm = term;
+        vm.setChosen = function (term) {
+            vm.chosenTerm = term;
         };
 
-        $scope.cancelTerm = function (patienttreatmentid) {
-            $scope.cancelling = true;
+        vm.cancelTerm = function (patienttreatmentid) {
+            vm.cancelling = true;
             employeesService.cancelEmployeeTerm(patienttreatmentid).then(function () {
-                $scope.loadEmployeeTermsPending();
-                $scope.loadEmployeeTermsCancelled();
-                $scope.cancelling = false;
-                $scope.errorCancel = false;
+                vm.loadEmployeeTermsPending();
+                vm.loadEmployeeTermsCancelled();
+                vm.cancelling = false;
+                vm.errorCancel = false;
             }, function () {
-                $scope.cancelling = false;
-                $scope.errorCancel = true;
+                vm.cancelling = false;
+                vm.errorCancel = true;
             });
         };
 
-        $scope.completeTerm = function (patienttreatmentid) {
-            $scope.completing = true;
+        vm.completeTerm = function (patienttreatmentid) {
+            vm.completing = true;
             employeesService.completeEmployeeTerm(patienttreatmentid).then(function () {
-                $scope.loadEmployeeTermsPending();
-                $scope.loadEmployeeTermsCompleted();
-                $scope.completing = false;
-                $scope.errorComplete = false;
+                vm.loadEmployeeTermsPending();
+                vm.loadEmployeeTermsCompleted();
+                vm.completing = false;
+                vm.errorComplete = false;
             }, function () {
-                $scope.completing = false;
-                $scope.errorComplete = true;
+                vm.completing = false;
+                vm.errorComplete = true;
             });
         };
     }

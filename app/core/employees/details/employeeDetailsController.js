@@ -1,104 +1,108 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.employees.details', ['rehApp.employeesService'])
+    angular.module('rehApp.employees.details', ['rehApp.employeesService', 'ui.router'])
 
             .controller('EmployeeDetailsController', EmployeeDetailsController);
 
-    EmployeeDetailsController.$inject = ['$scope', '$state', '$stateParams', 'employeesService'];
+    EmployeeDetailsController.$inject = ['$state', '$stateParams', 'employeesService'];
 
-    function EmployeeDetailsController($scope, $state, $stateParams, employeesService) {
-        $scope.allowEdit = false;
-        $scope.defaultEmployeeDetails = {};
+    function EmployeeDetailsController($state, $stateParams, employeesService) {
+        var vm = this;
 
-        $scope.rangeDays = function () {
+        vm.allowEdit = false;
+        vm.defaultEmployeeDetails = {};
+
+        vm.rangeDays = function () {
             var input = [];
-            for (var i = 1; i <= 31; i++)
+            for (var i = 1; i <= 31; i++) {
                 input.push(i);
+            }
             return input;
         };
 
-        $scope.rangeYears = function (max, min) {
+        vm.rangeYears = function (max, min) {
             var input = [];
-            for (var i = max; i >= min; i -= 1)
+            for (var i = max; i >= min; i -= 1) {
                 input.push(i);
+            }
             return input;
         };
 
-        $scope.loadEmployeeDetails = function () {
-            $scope.loading = true;
-            $scope.errorLoading = false;
+        vm.loadEmployeeDetails = function () {
+            vm.loading = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.employeeId)) {
                 employeesService.getEmployeeDetails($stateParams.employeeId).then(
                         function (employeeDetails) {
                             $state.get('root.employees.employee').data.breadcrumb = employeeDetails[0].surname + ' ' + employeeDetails[0].name;
-                            $scope.employeeDetails = employeeDetails[0];
-                            $scope.saveDefaultEmployeeDetails();
-                            $scope.loading = false;
-                            $scope.errorLoading = false;
+                            vm.employeeDetails = employeeDetails[0];
+                            vm.saveDefaultEmployeeDetails();
+                            vm.loading = false;
+                            vm.errorLoading = false;
                         },
                         function () {
-                            $scope.loading = false;
-                            $scope.errorLoading = true;
+                            vm.loading = false;
+                            vm.errorLoading = true;
                         }
                 );
             }
         };
 
-        $scope.updateEmployeeDetails = function () {
-            $scope.updating = true;
+        vm.updateEmployeeDetails = function () {
+            vm.updating = true;
             if (angular.isDefined($stateParams.employeeId)) {
-                employeesService.updateEmployeeDetails($scope.employeeDetails).then(function () {
-                    $scope.updating = false;
-                    $scope.errorEdit = false;
+                employeesService.updateEmployeeDetails(vm.employeeDetails).then(function () {
+                    vm.updating = false;
+                    vm.errorEdit = false;
                 }, function () {
-                    $scope.updating = false;
-                    $scope.errorEdit = true;
+                    vm.updating = false;
+                    vm.errorEdit = true;
                 });
             }
         };
 
-        $scope.restoreEmployeeDetails = function () {
-            angular.copy($scope.defaultEmployeeDetails, $scope.employeeDetails);
+        vm.restoreEmployeeDetails = function () {
+            angular.copy(vm.defaultEmployeeDetails, vm.employeeDetails);
         };
 
-        $scope.saveDefaultEmployeeDetails = function () {
-            angular.copy($scope.employeeDetails, $scope.defaultEmployeeDetails);
+        vm.saveDefaultEmployeeDetails = function () {
+            angular.copy(vm.employeeDetails, vm.defaultEmployeeDetails);
         };
 
         //After clicking 'Edytuj' button, we would be able to make changes in the fields.
-        $scope.startEdit = function () {
-            $scope.allowEdit = true;
+        vm.startEdit = function () {
+            vm.allowEdit = true;
         };
 
         //After clicking 'Zapisz' button, we would not be able to make changes in the fields
         //and all changes are being saved.
-        $scope.saveEdit = function () {
-            $scope.allowEdit = false;
-            $scope.updateEmployeeDetails();
+        vm.saveEdit = function () {
+            vm.allowEdit = false;
+            vm.updateEmployeeDetails();
         };
 
         //After clicking 'Anuluj' button, we would not be able to make changes in the fields
         //and all changes are being discarded (loading previous employee's details).
-        $scope.cancelEdit = function () {
-            $scope.allowEdit = false;
-            $scope.restoreEmployeeDetails();
+        vm.cancelEdit = function () {
+            vm.allowEdit = false;
+            vm.restoreEmployeeDetails();
         };
 
-        $scope.maxDate = new Date();
-        $scope.valuationDatePickerIsOpen = false;
+        vm.maxDate = new Date();
+        vm.valuationDatePickerIsOpen = false;
 
-        $scope.dateOptions = {
+        vm.dateOptions = {
             'starting-day': 1
         };
 
-        $scope.valuationDatePickerOpen = function ($event) {
+        vm.valuationDatePickerOpen = function ($event) {
             if ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
             }
 
-            $scope.valuationDatePickerIsOpen = true;
+            vm.valuationDatePickerIsOpen = true;
         };
     }
 })();

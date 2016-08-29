@@ -1,28 +1,29 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.cancelled.list', ['rehApp.termsService'])
+    angular.module('rehApp.terms.cancelled.list', ['rehApp.termsService', 'ui.router'])
 
             .controller('TermsCancelledListController', TermsCancelledListController);
 
-    TermsCancelledListController.$inject = ['$scope', '$state', 'termsService'];
+    TermsCancelledListController.$inject = ['$state', 'termsService'];
 
-    function TermsCancelledListController($scope, $state, termsService) {
+    function TermsCancelledListController($state, termsService) {
+        var vm = this;
 
-        $scope.loadTermsCancelled = function () {
-            $scope.loadingCancelled = true;
+        vm.loadTermsCancelled = function () {
+            vm.loadingCancelled = true;
             termsService.getTermsCancelled().then(
                     function (cancelledTerms) {
                         if (cancelledTerms.length === 0) {
-                            $scope.loadingCancelled = false;
+                            vm.loadingCancelled = false;
                             $state.go('root.terms.cancelled_empty');
                         } else {
-                            $scope.cancelledTerms = cancelledTerms;
-                            $scope.loadingCancelled = false;
+                            vm.cancelledTerms = cancelledTerms;
+                            vm.loadingCancelled = false;
                         }
                     },
                     function () {
-                        $scope.loadingCancelled = false;
+                        vm.loadingCancelled = false;
                         $state.go('root.terms.cancelled_error');
                     }
             );

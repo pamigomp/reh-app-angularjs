@@ -75,7 +75,7 @@
 
         dataStorageService.saveEmployee = function (employeeDetails) {
             return $http({
-                method: "POST",
+                method: 'POST',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees',
                 data: employeeDetails
             });
@@ -83,7 +83,7 @@
 
         dataStorageService.removeEmployee = function (employeeId) {
             return $http({
-                method: "DELETE",
+                method: 'DELETE',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/employees/' + employeeId
             });
         };
@@ -133,7 +133,7 @@
 
         dataStorageService.savePatient = function (patientDetails) {
             return $http({
-                method: "POST",
+                method: 'POST',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients',
                 data: patientDetails
             });
@@ -141,7 +141,7 @@
 
         dataStorageService.removePatient = function (patientPesel) {
             return $http({
-                method: "DELETE",
+                method: 'DELETE',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientPesel
             });
         };
@@ -205,7 +205,7 @@
 
         dataStorageService.saveTerms = function (terms) {
             return $http({
-                method: "POST",
+                method: 'POST',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending',
                 data: terms
             });

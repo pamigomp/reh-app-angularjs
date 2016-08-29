@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.nav.breadcrumbs', [])
+    angular.module('rehApp.nav.breadcrumbs', ['ui.router'])
 
             .controller('BreadcrumbsController', BreadcrumbsController);
 

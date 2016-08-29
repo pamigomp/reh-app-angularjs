@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.pageTitle', [])
+    angular.module('rehApp.pageTitle', ['ui.router'])
 
             .controller('PageTitleController', PageTitleController);
 

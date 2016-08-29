@@ -24,12 +24,14 @@
         return directive;
     }
 
-    modalDirectiveController.$inject = ['$scope'];
+    modalDirectiveController.$inject = [];
 
-    function modalDirectiveController($scope) {
-        $scope.closeModal = function () {
-            $(".modal-backdrop").remove();
-            $(".modal-open").css("overflow", "auto");
+    function modalDirectiveController() {
+        var vm = this;
+
+        vm.closeModal = function () {
+            $('.modal-backdrop').remove();
+            $('.modal-open').css('overflow', 'auto');
         };
     }
 })();

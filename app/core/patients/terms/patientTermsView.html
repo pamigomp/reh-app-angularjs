@@ -22,7 +22,7 @@
                     <uib-tabset>
                         <uib-tab heading="Oczekujące">
                             <div class="row" style="padding-top: 15px;" data-ng-hide="emptyPending">
-                                <div class="col-lg-12" data-ng-init="loadPatientTermsPending()">
+                                <div class="col-lg-12" data-ng-init="PTC.loadPatientTermsPending()">
                                     <div class="alert alert-danger" role="alert" data-ng-show="errorCancel">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <strong>Błąd!</strong> Wystąpił problem podczas odwoływania terminu zabiegu.
@@ -45,7 +45,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr data-ng-repeat="term in pendingTerms| orderBy:'patienttreatmentid' | filter:termsFilter">
+                                                <tr data-ng-repeat="term in PTC.pendingTerms| orderBy:'patienttreatmentid' | filter:termsFilter">
                                                     <td>{{term.patienttreatmentid}}</td>
                                                     <td>{{term.datehour|date: 'dd.MM.yyyy'}}</td>
                                                     <td>{{term.datehour|date: 'HH:mm'}}</td>

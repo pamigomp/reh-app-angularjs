@@ -1,58 +1,59 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.pending.list', ['rehApp.termsService'])
+    angular.module('rehApp.terms.pending.list', ['rehApp.termsService', 'ui.router'])
 
             .controller('TermsPendingListController', TermsPendingListController);
 
-    TermsPendingListController.$inject = ['$scope', '$state', 'termsService'];
+    TermsPendingListController.$inject = ['$state', 'termsService'];
 
-    function TermsPendingListController($scope, $state, termsService) {
+    function TermsPendingListController($state, termsService) {
+        var vm = this;
 
-        $scope.loadTermsPending = function () {
-            $scope.loadingPending = true;
+        vm.loadTermsPending = function () {
+            vm.loadingPending = true;
             termsService.getTermsPending().then(
                     function (pendingTerms) {
                         if (pendingTerms.length === 0) {
-                            $scope.loadingPending = false;
+                            vm.loadingPending = false;
                             $state.go('root.terms.pending_empty');
                         } else {
-                            $scope.pendingTerms = pendingTerms;
-                            $scope.loadingPending = false;
+                            vm.pendingTerms = pendingTerms;
+                            vm.loadingPending = false;
                         }
                     },
                     function () {
-                        $scope.loadingPending = false;
+                        vm.loadingPending = false;
                         $state.go('root.terms.pending_error');
                     }
             );
         };
 
-        $scope.setChosen = function (term) {
-            $scope.chosenTerm = term;
+        vm.setChosen = function (term) {
+            vm.chosenTerm = term;
         };
 
-        $scope.cancelTerm = function (patienttreatmentid) {
-            $scope.cancelling = true;
+        vm.cancelTerm = function (patienttreatmentid) {
+            vm.cancelling = true;
             termsService.cancelTerm(patienttreatmentid).then(function () {
-                $scope.loadTermsPending();
-                $scope.cancelling = false;
-                $scope.errorCancel = false;
+                vm.loadTermsPending();
+                vm.cancelling = false;
+                vm.errorCancel = false;
             }, function () {
-                $scope.cancelling = false;
-                $scope.errorCancel = true;
+                vm.cancelling = false;
+                vm.errorCancel = true;
             });
         };
 
-        $scope.completeTerm = function (patienttreatmentid) {
-            $scope.completing = true;
+        vm.completeTerm = function (patienttreatmentid) {
+            vm.completing = true;
             termsService.completeTerm(patienttreatmentid).then(function () {
-                $scope.loadTermsPending();
-                $scope.completing = false;
-                $scope.errorComplete = false;
+                vm.loadTermsPending();
+                vm.completing = false;
+                vm.errorComplete = false;
             }, function () {
-                $scope.completing = false;
-                $scope.errorComplete = true;
+                vm.completing = false;
+                vm.errorComplete = true;
             });
         };
     }

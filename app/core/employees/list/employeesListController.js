@@ -1,48 +1,50 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.employees.list', ['rehApp.employeesService'])
+    angular.module('rehApp.employees.list', ['rehApp.employeesService', 'ui.router'])
 
             .controller('EmployeesListController', EmployeesListController);
 
-    EmployeesListController.$inject = ['$scope', '$state', 'employeesService'];
+    EmployeesListController.$inject = ['$state', 'employeesService'];
 
-    function EmployeesListController($scope, $state, employeesService) {
+    function EmployeesListController($state, employeesService) {
+        var vm = this;
 
-        $scope.loadEmployeesList = function () {
-            $scope.loading = true;
+        vm.loadEmployeesList = function () {
+            vm.loading = true;
 
             employeesService.getEmployeesList().then(function (employeesList) {
                 if (employeesList.length === 0) {
-                    $scope.loading = false;
+                    vm.loading = false;
                     $state.go('root.employees.list_empty');
                 } else {
-                    $scope.employees = employeesList;
-                    $scope.loading = false;
+                    vm.employees = employeesList;
+                    vm.loading = false;
                 }
             }, function () {
-                $scope.loading = false;
+                vm.loading = false;
                 $state.go('root.employees.list_error');
             });
         };
 
-        $scope.removeEmployee = function () {
-            $scope.removing = true;
-            $scope.errorRemove = false;
+        vm.removeEmployee = function () {
+            vm.removing = true;
+            vm.errorRemove = false;
 
-            employeesService.removeEmployee($scope.chosenEmployee.employeeid).then(function () {
-                if ($scope.employees.length - 1 === 0)
+            employeesService.removeEmployee(vm.chosenEmployee.employeeid).then(function () {
+                if (vm.employees.length - 1 === 0) {
                     $state.go('root.employees.list_empty');
-                else
-                    $scope.loadEmployeesList();
+                } else {
+                    vm.loadEmployeesList();
+                }
             }, function () {
-                $scope.removing = false;
-                $scope.errorRemove = true;
+                vm.removing = false;
+                vm.errorRemove = true;
             });
         };
 
-        $scope.setChosen = function (employee) {
-            $scope.chosenEmployee = employee;
+        vm.setChosen = function (employee) {
+            vm.chosenEmployee = employee;
         };
     }
 })();

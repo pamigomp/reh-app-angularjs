@@ -1,28 +1,29 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.completed.list', ['rehApp.termsService'])
+    angular.module('rehApp.terms.completed.list', ['rehApp.termsService', 'ui.router'])
 
             .controller('TermsCompletedListController', TermsCompletedListController);
 
-    TermsCompletedListController.$inject = ['$scope', '$state', 'termsService'];
+    TermsCompletedListController.$inject = ['$state', 'termsService'];
 
-    function TermsCompletedListController($scope, $state, termsService) {
+    function TermsCompletedListController($state, termsService) {
+        var vm = this;
 
-        $scope.loadTermsCompleted = function () {
-            $scope.loadingCompleted = true;
+        vm.loadTermsCompleted = function () {
+            vm.loadingCompleted = true;
             termsService.getTermsCompleted().then(
                     function (completedTerms) {
                         if (completedTerms.length === 0) {
-                            $scope.loadingCompleted = false;
+                            vm.loadingCompleted = false;
                             $state.go('root.terms.completed_empty');
                         } else {
-                            $scope.completedTerms = completedTerms;
-                            $scope.loadingCompleted = false;
+                            vm.completedTerms = completedTerms;
+                            vm.loadingCompleted = false;
                         }
                     },
                     function () {
-                        $scope.loadingCompleted = false;
+                        vm.loadingCompleted = false;
                         $state.go('root.terms.completed_error');
                     }
             );

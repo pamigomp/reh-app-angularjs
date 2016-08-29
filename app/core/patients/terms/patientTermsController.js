@@ -1,116 +1,118 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.patients.terms', ['rehApp.patientsService'])
+    angular.module('rehApp.patients.terms', ['rehApp.patientsService', 'ui.router'])
 
             .controller('PatientTermsController', PatientTermsController);
 
-    PatientTermsController.$inject = ['$scope', '$state', '$stateParams', 'patientsService'];
+    PatientTermsController.$inject = ['$state', '$stateParams', 'patientsService'];
 
-    function PatientTermsController($scope, $state, $stateParams, patientsService) {
+    function PatientTermsController($state, $stateParams, patientsService) {
+        var vm = this;
 
-        $scope.loadPatientTermsPending = function () {
-            $scope.loadingPending = true;
-            $scope.errorLoading = false;
+        vm.loadPatientTermsPending = function () {
+            vm.loadingPending = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.patientPesel)) {
                 patientsService.getPatientTermsPending($stateParams.patientPesel).then(
                         function (pendingTerms) {
                             if (pendingTerms.length === 0) {
-                                $scope.emptyPending = true;
+                                vm.emptyPending = true;
                             } else {
                                 $state.get('root.patients.patient').data.breadcrumb = pendingTerms[0].patient_surname + ' ' + pendingTerms[0].patient_name;
-                                $scope.pendingTerms = pendingTerms;
-                                $scope.loadingPending = false;
-                                $scope.errorLoading = false;
-                                $scope.emptyPending = false;
+                                console.log(pendingTerms[0]);
+                                vm.pendingTerms = pendingTerms;
+                                vm.loadingPending = false;
+                                vm.errorLoading = false;
+                                vm.emptyPending = false;
                             }
                         },
                         function () {
-                            $scope.loadingPending = false;
-                            $scope.errorLoading = true;
-                            $scope.emptyPending = false;
+                            vm.loadingPending = false;
+                            vm.errorLoading = true;
+                            vm.emptyPending = false;
                         }
                 );
             }
         };
 
-        $scope.loadPatientTermsCancelled = function () {
-            $scope.loadingCancelled = true;
-            $scope.errorLoading = false;
+        vm.loadPatientTermsCancelled = function () {
+            vm.loadingCancelled = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.patientPesel)) {
                 patientsService.getPatientTermsCancelled($stateParams.patientPesel).then(
                         function (cancelledTerms) {
                             if (cancelledTerms.length === 0) {
-                                $scope.emptyCancelled = true;
+                                vm.emptyCancelled = true;
                             } else {
                                 $state.get('root.patients.patient').data.breadcrumb = cancelledTerms[0].patient_surname + ' ' + cancelledTerms[0].patient_name;
-                                $scope.cancelledTerms = cancelledTerms;
-                                $scope.loadingCancelled = false;
-                                $scope.errorLoading = false;
-                                $scope.emptyCancelled = false;
+                                vm.cancelledTerms = cancelledTerms;
+                                vm.loadingCancelled = false;
+                                vm.errorLoading = false;
+                                vm.emptyCancelled = false;
                             }
                         },
                         function () {
-                            $scope.loadingCancelled = false;
-                            $scope.errorLoading = true;
-                            $scope.emptyCancelled = false;
+                            vm.loadingCancelled = false;
+                            vm.errorLoading = true;
+                            vm.emptyCancelled = false;
                         }
                 );
             }
         };
 
-        $scope.loadPatientTermsCompleted = function () {
-            $scope.loadingCompleted = true;
-            $scope.errorLoading = false;
+        vm.loadPatientTermsCompleted = function () {
+            vm.loadingCompleted = true;
+            vm.errorLoading = false;
             if (angular.isDefined($stateParams.patientPesel)) {
                 patientsService.getPatientTermsCompleted($stateParams.patientPesel).then(
                         function (completedTerms) {
                             if (completedTerms.length === 0) {
-                                $scope.emptyCompleted = true;
+                                vm.emptyCompleted = true;
                             } else {
                                 $state.get('root.patients.patient').data.breadcrumb = completedTerms[0].patient_surname + ' ' + completedTerms[0].patient_name;
-                                $scope.completedTerms = completedTerms;
-                                $scope.loadingCompleted = false;
-                                $scope.errorLoading = false;
-                                $scope.emptyCompleted = false;
+                                vm.completedTerms = completedTerms;
+                                vm.loadingCompleted = false;
+                                vm.errorLoading = false;
+                                vm.emptyCompleted = false;
                             }
                         },
                         function () {
-                            $scope.loadingCompleted = false;
-                            $scope.errorLoading = true;
-                            $scope.emptyCompleted = false;
+                            vm.loadingCompleted = false;
+                            vm.errorLoading = true;
+                            vm.emptyCompleted = false;
                         }
                 );
             }
         };
 
-        $scope.setChosen = function (term) {
-            $scope.chosenTerm = term;
+        vm.setChosen = function (term) {
+            vm.chosenTerm = term;
         };
 
-        $scope.cancelTerm = function (patienttreatmentid) {
-            $scope.cancelling = true;
+        vm.cancelTerm = function (patienttreatmentid) {
+            vm.cancelling = true;
             patientsService.cancelPatientTerm(patienttreatmentid).then(function () {
-                $scope.loadPatientTermsPending();
-                $scope.loadPatientTermsCancelled();
-                $scope.cancelling = false;
-                $scope.errorCancel = false;
+                vm.loadPatientTermsPending();
+                vm.loadPatientTermsCancelled();
+                vm.cancelling = false;
+                vm.errorCancel = false;
             }, function () {
-                $scope.cancelling = false;
-                $scope.errorCancel = true;
+                vm.cancelling = false;
+                vm.errorCancel = true;
             });
         };
 
-        $scope.completeTerm = function (patienttreatmentid) {
-            $scope.completing = true;
+        vm.completeTerm = function (patienttreatmentid) {
+            vm.completing = true;
             patientsService.completePatientTerm(patienttreatmentid).then(function () {
-                $scope.loadPatientTermsPending();
-                $scope.loadPatientTermsCompleted();
-                $scope.completing = false;
-                $scope.errorComplete = false;
+                vm.loadPatientTermsPending();
+                vm.loadPatientTermsCompleted();
+                vm.completing = false;
+                vm.errorComplete = false;
             }, function () {
-                $scope.completing = false;
-                $scope.errorComplete = true;
+                vm.completing = false;
+                vm.errorComplete = true;
             });
         };
     }

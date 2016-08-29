@@ -1,16 +1,21 @@
-<div class="modal fade" id="{{modalId || 'modal'}}" role="dialog" data-backdrop="static" data-keyboard="true">
+<div class="modal fade" id="{{::modalId}}" role="dialog" data-backdrop="static" data-keyboard="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">{{title}}</h3>
+                <h3 class="modal-title">
+                    {{::title}}
+                </h3>
             </div>
             <div class="modal-body">
                 {{body}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-ng-click="confirmButton();
-                    closeModal()" data-dismiss="modal">Zatwierdź</button>
-                <button type="button" class="btn btn-default" data-ng-click="closeModal()" data-dismiss="modal">Anuluj</button>
+                <button type="button" class="btn btn-danger" data-ng-click="confirmButton(); closeModal()" data-dismiss="modal">
+                    Zatwierdź
+                </button>
+                <button type="button" class="btn btn-default" data-ng-click="closeModal()" data-dismiss="modal">
+                    Anuluj
+                </button>
             </div>
         </div>
     </div>
