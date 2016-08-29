@@ -1,0 +1,20 @@
+{
+    "name": "rehAppAngularJS",
+    "description": "Management support system for the private rehabilitation cabinets - web application",
+    "keywords": [
+        "AngularJS",
+        "angular",
+        "johnpapa",
+        "John",
+        "Papa",
+        "styleguide",
+        "management",
+        "support",
+        "system",
+        "rehabilitation",
+        "cabinet"
+    ],
+    "repository": "https://github.com/pamigomp/rehAppAngularJS",
+    "success_url": "/",
+    "addons": []
+}

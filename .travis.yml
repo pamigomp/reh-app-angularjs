@@ -5,7 +5,6 @@ node_js:
 before_install:
   - npm install bower -g
   - npm install grunt-cli -g
-  - npm install
   
 before_script:
   - export DISPLAY=:99.0
@@ -16,7 +15,7 @@ before_script:
   
 script:
   - grunt karma:singleRun
-  - grunt protractor
+  - ./node_modules/.bin/protractor protractor.conf.js
  
 after_success: 'npm run coveralls'
 
