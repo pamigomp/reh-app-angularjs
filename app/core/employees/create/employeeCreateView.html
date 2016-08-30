@@ -215,5 +215,5 @@
     </form>
     <button type="submit" class="btn btn-primary" data-ng-click="ECC.saveEmployeeDetails()" data-ng-hide="ECC.submitting" data-ng-disabled="new_employee.$invalid || ECC.employeeDetails.password!==ECC.confirmPassword" data-toggle="tooltip" title="Dodaj nowego pracownika"><i class="fa fa-plus"></i> Dodaj</button>
     <button class="btn btn-default" data-ui-sref="root.employees.list" data-ng-hide="ECC.submitting" data-toggle="tooltip" title="Wróć na listę pracowników"><i class="fa fa-times"></i> Anuluj</button>
-    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="ECC.submitting"></i></p>
+    <p align="center" data-ng-show="ECC.submitting"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
 </div>

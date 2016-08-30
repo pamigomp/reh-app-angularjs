@@ -77,7 +77,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="ETC.loadingPending"></i></p>
+                                    <p align="center" data-ng-show="ETC.loadingPending"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
                                 </div>
                             </div>
                             <div class="row" data-ng-show="ETC.emptyPending">
@@ -125,7 +125,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="ETC.loadingCancelled"></i></p>
+                                    <p align="center" data-ng-show="ETC.loadingCancelled"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
                                 </div>
                             </div>
                             <div class="row" data-ng-show="ETC.emptyCancelled">
@@ -173,7 +173,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="ETC.loadingCompleted"></i></p>
+                                    <p align="center" data-ng-show="ETC.loadingCompleted"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
                                 </div>
                             </div>
                             <div class="row" data-ng-show="ETC.emptyCompleted">
@@ -190,5 +190,5 @@
         </div>
     </form>
     <button class="btn btn-default pull-right" data-ng-hide="ETC.updating" data-ui-sref="root.employees.list" data-toggle="tooltip" title="Wróć na listę pracowników"><i class="fa fa-arrow-left"></i> Wróć</button>
-    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="ETC.updating"></i></p>
+    <p align="center" data-ng-show="ETC.updating"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
 </div>

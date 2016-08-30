@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="errorLoading">
+            <div class="alert alert-danger" role="alert" data-ng-show="PTC.errorLoading">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>Błąd!</strong> Wystąpił problem podczas pobierania terminów zabiegów pacjenta.
             </div>
@@ -21,19 +21,19 @@
                 <div class="panel-body">
                     <uib-tabset>
                         <uib-tab heading="Oczekujące">
-                            <div class="row" style="padding-top: 15px;" data-ng-hide="emptyPending">
+                            <div class="row" style="padding-top: 15px;" data-ng-hide="PTC.emptyPending">
                                 <div class="col-lg-12" data-ng-init="PTC.loadPatientTermsPending()">
-                                    <div class="alert alert-danger" role="alert" data-ng-show="errorCancel">
+                                    <div class="alert alert-danger" role="alert" data-ng-show="PTC.errorCancel">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <strong>Błąd!</strong> Wystąpił problem podczas odwoływania terminu zabiegu.
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group search-bar">
                                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                            <input type="text" class="form-control" placeholder="Wyszukaj oczekujący termin" data-ng-model="termsFilter">
+                                            <input type="text" class="form-control" placeholder="Wyszukaj oczekujący termin" data-ng-model="PTC.pendingTermsFilter">
                                         </div>
                                     </div>
-                                    <div class="table-responsive" data-ng-hide="loadingPending">
+                                    <div class="table-responsive" data-ng-hide="PTC.loadingPending">
                                         <table class="table table-striped table-condensed table-hover table-bordered">
                                             <thead>
                                                 <tr>
@@ -45,27 +45,27 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr data-ng-repeat="term in PTC.pendingTerms| orderBy:'patienttreatmentid' | filter:termsFilter">
+                                                <tr data-ng-repeat="term in PTC.pendingTerms| orderBy:'patienttreatmentid' | filter:PTC.pendingTermsFilter">
                                                     <td>{{term.patienttreatmentid}}</td>
                                                     <td>{{term.datehour|date: 'dd.MM.yyyy'}}</td>
                                                     <td>{{term.datehour|date: 'HH:mm'}}</td>
                                                     <td>{{term.degree}} {{term.name}} {{term.surname}}</td>
                                                     <td>
                                                         <!--<button class="btn btn-sm btn-primary" data-ui-sref="root.patients.patient.terms.term.details({termId: term.patienttreatmentid})" data-toggle="tooltip" title="Szczegóły zabiegu"><i class="fa fa-search"></i> Szczegóły</button>--> 
-                                                        <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#cancel" data-toggle="tooltip" title="Odwołaj zabieg"><i class="fa fa-remove"></i> Odwołaj</button>
-                                                        <button class="btn btn-sm btn-primary" data-ng-click="setChosen(term)" data-toggle="modal" data-target="#complete" data-toggle="tooltip" title="Zrealizuj zabieg"><i class="fa fa-remove"></i> Zrealizuj</button>
+                                                        <button class="btn btn-sm btn-primary" data-ng-click="PTC.setChosen(term)" data-toggle="modal" data-target="#modal-cancel-term-{{$index}}" data-toggle="tooltip" title="Odwołaj zabieg"><i class="fa fa-remove"></i> Odwołaj</button>
+                                                        <button class="btn btn-sm btn-primary" data-ng-click="PTC.setChosen(term)" data-toggle="modal" data-target="#modal-complete-term-{{$index}}" data-toggle="tooltip" title="Zrealizuj zabieg"><i class="fa fa-remove"></i> Zrealizuj</button>
                                             <modal-directive
-                                                modal-id="cancel"
+                                                modal-id="modal-cancel-term-{{$index}}"
                                                 title="Odwoływanie wizyty"
-                                                body="Czy na pewno chcesz odwołać wizytę z dnia {{chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{chosenTerm.datehour|date: 'HH:mm'}}?"
-                                                confirm-button="cancelTerm(chosenTerm.patienttreatmentid)" 
+                                                body="Czy na pewno chcesz odwołać wizytę z dnia {{PTC.chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{PTC.chosenTerm.datehour|date: 'HH:mm'}}?"
+                                                confirm-button="PTC.cancelTerm(chosenTerm.patienttreatmentid)" 
                                                 cancel-button="">
                                             </modal-directive>
                                             <modal-directive
-                                                modal-id="complete"
+                                                modal-id="modal-complete-term-{{$index}}"
                                                 title="Realizowanie wizyty"
-                                                body="Czy na pewno chcesz zrealizować wizytę z dnia {{chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{chosenTerm.datehour|date: 'HH:mm'}}?"
-                                                confirm-button="completeTerm(chosenTerm.patienttreatmentid)" 
+                                                body="Czy na pewno chcesz zrealizować wizytę z dnia {{PTC.chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{PTC.chosenTerm.datehour|date: 'HH:mm'}}?"
+                                                confirm-button="PTC.completeTerm(chosenTerm.patienttreatmentid)" 
                                                 cancel-button="">
                                             </modal-directive>
                                             </td>
@@ -73,10 +73,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="loadingPending"></i></p>
+                                    <p align="center" data-ng-show="PTC.loadingPending"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
                                 </div>
                             </div>
-                            <div class="row" data-ng-show="emptyPending">
+                            <div class="row" data-ng-show="PTC.emptyPending">
                                 <div class="col-lg-12" style="padding-top: 10px">
                                     <div class="alert alert-info" role="alert">
                                         <strong>Uwaga!</strong> Pacjent nie posiada żadnych zaplanowanych zabiegów.
@@ -85,15 +85,15 @@
                             </div>
                         </uib-tab>
                         <uib-tab heading="Odwołane">
-                            <div class="row" style="padding-top: 15px;" data-ng-hide="emptyCancelled">
-                                <div class="col-lg-12" data-ng-init="loadPatientTermsCancelled()">
+                            <div class="row" style="padding-top: 15px;" data-ng-hide="PTC.emptyCancelled">
+                                <div class="col-lg-12" data-ng-init="PTC.loadPatientTermsCancelled()">
                                     <div class="form-group">
                                         <div class="input-group search-bar">
                                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                            <input type="text" class="form-control" placeholder="Wyszukaj odwołany termin" data-ng-model="termsFilter">
+                                            <input type="text" class="form-control" placeholder="Wyszukaj odwołany termin" data-ng-model="PTC.cancelledTermsFilter">
                                         </div>
                                     </div>
-                                    <div class="table-responsive" data-ng-hide="loadingCancelled">
+                                    <div class="table-responsive" data-ng-hide="PTC.loadingCancelled">
                                         <table class="table table-striped table-condensed table-hover table-bordered">
                                             <thead>
                                                 <tr>
@@ -108,7 +108,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr data-ng-repeat="term in cancelledTerms| orderBy:'patienttreatmentid' | filter:termsFilter">
+                                                <tr data-ng-repeat="term in PTC.cancelledTerms| orderBy:'patienttreatmentid' | filter:PTC.cancelledTermsFilter">
                                                     <td>{{term.patienttreatmentid}}</td>
                                                     <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
                                                     <td>{{term.kindoftreatment}}</td>
@@ -121,7 +121,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p align="center"><i class="fa fa-spinner fa-spin fa-3x" data-ng-show="loadingCancelled"></i></p>
+                                    <p align="center" data-ng-show="PTC.loadingCancelled"><i class="fa fa-spinner fa-spin fa-3x"></i></p>
                                 </div>
                             </div>
                             <div class="row" data-ng-show="emptyCancelled">
@@ -133,15 +133,15 @@
                             </div>
                         </uib-tab>
                         <uib-tab heading="Zrealizowane">
-                            <div class="row" style="padding-top: 15px;" data-ng-hide="emptyCompleted">
-                                <div class="col-lg-12" data-ng-init="loadPatientTermsCompleted()">
+                            <div class="row" style="padding-top: 15px;" data-ng-hide="PTC.emptyCompleted">
+                                <div class="col-lg-12" data-ng-init="PTC.loadPatientTermsCompleted()">
                                     <div class="form-group">
                                         <div class="input-group search-bar">
                                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                            <input type="text" class="form-control" placeholder="Wyszukaj zrealizowany termin" data-ng-model="termsFilter">
+                                            <input type="text" class="form-control" placeholder="Wyszukaj zrealizowany termin" data-ng-model="PTC.completedTermsFilter">
                                         </div>
                                     </div>
-                                    <div class="table-responsive" data-ng-hide="loadingCompleted">
+                                    <div class="table-responsive" data-ng-hide="PTC.loadingCompleted">
                                         <table class="table table-striped table-condensed table-hover table-bordered">
                                             <thead>
                                                 <tr>
@@ -156,7 +156,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr data-ng-repeat="term in completedTerms| orderBy:'patienttreatmentid' | filter:termsFilter">
+                                                <tr data-ng-repeat="term in PTC.completedTerms| orderBy:'patienttreatmentid' | filter:PTC.completedTermsFilter">
                                                     <td>{{term.patienttreatmentid}}</td>
                                                     <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
                                                     <td>{{term.kindoftreatment}}</td>
@@ -169,10 +169,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p align="center"><i class="fa fa-spinner fa-spin fa-3x" data-ng-show="loadingCompleted"></i></p>
+                                    <p align="center" data-ng-show="PTC.loadingCompleted"><i class="fa fa-spinner fa-spin fa-3x"></i></p>
                                 </div>
                             </div>
-                            <div class="row" data-ng-show="emptyCompleted">
+                            <div class="row" data-ng-show="PTC.emptyCompleted">
                                 <div class="col-lg-12" style="padding-top: 10px">
                                     <div class="alert alert-info" role="alert">
                                         <strong>Uwaga!</strong> Pacjent nie posiada żadnych zrealizowanych zabiegów.
@@ -185,6 +185,6 @@
             </div>
         </div>
     </form>
-    <button class="btn btn-default pull-right" data-ng-hide="updating" data-ui-sref="root.patients.list" data-toggle="tooltip" title="Wróć na listę pacjentów"><i class="fa fa-arrow-left"></i> Wróć</button>
-    <p align="center"><i class="fa fa-spinner fa-spin fa-3x" data-ng-show="updating"></p>
+    <button class="btn btn-default pull-right" data-ng-hide="PTC.updating" data-ui-sref="root.patients.list" data-toggle="tooltip" title="Wróć na listę pacjentów"><i class="fa fa-arrow-left"></i> Wróć</button>
+    <p align="center" data-ng-show="PTC.updating"><i class="fa fa-spinner fa-spin fa-3x"></i></p>
 </div>

@@ -89,7 +89,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" name="dob"
                                            uib-datepicker-popup="dd.MM.yyyy"
                                            show-button-bar="false"
                                            max-date="EDC.maxDate"
@@ -205,5 +205,5 @@
     <button class="btn btn-primary" data-ng-show="EDC.allowEdit && !EDC.updating" data-ng-click="EDC.saveEdit()" data-ng-disabled="employee_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
     <button class="btn btn-warning" data-ng-show="EDC.allowEdit && !EDC.updating" data-ng-click="EDC.cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
     <button class="btn btn-default pull-right" data-ng-hide="EDC.updating" data-ui-sref="root.employees.list" data-toggle="tooltip" title="Wróć na listę pracowników"><i class="fa fa-arrow-left"></i> Wróć</button>
-    <p align="center"><i class="fa fa-spinner fa-spin fa-3x fa-fw" data-ng-show="EDC.updating"></i></p>
+    <p align="center" data-ng-show="EDC.updating"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
 </div>
