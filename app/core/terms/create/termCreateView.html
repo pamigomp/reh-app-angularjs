@@ -28,7 +28,7 @@
                     <div class="panel-body">
                         <div class="form-group required" data-ng-init="TCC.loadPatientsList()">
                             <label class="control-label" for="patient">Pacjent</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.patientId" name="patient" required="required">
+                            <select class="form-control" data-ng-model="TCC.termDetails.patientId" name="patient" required>
                                 <option data-ng-repeat="patient in TCC.patientsList|orderBy:'surname'" data-ng-value="{{patient.pesel}}" value="{{patient.pesel}}">{{patient.surname}} {{patient.name}} ({{patient.pesel}})</option>
                             </select>
                         </div>
@@ -98,18 +98,18 @@
                         </div>
                         <div class="form-group required">
                             <label class="control-label" for="contractNumber">Numer umowy z funduszem</label>
-                            <input name="contractNumber" type="text" class="form-control" data-ng-model="TCC.termDetails.contractNumber" data-ng-blur="contractNumberBlur = true" placeholder="Numer umowy z funduszem" required="required">
+                            <input name="contractNumber" type="text" class="form-control" data-ng-model="TCC.termDetails.contractNumber" data-ng-blur="contractNumberBlur = true" placeholder="Numer umowy z funduszem" required>
                         </div>
                         <div class="form-group required">
                             <label class="control-label" for="regon">REGON</label>
-                            <input name="regon" type="text" class="form-control" data-ng-model="TCC.termDetails.regon" data-ng-blur="regonBlur = true" placeholder="REGON" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" required="required">
+                            <input name="regon" type="text" class="form-control" data-ng-model="TCC.termDetails.regon" data-ng-blur="regonBlur = true" placeholder="REGON" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" required>
                             <p class="help-block" data-ng-show="regonBlur && fill_referral.regon.$invalid">
                                 Wprowadź REGON przychodni zlecającej zabieg, składający się z 9 cyfr.
                             </p>
                         </div>
                         <div class="form-group required">
                             <label class="control-label" for="resortCode">Kod resortowy cz. VII</label>
-                            <input name="resortCode" type="text" class="form-control" data-ng-model="TCC.termDetails.resortCode" data-ng-blur="resortCodeBlur = true" placeholder="Kod resortowy" data-ng-minlength="3" data-ng-maxlength="3" data-ng-pattern="/^[0-9]{3}$/" required="required">
+                            <input name="resortCode" type="text" class="form-control" data-ng-model="TCC.termDetails.resortCode" data-ng-blur="resortCodeBlur = true" placeholder="Kod resortowy" data-ng-minlength="3" data-ng-maxlength="3" data-ng-pattern="/^[0-9]{3}$/" required>
                             <p class="help-block" data-ng-show="resortCodeBlur && fill_referral.resortCode.$invalid">
                                 Wprowadź kod resortowy cz. VII przychodni zlecającej zabieg, składający się z 3 cyfr.
                             </p>
@@ -120,7 +120,7 @@
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadIcdsList()">
                             <label class="control-label" for="icd10">ICD-10</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.icd10" name="icd10" required="required">
+                            <select class="form-control" data-ng-model="TCC.termDetails.icd10" name="icd10" required>
                                 <option data-ng-repeat="icd in TCC.icdsList|orderBy:'code'" data-ng-value="{{icd.icdId}}" value="{{icd.icdId}}">{{icd.code}} ({{icd.name}})</option>
                             </select>
                         </div>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="form-group required">
                             <label class="control-label" for="doctorNumber">Numer lekarza wystawiającego</label>
-                            <input name="doctorNumber" type="text" class="form-control" data-ng-model="TCC.termDetails.doctorNumber" data-ng-blur="doctorNumberBlur = true" placeholder="Numer lekarza wystawiającego" data-ng-pattern="/^[0-9]+$/" required="required">
+                            <input name="doctorNumber" type="text" class="form-control" data-ng-model="TCC.termDetails.doctorNumber" data-ng-blur="doctorNumberBlur = true" placeholder="Numer lekarza wystawiającego" data-ng-pattern="/^[0-9]+$/" required>
                             <p class="help-block" data-ng-show="doctorNumberBlur && fill_referral.doctorNumber.$invalid">
                                 Wprowadź numer lekarza wystawiającego, składający się z cyfr.
                             </p>
@@ -174,30 +174,30 @@
                         <div class="form-group required">
                             <label class="control-label" for="hour">Godzina</label>
                             <fieldset>
-                                <uib-timepicker  data-ng-model="TCC.termDetails.datehour" data-ng-change="TCC.changed()" hour-step="TCC.hstep" minute-step="TCC.mstep" show-meridian="false" required="required"></uib-timepicker>
+                                <uib-timepicker  data-ng-model="TCC.termDetails.datehour" data-ng-change="TCC.changed()" hour-step="TCC.hstep" minute-step="TCC.mstep" show-meridian="false" required></uib-timepicker>
                             </fieldset>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadTreatmentsList()">
                             <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.treatmentId" name="kindoftreatment" required="required">
+                            <select class="form-control" data-ng-model="TCC.termDetails.treatmentId" name="kindoftreatment" required>
                                 <option data-ng-repeat="treatment in TCC.treatmentsList" data-ng-value="{{treatment.treatmentid}}" value="{{treatment.treatmentid}}">{{treatment.kindoftreatment}}</option>
                             </select>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadRoomsList()">
                             <label class="control-label" for="room">Pokój</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.roomId" name="room" required="required">
+                            <select class="form-control" data-ng-model="TCC.termDetails.roomId" name="room" required>
                                 <option data-ng-repeat="room in TCC.roomsList" data-ng-value="{{room.roomid}}" value="{{room.roomid}}">p. {{room.roomnumber}} ({{room.roomname}})</option>
                             </select>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadEmployeesList()">
                             <label class="control-label" for="employee">Pracownik</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.employeeId" name="employee" required="required">
+                            <select class="form-control" data-ng-model="TCC.termDetails.employeeId" name="employee" required>
                                 <option data-ng-repeat="employee in TCC.employeesList|orderBy: 'surname'" data-ng-value="{{employee.employeeid}}" value="{{employee.employeeid}}">{{employee.degree}} {{employee.surname}} {{employee.name}}</option>
                             </select>
                         </div>
                         <label class="control-label required" for="time">Czas trwania</label>
                         <div class="form-group input-group required">
-                            <input name="time" type="number" class="form-control" data-ng-model="TCC.termDetails.duration" placeholder="Czas trwania" min="0" max="480" required="required">
+                            <input name="time" type="number" class="form-control" data-ng-model="TCC.termDetails.duration" placeholder="Czas trwania" min="0" max="480" required>
                             <span class="input-group-addon">min.</span>
                         </div>
                         <div class="form-group">
@@ -206,7 +206,7 @@
                         </div>
                         <div class="form-group required">
                             <label class="control-label" for="bodyparts">Okolica ciała</label>
-                            <input name="bodyparts" type="text" class="form-control" data-ng-model="TCC.termDetails.bodyparts" placeholder="Okolica ciała" required="required">
+                            <input name="bodyparts" type="text" class="form-control" data-ng-model="TCC.termDetails.bodyparts" placeholder="Okolica ciała" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="additionalinformations">Dodatkowe informacje</label>

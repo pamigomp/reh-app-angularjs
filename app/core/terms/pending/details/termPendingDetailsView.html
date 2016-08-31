@@ -72,7 +72,7 @@
                                            is-open="TPDC.isOpen" 
                                            data-ng-value="TPDC.termPendingDetails.datehour|date:'dd.MM.yyyy'"
                                            data-ng-click="TPDC.open()" 
-                                           data-ng-model="TPDC.termPendingDetails.datehour" data-ng-disabled="!TPDC.allowEdit" required="required"/>
+                                           data-ng-model="TPDC.termPendingDetails.datehour" data-ng-disabled="!TPDC.allowEdit" required/>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!TPDC.allowEdit" data-ng-click="TPDC.open($event)">
                                             <i class="fa fa-calendar" ></i>
@@ -85,24 +85,24 @@
                     <div class="form-group required" data-ng-disabled="!TPDC.allowEdit">
                         <label class="control-label" for="hour">Godzina</label>
                         <fieldset data-ng-disabled="!TPDC.allowEdit">
-                            <uib-timepicker  data-ng-model="TPDC.termPendingDetails.datehour" data-ng-change="TPDC.changed()" hour-step="TPDC.hstep" minute-step="TPDC.mstep" show-meridian="false" data-ng-disabled="!TPDC.allowEdit" required="required"></uib-timepicker>
+                            <uib-timepicker  data-ng-model="TPDC.termPendingDetails.datehour" data-ng-change="TPDC.changed()" hour-step="TPDC.hstep" minute-step="TPDC.mstep" show-meridian="false" data-ng-disabled="!TPDC.allowEdit" required></uib-timepicker>
                         </fieldset>
                     </div>
                     <div class="form-group required" data-ng-init="TPDC.loadTreatmentsList()">
                         <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
-                        <select class="form-control" data-ng-model="TPDC.termPendingDetails.treatmentid" name="kindoftreatment" data-ng-disabled="!allowEdit" required="required">
+                        <select class="form-control" data-ng-model="TPDC.termPendingDetails.treatmentid" name="kindoftreatment" data-ng-disabled="!allowEdit" required>
                             <option data-ng-repeat="treatment in TPDC.treatmentsList" data-ng-value="{{treatment.treatmentid}}" value="{{treatment.treatmentid}}">{{treatment.kindoftreatment}} ({{treatment.price}} zł/{{treatment.duration}} min.)</option>
                         </select>
                     </div>
                     <div class="form-group required" data-ng-init="TPDC.loadRoomsList()">
                         <label class="control-label" for="roomNumber">Numer pokoju</label>
-                        <select class="form-control" data-ng-model="TPDC.termPendingDetails.roomid" name="roomNumber" data-ng-disabled="!TPDC.allowEdit" required="required">
+                        <select class="form-control" data-ng-model="TPDC.termPendingDetails.roomid" name="roomNumber" data-ng-disabled="!TPDC.allowEdit" required>
                             <option data-ng-repeat="room in TPDC.roomsList" data-ng-value="{{room.roomid}}" value="{{room.roomid}}">p. {{room.roomnumber}} ({{room.roomname}})</option>
                         </select>
                     </div>
                     <div class="form-group required" data-ng-init="TPDC.loadEmployeesList()">
                         <label class="control-label" for="employee">Pracownik</label>
-                        <select class="form-control" data-ng-model="TPDC.termPendingDetails.employeeid" name="employee" data-ng-disabled="!TPDC.allowEdit" required="required">
+                        <select class="form-control" data-ng-model="TPDC.termPendingDetails.employeeid" name="employee" data-ng-disabled="!TPDC.allowEdit" required>
                             <option data-ng-repeat="employee in TPDC.employeesList |orderBy: 'surname'" data-ng-value="{{employee.employeeid}}" value="{{employee.employeeid}}">{{employee.degree}} {{employee.surname}} {{employee.name}}</option>
                         </select>
                     </div>

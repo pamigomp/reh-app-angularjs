@@ -34,14 +34,14 @@
                 <div class="panel-body">
                     <div class="form-group required">
                         <label class="control-label" for="pesel">PESEL</label>
-                        <input name="pesel" type="text" class="form-control" data-ng-blur="peselBlur = true" data-ng-value="PDC.patientDetails.pesel" data-ng-disabled="true" data-ng-minlength="11" data-ng-maxlength="11" data-ng-pattern="/^[0-9]{11}$/" placeholder="PESEL" required="required">
+                        <input name="pesel" type="text" class="form-control" data-ng-blur="peselBlur = true" data-ng-value="PDC.patientDetails.pesel" data-ng-disabled="true" data-ng-minlength="11" data-ng-maxlength="11" data-ng-pattern="/^[0-9]{11}$/" placeholder="PESEL" required>
                         <p class="help-block" data-ng-show="peselBlur && patient_details.pesel.$invalid">
                             Wprowadź PESEL pacjenta, składający się z 11 cyfr.
                         </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="surname">Nazwisko</label>
-                        <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="PDC.patientDetails.surname" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required="required">
+                        <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="PDC.patientDetails.surname" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required>
                         <p class="help-block" data-ng-show="surnameBlur && patient_details.surname.$error.minlength">
                             Wprowadź nazwisko pacjenta, składające się z minimum 2 znaków.
                         </p>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="name">Imię</label>
-                        <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="PDC.patientDetails.name" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required="required">
+                        <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="PDC.patientDetails.name" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required>
                         <p class="help-block" data-ng-show="nameBlur && patient_details.name.$error.minlength">
                             Wprowadź imię pacjenta, składające się z minimum 2 znaków.
                         </p>
@@ -85,7 +85,7 @@
                                            is-open="PDC.valuationDatePickerIsOpen" 
                                            data-ng-value="PDC.patientDetails.dob|date:'dd.MM.yyyy'"
                                            data-ng-click="PDC.valuationDatePickerOpen()" 
-                                           data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required="required"/>
+                                           data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required/>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!PDC.allowEdit" data-ng-click="PDC.valuationDatePickerOpen($event)">
                                             <i class="fa fa-calendar" ></i>
@@ -117,7 +117,7 @@
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="status">Status</label>
-                        <select class="form-control" data-ng-model="PDC.patientDetails.status" name="status" data-ng-blur="statusBlur = true" data-ng-disabled="!PDC.allowEdit" required="required">
+                        <select class="form-control" data-ng-model="PDC.patientDetails.status" name="status" data-ng-blur="statusBlur = true" data-ng-disabled="!PDC.allowEdit" required>
                             <option selected disabled style="display: none" value=''>Proszę wybrać status</option>
                             <option value="Aktywny">Aktywny</option>
                             <option value="Nieaktywny">Nieaktywny</option>
@@ -156,7 +156,7 @@
                 <div class="panel-body">
                     <div class="form-group required">
                         <label class="control-label" for="street">Ulica</label>
-                        <input name="street" type="text" class="form-control" data-ng-model="PDC.patientDetails.street" data-ng-blur="streetBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required="required">
+                        <input name="street" type="text" class="form-control" data-ng-model="PDC.patientDetails.street" data-ng-blur="streetBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required>
                         <p class="help-block" data-ng-show="streetBlur && patient_details.street.$error.minlength">
                             Nazwa ulicy powinna składać się z minimum 3 znaków.
                         </p>
@@ -166,14 +166,14 @@
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="postal_code">Kod pocztowy</label>
-                        <input name="postal_code" type="text" class="form-control" data-ng-model="PDC.patientDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required="required">
+                        <input name="postal_code" type="text" class="form-control" data-ng-model="PDC.patientDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
                         <p class="help-block" data-ng-show="postalCodeBlur && patient_details.postal_code.$error.pattern">
                             Wprowadź poprawny format kodu pocztowego, np. 87-800.
                         </p>
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="city">Miejscowość</label>
-                        <input name="city" type="text" class="form-control" data-ng-model="PDC.patientDetails.city" data-ng-blur="cityBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required="required">
+                        <input name="city" type="text" class="form-control" data-ng-model="PDC.patientDetails.city" data-ng-blur="cityBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required>
                         <p class="help-block" data-ng-show="cityBlur && patient_details.city.$error.minlength">
                             Nazwa miejscowości powinna składać się z minimum 3 znaków.
                         </p>
@@ -183,7 +183,7 @@
                     </div>
                     <div class="form-group required">
                         <label class="control-label" for="country">Kraj</label>
-                        <input name="country" type="text" class="form-control" data-ng-model="PDC.patientDetails.country" data-ng-blur="countryBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required="required">
+                        <input name="country" type="text" class="form-control" data-ng-model="PDC.patientDetails.country" data-ng-blur="countryBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required>
                         <p class="help-block" data-ng-show="countryBlur && patient_details.country.$error.minlength">
                             Nazwa państwa powinna składać się z minimum 3 znaków.
                         </p>
