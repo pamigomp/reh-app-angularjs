@@ -11,31 +11,41 @@
         var vm = this;
 
         vm.credentialsError = false;
+        vm.login = login;
         vm.loginError = false;
 
-        vm.login = function (data) {
-            loginService.verifyEmployeeCredentials(data.email).then(function (employeeCredentials) {
+        function login(data) {
+            loginService.verifyEmployeeCredentials(data.email)
+                    .then(verifyEmployeeCredentialsSuccess, verifyEmployeeCredentialsFailure);
+
+            function verifyEmployeeCredentialsSuccess(employeeCredentials) {
                 if ((employeeCredentials.length > 0) && (data.password === employeeCredentials[0].password)) {
-                    AuthService.login(employeeCredentials[0]).then(function (authenticated) {
-                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                        $state.go('root.dashboard', {}, {reload: true});
-                        $scope.MC.setCurrentUsername(employeeCredentials[0]);
-                        $scope.MC.setCurrentPosition(employeeCredentials[0].position);
-                        vm.credentialsError = false;
-                        vm.loginError = false;
-                    }, function (err) {
-                        $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                        vm.credentialsError = true;
-                        vm.loginError = false;
-                    });
+                    AuthService.login(employeeCredentials[0]).then(loginSuccess, loginFailure);
                 } else {
                     vm.credentialsError = true;
                     vm.loginError = false;
                 }
-            }, function () {
-                vm.loginError = true;
+
+                function loginSuccess(authenticated) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    $state.go('root.dashboard', {}, {reload: true});
+                    $scope.MC.setCurrentUsername(employeeCredentials[0]);
+                    $scope.MC.setCurrentPosition(employeeCredentials[0].position);
+                    vm.credentialsError = false;
+                    vm.loginError = false;
+                }
+
+                function loginFailure(err) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                    vm.credentialsError = true;
+                    vm.loginError = false;
+                }
+            }
+
+            function verifyEmployeeCredentialsFailure() {
                 vm.credentialsError = false;
-            });
-        };
+                vm.loginError = true;
+            }
+        }
     }
 })();

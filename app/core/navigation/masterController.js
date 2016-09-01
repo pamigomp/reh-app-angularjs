@@ -10,8 +10,26 @@
     function MasterController($scope, $state, AuthService, AUTH_EVENTS) {
         var vm = this;
 
-        vm.username = window.localStorage.getItem('username');
+        vm.logout = logout;
         vm.position = window.localStorage.getItem('position');
+        vm.setCurrentUsername = setCurrentUsername;
+        vm.setCurrentPosition = setCurrentPosition;
+        vm.username = window.localStorage.getItem('username');
+
+        function setCurrentUsername(user) {
+            window.localStorage.setItem('username', user.name + ' ' + user.surname);
+            vm.username = window.localStorage.getItem('username');
+        }
+
+        function setCurrentPosition(position) {
+            window.localStorage.setItem('position', position);
+            vm.position = window.localStorage.getItem('position');
+        }
+
+        function logout() {
+            AuthService.logout();
+            $state.go('root.login');
+        }
 
         $scope.$state = $state;
 
@@ -28,20 +46,5 @@
             $state.go('root.login');
             console.log('Sesja wygasła! Musisz zalogować się ponownie.');
         });
-
-        vm.setCurrentUsername = function (user) {
-            window.localStorage.setItem('username', user.name + ' ' + user.surname);
-            vm.username = window.localStorage.getItem('username');
-        };
-
-        vm.setCurrentPosition = function (position) {
-            window.localStorage.setItem('position', position);
-            vm.position = window.localStorage.getItem('position');
-        };
-
-        vm.logout = function () {
-            AuthService.logout();
-            $state.go('root.login');
-        };
     }
 })();

@@ -4,16 +4,16 @@
             <h1 class="page-header">Szczegóły pracownika</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="EDC.errorEdit">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="EDC.errorEdit">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas edytowania pracownika.
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="EDC.errorLoading">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="EDC.errorLoading">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas pobierania szczegółów pracownika.
             </div>
         </div>
@@ -90,15 +90,13 @@
                                     <input type="text" class="form-control" name="dob"
                                            uib-datepicker-popup="dd.MM.yyyy"
                                            show-button-bar="false"
-                                           max-date="EDC.maxDate"
                                            datepicker-options="EDC.dateOptions"
-                                           is-open="EDC.valuationDatePickerIsOpen" 
-                                           data-ng-value="EDC.employeeDetails.dob|date:'dd.MM.yyyy'"
-                                           data-ng-click="EDC.valuationDatePickerOpen()"
+                                           is-open="EDC.opened"
+                                           data-ng-click="EDC.open()"
                                            data-ng-model="EDC.employeeDetails.dob" data-ng-disabled="!EDC.allowEdit" required/>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" data-ng-disabled="!EDC.allowEdit" data-ng-click="EDC.valuationDatePickerOpen($event)">
-                                            <i class="fa fa-calendar" ></i>
+                                        <button type="button" class="btn btn-default" data-ng-disabled="!EDC.allowEdit" data-ng-click="EDC.open()">
+                                            <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
                                 </div>

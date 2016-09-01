@@ -9,100 +9,102 @@
 
     function EmployeeDetailsController($state, $stateParams, employeesService) {
         var vm = this;
+        var restoreEmployeeDetails = restoreEmployeeDetails;
+        var saveDefaultEmployeeDetails = saveDefaultEmployeeDetails;
 
         vm.allowEdit = false;
+        vm.cancelEdit = cancelEdit;
+        vm.dateOptions = {
+            startingDay: 1,
+            maxDate: new Date()
+        };
         vm.defaultEmployeeDetails = {};
-
-        vm.rangeDays = function () {
-            var input = [];
-            for (var i = 1; i <= 31; i++) {
-                input.push(i);
-            }
-            return input;
-        };
-
-        vm.rangeYears = function (max, min) {
-            var input = [];
-            for (var i = max; i >= min; i -= 1) {
-                input.push(i);
-            }
-            return input;
-        };
-
-        vm.loadEmployeeDetails = function () {
-            vm.loading = true;
-            vm.errorLoading = false;
-            if (angular.isDefined($stateParams.employeeId)) {
-                employeesService.getEmployeeDetails($stateParams.employeeId).then(
-                        function (employeeDetails) {
-                            $state.get('root.employees.employee').data.breadcrumb = employeeDetails[0].surname + ' ' + employeeDetails[0].name;
-                            vm.employeeDetails = employeeDetails[0];
-                            vm.saveDefaultEmployeeDetails();
-                            vm.loading = false;
-                            vm.errorLoading = false;
-                        },
-                        function () {
-                            vm.loading = false;
-                            vm.errorLoading = true;
-                        }
-                );
-            }
-        };
-
-        vm.updateEmployeeDetails = function () {
-            vm.updating = true;
-            if (angular.isDefined($stateParams.employeeId)) {
-                employeesService.updateEmployeeDetails(vm.employeeDetails).then(function () {
-                    vm.updating = false;
-                    vm.errorEdit = false;
-                }, function () {
-                    vm.updating = false;
-                    vm.errorEdit = true;
-                });
-            }
-        };
-
-        vm.restoreEmployeeDetails = function () {
-            angular.copy(vm.defaultEmployeeDetails, vm.employeeDetails);
-        };
-
-        vm.saveDefaultEmployeeDetails = function () {
-            angular.copy(vm.employeeDetails, vm.defaultEmployeeDetails);
-        };
-
-        //After clicking 'Edytuj' button, we would be able to make changes in the fields.
-        vm.startEdit = function () {
-            vm.allowEdit = true;
-        };
-
-        //After clicking 'Zapisz' button, we would not be able to make changes in the fields
-        //and all changes are being saved.
-        vm.saveEdit = function () {
-            vm.allowEdit = false;
-            vm.updateEmployeeDetails();
-        };
+        vm.employeeDetails = {};
+        vm.errorEdit = false;
+        vm.errorLoading = false;
+        vm.loadEmployeeDetails = loadEmployeeDetails;
+        vm.loading = false;
+        vm.open = open;
+        vm.opened = false;
+        vm.saveEdit = saveEdit;
+        vm.startEdit = startEdit;
+        vm.updating = false;
+        vm.updateEmployeeDetails = updateEmployeeDetails;
 
         //After clicking 'Anuluj' button, we would not be able to make changes in the fields
         //and all changes are being discarded (loading previous employee's details).
-        vm.cancelEdit = function () {
+        function cancelEdit() {
             vm.allowEdit = false;
-            vm.restoreEmployeeDetails();
-        };
+            restoreEmployeeDetails();
+        }
 
-        vm.maxDate = new Date();
-        vm.valuationDatePickerIsOpen = false;
+        function loadEmployeeDetails() {
+            vm.errorLoading = false;
+            vm.loading = true;
 
-        vm.dateOptions = {
-            'starting-day': 1
-        };
-
-        vm.valuationDatePickerOpen = function ($event) {
-            if ($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
+            if (angular.isDefined($stateParams.employeeId)) {
+                employeesService.getEmployeeDetails($stateParams.employeeId)
+                        .then(getEmployeeDetailsSuccess, getEmployeeDetailsFailure);
             }
 
-            vm.valuationDatePickerIsOpen = true;
-        };
+            function getEmployeeDetailsSuccess(employeeDetails) {
+                $state.get('root.employees.employee').data.breadcrumb = employeeDetails[0].surname + ' ' + employeeDetails[0].name;
+                vm.employeeDetails = employeeDetails[0];
+                vm.employeeDetails.dob = new Date(vm.employeeDetails.dob);
+                saveDefaultEmployeeDetails();
+                vm.errorLoading = false;
+                vm.loading = false;
+            }
+
+            function getEmployeeDetailsFailure() {
+                vm.errorLoading = true;
+                vm.loading = false;
+            }
+        }
+
+        function open() {
+            vm.opened = true;
+        }
+
+        function restoreEmployeeDetails() {
+            angular.copy(vm.defaultEmployeeDetails, vm.employeeDetails);
+        }
+
+        function saveDefaultEmployeeDetails() {
+            angular.copy(vm.employeeDetails, vm.defaultEmployeeDetails);
+        }
+
+        //After clicking 'Zapisz' button, we would not be able to make changes in the fields
+        //and all changes are being saved.
+        function saveEdit() {
+            vm.updateEmployeeDetails();
+        }
+
+        //After clicking 'Edytuj' button, we would be able to make changes in the fields.
+        function startEdit() {
+            vm.allowEdit = true;
+        }
+
+        function updateEmployeeDetails() {
+            vm.errorEdit = false;
+            vm.updating = true;
+
+            if (angular.isDefined($stateParams.employeeId)) {
+                employeesService.updateEmployeeDetails(vm.employeeDetails)
+                        .then(updateEmployeeDetailsSuccess, updateEmployeeDetailsFailure);
+            }
+
+            function updateEmployeeDetailsSuccess() {
+                saveDefaultEmployeeDetails();
+                vm.allowEdit = false;
+                vm.errorEdit = false;
+                vm.updating = false;
+            }
+
+            function updateEmployeeDetailsFailure() {
+                vm.errorEdit = true;
+                vm.updating = false;
+            }
+        }
     }
 })();

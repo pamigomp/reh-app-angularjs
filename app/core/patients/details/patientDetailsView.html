@@ -4,24 +4,31 @@
             <h1 class="page-header">Szczegóły pacjenta</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="PDC.errorEdit">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="PDC.errorEdit">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas edytowania pacjenta.
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="PDC.errorLoading">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="PDC.errorLoading">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas pobierania szczegółów pacjenta.
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="PDC.errorReset">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="PDC.errorReset">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas resetowania hasła pacjenta.
+            </div>
+        </div>
+    </div>
+    <div class="row" data-ng-show="PDC.successReset">
+        <div class="col-lg-12">
+            <div class="alert alert-success" role="alert">
+                <strong>Sukces!</strong> Pomyślnie zresetowano hasło pacjenta.
             </div>
         </div>
     </div>
@@ -80,15 +87,13 @@
                                     <input type="text" class="form-control" name="dob"
                                            uib-datepicker-popup="dd.MM.yyyy"
                                            show-button-bar="false"
-                                           max-date="PDC.maxDate"
                                            datepicker-options="PDC.dateOptions"
-                                           is-open="PDC.valuationDatePickerIsOpen" 
-                                           data-ng-value="PDC.patientDetails.dob|date:'dd.MM.yyyy'"
-                                           data-ng-click="PDC.valuationDatePickerOpen()" 
+                                           is-open="PDC.opened" 
+                                           data-ng-click="PDC.open()" 
                                            data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required/>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" data-ng-disabled="!PDC.allowEdit" data-ng-click="PDC.valuationDatePickerOpen($event)">
-                                            <i class="fa fa-calendar" ></i>
+                                        <button type="button" class="btn btn-default" data-ng-disabled="!PDC.allowEdit" data-ng-click="PDC.open()">
+                                            <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
                                 </div>

@@ -10,52 +10,43 @@
     function PatientCreateController(patientsService) {
         var vm = this;
 
+        vm.dateOptions = {
+            startingDay: 1,
+            maxDate: new Date()
+        };
         vm.patientDetails = {};
-        vm.errorCreate = false;
         vm.patientDetails.country = 'Polska';
+        vm.errorCreate = false;
+        vm.open = open;
+        vm.open2 = open2;
+        vm.opened = false;
+        vm.opened2 = false;
+        vm.savePatientDetails = savePatientDetails;
+        vm.submitting = false;
 
-        vm.rangeDays = function () {
-            var input = [];
-            for (var i = 1; i <= 31; i++) {
-                input.push(i);
-            }
-            return input;
-        };
+        function open() {
+            vm.opened = true;
+        }
 
-        vm.rangeYears = function (max, min) {
-            var input = [];
-            for (var i = max; i >= min; i -= 1) {
-                input.push(i);
-            }
-            return input;
-        };
+        function open2() {
+            vm.opened2 = true;
+        }
 
-        vm.savePatientDetails = function () {
+        function savePatientDetails() {
+            vm.errorCreate = false;
             vm.submitting = true;
-            patientsService.savePatientDetails(vm.patientDetails).then(
-                    function () {
-                        vm.errorCreate = false;
-                        vm.submitting = false;
-                    }, function () {
+            patientsService.savePatientDetails(vm.patientDetails)
+                    .then(savePatientDetailsSuccess, savePatientDetailsFailure);
+
+            function savePatientDetailsSuccess() {
+                vm.errorCreate = false;
+                vm.submitting = false;
+            }
+
+            function savePatientDetailsFailure() {
                 vm.errorCreate = true;
                 vm.submitting = false;
-            });
-        };
-
-        vm.maxDate = new Date();
-        vm.valuationDatePickerIsOpen = false;
-
-        vm.dateOptions = {
-            'starting-day': 1
-        };
-
-        vm.valuationDatePickerOpen = function ($event) {
-            if ($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
             }
-
-            vm.valuationDatePickerIsOpen = true;
-        };
+        }
     }
 })();

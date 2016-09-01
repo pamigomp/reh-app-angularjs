@@ -10,41 +10,58 @@
     function EmployeesListController($state, employeesService) {
         var vm = this;
 
-        vm.loadEmployeesList = function () {
+        vm.errorRemove = false;
+        vm.loading = false;
+        vm.loadEmployeesList = loadEmployeesList;
+        vm.removeEmployee = removeEmployee;
+        vm.removing = false;
+        vm.setChosen = setChosen;
+
+        function loadEmployeesList() {
             vm.loading = true;
 
-            employeesService.getEmployeesList().then(function (employeesList) {
+            employeesService.getEmployeesList()
+                    .then(getEmployeesListSuccess, getEmployeesListFailure);
+
+            function getEmployeesListSuccess(employeesList) {
                 if (employeesList.length === 0) {
-                    vm.loading = false;
                     $state.go('root.employees.list_empty');
                 } else {
                     vm.employees = employeesList;
                     vm.loading = false;
                 }
-            }, function () {
-                vm.loading = false;
-                $state.go('root.employees.list_error');
-            });
-        };
+            }
 
-        vm.removeEmployee = function () {
+            function getEmployeesListFailure() {
+                $state.go('root.employees.list_error');
+            }
+        }
+
+        function removeEmployee() {
             vm.removing = true;
             vm.errorRemove = false;
 
-            employeesService.removeEmployee(vm.chosenEmployee.employeeid).then(function () {
+            employeesService.removeEmployee(vm.chosenEmployee.employeeid)
+                    .then(removeEmployeeSuccess, removeEmployeeFailure);
+
+            function removeEmployeeSuccess() {
                 if (vm.employees.length - 1 === 0) {
                     $state.go('root.employees.list_empty');
                 } else {
+                    vm.removing = false;
+                    vm.errorRemove = false;
                     vm.loadEmployeesList();
                 }
-            }, function () {
+            }
+
+            function removeEmployeeFailure() {
                 vm.removing = false;
                 vm.errorRemove = true;
-            });
-        };
+            }
+        }
 
-        vm.setChosen = function (employee) {
+        function setChosen(employee) {
             vm.chosenEmployee = employee;
-        };
+        }
     }
 })();

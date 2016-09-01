@@ -10,109 +10,160 @@
     function EmployeeTermsController($state, $stateParams, employeesService) {
         var vm = this;
 
-        vm.loadEmployeeTermsPending = function () {
+        vm.cancelledTerms = [];
+        vm.cancelling = false;
+        vm.cancelTerm = cancelTerm;
+        vm.chosenTerm = '';
+        vm.completedTerms = [];
+        vm.completeTerm = completeTerm;
+        vm.completing = false;
+        vm.emptyCancelled = false;
+        vm.emptyPending = false;
+        vm.errorCancel = false;
+        vm.errorComplete = false;
+        vm.errorLoading = false;
+        vm.loadEmployeeTermsCancelled = loadEmployeeTermsCancelled;
+        vm.loadEmployeeTermsCompleted = loadEmployeeTermsCompleted;
+        vm.loadEmployeeTermsPending = loadEmployeeTermsPending;
+        vm.loadingPending = false;
+        vm.pendingTerms = [];
+        vm.setChosen = setChosen;
+
+        function loadEmployeeTermsPending() {
+            vm.emptyPending = false;
+            vm.errorLoading = false;
             vm.loadingPending = true;
-            vm.errorLoading = false;
-            if (angular.isDefined($stateParams.employeeId)) {
-                employeesService.getEmployeeTermsPending($stateParams.employeeId).then(
-                        function (pendingTerms) {
-                            if (pendingTerms.length === 0) {
-                                vm.emptyPending = true;
-                            } else {
-                                $state.get('root.employees.employee').data.breadcrumb = pendingTerms[0].surname + ' ' + pendingTerms[0].name;
-                                vm.pendingTerms = pendingTerms;
-                                vm.loadingPending = false;
-                                vm.errorLoading = false;
-                                vm.emptyPending = false;
-                            }
-                        },
-                        function () {
-                            vm.loadingPending = false;
-                            vm.errorLoading = true;
-                            vm.emptyPending = false;
-                        }
-                );
-            }
-        };
 
-        vm.loadEmployeeTermsCancelled = function () {
+            if (angular.isDefined($stateParams.employeeId)) {
+                employeesService.getEmployeeTermsPending($stateParams.employeeId)
+                        .then(getEmployeeTermsPendingSuccess, getEmployeeTermsPendingFailure);
+            }
+
+            function getEmployeeTermsPendingSuccess(pendingTerms) {
+                if (pendingTerms.length === 0) {
+                    vm.emptyPending = true;
+                    vm.errorLoading = false;
+                    vm.loadingPending = false;
+                } else {
+                    $state.get('root.employees.employee').data.breadcrumb = pendingTerms[0].employee_surname + ' ' + pendingTerms[0].employee_name;
+                    vm.pendingTerms = pendingTerms;
+                    vm.emptyPending = false;
+                    vm.errorLoading = false;
+                    vm.loadingPending = false;
+                }
+            }
+
+            function getEmployeeTermsPendingFailure() {
+                vm.emptyPending = false;
+                vm.errorLoading = true;
+                vm.loadingPending = false;
+            }
+        }
+
+        function loadEmployeeTermsCancelled() {
+            vm.emptyCancelled = false;
+            vm.errorLoading = false;
             vm.loadingCancelled = true;
-            vm.errorLoading = false;
-            if (angular.isDefined($stateParams.employeeId)) {
-                employeesService.getEmployeeTermsCancelled($stateParams.employeeId).then(
-                        function (cancelledTerms) {
-                            if (cancelledTerms.length === 0) {
-                                vm.emptyCancelled = true;
-                            } else {
-                                $state.get('root.employees.employee').data.breadcrumb = cancelledTerms[0].surname + ' ' + cancelledTerms[0].name;
-                                vm.cancelledTerms = cancelledTerms;
-                                vm.loadingCancelled = false;
-                                vm.errorLoading = false;
-                                vm.emptyCancelled = false;
-                            }
-                        },
-                        function () {
-                            vm.loadingCancelled = false;
-                            vm.errorLoading = true;
-                            vm.emptyCancelled = false;
-                        }
-                );
-            }
-        };
 
-        vm.loadEmployeeTermsCompleted = function () {
+            if (angular.isDefined($stateParams.employeeId)) {
+                employeesService.getEmployeeTermsCancelled($stateParams.employeeId)
+                        .then(getEmployeeTermsCancelledSuccess, getEmployeeTermsCancelledFailure);
+            }
+
+            function getEmployeeTermsCancelledSuccess(cancelledTerms) {
+                if (cancelledTerms.length === 0) {
+                    vm.emptyCancelled = true;
+                    vm.errorLoading = false;
+                    vm.loadingCancelled = false;
+                } else {
+                    $state.get('root.employees.employee').data.breadcrumb = cancelledTerms[0].employee_surname + ' ' + cancelledTerms[0].employee_name;
+                    vm.cancelledTerms = cancelledTerms;
+                    vm.emptyCancelled = false;
+                    vm.errorLoading = false;
+                    vm.loadingCancelled = false;
+                }
+            }
+
+            function getEmployeeTermsCancelledFailure() {
+                vm.emptyCancelled = false;
+                vm.errorLoading = true;
+                vm.loadingCancelled = false;
+            }
+        }
+
+        function loadEmployeeTermsCompleted() {
+            vm.emptyCompleted = false;
+            vm.errorLoading = false;
             vm.loadingCompleted = true;
-            vm.errorLoading = false;
+
             if (angular.isDefined($stateParams.employeeId)) {
-                employeesService.getEmployeeTermsCompleted($stateParams.employeeId).then(
-                        function (completedTerms) {
-                            if (completedTerms.length === 0) {
-                                vm.emptyCompleted = true;
-                            } else {
-                                $state.get('root.employees.employee').data.breadcrumb = completedTerms[0].surname + ' ' + completedTerms[0].name;
-                                vm.completedTerms = completedTerms;
-                                vm.loadingCompleted = false;
-                                vm.errorLoading = false;
-                                vm.emptyCompleted = false;
-                            }
-                        },
-                        function () {
-                            vm.loadingCompleted = false;
-                            vm.errorLoading = true;
-                            vm.emptyCompleted = false;
-                        }
-                );
+                employeesService.getEmployeeTermsCompleted($stateParams.employeeId)
+                        .then(getEmployeeTermsCompletedSuccess, getEmployeeTermsCompletedFailure);
             }
-        };
 
-        vm.setChosen = function (term) {
+            function getEmployeeTermsCompletedSuccess(completedTerms) {
+                if (completedTerms.length === 0) {
+                    vm.emptyCompleted = true;
+                    vm.errorLoading = false;
+                    vm.loadingCompleted = false;
+                } else {
+                    $state.get('root.employees.employee').data.breadcrumb = completedTerms[0].employee_surname + ' ' + completedTerms[0].employee_name;
+                    vm.completedTerms = completedTerms;
+                    vm.emptyCompleted = false;
+                    vm.errorLoading = false;
+                    vm.loadingCompleted = false;
+                }
+            }
+
+            function getEmployeeTermsCompletedFailure() {
+                vm.emptyCompleted = false;
+                vm.errorLoading = true;
+                vm.loadingCompleted = false;
+            }
+        }
+
+        function setChosen(term) {
             vm.chosenTerm = term;
-        };
+        }
 
-        vm.cancelTerm = function (patienttreatmentid) {
+        function cancelTerm(patienttreatmentid) {
             vm.cancelling = true;
-            employeesService.cancelEmployeeTerm(patienttreatmentid).then(function () {
+            vm.errorCancel = false;
+
+            employeesService.cancelEmployeeTerm(patienttreatmentid)
+                    .then(cancelEmployeeTermSuccess, cancelEmployeeTermFailure);
+
+            function cancelEmployeeTermSuccess() {
                 vm.loadEmployeeTermsPending();
                 vm.loadEmployeeTermsCancelled();
                 vm.cancelling = false;
                 vm.errorCancel = false;
-            }, function () {
+            }
+
+            function cancelEmployeeTermFailure() {
                 vm.cancelling = false;
                 vm.errorCancel = true;
-            });
-        };
+            }
+        }
 
-        vm.completeTerm = function (patienttreatmentid) {
+        function completeTerm(patienttreatmentid) {
             vm.completing = true;
-            employeesService.completeEmployeeTerm(patienttreatmentid).then(function () {
+            vm.errorComplete = false;
+
+            employeesService.completeEmployeeTerm(patienttreatmentid)
+                    .then(completeEmployeeTermSuccess, completeEmployeeTermFailure);
+
+            function completeEmployeeTermSuccess() {
                 vm.loadEmployeeTermsPending();
                 vm.loadEmployeeTermsCompleted();
                 vm.completing = false;
                 vm.errorComplete = false;
-            }, function () {
+            }
+
+            function completeEmployeeTermFailure() {
                 vm.completing = false;
                 vm.errorComplete = true;
-            });
-        };
+            }
+        }
     }
 })();

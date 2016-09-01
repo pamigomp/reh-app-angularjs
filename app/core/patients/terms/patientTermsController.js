@@ -10,110 +10,160 @@
     function PatientTermsController($state, $stateParams, patientsService) {
         var vm = this;
 
-        vm.loadPatientTermsPending = function () {
+        vm.cancelledTerms = [];
+        vm.cancelling = false;
+        vm.cancelTerm = cancelTerm;
+        vm.chosenTerm = '';
+        vm.completedTerms = [];
+        vm.completeTerm = completeTerm;
+        vm.completing = false;
+        vm.emptyCancelled = false;
+        vm.emptyPending = false;
+        vm.errorCancel = false;
+        vm.errorComplete = false;
+        vm.errorLoading = false;
+        vm.loadPatientTermsCancelled = loadPatientTermsCancelled;
+        vm.loadPatientTermsCompleted = loadPatientTermsCompleted;
+        vm.loadPatientTermsPending = loadPatientTermsPending;
+        vm.loadingPending = false;
+        vm.pendingTerms = [];
+        vm.setChosen = setChosen;
+
+        function loadPatientTermsPending() {
+            vm.emptyPending = false;
+            vm.errorLoading = false;
             vm.loadingPending = true;
-            vm.errorLoading = false;
-            if (angular.isDefined($stateParams.patientPesel)) {
-                patientsService.getPatientTermsPending($stateParams.patientPesel).then(
-                        function (pendingTerms) {
-                            if (pendingTerms.length === 0) {
-                                vm.emptyPending = true;
-                            } else {
-                                $state.get('root.patients.patient').data.breadcrumb = pendingTerms[0].patient_surname + ' ' + pendingTerms[0].patient_name;
-                                console.log(pendingTerms[0]);
-                                vm.pendingTerms = pendingTerms;
-                                vm.loadingPending = false;
-                                vm.errorLoading = false;
-                                vm.emptyPending = false;
-                            }
-                        },
-                        function () {
-                            vm.loadingPending = false;
-                            vm.errorLoading = true;
-                            vm.emptyPending = false;
-                        }
-                );
-            }
-        };
 
-        vm.loadPatientTermsCancelled = function () {
+            if (angular.isDefined($stateParams.patientPesel)) {
+                patientsService.getPatientTermsPending($stateParams.patientPesel)
+                        .then(getPatientTermsPendingSuccess, getPatientTermsPendingFailure);
+            }
+
+            function getPatientTermsPendingSuccess(pendingTerms) {
+                if (pendingTerms.length === 0) {
+                    vm.emptyPending = true;
+                    vm.errorLoading = false;
+                    vm.loadingPending = false;
+                } else {
+                    $state.get('root.patients.patient').data.breadcrumb = pendingTerms[0].patient_surname + ' ' + pendingTerms[0].patient_name;
+                    vm.pendingTerms = pendingTerms;
+                    vm.emptyPending = false;
+                    vm.errorLoading = false;
+                    vm.loadingPending = false;
+                }
+            }
+
+            function getPatientTermsPendingFailure() {
+                vm.emptyPending = false;
+                vm.errorLoading = true;
+                vm.loadingPending = false;
+            }
+        }
+
+        function loadPatientTermsCancelled() {
+            vm.emptyCancelled = false;
+            vm.errorLoading = false;
             vm.loadingCancelled = true;
-            vm.errorLoading = false;
-            if (angular.isDefined($stateParams.patientPesel)) {
-                patientsService.getPatientTermsCancelled($stateParams.patientPesel).then(
-                        function (cancelledTerms) {
-                            if (cancelledTerms.length === 0) {
-                                vm.emptyCancelled = true;
-                            } else {
-                                $state.get('root.patients.patient').data.breadcrumb = cancelledTerms[0].patient_surname + ' ' + cancelledTerms[0].patient_name;
-                                vm.cancelledTerms = cancelledTerms;
-                                vm.loadingCancelled = false;
-                                vm.errorLoading = false;
-                                vm.emptyCancelled = false;
-                            }
-                        },
-                        function () {
-                            vm.loadingCancelled = false;
-                            vm.errorLoading = true;
-                            vm.emptyCancelled = false;
-                        }
-                );
-            }
-        };
 
-        vm.loadPatientTermsCompleted = function () {
+            if (angular.isDefined($stateParams.patientPesel)) {
+                patientsService.getPatientTermsCancelled($stateParams.patientPesel)
+                        .then(getPatientTermsCancelledSuccess, getPatientTermsCancelledFailure);
+            }
+
+            function getPatientTermsCancelledSuccess(cancelledTerms) {
+                if (cancelledTerms.length === 0) {
+                    vm.emptyCancelled = true;
+                    vm.errorLoading = false;
+                    vm.loadingCancelled = false;
+                } else {
+                    $state.get('root.patients.patient').data.breadcrumb = cancelledTerms[0].patient_surname + ' ' + cancelledTerms[0].patient_name;
+                    vm.cancelledTerms = cancelledTerms;
+                    vm.emptyCancelled = false;
+                    vm.errorLoading = false;
+                    vm.loadingCancelled = false;
+                }
+            }
+
+            function getPatientTermsCancelledFailure() {
+                vm.emptyCancelled = false;
+                vm.errorLoading = true;
+                vm.loadingCancelled = false;
+            }
+        }
+
+        function loadPatientTermsCompleted() {
+            vm.emptyCompleted = false;
+            vm.errorLoading = false;
             vm.loadingCompleted = true;
-            vm.errorLoading = false;
+
             if (angular.isDefined($stateParams.patientPesel)) {
-                patientsService.getPatientTermsCompleted($stateParams.patientPesel).then(
-                        function (completedTerms) {
-                            if (completedTerms.length === 0) {
-                                vm.emptyCompleted = true;
-                            } else {
-                                $state.get('root.patients.patient').data.breadcrumb = completedTerms[0].patient_surname + ' ' + completedTerms[0].patient_name;
-                                vm.completedTerms = completedTerms;
-                                vm.loadingCompleted = false;
-                                vm.errorLoading = false;
-                                vm.emptyCompleted = false;
-                            }
-                        },
-                        function () {
-                            vm.loadingCompleted = false;
-                            vm.errorLoading = true;
-                            vm.emptyCompleted = false;
-                        }
-                );
+                patientsService.getPatientTermsCompleted($stateParams.patientPesel)
+                        .then(getPatientTermsCompletedSuccess, getPatientTermsCompletedFailure);
             }
-        };
 
-        vm.setChosen = function (term) {
+            function getPatientTermsCompletedSuccess(completedTerms) {
+                if (completedTerms.length === 0) {
+                    vm.emptyCompleted = true;
+                    vm.errorLoading = false;
+                    vm.loadingCompleted = false;
+                } else {
+                    $state.get('root.patients.patient').data.breadcrumb = completedTerms[0].patient_surname + ' ' + completedTerms[0].patient_name;
+                    vm.completedTerms = completedTerms;
+                    vm.emptyCompleted = false;
+                    vm.errorLoading = false;
+                    vm.loadingCompleted = false;
+                }
+            }
+
+            function getPatientTermsCompletedFailure() {
+                vm.emptyCompleted = false;
+                vm.errorLoading = true;
+                vm.loadingCompleted = false;
+            }
+        }
+
+        function setChosen(term) {
             vm.chosenTerm = term;
-        };
+        }
 
-        vm.cancelTerm = function (patienttreatmentid) {
+        function cancelTerm(patienttreatmentid) {
             vm.cancelling = true;
-            patientsService.cancelPatientTerm(patienttreatmentid).then(function () {
+            vm.errorCancel = false;
+
+            patientsService.cancelPatientTerm(patienttreatmentid)
+                    .then(cancelPatientTermSuccess, cancelPatientTermFailure);
+
+            function cancelPatientTermSuccess() {
                 vm.loadPatientTermsPending();
                 vm.loadPatientTermsCancelled();
                 vm.cancelling = false;
                 vm.errorCancel = false;
-            }, function () {
+            }
+
+            function cancelPatientTermFailure() {
                 vm.cancelling = false;
                 vm.errorCancel = true;
-            });
-        };
+            }
+        }
 
-        vm.completeTerm = function (patienttreatmentid) {
+        function completeTerm(patienttreatmentid) {
             vm.completing = true;
-            patientsService.completePatientTerm(patienttreatmentid).then(function () {
+            vm.errorComplete = false;
+
+            patientsService.completePatientTerm(patienttreatmentid)
+                    .then(completePatientTermSuccess, completePatientTermFailure);
+
+            function completePatientTermSuccess() {
                 vm.loadPatientTermsPending();
                 vm.loadPatientTermsCompleted();
                 vm.completing = false;
                 vm.errorComplete = false;
-            }, function () {
+            }
+
+            function completePatientTermFailure() {
                 vm.completing = false;
                 vm.errorComplete = true;
-            });
-        };
+            }
+        }
     }
 })();

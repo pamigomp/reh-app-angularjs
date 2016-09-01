@@ -25,6 +25,9 @@
                                     <div class="alert alert-danger" role="alert" data-ng-show="PTC.errorCancel">
                                         <strong>Błąd!</strong> Wystąpił problem podczas odwoływania terminu zabiegu.
                                     </div>
+                                    <div class="alert alert-danger" role="alert" data-ng-show="PTC.errorComplete">
+                                        <strong>Błąd!</strong> Wystąpił problem podczas realizowania terminu zabiegu.
+                                    </div>
                                     <div class="form-group">
                                         <div class="input-group search-bar">
                                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -56,14 +59,14 @@
                                                 modal-id="modal-cancel-term-{{$index}}"
                                                 title="Odwoływanie wizyty"
                                                 body="Czy na pewno chcesz odwołać wizytę z dnia {{PTC.chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{PTC.chosenTerm.datehour|date: 'HH:mm'}}?"
-                                                confirm-button="PTC.cancelTerm(chosenTerm.patienttreatmentid)" 
+                                                confirm-button="PTC.cancelTerm(PTC.chosenTerm.patienttreatmentid)" 
                                                 cancel-button="">
                                             </modal-directive>
                                             <modal-directive
                                                 modal-id="modal-complete-term-{{$index}}"
                                                 title="Realizowanie wizyty"
                                                 body="Czy na pewno chcesz zrealizować wizytę z dnia {{PTC.chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{PTC.chosenTerm.datehour|date: 'HH:mm'}}?"
-                                                confirm-button="PTC.completeTerm(chosenTerm.patienttreatmentid)" 
+                                                confirm-button="PTC.completeTerm(PTC.chosenTerm.patienttreatmentid)" 
                                                 cancel-button="">
                                             </modal-directive>
                                             </td>
@@ -122,7 +125,7 @@
                                     <p align="center" data-ng-show="PTC.loadingCancelled"><i class="fa fa-spinner fa-spin fa-3x"></i></p>
                                 </div>
                             </div>
-                            <div class="row" data-ng-show="emptyCancelled">
+                            <div class="row" data-ng-show="PTC.emptyCancelled">
                                 <div class="col-lg-12" style="padding-top: 10px">
                                     <div class="alert alert-info" role="alert">
                                         <strong>Uwaga!</strong> Pacjent nie posiada żadnych odwołanych zabiegów.

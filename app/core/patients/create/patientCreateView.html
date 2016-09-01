@@ -4,9 +4,9 @@
             <h1 class="page-header">Nowy pacjent</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="PCC.errorCreate">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="PCC.errorCreate">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas dodawania nowego pacjenta.
             </div>
         </div>
@@ -66,15 +66,14 @@
                                     <input type="text" class="form-control"
                                            uib-datepicker-popup="dd.MM.yyyy"
                                            show-button-bar="false"
-                                           max-date="PCC.maxDate"
                                            datepicker-options="PCC.dateOptions"
-                                           is-open="PCC.valuationDatePickerIsOpen"
+                                           is-open="PCC.opened"
                                            placeholder="Data urodzenia"
-                                           data-ng-click="PCC.valuationDatePickerOpen()" 
+                                           data-ng-click="PCC.open()" 
                                            data-ng-model="PCC.patientDetails.dob" required/>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" data-ng-click="PCC.valuationDatePickerOpen($event)">
-                                            <i class="fa fa-calendar" ></i>
+                                        <button type="button" class="btn btn-default" data-ng-click="PCC.open()">
+                                            <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
                                 </div>
