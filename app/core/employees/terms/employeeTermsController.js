@@ -10,23 +10,11 @@
     function EmployeeTermsController($state, $stateParams, employeesService) {
         var vm = this;
 
-        vm.cancelledTerms = [];
-        vm.cancelling = false;
         vm.cancelTerm = cancelTerm;
-        vm.chosenTerm = '';
-        vm.completedTerms = [];
         vm.completeTerm = completeTerm;
-        vm.completing = false;
-        vm.emptyCancelled = false;
-        vm.emptyPending = false;
-        vm.errorCancel = false;
-        vm.errorComplete = false;
-        vm.errorLoading = false;
         vm.loadEmployeeTermsCancelled = loadEmployeeTermsCancelled;
         vm.loadEmployeeTermsCompleted = loadEmployeeTermsCompleted;
         vm.loadEmployeeTermsPending = loadEmployeeTermsPending;
-        vm.loadingPending = false;
-        vm.pendingTerms = [];
         vm.setChosen = setChosen;
 
         function loadEmployeeTermsPending() {

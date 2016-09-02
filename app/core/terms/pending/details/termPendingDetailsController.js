@@ -11,138 +11,157 @@
         var vm = this;
 
         vm.allowEdit = false;
+        vm.cancelEdit = cancelEdit;
+        vm.dateOptions = {
+            startingDay: 1,
+            minDate: new Date()
+        };
         vm.defaultTermPendingDetails = {};
+        vm.hstep = 1;
+        vm.loadEmployeesList = loadEmployeesList;
+        vm.loadRoomsList = loadRoomsList;
+        vm.loadTermPendingDetails = loadTermPendingDetails;
+        vm.loadTreatmentsList = loadTreatmentsList;
+        vm.mstep = 5;
+        vm.open = open;
+        vm.restoreTermPendingDetails = restoreTermPendingDetails;
+        vm.saveDefaultTermPendingDetails = saveDefaultTermPendingDetails;
+        vm.saveEdit = saveEdit;
+        vm.startEdit = startEdit;
+        vm.updateTermPendingDetails = updateTermPendingDetails;
 
-        vm.loadTermPendingDetails = function () {
-            vm.loading = true;
+        function loadTermPendingDetails() {
             vm.errorLoading = false;
-            if (angular.isDefined($stateParams.termId)) {
-                termsService.getTermPendingDetails($stateParams.termId).then(
-                        function (termPendingDetails) {
-                            $state.get('root.terms.pending.term').data.breadcrumb = termPendingDetails[0].patienttreatmentid;
-                            vm.termPendingDetails = termPendingDetails[0];
-                            vm.saveDefaultTermPendingDetails();
-                            vm.loading = false;
-                            vm.errorLoading = false;
-                        },
-                        function () {
-                            vm.loading = false;
-                            vm.errorLoading = true;
-                        }
-                );
-            }
-        };
+            vm.loading = true;
 
-        vm.loadEmployeesList = function () {
-            vm.loadingEmployees = true;
+            if (angular.isDefined($stateParams.termId)) {
+                termsService.getTermPendingDetails($stateParams.termId)
+                        .then(getTermPendingDetailsSuccess, getTermPendingDetailsFailure);
+            }
+
+            function getTermPendingDetailsSuccess(termPendingDetails) {
+                $state.get('root.terms.pending.term').data.breadcrumb = termPendingDetails[0].patienttreatmentid;
+                vm.termPendingDetails = termPendingDetails[0];
+                vm.termPendingDetails.datehour = new Date(vm.termPendingDetails.datehour);
+                vm.saveDefaultTermPendingDetails();
+                vm.errorLoading = false;
+                vm.loading = false;
+            }
+
+            function getTermPendingDetailsFailure() {
+                vm.errorLoading = true;
+                vm.loading = false;
+            }
+        }
+
+        function loadEmployeesList() {
             vm.errorLoadingEmployees = false;
-            termsService.getEmployeesList().then(
-                    function (employeesList) {
-                        vm.employeesList = employeesList;
-                        vm.loadingEmployees = false;
-                        vm.errorLoadingEmployees = false;
-                    },
-                    function () {
-                        vm.loadingEmployees = false;
-                        vm.errorLoadingEmployees = true;
-                    }
-            );
-        };
+            vm.loadingEmployees = true;
 
-        vm.loadRoomsList = function () {
-            vm.loadingRooms = true;
-            vm.errorLoadingRooms = false;
-            termsService.getRoomsList().then(
-                    function (roomsList) {
-                        vm.roomsList = roomsList;
-                        vm.loadingRooms = false;
-                        vm.errorLoadingRooms = false;
-                    },
-                    function () {
-                        vm.loadingRooms = false;
-                        vm.errorLoadingRooms = true;
-                    }
-            );
-        };
+            termsService.getEmployeesList()
+                    .then(getEmployeesListSuccess, getEmployeesListFailure);
 
-        vm.loadTreatmentsList = function () {
-            vm.loadingTreatments = true;
-            vm.errorLoadingTreatments = false;
-            termsService.getTreatmentsList().then(
-                    function (treatmentsList) {
-                        vm.treatmentsList = treatmentsList;
-                        vm.loadingTreatments = false;
-                        vm.errorLoadingTreatments = false;
-                    },
-                    function () {
-                        vm.loadingTreatments = false;
-                        vm.errorLoadingTreatments = true;
-                    }
-            );
-        };
-
-        vm.updateTermPendingDetails = function () {
-            vm.updating = true;
-            if (angular.isDefined($stateParams.termId)) {
-                termsService.updateTermPendingDetails(vm.termPendingDetails).then(function () {
-                    vm.updating = false;
-                    vm.errorEdit = false;
-                    vm.loadTermPendingDetails();
-                }, function () {
-                    vm.updating = false;
-                    vm.errorEdit = true;
-                });
+            function getEmployeesListSuccess(employeesList) {
+                vm.employeesList = employeesList;
+                vm.errorLoadingEmployees = false;
+                vm.loadingEmployees = false;
             }
-        };
 
-        vm.restoreTermPendingDetails = function () {
+            function getEmployeesListFailure() {
+                vm.errorLoadingEmployees = true;
+                vm.loadingEmployees = false;
+            }
+        }
+
+        function loadRoomsList() {
+            vm.errorLoadingRooms = false;
+            vm.loadingRooms = true;
+
+            termsService.getRoomsList()
+                    .then(getRoomsListSuccess, getRoomsListFailure);
+
+            function getRoomsListSuccess(roomsList) {
+                vm.roomsList = roomsList;
+                vm.errorLoadingRooms = false;
+                vm.loadingRooms = false;
+            }
+
+            function getRoomsListFailure() {
+                vm.errorLoadingRooms = true;
+                vm.loadingRooms = false;
+            }
+        }
+
+        function loadTreatmentsList() {
+            vm.errorLoadingTreatments = false;
+            vm.loadingTreatments = true;
+
+            termsService.getTreatmentsList()
+                    .then(getTreatmentsListSuccess, getTreatmentsListFailure);
+
+            function getTreatmentsListSuccess(treatmentsList) {
+                vm.treatmentsList = treatmentsList;
+                vm.errorLoadingTreatments = false;
+                vm.loadingTreatments = false;
+            }
+
+            function getTreatmentsListFailure() {
+                vm.errorLoadingTreatments = true;
+                vm.loadingTreatments = false;
+            }
+        }
+
+        function updateTermPendingDetails() {
+            vm.errorEdit = false;
+            vm.updating = true;
+
+            if (angular.isDefined($stateParams.termId)) {
+                termsService.updateTermPendingDetails(vm.termPendingDetails)
+                        .then(updateTermPendingDetailsSuccess, updateTermPendingDetailsFailure);
+            }
+
+            function updateTermPendingDetailsSuccess() {
+                saveDefaultEmployeeDetails();
+                vm.allowEdit = false;
+                vm.errorEdit = false;
+                vm.updating = false;
+            }
+
+            function updateTermPendingDetailsFailure() {
+                vm.errorEdit = true;
+                vm.updating = false;
+            }
+        }
+
+        function restoreTermPendingDetails() {
             angular.copy(vm.defaultTermPendingDetails, vm.termPendingDetails);
-        };
+        }
 
-        vm.saveDefaultTermPendingDetails = function () {
+        function saveDefaultTermPendingDetails() {
             angular.copy(vm.termPendingDetails, vm.defaultTermPendingDetails);
-        };
+        }
 
         //After clicking 'Edytuj' button, we would be able to make changes in the fields.
-        vm.startEdit = function () {
+        function startEdit() {
             vm.allowEdit = true;
-        };
+        }
 
         //After clicking 'Zapisz' button, we would not be able to make changes in the fields
         //and all changes are being saved.
-        vm.saveEdit = function () {
+        function saveEdit() {
             vm.allowEdit = false;
             vm.updateTermPendingDetails();
-        };
+        }
 
         //After clicking 'Anuluj' button, we would not be able to make changes in the fields
         //and all changes are being discarded (loading previous termPending's details).
-        vm.cancelEdit = function () {
+        function cancelEdit() {
             vm.allowEdit = false;
             vm.restoreTermPendingDetails();
-        };
+        }
 
-        //DATEPICKER
-        vm.minDate = new Date();
-        vm.isOpen = false;
-
-        vm.dateOptions = {
-            'starting-day': 1
-        };
-
-        vm.open = function ($event) {
-            if ($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-            }
-
-            vm.isOpen = true;
-        };
-        //DATEPICKER END
-
-        //TIMEPICKER
-        vm.hstep = 1;
-        vm.mstep = 5;
-        //TIMEPICKER END
+        function open() {
+            vm.opened = true;
+        }
     }
 })();

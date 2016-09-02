@@ -16,13 +16,9 @@
         };
         vm.patientDetails = {};
         vm.patientDetails.country = 'Polska';
-        vm.errorCreate = false;
         vm.open = open;
         vm.open2 = open2;
-        vm.opened = false;
-        vm.opened2 = false;
         vm.savePatientDetails = savePatientDetails;
-        vm.submitting = false;
 
         function open() {
             vm.opened = true;

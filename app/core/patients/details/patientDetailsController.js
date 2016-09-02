@@ -9,6 +9,7 @@
 
     function PatientDetailsController($state, $stateParams, patientsService) {
         var vm = this;
+
         var restorePatientDetails = restorePatientDetails;
         var saveDefaultPatientDetails = saveDefaultPatientDetails;
 
@@ -20,19 +21,11 @@
         };
         vm.defaultPatientDetails = {};
         vm.employeeDetails = {};
-        vm.errorEdit = false;
-        vm.errorLoading = false;
-        vm.errorReset = false;
         vm.loadPatientDetails = loadPatientDetails;
-        vm.loading = false;
         vm.open = open;
-        vm.opened = false;
         vm.resetPassword = resetPassword;
-        vm.resetting = false;
         vm.saveEdit = saveEdit;
         vm.startEdit = startEdit;
-        vm.successReset = false;
-        vm.updating = false;
         vm.updatePatientDetails = updatePatientDetails;
 
         //After clicking 'Anuluj' button, we would not be able to make changes in the fields

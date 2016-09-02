@@ -9,7 +9,7 @@
             <div class="form-group">
                 <div class="input-group search-bar">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Wyszukaj odwołany termin" data-ng-model="termsFilter">
+                    <input type="text" class="form-control" placeholder="Wyszukaj odwołany termin" data-ng-model="TCLC.termsFilter">
                 </div>
             </div>
             <div class="table-responsive" data-ng-hide="TCLC.loadingCancelled">
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-ng-repeat="term in TCLC.cancelledTerms| orderBy:'-datehour' | filter:termsFilter">
+                        <tr data-ng-repeat="term in TCLC.cancelledTerms| orderBy:'-datehour' | filter:TCLC.termsFilter">
                             <td>{{term.patienttreatmentid}}</td>
                             <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
                             <td>{{term.kindoftreatment}}</td>

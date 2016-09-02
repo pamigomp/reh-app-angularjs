@@ -10,11 +10,8 @@
     function EmployeesListController($state, employeesService) {
         var vm = this;
 
-        vm.errorRemove = false;
-        vm.loading = false;
         vm.loadEmployeesList = loadEmployeesList;
         vm.removeEmployee = removeEmployee;
-        vm.removing = false;
         vm.setChosen = setChosen;
 
         function loadEmployeesList() {

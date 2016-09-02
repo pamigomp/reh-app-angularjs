@@ -10,11 +10,12 @@
     function LoginController($rootScope, $scope, $state, AUTH_EVENTS, AuthService, loginService) {
         var vm = this;
 
-        vm.credentialsError = false;
         vm.login = login;
-        vm.loginError = false;
 
         function login(data) {
+            vm.credentialsError = false;
+            vm.loginError = false;
+
             loginService.verifyEmployeeCredentials(data.email)
                     .then(verifyEmployeeCredentialsSuccess, verifyEmployeeCredentialsFailure);
 

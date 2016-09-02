@@ -10,11 +10,8 @@
     function PatientsListController($state, patientsService) {
         var vm = this;
 
-        vm.errorRemove = false;
-        vm.loading = false;
         vm.loadPatientsList = loadPatientsList;
         vm.removePatient = removePatient;
-        vm.removing = false;
         vm.setChosen = setChosen;
 
         function loadPatientsList() {

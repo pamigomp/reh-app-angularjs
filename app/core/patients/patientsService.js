@@ -8,167 +8,212 @@
     patientsService.$inject = ['$q', '$state', 'dataStorageService'];
 
     function patientsService($q, $state, dataStorageService) {
-        var patientsService = {};
-
-        patientsService.getPatientsList = function () {
-            var deferred = $q.defer();
-
-            dataStorageService.getPatients().then(
-                    function (patientsData) {
-                        var list = [];
-                        angular.forEach(patientsData.data.items, function (patientData) {
-                            list.push(patientData);
-                        });
-                        deferred.resolve(list);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
+        return {
+            cancelPatientTerm: cancelPatientTerm,
+            completePatientTerm: completePatientTerm,
+            getPatientDetails: getPatientDetails,
+            getPatientsList: getPatientsList,
+            getPatientTermsCancelled: getPatientTermsCancelled,
+            getPatientTermsCompleted: getPatientTermsCompleted,
+            getPatientTermsPending: getPatientTermsPending,
+            removePatient: removePatient,
+            resetPatientPassword: resetPatientPassword,
+            savePatientDetails: savePatientDetails,
+            updatePatientDetails: updatePatientDetails
         };
 
-        patientsService.getPatientDetails = function (patientPesel) {
+        function getPatientsList() {
             var deferred = $q.defer();
 
-            dataStorageService.getPatient(patientPesel).then(
-                    function (patientData) {
-                        deferred.resolve(patientData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getPatients()
+                    .then(getPatientsSuccess, getPatientsFailure);
 
-        patientsService.savePatientDetails = function (patientDetails) {
+            function getPatientsSuccess(patientsData) {
+                var list = [];
+
+                angular.forEach(patientsData.data.items, function (patientData) {
+                    list.push(patientData);
+                });
+
+                deferred.resolve(list);
+            }
+
+            function getPatientsFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getPatientDetails(patientPesel) {
             var deferred = $q.defer();
 
-            dataStorageService.savePatient(patientDetails).then(
-                    function () {
-                        $state.go('root.patients.list');
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getPatient(patientPesel)
+                    .then(getPatientSuccess, getPatientFailure);
 
-        patientsService.removePatient = function (chosenPatient) {
+            function getPatientSuccess(patientData) {
+                deferred.resolve(patientData.data.items);
+            }
+
+            function getPatientFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function savePatientDetails(patientDetails) {
             var deferred = $q.defer();
 
-            dataStorageService.removePatient(chosenPatient).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.savePatient(patientDetails)
+                    .then(savePatientSuccess, savePatientFailure);
 
-        patientsService.updatePatientDetails = function (patientDetails) {
+            function savePatientSuccess() {
+                $state.go('root.patients.list');
+                deferred.resolve();
+            }
+
+            function savePatientFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function removePatient(chosenPatient) {
             var deferred = $q.defer();
 
-            dataStorageService.updatePatient(patientDetails).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.removePatient(chosenPatient)
+                    .then(removePatientSuccess, removePatientFailure);
 
-        patientsService.resetPatientPassword = function (patientPesel) {
+            function removePatientSuccess() {
+                deferred.resolve();
+            }
+
+            function removePatientFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function updatePatientDetails(patientDetails) {
             var deferred = $q.defer();
 
-            dataStorageService.resetPatientPassword(patientPesel).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.updatePatient(patientDetails)
+                    .then(updatePatientSuccess, updatePatientFailure);
 
-        patientsService.getPatientTermsPending = function (patientPesel) {
+            function updatePatientSuccess() {
+                deferred.resolve();
+            }
+
+            function updatePatientFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function resetPatientPassword(patientPesel) {
             var deferred = $q.defer();
 
-            dataStorageService.getPatientTermsPending(patientPesel).then(
-                    function (patientData) {
-                        deferred.resolve(patientData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.resetPatientPassword(patientPesel)
+                    .then(resetPatientPasswordSuccess, resetPatientPasswordFailure)
 
-        patientsService.getPatientTermsCancelled = function (patientPesel) {
+            function resetPatientPasswordSuccess() {
+                deferred.resolve();
+            }
+
+            function resetPatientPasswordFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getPatientTermsPending(patientPesel) {
             var deferred = $q.defer();
 
-            dataStorageService.getPatientTermsCancelled(patientPesel).then(
-                    function (patientData) {
-                        deferred.resolve(patientData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getPatientTermsPending(patientPesel)
+                    .then(getPatientTermsPendingSuccess, getPatientTermsPendingFailure);
 
-        patientsService.getPatientTermsCompleted = function (patientPesel) {
+            function getPatientTermsPendingSuccess(patientData) {
+                deferred.resolve(patientData.data.items);
+            }
+
+            function getPatientTermsPendingFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getPatientTermsCancelled(patientPesel) {
             var deferred = $q.defer();
 
-            dataStorageService.getPatientTermsCompleted(patientPesel).then(
-                    function (patientData) {
-                        deferred.resolve(patientData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getPatientTermsCancelled(patientPesel)
+                    .then(getPatientTermsCancelledSuccess, getPatientTermsCancelledFailure);
 
-        patientsService.cancelPatientTerm = function (patienttreatmentid) {
+            function getPatientTermsCancelledSuccess(patientData) {
+                deferred.resolve(patientData.data.items);
+            }
+
+            function getPatientTermsCancelledFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getPatientTermsCompleted(patientPesel) {
             var deferred = $q.defer();
 
-            dataStorageService.cancelTerm(patienttreatmentid).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getPatientTermsCompleted(patientPesel)
+                    .then(getPatientTermsCompletedSuccess, getPatientTermsCompletedFailure);
 
-        patientsService.completePatientTerm = function (patienttreatmentid) {
+            function getPatientTermsCompletedSuccess(patientData) {
+                deferred.resolve(patientData.data.items);
+            }
+
+            function getPatientTermsCompletedFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function cancelPatientTerm(patienttreatmentid) {
             var deferred = $q.defer();
 
-            dataStorageService.completeTerm(patienttreatmentid).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.cancelTerm(patienttreatmentid)
+                    .then(cancelTermSuccess, cancelTermFailure);
 
-        return patientsService;
+            function cancelTermSuccess() {
+                deferred.resolve();
+            }
+
+            function cancelTermFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function completePatientTerm(patienttreatmentid) {
+            var deferred = $q.defer();
+
+            dataStorageService.completeTerm(patienttreatmentid)
+                    .then(completeTermSuccess, completeTermFailure);
+
+            function completeTermSuccess() {
+                deferred.resolve();
+            }
+
+            function completeTermFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
     }
 })();

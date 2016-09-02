@@ -76,16 +76,16 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="input-group">
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control" name="issueDate"
                                                uib-datepicker-popup="dd.MM.yyyy"
                                                show-button-bar="false"
-                                               max-date="TCC.maxDate"
-                                               datepicker-options="TCC.dateOptions"
-                                               is-open="TCC.isOpen"
-                                               data-ng-click="TCC.open()"
-                                               data-ng-model="TCC.termDetails.issueDate"/>
+                                               datepicker-options="TCC.dateOptions2"
+                                               is-open="TCC.opened2"
+                                               placeholder="Data wystawienia"
+                                               data-ng-click="TCC.open2()"
+                                               data-ng-model="TCC.termDetails.issueDate" placeholder="Data wystawienia"/>
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" data-ng-click="TCC.open($event)">
+                                            <button type="button" class="btn btn-default" data-ng-click="TCC.open2()">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
@@ -157,13 +157,13 @@
                                         <input type="text" class="form-control"
                                                uib-datepicker-popup="dd.MM.yyyy"
                                                show-button-bar="false"
-                                               min-date="TCC.minDate"
                                                datepicker-options="TCC.dateOptions"
-                                               is-open="TCC.isOpen2" 
+                                               is-open="TCC.opened2"
+                                               placeholder="Dzień"
                                                data-ng-click="TCC.open2()" 
                                                data-ng-model="TCC.termDetails.datehour"/>
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" data-ng-click="TCC.open2($event)">
+                                            <button type="button" class="btn btn-default" data-ng-click="TCC.open2()">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </span>
@@ -230,14 +230,16 @@
                         <table class="table table-striped table-condensed table-hover table-bordered">
                             <thead>
                                 <tr>
+                                    <th class="col-xs-1">Lp.</th>
                                     <th class="col-xs-3">Data i godzina</th>
                                     <th class="col-xs-3">Rodzaj zabiegu</th>
-                                    <th class="col-xs-3">Numer pokoju</th>
+                                    <th class="col-xs-2">Numer pokoju</th>
                                     <th class="col-xs-3">Pracownik</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr data-ng-repeat="term in TCC.terms| orderBy:'datehour'">
+                                    <td>{{$index + 1}}</td>
                                     <td>{{term.datehour|date: 'dd.MM.yyyy HH:mm'}}</td>
                                     <td>{{term.treatmentId}}</td>
                                     <td>{{term.roomId}}</td> 

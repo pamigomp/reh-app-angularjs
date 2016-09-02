@@ -4,6 +4,7 @@
 
             .config(config)
             .run(run);
+
     run.$inject = ['$state', '$rootScope', '$httpBackend', 'AuthService', 'AUTH_EVENTS'];
     function run($state, $rootScope, $httpBackend, AuthService, AUTH_EVENTS) {
         $rootScope.$state = $state;

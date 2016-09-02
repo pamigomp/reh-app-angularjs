@@ -8,153 +8,194 @@
     employeesService.$inject = ['$q', '$state', 'dataStorageService'];
 
     function employeesService($q, $state, dataStorageService) {
-        var employeesService = {};
-
-        employeesService.getEmployeesList = function () {
-            var deferred = $q.defer();
-
-            dataStorageService.getEmployees().then(
-                    function (employeesData) {
-                        var list = [];
-                        angular.forEach(employeesData.data.items, function (employeeData) {
-                            list.push(employeeData);
-                        });
-                        deferred.resolve(list);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
+        return {
+            getEmployeesList: getEmployeesList,
+            getEmployeeDetails: getEmployeeDetails,
+            saveEmployeeDetails: saveEmployeeDetails,
+            removeEmployee: removeEmployee,
+            updateEmployeeDetails: updateEmployeeDetails,
+            getEmployeeTermsPending: getEmployeeTermsPending,
+            getEmployeeTermsCancelled: getEmployeeTermsCancelled,
+            getEmployeeTermsCompleted: getEmployeeTermsCompleted,
+            cancelEmployeeTerm: cancelEmployeeTerm,
+            completeEmployeeTerm: completeEmployeeTerm
         };
 
-        employeesService.getEmployeeDetails = function (employeeId) {
+        function getEmployeesList() {
             var deferred = $q.defer();
 
-            dataStorageService.getEmployee(employeeId).then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getEmployees()
+                    .then(getEmployeesSuccess, getEmployeesFailure);
 
-        employeesService.saveEmployeeDetails = function (employeeDetails) {
+            function getEmployeesSuccess(employeesData) {
+                var list = [];
+
+                angular.forEach(employeesData.data.items, function (employeeData) {
+                    list.push(employeeData);
+                });
+
+                deferred.resolve(list);
+            }
+
+            function getEmployeesFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getEmployeeDetails(employeeId) {
             var deferred = $q.defer();
 
-            dataStorageService.saveEmployee(employeeDetails).then(
-                    function () {
-                        $state.go('root.employees.list');
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getEmployee(employeeId)
+                    .then(getEmployeeSucess, getEmployeeFailure);
 
-        employeesService.removeEmployee = function (chosenEmployee) {
+            function getEmployeeSucess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getEmployeeFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function saveEmployeeDetails(employeeDetails) {
             var deferred = $q.defer();
 
-            dataStorageService.removeEmployee(chosenEmployee).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.saveEmployee(employeeDetails)
+                    .then(saveEmployeeSuccess, saveEmployeeFailure);
 
-        employeesService.updateEmployeeDetails = function (employeeDetails) {
+            function saveEmployeeSuccess() {
+                $state.go('root.employees.list');
+                deferred.resolve();
+            }
+
+            function saveEmployeeFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function removeEmployee(chosenEmployee) {
             var deferred = $q.defer();
 
-            dataStorageService.updateEmployee(employeeDetails).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.removeEmployee(chosenEmployee)
+                    .then(removeEmployeeSuccess, removeEmployeeFailure);
 
-        employeesService.getEmployeeTermsPending = function (employeeId) {
+            function removeEmployeeSuccess() {
+                deferred.resolve();
+            }
+
+            function removeEmployeeFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function updateEmployeeDetails(employeeDetails) {
             var deferred = $q.defer();
 
-            dataStorageService.getEmployeeTermsPending(employeeId).then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.updateEmployee(employeeDetails)
+                    .then(updateEmployeeSuccess, updateEmployeeFailure);
 
-        employeesService.getEmployeeTermsCancelled = function (employeeId) {
+            function updateEmployeeSuccess() {
+                deferred.resolve();
+            }
+
+            function updateEmployeeFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getEmployeeTermsPending(employeeId) {
             var deferred = $q.defer();
 
-            dataStorageService.getEmployeeTermsCancelled(employeeId).then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getEmployeeTermsPending(employeeId)
+                    .then(getEmployeeTermsPendingSuccess, getEmployeeTermsPendingFailure);
 
-        employeesService.getEmployeeTermsCompleted = function (employeeId) {
+            function getEmployeeTermsPendingSuccess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getEmployeeTermsPendingFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getEmployeeTermsCancelled(employeeId) {
             var deferred = $q.defer();
 
-            dataStorageService.getEmployeeTermsCompleted(employeeId).then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getEmployeeTermsCancelled(employeeId)
+                    .then(getEmployeeTermsCancelledSuccess, getEmployeeTermsCancelledFailure);
 
-        employeesService.cancelEmployeeTerm = function (patienttreatmentid) {
+            function getEmployeeTermsCancelledSuccess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getEmployeeTermsCancelledFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getEmployeeTermsCompleted(employeeId) {
             var deferred = $q.defer();
 
-            dataStorageService.cancelTerm(patienttreatmentid).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getEmployeeTermsCompleted(employeeId)
+                    .then(getEmployeeTermsCompletedSuccess, getEmployeeTermsCompletedFailure);
 
-        employeesService.completeEmployeeTerm = function (patienttreatmentid) {
+            function getEmployeeTermsCompletedSuccess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getEmployeeTermsCompletedFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function cancelEmployeeTerm(patienttreatmentid) {
             var deferred = $q.defer();
 
-            dataStorageService.completeTerm(patienttreatmentid).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.cancelTerm(patienttreatmentid)
+                    .then(cancelTermSuccess, cancelTermFailure);
 
-        return employeesService;
+            function cancelTermSuccess() {
+                deferred.resolve();
+            }
+
+            function cancelTermFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function completeEmployeeTerm(patienttreatmentid) {
+            var deferred = $q.defer();
+
+            dataStorageService.completeTerm(patienttreatmentid)
+                    .then(completeTermSuccess, completeTermFailure);
+
+            function completeTermSuccess() {
+                deferred.resolve();
+            }
+
+            function completeTermFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
     }
 })();

@@ -45,14 +45,14 @@
                         modal-id="modal-cancel-term-{{$index}}"
                         title="Odwoływanie wizyty"
                         body="Czy na pewno chcesz odwołać wizytę z dnia {{TPLC.chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{TPLC.chosenTerm.datehour|date: 'HH:mm'}}?"
-                        confirm-button="TPLC.cancelTerm(chosenTerm.patienttreatmentid)" 
+                        confirm-button="TPLC.cancelTerm(TPLC.chosenTerm.patienttreatmentid)" 
                         cancel-button="">
                     </modal-directive>
                     <modal-directive
                         modal-id="modal-complete-term-{{$index}}"
                         title="Realizowanie wizyty"
                         body="Czy na pewno chcesz zrealizować wizytę z dnia {{TPLC.chosenTerm.datehour|date: 'dd.MM.yyyy'}} o godzinie {{TPLC.chosenTerm.datehour|date: 'HH:mm'}}?"
-                        confirm-button="TPLC.completeTerm(chosenTerm.patienttreatmentid)" 
+                        confirm-button="TPLC.completeTerm(TPLC.chosenTerm.patienttreatmentid)" 
                         cancel-button="">
                     </modal-directive>
                     </td>

@@ -10,51 +10,71 @@
     function TermsPendingListController($state, termsService) {
         var vm = this;
 
-        vm.loadTermsPending = function () {
+        vm.loadTermsPending = loadTermsPending;
+        vm.setChosen = setChosen;
+        vm.cancelTerm = cancelTerm;
+        vm.completeTerm = completeTerm;
+
+        function loadTermsPending() {
             vm.loadingPending = true;
-            termsService.getTermsPending().then(
-                    function (pendingTerms) {
-                        if (pendingTerms.length === 0) {
-                            vm.loadingPending = false;
-                            $state.go('root.terms.pending_empty');
-                        } else {
-                            vm.pendingTerms = pendingTerms;
-                            vm.loadingPending = false;
-                        }
-                    },
-                    function () {
-                        vm.loadingPending = false;
-                        $state.go('root.terms.pending_error');
-                    }
-            );
-        };
 
-        vm.setChosen = function (term) {
+            termsService.getTermsPending()
+                    .then(getTermsPendingSuccess, getTermsPendingFailure);
+
+            function getTermsPendingSuccess(pendingTerms) {
+                if (pendingTerms.length === 0) {
+                    $state.go('root.terms.pending_empty');
+                } else {
+                    vm.pendingTerms = pendingTerms;
+                    vm.loadingPending = false;
+                }
+            }
+
+            function getTermsPendingFailure() {
+                $state.go('root.terms.pending_error');
+            }
+        }
+
+        function setChosen(term) {
             vm.chosenTerm = term;
-        };
+        }
 
-        vm.cancelTerm = function (patienttreatmentid) {
+        function cancelTerm(patienttreatmentid) {
             vm.cancelling = true;
-            termsService.cancelTerm(patienttreatmentid).then(function () {
+            vm.errorCancel = false;
+
+            termsService.cancelTerm(patienttreatmentid)
+                    .then(cancelTermSuccess, cancelTermFailure);
+
+            function cancelTermSuccess() {
                 vm.loadTermsPending();
                 vm.cancelling = false;
                 vm.errorCancel = false;
-            }, function () {
+            }
+
+            function cancelTermFailure() {
                 vm.cancelling = false;
                 vm.errorCancel = true;
-            });
-        };
+            }
+        }
 
-        vm.completeTerm = function (patienttreatmentid) {
+        function completeTerm(patienttreatmentid) {
             vm.completing = true;
-            termsService.completeTerm(patienttreatmentid).then(function () {
+            vm.errorComplete = false;
+
+            termsService.completeTerm(patienttreatmentid)
+                    .then(completeTermSuccess, completeTermFailure);
+
+            function completeTermSuccess() {
                 vm.loadTermsPending();
                 vm.completing = false;
                 vm.errorComplete = false;
-            }, function () {
+            }
+
+            function completeTermFailure() {
                 vm.completing = false;
                 vm.errorComplete = true;
-            });
-        };
+            }
+        }
     }
 })();

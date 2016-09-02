@@ -13,145 +13,162 @@
         var vm = this;
 
         vm.termDetails = {};
-        vm.errorCreate = false;
-        vm.today = new Date().getTime();
         vm.terms = [];
         vm.index = 0;
+        vm.dateOptions = {
+            startingDay: 1,
+            minDate: new Date()
+        };
+        vm.dateOptions2 = {
+            startingDay: 1,
+            maxDate: new Date()
+        };
+        vm.hstep = 1;
+        vm.mstep = 5;
+        vm.open = open;
+        vm.open2 = open2;
+        vm.loadEmployeesList = loadEmployeesList;
+        vm.loadIcdsList = loadIcdsList;
+        vm.loadPatientsList = loadPatientsList;
+        vm.loadRoomsList = loadRoomsList;
+        vm.loadTreatmentsList = loadTreatmentsList;
+        vm.saveTerm = saveTerm;
+        vm.saveTerms = saveTerms;
 
-        vm.saveTerms = function () {
+        function saveTerms() {
+            vm.errorCreate = false;
             vm.submitting = true;
+
             for (var i = 0; i < vm.terms.length; i++) {
                 //TODO Move the function outside the loop
-                termsService.saveTerms(vm.terms[i]).then(
-                        function () {
-                            vm.errorCreate = false;
-                            vm.submitting = false;
-                        }, function () {
-                    vm.errorCreate = true;
-                    vm.submitting = false;
-                });
+                termsService.saveTerms(vm.terms[i])
+                        .then(saveTermsSuccess, saveTermsFailure);
             }
+
+            //TODO Redirection need to be right after last response
             $timeout(function () {
                 $state.go('root.terms.pending');
             }, 2000);
 
-        };
+            function saveTermsSuccess() {
+                vm.errorCreate = false;
+                vm.submitting = false;
+            }
 
-        vm.saveTerm = function () {
+            function saveTermsFailure() {
+                vm.errorCreate = true;
+                vm.submitting = false;
+            }
+        }
+
+        function saveTerm() {
             vm.terms[vm.index] = angular.copy(vm.termDetails);
             vm.index += 1;
-        };
+        }
 
-        vm.loadPatientsList = function () {
-            vm.loadingPatients = true;
+        function loadPatientsList() {
             vm.errorLoadingPatients = false;
-            termsService.getPatientsList().then(
-                    function (patientsList) {
-                        vm.patientsList = patientsList;
-                        vm.loadingPatients = false;
-                        vm.errorLoadingPatients = false;
-                    },
-                    function () {
-                        vm.loadingPatients = false;
-                        vm.errorLoadingPatients = true;
-                    }
-            );
-        };
+            vm.loadingPatients = true;
 
-        vm.loadIcdsList = function () {
-            vm.loadingIcds = true;
+            termsService.getPatientsList()
+                    .then(getPatientsListSuccess, getPatientsListFailure);
+
+            function getPatientsListSuccess(patientsList) {
+                vm.patientsList = patientsList;
+                vm.errorLoadingPatients = false;
+                vm.loadingPatients = false;
+            }
+
+            function getPatientsListFailure() {
+                vm.errorLoadingPatients = true;
+                vm.loadingPatients = false;
+            }
+        }
+
+        function loadIcdsList() {
             vm.errorLoadingIcds = false;
-            termsService.getIcdsList().then(
-                    function (icdsList) {
-                        vm.icdsList = icdsList;
-                        vm.loadingIcds = false;
-                        vm.errorLoadingIcds = false;
-                    },
-                    function () {
-                        vm.loadingIcds = false;
-                        vm.errorLoadingIcds = true;
-                    }
-            );
-        };
+            vm.loadingIcds = true;
 
-        vm.loadEmployeesList = function () {
-            vm.loadingEmployees = true;
+            termsService.getIcdsList()
+                    .then(getIcdsListSuccess, getIcdsListFailure);
+
+            function getIcdsListSuccess(icdsList) {
+                vm.icdsList = icdsList;
+                vm.errorLoadingIcds = false;
+                vm.loadingIcds = false;
+            }
+
+            function getIcdsListFailure() {
+                vm.errorLoadingIcds = true;
+                vm.loadingIcds = false;
+            }
+        }
+
+        function loadEmployeesList() {
             vm.errorLoadingEmployees = false;
-            termsService.getEmployeesList().then(
-                    function (employeesList) {
-                        vm.employeesList = employeesList;
-                        vm.loadingEmployees = false;
-                        vm.errorLoadingEmployees = false;
-                    },
-                    function () {
-                        vm.loadingEmployees = false;
-                        vm.errorLoadingEmployees = true;
-                    }
-            );
-        };
+            vm.loadingEmployees = true;
 
-        vm.loadRoomsList = function () {
-            vm.loadingRooms = true;
+            termsService.getEmployeesList()
+                    .then(getEmployeesListSuccess, getEmployeesListFailure);
+
+            function getEmployeesListSuccess(employeesList) {
+                vm.employeesList = employeesList;
+                vm.errorLoadingEmployees = false;
+                vm.loadingEmployees = false;
+            }
+
+            function getEmployeesListFailure() {
+                vm.errorLoadingEmployees = true;
+                vm.loadingEmployees = false;
+            }
+        }
+
+        function loadRoomsList() {
             vm.errorLoadingRooms = false;
-            termsService.getRoomsList().then(
-                    function (roomsList) {
-                        vm.roomsList = roomsList;
-                        vm.loadingRooms = false;
-                        vm.errorLoadingRooms = false;
-                    },
-                    function () {
-                        vm.loadingRooms = false;
-                        vm.errorLoadingRooms = true;
-                    }
-            );
-        };
+            vm.loadingRooms = true;
 
-        vm.loadTreatmentsList = function () {
-            vm.loadingTreatments = true;
+            termsService.getRoomsList()
+                    .then(getRoomsListSuccess, getRoomsListFailure);
+
+            function getRoomsListSuccess(roomsList) {
+                vm.roomsList = roomsList;
+                vm.errorLoadingRooms = false;
+                vm.loadingRooms = false;
+            }
+
+            function getRoomsListFailure() {
+                vm.errorLoadingRooms = true;
+                vm.loadingRooms = false;
+            }
+        }
+
+
+        function loadTreatmentsList() {
             vm.errorLoadingTreatments = false;
-            termsService.getTreatmentsList().then(
-                    function (treatmentsList) {
-                        vm.treatmentsList = treatmentsList;
-                        vm.loadingTreatments = false;
-                        vm.errorLoadingTreatments = false;
-                    },
-                    function () {
-                        vm.loadingTreatments = false;
-                        vm.errorLoadingTreatments = true;
-                    }
-            );
-        };
-        //DATEPICKER
-        vm.minDate = new Date();
-        vm.maxDate = new Date();
-        vm.isOpen = false;
-        vm.isOpen2 = false;
+            vm.loadingTreatments = true;
 
-        vm.dateOptions = {
-            'starting-day': 1
-        };
+            termsService.getTreatmentsList()
+                    .then(getTreatmentsListSuccess, getTreatmentsListFailure);
 
-        vm.open = function ($event) {
-            if ($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
+            function getTreatmentsListSuccess(treatmentsList) {
+                vm.treatmentsList = treatmentsList;
+                vm.errorLoadingTreatments = false;
+                vm.loadingTreatments = false;
             }
 
-            vm.isOpen = true;
-        };
-        vm.open2 = function ($event) {
-            if ($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
+            function getTreatmentsListFailure() {
+                vm.errorLoadingTreatments = true;
+                vm.loadingTreatments = false;
             }
+        }
 
-            vm.isOpen2 = true;
-        };
-        //DATEPICKER END
+        function open() {
+            vm.opened = true;
+        }
 
-        //TIMEPICKER
-        vm.hstep = 1;
-        vm.mstep = 5;
-        //TIMEPICKER END
+
+        function open2() {
+            vm.opened2 = true;
+        }
     }
 })();

@@ -9,6 +9,7 @@
 
     function EmployeeDetailsController($state, $stateParams, employeesService) {
         var vm = this;
+
         var restoreEmployeeDetails = restoreEmployeeDetails;
         var saveDefaultEmployeeDetails = saveDefaultEmployeeDetails;
 
@@ -20,15 +21,10 @@
         };
         vm.defaultEmployeeDetails = {};
         vm.employeeDetails = {};
-        vm.errorEdit = false;
-        vm.errorLoading = false;
         vm.loadEmployeeDetails = loadEmployeeDetails;
-        vm.loading = false;
         vm.open = open;
-        vm.opened = false;
         vm.saveEdit = saveEdit;
         vm.startEdit = startEdit;
-        vm.updating = false;
         vm.updateEmployeeDetails = updateEmployeeDetails;
 
         //After clicking 'Anuluj' button, we would not be able to make changes in the fields

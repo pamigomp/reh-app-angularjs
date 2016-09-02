@@ -10,23 +10,26 @@
     function TermsCompletedListController($state, termsService) {
         var vm = this;
 
-        vm.loadTermsCompleted = function () {
+        vm.loadTermsCompleted = loadTermsCompleted;
+
+        function loadTermsCompleted() {
             vm.loadingCompleted = true;
-            termsService.getTermsCompleted().then(
-                    function (completedTerms) {
-                        if (completedTerms.length === 0) {
-                            vm.loadingCompleted = false;
-                            $state.go('root.terms.completed_empty');
-                        } else {
-                            vm.completedTerms = completedTerms;
-                            vm.loadingCompleted = false;
-                        }
-                    },
-                    function () {
-                        vm.loadingCompleted = false;
-                        $state.go('root.terms.completed_error');
-                    }
-            );
-        };
+
+            termsService.getTermsCompleted()
+                    .then(getTermsCompletedSuccess, getTermsCompletedFailure);
+
+            function getTermsCompletedSuccess(completedTerms) {
+                if (completedTerms.length === 0) {
+                    $state.go('root.terms.completed_empty');
+                } else {
+                    vm.completedTerms = completedTerms;
+                    vm.loadingCompleted = false;
+                }
+            }
+
+            function getTermsCompletedFailure() {
+                $state.go('root.terms.completed_error');
+            }
+        }
     }
 })();
