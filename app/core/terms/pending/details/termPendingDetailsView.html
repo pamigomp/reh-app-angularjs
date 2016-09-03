@@ -84,7 +84,7 @@
                     <div class="form-group required" data-ng-disabled="!TPDC.allowEdit">
                         <label class="control-label" for="hour">Godzina</label>
                         <fieldset data-ng-disabled="!TPDC.allowEdit">
-                            <uib-timepicker  data-ng-model="TPDC.termPendingDetails.datehour" hour-step="TPDC.hstep" minute-step="TPDC.mstep" show-meridian="false" data-ng-disabled="!TPDC.allowEdit" required></uib-timepicker>
+                            <div uib-timepicker  data-ng-model="TPDC.termPendingDetails.datehour" hour-step="TPDC.hstep" minute-step="TPDC.mstep" show-meridian="false" data-ng-disabled="!TPDC.allowEdit" required></div>
                         </fieldset>
                     </div>
                     <div class="form-group required" data-ng-init="TPDC.loadTreatmentsList()">

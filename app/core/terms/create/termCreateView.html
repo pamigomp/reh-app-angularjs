@@ -170,7 +170,7 @@
                         <div class="form-group required">
                             <label class="control-label" for="hour">Godzina</label>
                             <fieldset>
-                                <uib-timepicker  data-ng-model="TCC.termDetails.datehour" hour-step="TCC.hstep" minute-step="TCC.mstep" show-meridian="false" required></uib-timepicker>
+                                <div uib-timepicker data-ng-model="TCC.termDetails.datehour" hour-step="TCC.hstep" minute-step="TCC.mstep" show-meridian="false" required></div>
                             </fieldset>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadTreatmentsList()">
