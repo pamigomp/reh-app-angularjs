@@ -39,7 +39,8 @@
         "bootstrap": "^3.3.7",
         "font-awesome": "^4.6.3",
         "jquery": "^2.2.4",
-        "metisMenu": "^2.5.2"
+        "metisMenu": "^2.5.2",
+        "ng-table": "^1.0.0"
     },
     "private": true
 }

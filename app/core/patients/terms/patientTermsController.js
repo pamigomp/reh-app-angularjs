@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.patients.terms', ['rehApp.patientsService', 'ui.router'])
+    angular.module('rehApp.patients.terms', ['rehApp.patientsService', 'ui.router', 'ngTable'])
 
             .controller('PatientTermsController', PatientTermsController);
 
-    PatientTermsController.$inject = ['$state', '$stateParams', 'patientsService'];
+    PatientTermsController.$inject = ['$state', '$stateParams', 'patientsService', 'NgTableParams'];
 
-    function PatientTermsController($state, $stateParams, patientsService) {
+    function PatientTermsController($state, $stateParams, patientsService, NgTableParams) {
         var vm = this;
 
         vm.cancelTerm = cancelTerm;
@@ -35,6 +35,7 @@
                 } else {
                     $state.get('root.patients.patient').data.breadcrumb = pendingTerms[0].patient_surname + ' ' + pendingTerms[0].patient_name;
                     vm.pendingTerms = pendingTerms;
+                    vm.tableParamsPending = new NgTableParams({}, {dataset: vm.pendingTerms});
                     vm.emptyPending = false;
                     vm.errorLoading = false;
                     vm.loadingPending = false;
@@ -66,6 +67,7 @@
                 } else {
                     $state.get('root.patients.patient').data.breadcrumb = cancelledTerms[0].patient_surname + ' ' + cancelledTerms[0].patient_name;
                     vm.cancelledTerms = cancelledTerms;
+                    vm.tableParamsCancelled = new NgTableParams({}, {dataset: vm.cancelledTerms});
                     vm.emptyCancelled = false;
                     vm.errorLoading = false;
                     vm.loadingCancelled = false;
@@ -97,6 +99,7 @@
                 } else {
                     $state.get('root.patients.patient').data.breadcrumb = completedTerms[0].patient_surname + ' ' + completedTerms[0].patient_name;
                     vm.completedTerms = completedTerms;
+                    vm.tableParamsCompleted = new NgTableParams({}, {dataset: vm.completedTerms});
                     vm.emptyCompleted = false;
                     vm.errorLoading = false;
                     vm.loadingCompleted = false;

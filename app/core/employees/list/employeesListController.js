@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.employees.list', ['rehApp.employeesService', 'ui.router'])
+    angular.module('rehApp.employees.list', ['rehApp.employeesService', 'ui.router', 'ngTable'])
 
             .controller('EmployeesListController', EmployeesListController);
 
-    EmployeesListController.$inject = ['$state', 'employeesService'];
+    EmployeesListController.$inject = ['$state', 'employeesService', 'NgTableParams'];
 
-    function EmployeesListController($state, employeesService) {
+    function EmployeesListController($state, employeesService, NgTableParams) {
         var vm = this;
 
         vm.loadEmployeesList = loadEmployeesList;
@@ -25,6 +25,7 @@
                     $state.go('root.employees.list_empty');
                 } else {
                     vm.employees = employeesList;
+                    vm.tableParams = new NgTableParams({}, {dataset: vm.employees});
                     vm.loading = false;
                 }
             }

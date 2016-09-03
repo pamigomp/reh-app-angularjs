@@ -12,35 +12,18 @@
             <div class="alert alert-danger" role="alert" data-ng-show="TPLC.errorComplete">
                 <strong>Błąd!</strong> Wystąpił problem podczas realizowania terminu zabiegu.
             </div>
-            <div class="form-group">
-                <div class="input-group search-bar">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Wyszukaj oczekujący termin" data-ng-model="TPLC.termsFilter">
-                </div>
-            </div>
             <div class="table-responsive" data-ng-hide="TPLC.loadingPending">
-                <table class="table table-striped table-condensed table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="col-xs-1">ID</th>
-                            <th class="col-xs-1">Data</th>
-                            <th class="col-xs-1">Godzina</th>
-                            <th class="col-xs-3">Pracownik</th>
-                            <th class="col-xs-3">Pacjent</th>
-                            <th class="col-xs-3">Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-ng-repeat="term in TPLC.pendingTerms| orderBy:'-datehour' | filter:TPLC.termsFilter">
-                            <td>{{term.patienttreatmentid}}</td>
-                            <td>{{term.datehour|date: 'dd.MM.yyyy'}}</td>
-                            <td>{{term.datehour|date: 'HH:mm'}}</td>
-                            <td>{{term.degree}} {{term.name}} {{term.surname}}</td>
-                            <td>{{term.patient_surname}} {{term.patient_name}}</td>
-                            <td>
-                                <button class="btn btn-sm btn-primary" data-ui-sref="root.terms.pending.term.details({termId: term.patienttreatmentid})" data-toggle="tooltip" title="Szczegóły zabiegu"><i class="fa fa-search"></i> Szczegóły</button> 
-                                <button class="btn btn-sm btn-primary" data-ng-click="TPLC.setChosen(term)" data-toggle="modal" data-target="#modal-cancel-term-{{$index}}" data-toggle="tooltip" title="Odwołaj zabieg"><i class="fa fa-remove"></i> Odwołaj</button>
-                                <button class="btn btn-sm btn-primary" data-ng-click="TPLC.setChosen(term)" data-toggle="modal" data-target="#modal-complete-term-{{$index}}" data-toggle="tooltip" title="Zrealizuj zabieg"><i class="fa fa-remove"></i> Zrealizuj</button>
+                <table data-ng-table="TPLC.tableParams" class="table table-striped table-condensed table-hover table-bordered" show-filter="true">
+                    <tr data-ng-repeat="term in $data">
+                        <td class="col-xs-1" title="'ID'" filter="{patienttreatmentid: 'text'}" sortable="'patienttreatmentid'">{{term.patienttreatmentid}}</td>
+                        <td class="col-xs-1" title="'Data'" sortable="'datehour'">{{term.datehour|date: 'dd.MM.yyyy'}}</td>
+                        <td class="col-xs-1" title="'Godzina'" sortable="'datehour'">{{term.datehour|date: 'HH:mm'}}</td>
+                        <td class="col-xs-3" title="'Pracownik'" filter="{surname: 'text'}" sortable="'surname'">{{term.degree}} {{term.name}} {{term.surname}}</td>
+                        <td class="col-xs-3" title="'Pacjent'" filter="{patient_surname: 'text'}" sortable="'patient_surname'">{{term.patient_surname}} {{term.patient_name}}</td>
+                        <td class="col-xs-3" title="'Akcja'">
+                            <button class="btn btn-sm btn-primary" data-ui-sref="root.terms.pending.term.details({termId: term.patienttreatmentid})" data-toggle="tooltip" title="Szczegóły zabiegu"><i class="fa fa-search"></i> Szczegóły</button> 
+                            <span data-toggle="tooltip" title="Odwołaj zabieg"><button class="btn btn-sm btn-primary" data-ng-click="TPLC.setChosen(term)" data-toggle="modal" data-target="#modal-cancel-term-{{$index}}"><i class="fa fa-remove"></i> Odwołaj</button></span>
+                            <span data-toggle="tooltip" title="Zrealizuj zabieg"><button class="btn btn-sm btn-primary" data-ng-click="TPLC.setChosen(term)" data-toggle="modal" data-target="#modal-complete-term-{{$index}}"><i class="fa fa-remove"></i> Zrealizuj</button></span>
                     <modal-directive
                         modal-id="modal-cancel-term-{{$index}}"
                         title="Odwoływanie wizyty"
@@ -57,7 +40,6 @@
                     </modal-directive>
                     </td>
                     </tr>
-                    </tbody>
                 </table>
             </div>
             <p align="center" data-ng-show="TPLC.loadingPending"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>

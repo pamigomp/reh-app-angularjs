@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.patients.list', ['rehApp.patientsService', 'ui.router'])
+    angular.module('rehApp.patients.list', ['rehApp.patientsService', 'ui.router', 'ngTable'])
 
             .controller('PatientsListController', PatientsListController);
 
-    PatientsListController.$inject = ['$state', 'patientsService'];
+    PatientsListController.$inject = ['$state', 'patientsService', 'NgTableParams'];
 
-    function PatientsListController($state, patientsService) {
+    function PatientsListController($state, patientsService, NgTableParams) {
         var vm = this;
 
         vm.loadPatientsList = loadPatientsList;
@@ -25,6 +25,7 @@
                     $state.go('root.patients.list_empty');
                 } else {
                     vm.patients = patientsList;
+                    vm.tableParams = new NgTableParams({}, {dataset: vm.patients});
                     vm.loading = false;
                 }
             }
@@ -38,7 +39,7 @@
             vm.removing = true;
             vm.errorRemove = false;
 
-            patientsService.removePatient(vm.chosenPatient.patientid)
+            patientsService.removePatient(vm.chosenPatient.pesel)
                     .then(removePatientSuccess, removePatientFailure);
 
             function removePatientSuccess() {

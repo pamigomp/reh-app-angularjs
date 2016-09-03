@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.pending.list', ['rehApp.termsService', 'ui.router'])
+    angular.module('rehApp.terms.pending.list', ['rehApp.termsService', 'ui.router', 'ngTable'])
 
             .controller('TermsPendingListController', TermsPendingListController);
 
-    TermsPendingListController.$inject = ['$state', 'termsService'];
+    TermsPendingListController.$inject = ['$state', 'termsService', 'NgTableParams'];
 
-    function TermsPendingListController($state, termsService) {
+    function TermsPendingListController($state, termsService, NgTableParams) {
         var vm = this;
 
         vm.loadTermsPending = loadTermsPending;
@@ -26,6 +26,7 @@
                     $state.go('root.terms.pending_empty');
                 } else {
                     vm.pendingTerms = pendingTerms;
+                    vm.tableParams = new NgTableParams({}, {dataset: vm.pendingTerms});
                     vm.loadingPending = false;
                 }
             }

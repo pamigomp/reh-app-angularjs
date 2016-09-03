@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.cancelled.list', ['rehApp.termsService', 'ui.router'])
+    angular.module('rehApp.terms.cancelled.list', ['rehApp.termsService', 'ui.router', 'ngTable'])
 
             .controller('TermsCancelledListController', TermsCancelledListController);
 
-    TermsCancelledListController.$inject = ['$state', 'termsService'];
+    TermsCancelledListController.$inject = ['$state', 'termsService', 'NgTableParams'];
 
-    function TermsCancelledListController($state, termsService) {
+    function TermsCancelledListController($state, termsService, NgTableParams) {
         var vm = this;
 
         vm.loadTermsCancelled = loadTermsCancelled;
@@ -23,6 +23,7 @@
                     $state.go('root.terms.cancelled_empty');
                 } else {
                     vm.cancelledTerms = cancelledTerms;
+                    vm.tableParams = new NgTableParams({}, {dataset: vm.cancelledTerms});
                     vm.loadingCancelled = false;
                 }
             }

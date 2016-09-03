@@ -91,7 +91,7 @@
                                            is-open="PDC.opened" 
                                            placeholder="Data urodzenia"
                                            data-ng-click="PDC.open()" 
-                                           data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required/>
+                                           data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!PDC.allowEdit" data-ng-click="PDC.open()">
                                             <i class="fa fa-calendar"></i>
@@ -124,7 +124,7 @@
                     <div class="form-group required">
                         <label class="control-label" for="status">Status</label>
                         <select class="form-control" data-ng-model="PDC.patientDetails.status" name="status" data-ng-blur="statusBlur = true" data-ng-disabled="!PDC.allowEdit" required>
-                            <option selected disabled style="display: none" value=''>Proszę wybrać status</option>
+                            <option selected disabled style="display: none" value="">Proszę wybrać status</option>
                             <option value="Aktywny">Aktywny</option>
                             <option value="Nieaktywny">Nieaktywny</option>
                         </select>

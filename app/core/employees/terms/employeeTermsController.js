@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.employees.terms', ['rehApp.employeesService', 'ui.router'])
+    angular.module('rehApp.employees.terms', ['rehApp.employeesService', 'ui.router', 'ngTable'])
 
             .controller('EmployeeTermsController', EmployeeTermsController);
 
-    EmployeeTermsController.$inject = ['$state', '$stateParams', 'employeesService'];
+    EmployeeTermsController.$inject = ['$state', '$stateParams', 'employeesService', 'NgTableParams'];
 
-    function EmployeeTermsController($state, $stateParams, employeesService) {
+    function EmployeeTermsController($state, $stateParams, employeesService, NgTableParams) {
         var vm = this;
 
         vm.cancelTerm = cancelTerm;
@@ -33,8 +33,9 @@
                     vm.errorLoading = false;
                     vm.loadingPending = false;
                 } else {
-                    $state.get('root.employees.employee').data.breadcrumb = pendingTerms[0].employee_surname + ' ' + pendingTerms[0].employee_name;
+                    $state.get('root.employees.employee').data.breadcrumb = pendingTerms[0].surname + ' ' + pendingTerms[0].name;
                     vm.pendingTerms = pendingTerms;
+                    vm.tableParamsPending = new NgTableParams({}, {dataset: vm.pendingTerms});
                     vm.emptyPending = false;
                     vm.errorLoading = false;
                     vm.loadingPending = false;
@@ -64,8 +65,9 @@
                     vm.errorLoading = false;
                     vm.loadingCancelled = false;
                 } else {
-                    $state.get('root.employees.employee').data.breadcrumb = cancelledTerms[0].employee_surname + ' ' + cancelledTerms[0].employee_name;
+                    $state.get('root.employees.employee').data.breadcrumb = cancelledTerms[0].surname + ' ' + cancelledTerms[0].name;
                     vm.cancelledTerms = cancelledTerms;
+                    vm.tableParamsCancelled = new NgTableParams({}, {dataset: vm.cancelledTerms});
                     vm.emptyCancelled = false;
                     vm.errorLoading = false;
                     vm.loadingCancelled = false;
@@ -95,8 +97,9 @@
                     vm.errorLoading = false;
                     vm.loadingCompleted = false;
                 } else {
-                    $state.get('root.employees.employee').data.breadcrumb = completedTerms[0].employee_surname + ' ' + completedTerms[0].employee_name;
+                    $state.get('root.employees.employee').data.breadcrumb = completedTerms[0].surname + ' ' + completedTerms[0].name;
                     vm.completedTerms = completedTerms;
+                    vm.tableParamsCompleted = new NgTableParams({}, {dataset: vm.completedTerms});
                     vm.emptyCompleted = false;
                     vm.errorLoading = false;
                     vm.loadingCompleted = false;

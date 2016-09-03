@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.terms.completed.list', ['rehApp.termsService', 'ui.router'])
+    angular.module('rehApp.terms.completed.list', ['rehApp.termsService', 'ui.router', 'ngTable'])
 
             .controller('TermsCompletedListController', TermsCompletedListController);
 
-    TermsCompletedListController.$inject = ['$state', 'termsService'];
+    TermsCompletedListController.$inject = ['$state', 'termsService', 'NgTableParams'];
 
-    function TermsCompletedListController($state, termsService) {
+    function TermsCompletedListController($state, termsService, NgTableParams) {
         var vm = this;
 
         vm.loadTermsCompleted = loadTermsCompleted;
@@ -23,6 +23,7 @@
                     $state.go('root.terms.completed_empty');
                 } else {
                     vm.completedTerms = completedTerms;
+                    vm.tableParams = new NgTableParams({}, {dataset: vm.completedTerms});
                     vm.loadingCompleted = false;
                 }
             }
