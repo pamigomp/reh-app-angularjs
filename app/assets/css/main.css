@@ -1,5 +1,11 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+.center-icon {
+    text-align:center;
+    display: inline-block;
+    width: 100%;
+}
+
 body {
     background-color: #f8f8f8;
 }
