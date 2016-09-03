@@ -10,9 +10,6 @@
     function EmployeeDetailsController($state, $stateParams, employeesService) {
         var vm = this;
 
-        var restoreEmployeeDetails = restoreEmployeeDetails;
-        var saveDefaultEmployeeDetails = saveDefaultEmployeeDetails;
-
         vm.allowEdit = false;
         vm.cancelEdit = cancelEdit;
         vm.dateOptions = {
@@ -23,12 +20,9 @@
         vm.employeeDetails = {};
         vm.loadEmployeeDetails = loadEmployeeDetails;
         vm.open = open;
-        vm.saveEdit = saveEdit;
         vm.startEdit = startEdit;
         vm.updateEmployeeDetails = updateEmployeeDetails;
 
-        //After clicking 'Anuluj' button, we would not be able to make changes in the fields
-        //and all changes are being discarded (loading previous employee's details).
         function cancelEdit() {
             vm.allowEdit = false;
             restoreEmployeeDetails();
@@ -70,13 +64,6 @@
             angular.copy(vm.employeeDetails, vm.defaultEmployeeDetails);
         }
 
-        //After clicking 'Zapisz' button, we would not be able to make changes in the fields
-        //and all changes are being saved.
-        function saveEdit() {
-            vm.updateEmployeeDetails();
-        }
-
-        //After clicking 'Edytuj' button, we would be able to make changes in the fields.
         function startEdit() {
             vm.allowEdit = true;
         }

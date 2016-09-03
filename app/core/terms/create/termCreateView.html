@@ -28,9 +28,7 @@
                     <div class="panel-body">
                         <div class="form-group required" data-ng-init="TCC.loadPatientsList()">
                             <label class="control-label" for="patient">Pacjent</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.patientId" name="patient" required>
-                                <option data-ng-repeat="patient in TCC.patientsList|orderBy:'surname'" data-ng-value="{{patient.pesel}}" value="{{patient.pesel}}">{{patient.surname}} {{patient.name}} ({{patient.pesel}})</option>
-                            </select>
+                            <select class="form-control" data-ng-options="patient.pesel as patient.surname +  ' ' +  patient.name +  ' (' +  patient.pesel +  ')' for patient in TCC.patientsList|orderBy:'surname'" data-ng-model="TCC.termDetails.patientId" name="patient" required></select>
                         </div>
                     </div>
                 </div>
@@ -120,9 +118,7 @@
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadIcdsList()">
                             <label class="control-label" for="icd10">ICD-10</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.icd10" name="icd10" required>
-                                <option data-ng-repeat="icd in TCC.icdsList|orderBy:'code'" data-ng-value="{{icd.icdId}}" value="{{icd.icdId}}">{{icd.code}} ({{icd.name}})</option>
-                            </select>
+                            <select class="form-control" data-ng-options="icd.code as icd.code +  ' (' +  icd.name +  ')' for icd in TCC.icdsList|orderBy:'code'" data-ng-model="TCC.termDetails.icdCode" name="icd10" required></select>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="purpose">Cel zabiegów</label>
@@ -174,26 +170,20 @@
                         <div class="form-group required">
                             <label class="control-label" for="hour">Godzina</label>
                             <fieldset>
-                                <uib-timepicker  data-ng-model="TCC.termDetails.datehour" data-ng-change="TCC.changed()" hour-step="TCC.hstep" minute-step="TCC.mstep" show-meridian="false" required></uib-timepicker>
+                                <uib-timepicker  data-ng-model="TCC.termDetails.datehour" hour-step="TCC.hstep" minute-step="TCC.mstep" show-meridian="false" required></uib-timepicker>
                             </fieldset>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadTreatmentsList()">
                             <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.treatmentId" name="kindoftreatment" required>
-                                <option data-ng-repeat="treatment in TCC.treatmentsList" data-ng-value="{{treatment.treatmentid}}" value="{{treatment.treatmentid}}">{{treatment.kindoftreatment}}</option>
-                            </select>
+                            <select class="form-control" data-ng-options="treatment.treatmentid as treatment.kindoftreatment for treatment in TCC.treatmentsList|orderBy:'kindoftreatment'" data-ng-model="TCC.termDetails.treatmentId" name="kindoftreatment" required></select>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadRoomsList()">
                             <label class="control-label" for="room">Pokój</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.roomId" name="room" required>
-                                <option data-ng-repeat="room in TCC.roomsList" data-ng-value="{{room.roomid}}" value="{{room.roomid}}">p. {{room.roomnumber}} ({{room.roomname}})</option>
-                            </select>
+                            <select class="form-control" data-ng-options="room.roomid as 'p. ' + room.roomnumber + ' (' + room.roomname + ')' for room in TCC.roomsList|orderBy:'roomnumber'" data-ng-model="TCC.termDetails.roomId" name="room" required></select>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadEmployeesList()">
                             <label class="control-label" for="employee">Pracownik</label>
-                            <select class="form-control" data-ng-model="TCC.termDetails.employeeId" name="employee" required>
-                                <option data-ng-repeat="employee in TCC.employeesList|orderBy: 'surname'" data-ng-value="{{employee.employeeid}}" value="{{employee.employeeid}}">{{employee.degree}} {{employee.surname}} {{employee.name}}</option>
-                            </select>
+                            <select class="form-control" data-ng-options="employee.employeeid as employee.degree +  ' ' +  employee.surname +  ' ' +  employee.name for employee in TCC.employeesList|orderBy:'surname'" data-ng-model="TCC.termDetails.employeeId" name="employee" required></select>
                         </div>
                         <label class="control-label required" for="time">Czas trwania</label>
                         <div class="form-group input-group required">

@@ -118,7 +118,7 @@
             var deferred = $q.defer();
 
             dataStorageService.resetPatientPassword(patientPesel)
-                    .then(resetPatientPasswordSuccess, resetPatientPasswordFailure)
+                    .then(resetPatientPasswordSuccess, resetPatientPasswordFailure);
 
             function resetPatientPasswordSuccess() {
                 deferred.resolve();

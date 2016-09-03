@@ -24,9 +24,6 @@
         vm.loadTreatmentsList = loadTreatmentsList;
         vm.mstep = 5;
         vm.open = open;
-        vm.restoreTermPendingDetails = restoreTermPendingDetails;
-        vm.saveDefaultTermPendingDetails = saveDefaultTermPendingDetails;
-        vm.saveEdit = saveEdit;
         vm.startEdit = startEdit;
         vm.updateTermPendingDetails = updateTermPendingDetails;
 
@@ -43,7 +40,7 @@
                 $state.get('root.terms.pending.term').data.breadcrumb = termPendingDetails[0].patienttreatmentid;
                 vm.termPendingDetails = termPendingDetails[0];
                 vm.termPendingDetails.datehour = new Date(vm.termPendingDetails.datehour);
-                vm.saveDefaultTermPendingDetails();
+                saveDefaultTermPendingDetails();
                 vm.errorLoading = false;
                 vm.loading = false;
             }
@@ -121,7 +118,7 @@
             }
 
             function updateTermPendingDetailsSuccess() {
-                saveDefaultEmployeeDetails();
+                saveDefaultTermPendingDetails();
                 vm.allowEdit = false;
                 vm.errorEdit = false;
                 vm.updating = false;
@@ -141,23 +138,13 @@
             angular.copy(vm.termPendingDetails, vm.defaultTermPendingDetails);
         }
 
-        //After clicking 'Edytuj' button, we would be able to make changes in the fields.
         function startEdit() {
             vm.allowEdit = true;
         }
 
-        //After clicking 'Zapisz' button, we would not be able to make changes in the fields
-        //and all changes are being saved.
-        function saveEdit() {
-            vm.allowEdit = false;
-            vm.updateTermPendingDetails();
-        }
-
-        //After clicking 'Anuluj' button, we would not be able to make changes in the fields
-        //and all changes are being discarded (loading previous termPending's details).
         function cancelEdit() {
             vm.allowEdit = false;
-            vm.restoreTermPendingDetails();
+            restoreTermPendingDetails();
         }
 
         function open() {

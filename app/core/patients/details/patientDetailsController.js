@@ -10,9 +10,6 @@
     function PatientDetailsController($state, $stateParams, patientsService) {
         var vm = this;
 
-        var restorePatientDetails = restorePatientDetails;
-        var saveDefaultPatientDetails = saveDefaultPatientDetails;
-
         vm.allowEdit = false;
         vm.cancelEdit = cancelEdit;
         vm.dateOptions = {
@@ -24,12 +21,9 @@
         vm.loadPatientDetails = loadPatientDetails;
         vm.open = open;
         vm.resetPassword = resetPassword;
-        vm.saveEdit = saveEdit;
         vm.startEdit = startEdit;
         vm.updatePatientDetails = updatePatientDetails;
 
-        //After clicking 'Anuluj' button, we would not be able to make changes in the fields
-        //and all changes are being discarded (loading previous patient's details).
         function cancelEdit() {
             vm.allowEdit = false;
             restorePatientDetails();
@@ -93,13 +87,6 @@
             angular.copy(vm.patientDetails, vm.defaultPatientDetails);
         }
 
-        //After clicking 'Zapisz' button, we would not be able to make changes in the fields
-        //and all changes are being saved.
-        function saveEdit() {
-            vm.updatePatientDetails();
-        }
-
-        //After clicking 'Edytuj' button, we would be able to make changes in the fields.
         function startEdit() {
             vm.allowEdit = true;
         }

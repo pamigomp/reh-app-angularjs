@@ -142,7 +142,6 @@
             }
         }
 
-
         function loadTreatmentsList() {
             vm.errorLoadingTreatments = false;
             vm.loadingTreatments = true;
@@ -165,7 +164,6 @@
         function open() {
             vm.opened = true;
         }
-
 
         function open2() {
             vm.opened2 = true;

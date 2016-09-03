@@ -8,190 +8,241 @@
     termsService.$inject = ['$q', 'dataStorageService'];
 
     function termsService($q, dataStorageService) {
-        var termsService = {};
-
-        termsService.getTermsPending = function () {
-            var deferred = $q.defer();
-
-            dataStorageService.getTermsPending().then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
+        return {
+            cancelTerm: cancelTerm,
+            completeTerm: completeTerm,
+            getEmployeesList: getEmployeesList,
+            getIcdsList: getIcdsList,
+            getPatientsList: getPatientsList,
+            getRoomsList: getRoomsList,
+            getTermPendingDetails: getTermPendingDetails,
+            getTermsCancelled: getTermsCancelled,
+            getTermsCompleted: getTermsCompleted,
+            getTermsPending: getTermsPending,
+            getTreatmentsList: getTreatmentsList,
+            saveTerms: saveTerms,
+            updateTermPendingDetails: updateTermPendingDetails
         };
 
-        termsService.getTermPendingDetails = function (termId) {
+        function getTermsPending() {
             var deferred = $q.defer();
 
-            dataStorageService.getTermPending(termId).then(
-                    function (termPendingData) {
-                        deferred.resolve(termPendingData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getTermsPending()
+                    .then(getTermsPendingSuccess, getTermsPendingFailure);
 
-        termsService.updateTermPendingDetails = function (termPendingDetails) {
+            function getTermsPendingSuccess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getTermsPendingFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getTermPendingDetails(termId) {
             var deferred = $q.defer();
 
-            dataStorageService.updateTermPending(termPendingDetails).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getTermPending(termId)
+                    .then(getTermPendingSuccess, getTermPendingFailure);
 
-        termsService.getTermsCancelled = function () {
+            function getTermPendingSuccess(termPendingData) {
+                deferred.resolve(termPendingData.data.items);
+            }
+
+            function getTermPendingFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function updateTermPendingDetails(termPendingDetails) {
             var deferred = $q.defer();
 
-            dataStorageService.getTermsCancelled().then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.updateTermPending(termPendingDetails)
+                    .then(updateTermPendingSuccess, updateTermPendingFailure);
 
-        termsService.getTermsCompleted = function () {
+            function updateTermPendingSuccess() {
+                deferred.resolve();
+            }
+
+            function updateTermPendingFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getTermsCancelled() {
             var deferred = $q.defer();
 
-            dataStorageService.getTermsCompleted().then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getTermsCancelled()
+                    .then(getTermsCancelledSuccess, getTermsCancelledFailure);
 
-        termsService.cancelTerm = function (patienttreatmentid) {
+            function getTermsCancelledSuccess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getTermsCancelledFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getTermsCompleted() {
             var deferred = $q.defer();
 
-            dataStorageService.cancelTerm(patienttreatmentid).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getTermsCompleted()
+                    .then(getTermsCompletedSuccess, getTermsCompletedFailure);
 
-        termsService.completeTerm = function (patienttreatmentid) {
+            function getTermsCompletedSuccess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getTermsCompletedFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function cancelTerm(patienttreatmentid) {
             var deferred = $q.defer();
 
-            dataStorageService.completeTerm(patienttreatmentid).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.cancelTerm(patienttreatmentid)
+                    .then(cancelTermSuccess, cancelTermFailure);
 
-        termsService.getEmployeesList = function () {
+            function cancelTermSuccess() {
+                deferred.resolve();
+            }
+
+            function cancelTermFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function completeTerm(patienttreatmentid) {
             var deferred = $q.defer();
 
-            dataStorageService.getEmployees().then(
-                    function (employeeData) {
-                        deferred.resolve(employeeData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.completeTerm(patienttreatmentid)
+                    .then(completeTermSuccess, completeTermFailure);
 
-        termsService.getRoomsList = function () {
+            function completeTermSuccess() {
+                deferred.resolve();
+            }
+
+            function completeTermFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getEmployeesList() {
             var deferred = $q.defer();
 
-            dataStorageService.getRooms().then(
-                    function (roomData) {
-                        deferred.resolve(roomData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getEmployees()
+                    .then(getEmployeesSuccess, getEmployeesFailure);
 
-        termsService.getTreatmentsList = function () {
+            function getEmployeesSuccess(employeeData) {
+                deferred.resolve(employeeData.data.items);
+            }
+
+            function getEmployeesFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getRoomsList() {
             var deferred = $q.defer();
 
-            dataStorageService.getTreatments().then(
-                    function (treatmentData) {
-                        deferred.resolve(treatmentData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getRooms()
+                    .then(getRoomsSuccess, getRoomsFailure);
 
-        termsService.getPatientsList = function () {
+            function getRoomsSuccess(roomData) {
+                deferred.resolve(roomData.data.items);
+            }
+
+            function getRoomsFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getTreatmentsList() {
             var deferred = $q.defer();
 
-            dataStorageService.getPatients().then(
-                    function (patientData) {
-                        deferred.resolve(patientData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getTreatments()
+                    .then(getTreatmentsSuccess, getTreatmentsFailure);
 
-        termsService.getIcdsList = function () {
+            function getTreatmentsSuccess(treatmentData) {
+                deferred.resolve(treatmentData.data.items);
+            }
+
+            function getTreatmentsFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getPatientsList() {
             var deferred = $q.defer();
 
-            dataStorageService.getIcds().then(
-                    function (icdData) {
-                        deferred.resolve(icdData.data.items);
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getPatients()
+                    .then(getPatientsSuccess, getPatientsFailure);
 
-        termsService.saveTerms = function (terms) {
+            function getPatientsSuccess(patientData) {
+                deferred.resolve(patientData.data.items);
+            }
+
+            function getPatientsFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function getIcdsList() {
             var deferred = $q.defer();
 
-            dataStorageService.saveTerms(terms).then(
-                    function () {
-                        deferred.resolve();
-                    },
-                    function () {
-                        deferred.reject();
-                    }
-            );
-            return deferred.promise;
-        };
+            dataStorageService.getIcds()
+                    .then(getIcdsSuccess, getIcdsFailure);
 
-        return termsService;
+            function getIcdsSuccess(icdData) {
+                deferred.resolve(icdData.data.items);
+            }
+
+            function getIcdsFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
+
+        function saveTerms(terms) {
+            var deferred = $q.defer();
+
+            dataStorageService.saveTerms(terms)
+                    .then(saveTermsSuccess, saveTermsFailure);
+
+            function saveTermsSuccess() {
+                deferred.resolve();
+            }
+
+            function saveTermsFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
     }
 })();

@@ -202,7 +202,7 @@
         </div> 
     </form>
     <button type="submit" class="btn btn-primary" data-ng-show="!PDC.allowEdit && !PDC.updating" data-ng-click="PDC.startEdit()" data-toggle="tooltip" title="Edytuj szczegóły pacjenta"><i class="fa fa-pencil"></i> Edytuj</button>
-    <button class="btn btn-primary" data-ng-show="PDC.allowEdit && !PDC.updating" data-ng-click="PDC.saveEdit()" data-ng-disabled="patient_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
+    <button class="btn btn-primary" data-ng-show="PDC.allowEdit && !PDC.updating" data-ng-click="PDC.updatePatientDetails()" data-ng-disabled="patient_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
     <button class="btn btn-warning" data-ng-show="PDC.allowEdit && !PDC.updating" data-ng-click="PDC.cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
     <button class="btn btn-default pull-right" data-ng-hide="PDC.updating" data-ui-sref="root.patients.list" data-toggle="tooltip" title="Wróć na listę pacjentów"><i class="fa fa-arrow-left"></i> Wróć</button>
     <p align="center" data-ng-show="PDC.updating"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
