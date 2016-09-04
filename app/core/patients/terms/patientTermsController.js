@@ -21,6 +21,16 @@
         vm.tableParamsPending = createTableParams();
         vm.kindsOfVisit = [{'id': 'Prywatna', 'title': 'Prywatna'}, {'id': 'NFZ', 'title': 'NFZ'}];
         vm.kindsOfTreatment = $q.when(patientsService.getKindsOfTreatment());
+        vm.employeeFilters = {
+            surname: {
+                id: 'text',
+                placeholder: 'Nazwisko'
+            },
+            name: {
+                id: 'text',
+                placeholder: 'Imię'
+            }
+        };
 
         function createTableParams() {
             var initialParams = {
@@ -35,17 +45,6 @@
             };
             return new NgTableParams(initialParams, initialSettings);
         }
-
-        vm.employeeFilters = {
-            surname: {
-                id: 'text',
-                placeholder: 'Nazwisko'
-            },
-            name: {
-                id: 'text',
-                placeholder: 'Imię'
-            }
-        };
 
         function loadPatientTermsPending() {
             vm.emptyPending = false;
