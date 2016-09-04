@@ -8,6 +8,7 @@
     run.$inject = ['$state', '$rootScope', '$httpBackend', 'AuthService', 'AUTH_EVENTS'];
     function run($state, $rootScope, $httpBackend, AuthService, AUTH_EVENTS) {
         $rootScope.$state = $state;
+        $httpBackend.whenGET(/assets\/\w+.*/).passThrough();
         $httpBackend.whenGET(/core\/\w+.*/).passThrough();
         $httpBackend.whenGET(/common\/\w+.*/).passThrough();
         $httpBackend.whenGET(/https:\/\/apex.oracle.com\/pls\/apex\/pwr\/\w+.*/).passThrough();

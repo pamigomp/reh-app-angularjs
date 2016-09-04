@@ -26,34 +26,34 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-3">
+                        <div class="col-xs-5 col-md-3">
                             <label style="padding-top: 7px; padding-bottom: 7px;">ID</label>
                         </div>
-                        <div class="col-xs-5">
+                        <div class="col-xs-5 col-md-7">
                             <p class="form-control-static">{{TPDC.termPendingDetails.patienttreatmentid}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3">
+                        <div class="col-xs-5 col-md-3">
                             <label style="padding-top: 7px; padding-bottom: 7px;">Pacjent</label>
                         </div>
-                        <div class="col-xs-5">
+                        <div class="col-xs-5 col-md-7">
                             <p class="form-control-static">{{TPDC.termPendingDetails.patient_surname + ' ' + TPDC.termPendingDetails.patient_name}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3">
+                        <div class="col-xs-5 col-md-3">
                             <label style="padding-top: 7px; padding-bottom: 7px;">Rodzaj wizyty</label>
                         </div>
-                        <div class="col-xs-5">
+                        <div class="col-xs-5 col-md-7">
                             <p class="form-control-static">{{TPDC.termPendingDetails.kindofvisit}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3">
+                        <div class="col-xs-5 col-md-3">
                             <label style="padding-top: 7px; padding-bottom: 7px;">Cena</label>
                         </div>
-                        <div class="col-xs-5">
+                        <div class="col-xs-5 col-md-7">
                             <p data-ng-show="TPDC.termPendingDetails.kindofvisit === 'NFZ'" class="form-control-static">{{0|currency}}</p>
                             <p data-ng-show="TPDC.termPendingDetails.kindofvisit === 'Prywatna'" class="form-control-static">{{TPDC.termPendingDetails.price|currency}}</p>
                         </div>
