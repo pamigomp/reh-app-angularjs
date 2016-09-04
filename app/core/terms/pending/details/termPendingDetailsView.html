@@ -38,7 +38,7 @@
                             <label style="padding-top: 7px; padding-bottom: 7px;">Pacjent</label>
                         </div>
                         <div class="col-xs-5">
-                            <p class="form-control-static">{{TPDC.termPendingDetails.patient_surname}} {{TPDC.termPendingDetails.patient_name}}</p>
+                            <p class="form-control-static">{{TPDC.termPendingDetails.patient_surname + ' ' + TPDC.termPendingDetails.patient_name}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -54,8 +54,8 @@
                             <label style="padding-top: 7px; padding-bottom: 7px;">Cena</label>
                         </div>
                         <div class="col-xs-5">
-                            <p data-ng-show="TPDC.termPendingDetails.kindofvisit === 'NFZ'" class="form-control-static">- zł</p>
-                            <p data-ng-show="TPDC.termPendingDetails.kindofvisit === 'Prywatna'" class="form-control-static">{{TPDC.termPendingDetails.price}} zł</p>
+                            <p data-ng-show="TPDC.termPendingDetails.kindofvisit === 'NFZ'" class="form-control-static">{{0|currency}}</p>
+                            <p data-ng-show="TPDC.termPendingDetails.kindofvisit === 'Prywatna'" class="form-control-static">{{TPDC.termPendingDetails.price|currency}}</p>
                         </div>
                     </div>
                     <hr>
@@ -64,14 +64,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="date"
-                                           uib-datepicker-popup="dd.MM.yyyy"
-                                           show-button-bar="false"
-                                           datepicker-options="TPDC.dateOptions"
-                                           is-open="TPDC.opened"
-                                           placeholder="Dzień"
-                                           data-ng-click="TPDC.open()" 
-                                           data-ng-model="TPDC.termPendingDetails.datehour" data-ng-disabled="!TPDC.allowEdit" required>
+                                    <input type="text" class="form-control" name="date" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="TPDC.dateOptions" is-open="TPDC.opened" placeholder="Dzień" data-ng-click="TPDC.open()" data-ng-model="TPDC.termPendingDetails.datehour" data-ng-disabled="!TPDC.allowEdit" required>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!TPDC.allowEdit" data-ng-click="TPDC.open()">
                                             <i class="fa fa-calendar"></i>

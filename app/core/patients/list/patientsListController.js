@@ -13,6 +13,21 @@
         vm.loadPatientsList = loadPatientsList;
         vm.removePatient = removePatient;
         vm.setChosen = setChosen;
+        vm.statuses = [{'id': 'Aktywny', 'title': 'Aktywny'}, {'id': 'Nieaktywny', 'title': 'Nieaktywny'}];
+        vm.tableParams = createTableParams();
+
+        function createTableParams() {
+            var initialParams = {
+                count: 10,
+                sorting: {surname: 'asc'}
+            };
+            var initialSettings = {
+                counts: [10, 25, 50, 100],
+                paginationMaxBlocks: 5,
+                paginationMinBlocks: 1
+            };
+            return new NgTableParams(initialParams, initialSettings);
+        }
 
         function loadPatientsList() {
             vm.loading = true;
@@ -25,7 +40,7 @@
                     $state.go('root.patients.list_empty');
                 } else {
                     vm.patients = patientsList;
-                    vm.tableParams = new NgTableParams({}, {dataset: vm.patients});
+                    vm.tableParams.settings({dataset: vm.patients});
                     vm.loading = false;
                 }
             }
@@ -35,11 +50,11 @@
             }
         }
 
-        function removePatient() {
+        function removePatient(pesel) {
             vm.removing = true;
             vm.errorRemove = false;
 
-            patientsService.removePatient(vm.chosenPatient.pesel)
+            patientsService.removePatient(pesel)
                     .then(removePatientSuccess, removePatientFailure);
 
             function removePatientSuccess() {

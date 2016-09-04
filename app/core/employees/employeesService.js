@@ -9,17 +9,46 @@
 
     function employeesService($q, $state, dataStorageService) {
         return {
-            getEmployeesList: getEmployeesList,
+            cancelEmployeeTerm: cancelEmployeeTerm,
+            completeEmployeeTerm: completeEmployeeTerm,
             getEmployeeDetails: getEmployeeDetails,
-            saveEmployeeDetails: saveEmployeeDetails,
-            removeEmployee: removeEmployee,
-            updateEmployeeDetails: updateEmployeeDetails,
+            getEmployeesList: getEmployeesList,
             getEmployeeTermsPending: getEmployeeTermsPending,
             getEmployeeTermsCancelled: getEmployeeTermsCancelled,
             getEmployeeTermsCompleted: getEmployeeTermsCompleted,
-            cancelEmployeeTerm: cancelEmployeeTerm,
-            completeEmployeeTerm: completeEmployeeTerm
+            getKindsOfTreatment: getKindsOfTreatment,
+            removeEmployee: removeEmployee,
+            saveEmployeeDetails: saveEmployeeDetails,
+            updateEmployeeDetails: updateEmployeeDetails
         };
+
+        function getKindsOfTreatment() {
+            var deferred = $q.defer();
+
+            dataStorageService.getTreatments()
+                    .then(getTreatmentsSuccess, getTreatmentsFailure);
+
+            function getTreatmentsSuccess(treatmentData) {
+                for (var i = 0; i < treatmentData.data.items.length; i++) {
+                    if (treatmentData.data.items[i].hasOwnProperty('kindoftreatment')) {
+                        treatmentData.data.items[i].title = treatmentData.data.items[i].kindoftreatment;
+                        treatmentData.data.items[i].id = treatmentData.data.items[i].kindoftreatment;
+                        delete treatmentData.data.items[i].kindoftreatment;
+                        delete treatmentData.data.items[i].duration;
+                        delete treatmentData.data.items[i].price;
+                        delete treatmentData.data.items[i].treatmentid;
+                    }
+                }
+
+                deferred.resolve(treatmentData.data.items);
+            }
+
+            function getTreatmentsFailure() {
+                deferred.reject();
+            }
+
+            return deferred.promise;
+        }
 
         function getEmployeesList() {
             var deferred = $q.defer();

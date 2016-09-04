@@ -5,9 +5,9 @@
 
             .controller('PatientTermsController', PatientTermsController);
 
-    PatientTermsController.$inject = ['$state', '$stateParams', 'patientsService', 'NgTableParams'];
+    PatientTermsController.$inject = ['$state', '$stateParams', '$q', 'patientsService', 'NgTableParams'];
 
-    function PatientTermsController($state, $stateParams, patientsService, NgTableParams) {
+    function PatientTermsController($state, $stateParams, $q, patientsService, NgTableParams) {
         var vm = this;
 
         vm.cancelTerm = cancelTerm;
@@ -16,6 +16,36 @@
         vm.loadPatientTermsCompleted = loadPatientTermsCompleted;
         vm.loadPatientTermsPending = loadPatientTermsPending;
         vm.setChosen = setChosen;
+        vm.tableParamsCancelled = createTableParams();
+        vm.tableParamsCompleted = createTableParams();
+        vm.tableParamsPending = createTableParams();
+        vm.kindsOfVisit = [{'id': 'Prywatna', 'title': 'Prywatna'}, {'id': 'NFZ', 'title': 'NFZ'}];
+        vm.kindsOfTreatment = $q.when(patientsService.getKindsOfTreatment());
+
+        function createTableParams() {
+            var initialParams = {
+                count: 10,
+                sorting: {datehour: 'desc'}
+            };
+            var initialSettings = {
+                filterOptions: {filterLayout: 'horizontal'},
+                counts: [10, 25, 50, 100],
+                paginationMaxBlocks: 5,
+                paginationMinBlocks: 1
+            };
+            return new NgTableParams(initialParams, initialSettings);
+        }
+
+        vm.employeeFilters = {
+            surname: {
+                id: 'text',
+                placeholder: 'Nazwisko'
+            },
+            name: {
+                id: 'text',
+                placeholder: 'Imię'
+            }
+        };
 
         function loadPatientTermsPending() {
             vm.emptyPending = false;
@@ -35,7 +65,7 @@
                 } else {
                     $state.get('root.patients.patient').data.breadcrumb = pendingTerms[0].patient_surname + ' ' + pendingTerms[0].patient_name;
                     vm.pendingTerms = pendingTerms;
-                    vm.tableParamsPending = new NgTableParams({}, {dataset: vm.pendingTerms});
+                    vm.tableParamsPending.settings({dataset: vm.pendingTerms});
                     vm.emptyPending = false;
                     vm.errorLoading = false;
                     vm.loadingPending = false;
@@ -67,7 +97,7 @@
                 } else {
                     $state.get('root.patients.patient').data.breadcrumb = cancelledTerms[0].patient_surname + ' ' + cancelledTerms[0].patient_name;
                     vm.cancelledTerms = cancelledTerms;
-                    vm.tableParamsCancelled = new NgTableParams({}, {dataset: vm.cancelledTerms});
+                    vm.tableParamsCancelled.settings({dataset: vm.cancelledTerms});
                     vm.emptyCancelled = false;
                     vm.errorLoading = false;
                     vm.loadingCancelled = false;
@@ -99,7 +129,7 @@
                 } else {
                     $state.get('root.patients.patient').data.breadcrumb = completedTerms[0].patient_surname + ' ' + completedTerms[0].patient_name;
                     vm.completedTerms = completedTerms;
-                    vm.tableParamsCompleted = new NgTableParams({}, {dataset: vm.completedTerms});
+                    vm.tableParamsCompleted.settings({dataset: vm.completedTerms});
                     vm.emptyCompleted = false;
                     vm.errorLoading = false;
                     vm.loadingCompleted = false;

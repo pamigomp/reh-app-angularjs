@@ -84,14 +84,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="dob"
-                                           uib-datepicker-popup="dd.MM.yyyy"
-                                           show-button-bar="false"
-                                           datepicker-options="PDC.dateOptions"
-                                           is-open="PDC.opened" 
-                                           placeholder="Data urodzenia"
-                                           data-ng-click="PDC.open()" 
-                                           data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required>
+                                    <input type="text" class="form-control" name="dob" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="PDC.dateOptions"  is-open="PDC.opened"  placeholder="Data urodzenia" data-ng-click="PDC.open()" data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!PDC.allowEdit" data-ng-click="PDC.open()">
                                             <i class="fa fa-calendar"></i>

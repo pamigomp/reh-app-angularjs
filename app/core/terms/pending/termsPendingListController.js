@@ -14,6 +14,43 @@
         vm.setChosen = setChosen;
         vm.cancelTerm = cancelTerm;
         vm.completeTerm = completeTerm;
+        vm.tableParams = createTableParams();
+
+        function createTableParams() {
+            var initialParams = {
+                count: 10,
+                sorting: {datehour: 'desc'}
+            };
+            var initialSettings = {
+                filterOptions: {filterLayout: 'horizontal'},
+                counts: [10, 25, 50, 100],
+                paginationMaxBlocks: 5,
+                paginationMinBlocks: 1
+            };
+            return new NgTableParams(initialParams, initialSettings);
+        }
+
+        vm.employeeFilters = {
+            surname: {
+                id: 'text',
+                placeholder: 'Nazwisko'
+            },
+            name: {
+                id: 'text',
+                placeholder: 'Imię'
+            }
+        };
+
+        vm.patientFilters = {
+            patient_surname: {
+                id: 'text',
+                placeholder: 'Nazwisko'
+            },
+            patient_name: {
+                id: 'text',
+                placeholder: 'Imię'
+            }
+        };
 
         function loadTermsPending() {
             vm.loadingPending = true;
@@ -26,7 +63,7 @@
                     $state.go('root.terms.pending_empty');
                 } else {
                     vm.pendingTerms = pendingTerms;
-                    vm.tableParams = new NgTableParams({}, {dataset: vm.pendingTerms});
+                    vm.tableParams.settings({dataset: vm.pendingTerms});
                     vm.loadingPending = false;
                 }
             }

@@ -13,6 +13,21 @@
         vm.loadEmployeesList = loadEmployeesList;
         vm.removeEmployee = removeEmployee;
         vm.setChosen = setChosen;
+        vm.statuses = [{'id': 'Aktywny', 'title': 'Aktywny'}, {'id': 'Nieaktywny', 'title': 'Nieaktywny'}];
+        vm.tableParams = createTableParams();
+
+        function createTableParams() {
+            var initialParams = {
+                count: 10,
+                sorting: {surname: 'asc'}
+            };
+            var initialSettings = {
+                counts: [10, 25, 50, 100],
+                paginationMaxBlocks: 5,
+                paginationMinBlocks: 1
+            };
+            return new NgTableParams(initialParams, initialSettings);
+        }
 
         function loadEmployeesList() {
             vm.loading = true;
@@ -25,7 +40,7 @@
                     $state.go('root.employees.list_empty');
                 } else {
                     vm.employees = employeesList;
-                    vm.tableParams = new NgTableParams({}, {dataset: vm.employees});
+                    vm.tableParams.settings({dataset: vm.employees});
                     vm.loading = false;
                 }
             }
@@ -35,11 +50,11 @@
             }
         }
 
-        function removeEmployee() {
+        function removeEmployee(employeeid) {
             vm.removing = true;
             vm.errorRemove = false;
 
-            employeesService.removeEmployee(vm.chosenEmployee.employeeid)
+            employeesService.removeEmployee(employeeid)
                     .then(removeEmployeeSuccess, removeEmployeeFailure);
 
             function removeEmployeeSuccess() {
