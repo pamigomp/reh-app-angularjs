@@ -11,7 +11,7 @@
             </div>
             <div class="table-responsive" data-ng-hide="ELC.loading">
                 <table data-ng-table="ELC.tableParams" class="table table-striped table-condensed table-hover table-bordered" show-filter="true">
-                    <tr data-ng-repeat="employee in ELC.tableParams.data track by employee.employeeid">
+                    <tr data-ng-repeat="employee in $data track by employee.employeeid">
                         <td class="col-xs-3" title="'Nazwisko'" filter="{surname: 'text'}" sortable="'surname'">{{employee.surname}}</td>
                         <td class="col-xs-3" title="'Imię'" filter="{name: 'text'}" sortable="'name'">{{employee.name}}</td>
                         <td class="col-xs-3" title="'Stanowisko'" filter="{position: 'text'}" sortable="'position'">{{employee.position}}</td>

@@ -39,8 +39,7 @@
                 if (employeesList.length === 0) {
                     $state.go('root.employees.list_empty');
                 } else {
-                    vm.employees = employeesList;
-                    vm.tableParams.settings({dataset: vm.employees});
+                    vm.tableParams.settings({dataset: employeesList});
                     vm.loading = false;
                 }
             }

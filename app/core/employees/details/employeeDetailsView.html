@@ -131,11 +131,11 @@
                     </div>
                     <div class="form-group">
                         <label>Data zatrudnienia</label>
-                        <p class="form-control-static">{{EDC.employeeDetails.employmentdate|date:'dd.MM.yyyy'}}</p>
+                        <p class="form-control-static">{{::EDC.employeeDetails.employmentdate|date:'dd.MM.yyyy'}}</p>
                     </div>
                     <div class="form-group" data-ng-hide="EDC.employeeDetails.dismissdate === undefined">
                         <label>Data rezygnacji</label>
-                        <p class="form-control-static">{{EDC.employeeDetails.dismissdate|date:'dd.MM.yyyy'}}</p>
+                        <p class="form-control-static">{{::EDC.employeeDetails.dismissdate|date:'dd.MM.yyyy'}}</p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="informations">Dodatkowe informacje</label>

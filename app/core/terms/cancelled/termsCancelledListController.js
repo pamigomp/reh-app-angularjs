@@ -61,8 +61,7 @@
                 if (cancelledTerms.length === 0) {
                     $state.go('root.terms.cancelled_empty');
                 } else {
-                    vm.cancelledTerms = cancelledTerms;
-                    vm.tableParams.settings({dataset: vm.cancelledTerms});
+                    vm.tableParams.settings({dataset: cancelledTerms});
                     vm.loadingCancelled = false;
                 }
             }

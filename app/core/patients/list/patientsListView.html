@@ -11,7 +11,7 @@
             </div>
             <div class="table-responsive" data-ng-hide="PLC.loading">
                 <table data-ng-table="PLC.tableParams" class="table table-striped table-condensed table-hover table-bordered" show-filter="true">
-                    <tr data-ng-repeat="patient in PLC.tableParams.data track by patient.pesel">
+                    <tr data-ng-repeat="patient in $data track by patient.pesel">
                         <td class="col-xs-2" title="'PESEL'" filter="{pesel: 'number'}" sortable="'pesel'">{{patient.pesel}}</td>
                         <td class="col-xs-3" title="'Nazwisko'" filter="{surname: 'text'}" sortable="'surname'">{{patient.surname}}</td>
                         <td class="col-xs-3" title="'Imię'" filter="{name: 'text'}" sortable="'name'">{{patient.name}}</td>

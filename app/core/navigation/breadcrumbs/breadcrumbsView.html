@@ -2,8 +2,8 @@
     <ol class="breadcrumb">
         <li data-ng-repeat="state in $state.$current.path" data-ng-class="{active: $last}">
             <span data-ng-switch="$last">
-                <span data-ng-switch-when="false"> <a href="#{{state.url.format($stateParams)}}">{{state.data.breadcrumb}}</a> </span>
-                <span data-ng-switch-when="true"> {{state.data.breadcrumb}} </span>
+                <span data-ng-switch-when="false"> <a href="#{{::state.url.format($stateParams)}}">{{state.data.breadcrumb}}</a> </span>
+                <span data-ng-switch-when="true"> {{::state.data.breadcrumb}} </span>
             </span>
         </li>
     </ol>

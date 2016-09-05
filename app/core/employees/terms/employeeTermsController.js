@@ -16,9 +16,9 @@
         vm.loadEmployeeTermsCompleted = loadEmployeeTermsCompleted;
         vm.loadEmployeeTermsPending = loadEmployeeTermsPending;
         vm.setChosen = setChosen;
-        vm.tableParamsCancelled = createTableParams();
-        vm.tableParamsCompleted = createTableParams();
-        vm.tableParamsPending = createTableParams();
+        vm.tableParamsCancelled = createTableParams('desc');
+        vm.tableParamsCompleted = createTableParams('desc');
+        vm.tableParamsPending = createTableParams('asc');
         vm.kindsOfVisit = [{'id': 'Prywatna', 'title': 'Prywatna'}, {'id': 'NFZ', 'title': 'NFZ'}];
         vm.kindsOfTreatment = $q.when(employeesService.getKindsOfTreatment());
         vm.patientFilters = {
@@ -32,10 +32,10 @@
             }
         };
 
-        function createTableParams() {
+        function createTableParams(order) {
             var initialParams = {
                 count: 10,
-                sorting: {datehour: 'desc'}
+                sorting: {datehour: order}
             };
             var initialSettings = {
                 filterOptions: {filterLayout: 'horizontal'},
@@ -63,8 +63,7 @@
                     vm.loadingPending = false;
                 } else {
                     $state.get('root.employees.employee').data.breadcrumb = pendingTerms[0].surname + ' ' + pendingTerms[0].name;
-                    vm.pendingTerms = pendingTerms;
-                    vm.tableParamsPending.settings({dataset: vm.pendingTerms});
+                    vm.tableParamsPending.settings({dataset: pendingTerms});
                     vm.emptyPending = false;
                     vm.errorLoading = false;
                     vm.loadingPending = false;
@@ -95,8 +94,7 @@
                     vm.loadingCancelled = false;
                 } else {
                     $state.get('root.employees.employee').data.breadcrumb = cancelledTerms[0].surname + ' ' + cancelledTerms[0].name;
-                    vm.cancelledTerms = cancelledTerms;
-                    vm.tableParamsCancelled.settings({dataset: vm.cancelledTerms});
+                    vm.tableParamsCancelled.settings({dataset: cancelledTerms});
                     vm.emptyCancelled = false;
                     vm.errorLoading = false;
                     vm.loadingCancelled = false;
@@ -127,8 +125,7 @@
                     vm.loadingCompleted = false;
                 } else {
                     $state.get('root.employees.employee').data.breadcrumb = completedTerms[0].surname + ' ' + completedTerms[0].name;
-                    vm.completedTerms = completedTerms;
-                    vm.tableParamsCompleted.settings({dataset: vm.completedTerms});
+                    vm.tableParamsCompleted.settings({dataset: completedTerms});
                     vm.emptyCompleted = false;
                     vm.errorLoading = false;
                     vm.loadingCompleted = false;

@@ -61,8 +61,7 @@
                 if (completedTerms.length === 0) {
                     $state.go('root.terms.completed_empty');
                 } else {
-                    vm.completedTerms = completedTerms;
-                    vm.tableParams.settings({dataset: vm.completedTerms});
+                    vm.tableParams.settings({dataset: completedTerms});
                     vm.loadingCompleted = false;
                 }
             }

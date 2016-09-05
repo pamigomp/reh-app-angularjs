@@ -19,7 +19,7 @@
         function createTableParams() {
             var initialParams = {
                 count: 10,
-                sorting: {datehour: 'desc'}
+                sorting: {datehour: 'asc'}
             };
             var initialSettings = {
                 filterOptions: {filterLayout: 'horizontal'},
@@ -62,8 +62,7 @@
                 if (pendingTerms.length === 0) {
                     $state.go('root.terms.pending_empty');
                 } else {
-                    vm.pendingTerms = pendingTerms;
-                    vm.tableParams.settings({dataset: vm.pendingTerms});
+                    vm.tableParams.settings({dataset: pendingTerms});
                     vm.loadingPending = false;
                 }
             }

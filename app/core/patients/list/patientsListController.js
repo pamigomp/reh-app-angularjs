@@ -39,8 +39,7 @@
                 if (patientsList.length === 0) {
                     $state.go('root.patients.list_empty');
                 } else {
-                    vm.patients = patientsList;
-                    vm.tableParams.settings({dataset: vm.patients});
+                    vm.tableParams.settings({dataset: patientsList});
                     vm.loading = false;
                 }
             }
