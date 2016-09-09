@@ -57,7 +57,7 @@
                     .then(removePatientSuccess, removePatientFailure);
 
             function removePatientSuccess() {
-                if (vm.patients.length - 1 === 0) {
+                if (vm.tableParams.total() - 1 === 0) {
                     $state.go('root.patients.list_empty');
                 } else {
                     vm.removing = false;

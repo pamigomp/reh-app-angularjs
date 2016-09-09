@@ -31,7 +31,6 @@
 
         function loadEmployeesList() {
             vm.loading = true;
-
             employeesService.getEmployeesList()
                     .then(getEmployeesListSuccess, getEmployeesListFailure);
 
@@ -41,6 +40,7 @@
                 } else {
                     vm.tableParams.settings({dataset: employeesList});
                     vm.loading = false;
+                    console.log(vm.tableParams.total());
                 }
             }
 
@@ -57,7 +57,7 @@
                     .then(removeEmployeeSuccess, removeEmployeeFailure);
 
             function removeEmployeeSuccess() {
-                if (vm.employees.length - 1 === 0) {
+                if (vm.tableParams.total() - 1 === 0) {
                     $state.go('root.employees.list_empty');
                 } else {
                     vm.removing = false;
