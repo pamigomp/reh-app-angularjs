@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <form class="row" role="form" name="term_pending_details" data-ng-init="TPDC.loadTermPendingDetails()">
+    <form class="row" role="form" name="termPendingDetails" data-ng-init="TPDC.loadTermPendingDetails()">
         <div class="col-lg-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -81,8 +81,8 @@
                         </fieldset>
                     </div>
                     <div class="form-group required" data-ng-init="TPDC.loadTreatmentsList()">
-                        <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
-                        <select class="form-control" data-ng-options="treatment.treatmentid as treatment.kindoftreatment + ' (' + treatment.price + ' zł/' + treatment.duration +' min.)' for treatment in TPDC.treatmentsList|orderBy:'kindoftreatment'" data-ng-model="TPDC.termPendingDetails.treatmentid" name="kindoftreatment" data-ng-disabled="!TPDC.allowEdit" required></select>
+                        <label class="control-label" for="kindOfTreatment">Rodzaj zabiegu</label>
+                        <select class="form-control" data-ng-options="treatment.treatmentid as treatment.kindoftreatment + ' (' + treatment.price + ' zł/' + treatment.duration +' min.)' for treatment in TPDC.treatmentsList|orderBy:'kindoftreatment'" data-ng-model="TPDC.termPendingDetails.treatmentid" name="kindOfTreatment" data-ng-disabled="!TPDC.allowEdit" required></select>
                     </div>
                     <div class="form-group required" data-ng-init="TPDC.loadRoomsList()">
                         <label class="control-label" for="roomNumber">Numer pokoju</label>
@@ -93,15 +93,15 @@
                         <select class="form-control" data-ng-options="employee.employeeid as employee.degree + ' ' + employee.surname + ' ' + employee.name for employee in TPDC.employeesList|orderBy:'surname'" data-ng-model="TPDC.termPendingDetails.employeeid" name="employee" data-ng-disabled="!TPDC.allowEdit" required></select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="additionalinformations">Dodatkowe informacje</label>
-                        <textarea name="additionalinformations" data-ng-model="TPDC.termPendingDetails.additionalinformations" class="form-control" maxlength="512" rows="5" data-ng-disabled="!TPDC.allowEdit" placeholder="Dodatkowe informacje"></textarea>
+                        <label class="control-label" for="additionalInformations">Dodatkowe informacje</label>
+                        <textarea name="additionalInformations" data-ng-model="TPDC.termPendingDetails.additionalinformations" class="form-control" maxlength="512" rows="5" data-ng-disabled="!TPDC.allowEdit" placeholder="Dodatkowe informacje"></textarea>
                     </div>
                 </div>
             </div>
         </div>
     </form>
     <button type="submit" class="btn btn-primary" data-ng-show="!TPDC.allowEdit && !TPDC.updating" data-ng-click="TPDC.startEdit()" data-toggle="tooltip" title="Edytuj szczegóły terminu"><i class="fa fa-pencil"></i> Edytuj</button>
-    <button class="btn btn-primary" data-ng-show="TPDC.allowEdit && !TPDC.updating" data-ng-click="TPDC.updateTermPendingDetails()" data-ng-disabled="term_pending_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
+    <button class="btn btn-primary" data-ng-show="TPDC.allowEdit && !TPDC.updating" data-ng-click="TPDC.updateTermPendingDetails()" data-ng-disabled="termPendingDetails.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
     <button class="btn btn-warning" data-ng-show="TPDC.allowEdit && !TPDC.updating" data-ng-click="TPDC.cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
     <button class="btn btn-default pull-right" data-ng-hide="TPDC.updating" data-ui-sref="root.terms.pending" data-toggle="tooltip" title="Wróć na listę terminów"><i class="fa fa-arrow-left"></i> Wróć</button>
     <p align="center" data-ng-show="TPDC.updating"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>

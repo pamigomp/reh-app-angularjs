@@ -11,59 +11,59 @@
             </div>
         </div>
     </div>
-    <form class="row" role="form" name="new_patient">
+    <form class="row" role="form" name="newPatient">
         <div class="col-lg-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Dane personalne</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.pesel.$valid ? 'has-success' : (newPatient.pesel.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="pesel">PESEL</label>
                         <input name="pesel" type="text" class="form-control" data-ng-blur="peselBlur = true" data-ng-model="PCC.patientDetails.pesel" data-ng-minlength="11" data-ng-maxlength="11" data-ng-pattern="/^[0-9]{11}$/" placeholder="PESEL" required>
-                        <p class="help-block" data-ng-show="peselBlur && new_patient.pesel.$invalid">
-                            Wprowadź PESEL pacjenta, składający się z 11 cyfr.
+                        <p class="help-block" data-ng-show="peselBlur && newPatient.pesel.$invalid">
+                            Wprowadź PESEL pacjenta składający się z 11 cyfr.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.surname.$valid ? 'has-success' : (newPatient.surname.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="surname">Nazwisko</label>
                         <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="PCC.patientDetails.surname" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required>
-                        <p class="help-block" data-ng-show="surnameBlur && new_patient.surname.$error.minlength">
-                            Wprowadź nazwisko pacjenta, składające się z minimum 2 znaków.
+                        <p class="help-block" data-ng-show="surnameBlur && newPatient.surname.$error.minlength">
+                            Wprowadź nazwisko pacjenta składające się z minimum 2 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="surnameBlur && new_patient.surname.$error.maxlength">
-                            Wprowadź nazwisko pacjenta, składające się z maksymalnie 32 znaków.
+                        <p class="help-block" data-ng-show="surnameBlur && newPatient.surname.$error.maxlength">
+                            Wprowadź nazwisko pacjenta składające się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.name.$valid ? 'has-success' : (newPatient.name.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="name">Imię</label>
                         <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="PCC.patientDetails.name" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required>
-                        <p class="help-block" data-ng-show="nameBlur && new_patient.name.$error.minlength">
-                            Wprowadź imię pacjenta, składające się z minimum 2 znaków.
+                        <p class="help-block" data-ng-show="nameBlur && newPatient.name.$error.minlength">
+                            Wprowadź imię pacjenta składające się z minimum 2 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="nameBlur && new_patient.name.$error.maxlength">
-                            Wprowadź imię pacjenta, składające się z maksymalnie 32 znaków.
+                        <p class="help-block" data-ng-show="nameBlur && newPatient.name.$error.maxlength">
+                            Wprowadź imię pacjenta składające się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.sex.$valid ? 'has-success' : (newPatient.sex.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="sex">Płeć</label>
                         <div class="radio">
                             <label>
-                                <input value="K" data-ng-model="PCC.patientDetails.sex" type="radio" data-ng-required="!PCC.patientDetails.sex">Kobieta
+                                <input name="sex" value="K" data-ng-model="PCC.patientDetails.sex" type="radio" data-ng-required="!PCC.patientDetails.sex">Kobieta
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input value="M" data-ng-model="PCC.patientDetails.sex" type="radio" data-ng-required="!PCC.patientDetails.sex">Mężczyzna
+                                <input name="sex" value="M" data-ng-model="PCC.patientDetails.sex" type="radio" data-ng-required="!PCC.patientDetails.sex">Mężczyzna
                             </label>
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.dob.$valid ? 'has-success' : (newPatient.dob.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="dob">Data urodzenia</label>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="PCC.dateOptions" is-open="PCC.opened" placeholder="Data urodzenia" data-ng-click="PCC.open()" data-ng-model="PCC.patientDetails.dob" required>
+                                    <input type="text" name="dob" class="form-control" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="PCC.dateOptions" is-open="PCC.opened" placeholder="Data urodzenia" data-ng-click="PCC.open()" data-ng-model="PCC.patientDetails.dob" required>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-click="PCC.open()">
                                             <i class="fa fa-calendar"></i>
@@ -73,27 +73,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="newPatient.email.$valid ? 'has-success' : (newPatient.email.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="email">E-mail</label>
                         <input name="email" type="email" data-ng-model="PCC.patientDetails.email" data-ng-blur="emailBlur = true" data-ng-minlength="5" data-ng-maxlength="64" class="form-control" placeholder="E-mail">
-                        <p class="help-block" data-ng-show="emailBlur && new_patient.email.$error.minlength && !new_patient.email.$error.email">
-                            Wprowadź e-mail pacjenta, składający się z minimum 5 znaków.
+                        <p class="help-block" data-ng-show="emailBlur && newPatient.email.$error.minlength && !newPatient.email.$error.email">
+                            Wprowadź e-mail pacjenta składający się z minimum 5 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="emailBlur && new_patient.email.$error.maxlength && !new_patient.email.$error.email">
-                            Wprowadź e-mail pacjenta, składający się z maksymalnie 64 znaków.
+                        <p class="help-block" data-ng-show="emailBlur && newPatient.email.$error.maxlength && !newPatient.email.$error.email">
+                            Wprowadź e-mail pacjenta składający się z maksymalnie 64 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="emailBlur && new_patient.email.$error.email">
+                        <p class="help-block" data-ng-show="emailBlur && newPatient.email.$error.email">
                             Wprowadź poprawny format e-maila pacjenta, np. przyklad@rehapp.pl 
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="newPatient.phone.$valid ? 'has-success' : (newPatient.phone.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="phone">Telefon kontaktowy</label>
-                        <input name="phone" type="text" data-ng-model="PCC.patientDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy">
-                        <p class="help-block" data-ng-show="phoneBlur && new_patient.phone.$error.pattern">
+                        <input name="phone" type="tel" data-ng-model="PCC.patientDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy">
+                        <p class="help-block" data-ng-show="phoneBlur && newPatient.phone.$error.pattern">
                             Wprowadź poprawny format telefonu pacjenta (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="newPatient.informations.$valid ? 'has-success' : (newPatient.informations.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="informations">Dodatkowe informacje</label>
                         <textarea name="informations" class="form-control" data-ng-model="PCC.patientDetails.informations" maxlength="512" rows="5" placeholder="Dodatkowe informacje"></textarea>
                     </div>
@@ -107,40 +107,40 @@
                     <h3 class="panel-title">Adres zamieszkania</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.street.$valid ? 'has-success' : (newPatient.street.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="street">Ulica</label>
                         <input name="street" type="text" class="form-control" data-ng-model="PCC.patientDetails.street" data-ng-blur="streetBlur = true" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required>
-                        <p class="help-block" data-ng-show="streetBlur && new_patient.street.$error.minlength">
+                        <p class="help-block" data-ng-show="streetBlur && newPatient.street.$error.minlength">
                             Nazwa ulicy powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="streetBlur && new_patient.street.$error.maxlength">
+                        <p class="help-block" data-ng-show="streetBlur && newPatient.street.$error.maxlength">
                             Nazwa ulicy powinna składać się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
-                        <label class="control-label" for="postal_code">Kod pocztowy</label>
-                        <input name="postal_code" type="text" class="form-control" data-ng-model="PCC.patientDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
-                        <p class="help-block" data-ng-show="postalCodeBlur && new_patient.postal_code.$error.pattern">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.postalCode.$valid ? 'has-success' : (newPatient.postalCode.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="postalCode">Kod pocztowy</label>
+                        <input name="postalCode" type="text" class="form-control" data-ng-model="PCC.patientDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
+                        <p class="help-block" data-ng-show="postalCodeBlur && newPatient.postalCode.$error.pattern">
                             Wprowadź poprawny format kodu pocztowego, np. 87-800.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.city.$valid ? 'has-success' : (newPatient.city.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="city">Miejscowość</label>
                         <input name="city" type="text" class="form-control" data-ng-model="PCC.patientDetails.city" data-ng-blur="cityBlur = true" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required>
-                        <p class="help-block" data-ng-show="cityBlur && new_patient.city.$error.minlength">
+                        <p class="help-block" data-ng-show="cityBlur && newPatient.city.$error.minlength">
                             Nazwa miejscowości powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="cityBlur && new_patient.city.$error.maxlength">
+                        <p class="help-block" data-ng-show="cityBlur && newPatient.city.$error.maxlength">
                             Nazwa miejscowości powinna składać się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newPatient.country.$valid ? 'has-success' : (newPatient.country.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="country">Kraj</label>
                         <input name="country" type="text" class="form-control" data-ng-model="PCC.patientDetails.country" data-ng-blur="countryBlur = true" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required>
-                        <p class="help-block" data-ng-show="countryBlur && new_patient.country.$error.minlength">
+                        <p class="help-block" data-ng-show="countryBlur && newPatient.country.$error.minlength">
                             Nazwa państwa powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="countryBlur && new_patient.country.$error.maxlength">
+                        <p class="help-block" data-ng-show="countryBlur && newPatient.country.$error.maxlength">
                             Nazwa państwa powinna składać się z maksymalnie 64 znaków.
                         </p>
                     </div>
@@ -148,7 +148,7 @@
             </div>
         </div> 
     </form>
-    <button type="submit" class="btn btn-primary" data-ng-click="PCC.savePatientDetails()" data-ng-hide="PCC.submitting" data-ng-disabled="new_patient.$invalid" data-toggle="tooltip" title="Dodaj nowego pacjenta"><i class="fa fa-plus"></i> Dodaj</button>
+    <button type="submit" class="btn btn-primary" data-ng-click="PCC.savePatientDetails()" data-ng-hide="PCC.submitting" data-ng-disabled="newPatient.$invalid" data-toggle="tooltip" title="Dodaj nowego pacjenta"><i class="fa fa-plus"></i> Dodaj</button>
     <button class="btn btn-default" data-ui-sref="root.patients.list" data-ng-hide="PCC.submitting" data-toggle="tooltip" title="Wróć na listę pacjentów"><i class="fa fa-times"></i> Anuluj</button>
     <p align="center" data-ng-show="PCC.submitting"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
 </div>

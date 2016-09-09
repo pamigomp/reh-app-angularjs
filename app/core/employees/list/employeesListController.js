@@ -31,6 +31,7 @@
 
         function loadEmployeesList() {
             vm.loading = true;
+
             employeesService.getEmployeesList()
                     .then(getEmployeesListSuccess, getEmployeesListFailure);
 
@@ -40,7 +41,6 @@
                 } else {
                     vm.tableParams.settings({dataset: employeesList});
                     vm.loading = false;
-                    console.log(vm.tableParams.total());
                 }
             }
 

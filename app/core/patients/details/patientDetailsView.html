@@ -32,59 +32,59 @@
             </div>
         </div>
     </div>
-    <form class="row" role="form" name="patient_details" data-ng-init="PDC.loadPatientDetails()">
+    <form class="row" role="form" name="patientDetails" data-ng-init="PDC.loadPatientDetails()">
         <div class="col-lg-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Dane personalne</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group required">
+                    <div class="form-grouprequired">
                         <label class="control-label" for="pesel">PESEL</label>
                         <input name="pesel" type="text" class="form-control" data-ng-blur="peselBlur = true" data-ng-value="PDC.patientDetails.pesel" data-ng-disabled="true" data-ng-minlength="11" data-ng-maxlength="11" data-ng-pattern="/^[0-9]{11}$/" placeholder="PESEL" required>
-                        <p class="help-block" data-ng-show="peselBlur && patient_details.pesel.$invalid">
-                            Wprowadź PESEL pacjenta, składający się z 11 cyfr.
+                        <p class="help-block" data-ng-show="peselBlur && patientDetails.pesel.$invalid">
+                            Wprowadź PESEL pacjenta składający się z 11 cyfr.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.surname.$valid ? 'has-success' : (patientDetails.surname.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="surname">Nazwisko</label>
                         <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="PDC.patientDetails.surname" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required>
-                        <p class="help-block" data-ng-show="surnameBlur && patient_details.surname.$error.minlength">
-                            Wprowadź nazwisko pacjenta, składające się z minimum 2 znaków.
+                        <p class="help-block" data-ng-show="surnameBlur && patientDetails.surname.$error.minlength">
+                            Wprowadź nazwisko pacjenta składające się z minimum 2 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="surnameBlur && patient_details.surname.$error.maxlength">
-                            Wprowadź nazwisko pacjenta, składające się z maksymalnie 32 znaków.
+                        <p class="help-block" data-ng-show="surnameBlur && patientDetails.surname.$error.maxlength">
+                            Wprowadź nazwisko pacjenta składające się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.name.$valid ? 'has-success' : (patientDetails.name.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="name">Imię</label>
                         <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="PDC.patientDetails.name" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required>
-                        <p class="help-block" data-ng-show="nameBlur && patient_details.name.$error.minlength">
-                            Wprowadź imię pacjenta, składające się z minimum 2 znaków.
+                        <p class="help-block" data-ng-show="nameBlur && patientDetails.name.$error.minlength">
+                            Wprowadź imię pacjenta składające się z minimum 2 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="nameBlur && patient_details.name.$error.maxlength">
-                            Wprowadź imię pacjenta, składające się z maksymalnie 32 znaków.
+                        <p class="help-block" data-ng-show="nameBlur && patientDetails.name.$error.maxlength">
+                            Wprowadź imię pacjenta składające się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.sex.$valid ? 'has-success' : (patientDetails.sex.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="sex">Płeć</label>
                         <div class="radio">
                             <label>
-                                <input value="K" data-ng-model="PDC.patientDetails.sex" data-ng-disabled="!PDC.allowEdit" type="radio" data-ng-required="!PDC.patientDetails.sex">Kobieta
+                                <input value="K" name="sex" data-ng-model="PDC.patientDetails.sex" data-ng-disabled="!PDC.allowEdit" type="radio" data-ng-required="!PDC.patientDetails.sex">Kobieta
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input value="M" data-ng-model="PDC.patientDetails.sex" data-ng-disabled="!PDC.allowEdit" type="radio" data-ng-required="!PDC.patientDetails.sex">Mężczyzna
+                                <input value="M" name="sex" data-ng-model="PDC.patientDetails.sex" data-ng-disabled="!PDC.allowEdit" type="radio" data-ng-required="!PDC.patientDetails.sex">Mężczyzna
                             </label>
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.dob.$valid ? 'has-success' : (patientDetails.dob.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="dob">Data urodzenia</label>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="dob" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="PDC.dateOptions"  is-open="PDC.opened"  placeholder="Data urodzenia" data-ng-click="PDC.open()" data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required>
+                                    <input type="text" class="form-control" name="dob" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="PDC.dateOptions" is-open="PDC.opened" placeholder="Data urodzenia" data-ng-click="PDC.open()" data-ng-model="PDC.patientDetails.dob" data-ng-disabled="!PDC.allowEdit" required>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!PDC.allowEdit" data-ng-click="PDC.open()">
                                             <i class="fa fa-calendar"></i>
@@ -94,27 +94,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="patientDetails.email.$valid ? 'has-success' : (patientDetails.email.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="email">E-mail</label>
                         <input name="email" type="email" data-ng-model="PDC.patientDetails.email" data-ng-blur="emailBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="5" data-ng-maxlength="64" class="form-control" placeholder="E-mail">
-                        <p class="help-block" data-ng-show="emailBlur && patient_details.email.$error.minlength && !patient_details.email.$error.email">
-                            Wprowadź e-mail pacjenta, składający się z minimum 5 znaków.
+                        <p class="help-block" data-ng-show="emailBlur && patientDetails.email.$error.minlength && !patientDetails.email.$error.email">
+                            Wprowadź e-mail pacjenta składający się z minimum 5 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="emailBlur && patient_details.email.$error.maxlength && !patient_details.email.$error.email">
-                            Wprowadź e-mail pacjenta, składający się z maksymalnie 64 znaków.
+                        <p class="help-block" data-ng-show="emailBlur && patientDetails.email.$error.maxlength && !patientDetails.email.$error.email">
+                            Wprowadź e-mail pacjenta składający się z maksymalnie 64 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="emailBlur && patient_details.email.$error.email">
+                        <p class="help-block" data-ng-show="emailBlur && patientDetails.email.$error.email">
                             Wprowadź poprawny format e-maila pacjenta, np. przyklad@rehapp.pl 
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="patientDetails.phone.$valid ? 'has-success' : (patientDetails.phone.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="phone">Telefon kontaktowy</label>
-                        <input name="phone" type="text" data-ng-model="PDC.patientDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy">
-                        <p class="help-block" data-ng-show="phoneBlur && patient_details.phone.$error.pattern">
+                        <input name="phone" type="tel" data-ng-model="PDC.patientDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy">
+                        <p class="help-block" data-ng-show="phoneBlur && patientDetails.phone.$error.pattern">
                             Wprowadź poprawny format telefonu pacjenta (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.status.$valid ? 'has-success' : (patientDetails.status.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="status">Status</label>
                         <select class="form-control" data-ng-model="PDC.patientDetails.status" name="status" data-ng-blur="statusBlur = true" data-ng-disabled="!PDC.allowEdit" required>
                             <option selected disabled style="display: none" value="">Proszę wybrać status</option>
@@ -139,7 +139,7 @@
                         <label>Data rezygnacji</label>
                         <p class="form-control-static">{{::patientDetails.dismissdate|date:'dd.MM.yyyy'}}</p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="patientDetails.informations.$valid ? 'has-success' : (patientDetails.informations.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="informations">Dodatkowe informacje</label>
                         <textarea name="informations" data-ng-model="PDC.patientDetails.informations" class="form-control" maxlength="512" rows="5" data-ng-disabled="!PDC.allowEdit" placeholder="Dodatkowe informacje"></textarea>
                     </div>
@@ -153,40 +153,40 @@
                     <h3 class="panel-title">Adres zamieszkania</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.street.$valid ? 'has-success' : (patientDetails.street.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="street">Ulica</label>
                         <input name="street" type="text" class="form-control" data-ng-model="PDC.patientDetails.street" data-ng-blur="streetBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required>
-                        <p class="help-block" data-ng-show="streetBlur && patient_details.street.$error.minlength">
+                        <p class="help-block" data-ng-show="streetBlur && patientDetails.street.$error.minlength">
                             Nazwa ulicy powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="streetBlur && patient_details.street.$error.maxlength">
+                        <p class="help-block" data-ng-show="streetBlur && patientDetails.street.$error.maxlength">
                             Nazwa ulicy powinna składać się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
-                        <label class="control-label" for="postal_code">Kod pocztowy</label>
-                        <input name="postal_code" type="text" class="form-control" data-ng-model="PDC.patientDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
-                        <p class="help-block" data-ng-show="postalCodeBlur && patient_details.postal_code.$error.pattern">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.postalCode.$valid ? 'has-success' : (patientDetails.postalCode.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="postalCode">Kod pocztowy</label>
+                        <input name="postalCode" type="text" class="form-control" data-ng-model="PDC.patientDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
+                        <p class="help-block" data-ng-show="postalCodeBlur && patientDetails.postalCode.$error.pattern">
                             Wprowadź poprawny format kodu pocztowego, np. 87-800.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.city.$valid ? 'has-success' : (patientDetails.city.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="city">Miejscowość</label>
                         <input name="city" type="text" class="form-control" data-ng-model="PDC.patientDetails.city" data-ng-blur="cityBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required>
-                        <p class="help-block" data-ng-show="cityBlur && patient_details.city.$error.minlength">
+                        <p class="help-block" data-ng-show="cityBlur && patientDetails.city.$error.minlength">
                             Nazwa miejscowości powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="cityBlur && patient_details.city.$error.maxlength">
+                        <p class="help-block" data-ng-show="cityBlur && patientDetails.city.$error.maxlength">
                             Nazwa miejscowości powinna składać się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="patientDetails.country.$valid ? 'has-success' : (patientDetails.country.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="country">Kraj</label>
                         <input name="country" type="text" class="form-control" data-ng-model="PDC.patientDetails.country" data-ng-blur="countryBlur = true" data-ng-disabled="!PDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required>
-                        <p class="help-block" data-ng-show="countryBlur && patient_details.country.$error.minlength">
+                        <p class="help-block" data-ng-show="countryBlur && patientDetails.country.$error.minlength">
                             Nazwa państwa powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="countryBlur && patient_details.country.$error.maxlength">
+                        <p class="help-block" data-ng-show="countryBlur && patientDetails.country.$error.maxlength">
                             Nazwa państwa powinna składać się z maksymalnie 64 znaków.
                         </p>
                     </div>
@@ -195,7 +195,7 @@
         </div> 
     </form>
     <button type="submit" class="btn btn-primary" data-ng-show="!PDC.allowEdit && !PDC.updating" data-ng-click="PDC.startEdit()" data-toggle="tooltip" title="Edytuj szczegóły pacjenta"><i class="fa fa-pencil"></i> Edytuj</button>
-    <button class="btn btn-primary" data-ng-show="PDC.allowEdit && !PDC.updating" data-ng-click="PDC.updatePatientDetails()" data-ng-disabled="patient_details.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
+    <button class="btn btn-primary" data-ng-show="PDC.allowEdit && !PDC.updating" data-ng-click="PDC.updatePatientDetails()" data-ng-disabled="patientDetails.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
     <button class="btn btn-warning" data-ng-show="PDC.allowEdit && !PDC.updating" data-ng-click="PDC.cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
     <button class="btn btn-default pull-right" data-ng-hide="PDC.updating" data-ui-sref="root.patients.list" data-toggle="tooltip" title="Wróć na listę pacjentów"><i class="fa fa-arrow-left"></i> Wróć</button>
     <p align="center" data-ng-show="PDC.updating"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>

@@ -4,21 +4,22 @@
             <h1 class="page-header">Nowy termin</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="TCC.errorCreate">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="TCC.errorCreate">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas umawiania nowego terminu.
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-ng-show="TCC.errorLoadingPatients">
         <div class="col-lg-12">
-            <div class="alert alert-danger" role="alert" data-ng-show="TCC.errorLoadingPatients">
+            <div class="alert alert-danger" role="alert">
                 <strong>Błąd!</strong> Wystąpił problem podczas pobierania listy pacjentów.
             </div>
         </div>
     </div>
-    <form role="form" name="choose_patient">
+    <p align="center" data-ng-show="TCC.loadingPatients"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+    <form role="form" name="choosePatient" data-ng-hide="TCC.loadingPatients">
         <div class="row">
             <div class="col-lg-6">
                 <div class="panel panel-primary">
@@ -35,8 +36,8 @@
             </div>
         </div>
     </form>
-    <form role="form" name="choose_kindofvisit">
-        <div class="row" data-ng-show="choose_patient.$valid">
+    <form role="form" name="chooseKindOfVisit">
+        <div class="row" data-ng-show="choosePatient.$valid">
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -44,7 +45,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group required">
-                            <label class="control-label" for="kindofvisit">Rodzaj wizyty</label>
+                            <label class="control-label" for="kindOfVisit">Rodzaj wizyty</label>
                             <div class="radio">
                                 <label>
                                     <input value="1" data-ng-model="TCC.termDetails.visitId" type="radio" data-ng-required="!TCC.termDetails.visitId">NFZ
@@ -61,8 +62,8 @@
             </div>
         </div>
     </form>
-    <form role="form" name="fill_referral">
-        <div class="row" data-ng-show="choose_patient.$valid && TCC.termDetails.visitId === '1'">
+    <form role="form" name="fillReferral">
+        <div class="row" data-ng-show="choosePatient.$valid && TCC.termDetails.visitId === '1'">
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -94,15 +95,15 @@
                         <div class="form-group required">
                             <label class="control-label" for="regon">REGON</label>
                             <input name="regon" type="text" class="form-control" data-ng-model="TCC.termDetails.regon" data-ng-blur="regonBlur = true" placeholder="REGON" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" required>
-                            <p class="help-block" data-ng-show="regonBlur && fill_referral.regon.$invalid">
-                                Wprowadź REGON przychodni zlecającej zabieg, składający się z 9 cyfr.
+                            <p class="help-block" data-ng-show="regonBlur && fillReferral.regon.$invalid">
+                                Wprowadź REGON przychodni zlecającej zabieg składający się z 9 cyfr.
                             </p>
                         </div>
                         <div class="form-group required">
                             <label class="control-label" for="resortCode">Kod resortowy cz. VII</label>
                             <input name="resortCode" type="text" class="form-control" data-ng-model="TCC.termDetails.resortCode" data-ng-blur="resortCodeBlur = true" placeholder="Kod resortowy" data-ng-minlength="3" data-ng-maxlength="3" data-ng-pattern="/^[0-9]{3}$/" required>
-                            <p class="help-block" data-ng-show="resortCodeBlur && fill_referral.resortCode.$invalid">
-                                Wprowadź kod resortowy cz. VII przychodni zlecającej zabieg, składający się z 3 cyfr.
+                            <p class="help-block" data-ng-show="resortCodeBlur && fillReferral.resortCode.$invalid">
+                                Wprowadź kod resortowy cz. VII przychodni zlecającej zabieg składający się z 3 cyfr.
                             </p>
                         </div>
                         <div class="form-group">
@@ -120,8 +121,8 @@
                         <div class="form-group required">
                             <label class="control-label" for="doctorNumber">Numer lekarza wystawiającego</label>
                             <input name="doctorNumber" type="text" class="form-control" data-ng-model="TCC.termDetails.doctorNumber" data-ng-blur="doctorNumberBlur = true" placeholder="Numer lekarza wystawiającego" data-ng-pattern="/^[0-9]+$/" required>
-                            <p class="help-block" data-ng-show="doctorNumberBlur && fill_referral.doctorNumber.$invalid">
-                                Wprowadź numer lekarza wystawiającego, składający się z cyfr.
+                            <p class="help-block" data-ng-show="doctorNumberBlur && fillReferral.doctorNumber.$invalid">
+                                Wprowadź numer lekarza wystawiającego składający się z cyfr.
                             </p>
                         </div>
                     </div>
@@ -129,8 +130,8 @@
             </div>
         </div>
     </form>
-    <form role="form" name="choose_term">
-        <div class="row" data-ng-show="choose_patient.$valid && choose_kindofvisit.$valid && (fill_referral.$valid || TCC.termDetails.visitId === '2')">
+    <form role="form" name="chooseTerm">
+        <div class="row" data-ng-show="choosePatient.$valid && chooseKindOfVisit.$valid && (fillReferral.$valid || TCC.termDetails.visitId === '2')">
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -160,8 +161,8 @@
                             </fieldset>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadTreatmentsList()">
-                            <label class="control-label" for="kindoftreatment">Rodzaj zabiegu</label>
-                            <select class="form-control" data-ng-options="treatment.treatmentid as treatment.kindoftreatment for treatment in TCC.treatmentsList|orderBy:'kindoftreatment'" data-ng-model="TCC.termDetails.treatmentId" name="kindoftreatment" required></select>
+                            <label class="control-label" for="kindOfTreatment">Rodzaj zabiegu</label>
+                            <select class="form-control" data-ng-options="treatment.treatmentid as treatment.kindoftreatment for treatment in TCC.treatmentsList|orderBy:'kindoftreatment'" data-ng-model="TCC.termDetails.treatmentId" name="kindOfTreatment" required></select>
                         </div>
                         <div class="form-group required" data-ng-init="TCC.loadRoomsList()">
                             <label class="control-label" for="room">Pokój</label>
@@ -181,14 +182,14 @@
                             <input name="parameters" type="text" class="form-control" data-ng-model="TCC.termDetails.parameters" placeholder="Parametry">
                         </div>
                         <div class="form-group required">
-                            <label class="control-label" for="bodyparts">Okolica ciała</label>
-                            <input name="bodyparts" type="text" class="form-control" data-ng-model="TCC.termDetails.bodyparts" placeholder="Okolica ciała" required>
+                            <label class="control-label" for="bodyParts">Okolica ciała</label>
+                            <input name="bodyParts" type="text" class="form-control" data-ng-model="TCC.termDetails.bodyparts" placeholder="Okolica ciała" required>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="additionalinformations">Dodatkowe informacje</label>
-                            <textarea name="additionalinformations" data-ng-model="TCC.termDetails.additionalInformations" class="form-control" maxlength="512" rows="5" placeholder="Dodatkowe informacje"></textarea>
+                            <label class="control-label" for="additionalInformations">Dodatkowe informacje</label>
+                            <textarea name="additionalInformations" data-ng-model="TCC.termDetails.additionalInformations" class="form-control" maxlength="512" rows="5" placeholder="Dodatkowe informacje"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" data-ng-click="TCC.saveTerm()" data-ng-hide="TCC.submitting" data-ng-disabled="choose_term.$invalid" data-toggle="tooltip" title="Dodaj nowy termin"><i class="fa fa-plus"></i> Dodaj</button>
+                        <button type="submit" class="btn btn-primary" data-ng-click="TCC.saveTerm()" data-ng-hide="TCC.submitting" data-ng-disabled="chooseTerm.$invalid" data-toggle="tooltip" title="Dodaj nowy termin"><i class="fa fa-plus"></i> Dodaj</button>
                     </div>
                 </div>
             </div>
@@ -225,7 +226,7 @@
                         </table>
                     </div>
                     <p align="center" data-ng-show="TCC.submitting"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
-                    <button type="submit" class="btn btn-primary" data-ng-click="TCC.saveTerms()" data-ng-hide="TCC.submitting" data-toggle="tooltip" title="Zatweirdź wybrane terminy"><i class="fa fa-check"></i> Zatwierdź</button>
+                    <button type="submit" class="btn btn-primary" data-ng-click="TCC.saveTerms()" data-ng-hide="TCC.submitting" data-toggle="tooltip" title="Zatwierdź wybrane terminy"><i class="fa fa-check"></i> Zatwierdź</button>
                 </div>
             </div>
         </div>

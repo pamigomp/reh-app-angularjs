@@ -11,72 +11,72 @@
             </div>
         </div>
     </div>
-    <form class="row" role="form" name="new_employee">
+    <form class="row" role="form" name="newEmployee">
         <div class="col-lg-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Dane personalne</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.surname.$valid ? 'has-success' : (newEmployee.surname.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="surname">Nazwisko</label>
                         <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="ECC.employeeDetails.surname" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required>
-                        <p class="help-block" data-ng-show="surnameBlur && new_employee.surname.$error.minlength">
-                            Wprowadź nazwisko pracownika, składające się z minimum 2 znaków.
+                        <p class="help-block" data-ng-show="surnameBlur && newEmployee.surname.$error.minlength">
+                            Wprowadź nazwisko pracownika składające się z minimum 2 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="surnameBlur && new_employee.surname.$error.maxlength">
-                            Wprowadź nazwisko pracownika, składające się z maksymalnie 32 znaków.
+                        <p class="help-block" data-ng-show="surnameBlur && newEmployee.surname.$error.maxlength">
+                            Wprowadź nazwisko pracownika składające się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.name.$valid ? 'has-success' : (newEmployee.name.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="name">Imię</label>
                         <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="ECC.employeeDetails.name" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required>
-                        <p class="help-block" data-ng-show="nameBlur && new_employee.name.$error.minlength">
-                            Wprowadź imię pracownika, składające się z minimum 2 znaków.
+                        <p class="help-block" data-ng-show="nameBlur && newEmployee.name.$error.minlength">
+                            Wprowadź imię pracownika składające się z minimum 2 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="nameBlur && new_employee.name.$error.maxlength">
-                            Wprowadź imię pracownika, składające się z maksymalnie 32 znaków.
+                        <p class="help-block" data-ng-show="nameBlur && newEmployee.name.$error.maxlength">
+                            Wprowadź imię pracownika składające się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="newEmployee.degree.$valid ? 'has-success' : (newEmployee.degree.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="degree">Stopień</label>
                         <input name="degree" type="text" class="form-control" data-ng-blur="degreeBlur = true" data-ng-model="ECC.employeeDetails.degree" data-ng-minlength="2" data-ng-maxlength="16" placeholder="Stopień">
-                        <p class="help-block" data-ng-show="degreeBlur && new_employee.degree.$error.minlength">
-                            Wprowadź stopień pracownika, składający się z minimum 2 znaków. Np. mgr, lek. itp.
+                        <p class="help-block" data-ng-show="degreeBlur && newEmployee.degree.$error.minlength">
+                            Wprowadź stopień pracownika składający się z minimum 2 znaków. Np. mgr, lek. itp.
                         </p>
-                        <p class="help-block" data-ng-show="degreeBlur && new_employee.degree.$error.maxlength">
-                            Wprowadź stopień pracownika, składający się z minimum 16 znaków. Np. mgr, lek. itp.
+                        <p class="help-block" data-ng-show="degreeBlur && newEmployee.degree.$error.maxlength">
+                            Wprowadź stopień pracownika składający się z minimum 16 znaków. Np. mgr, lek. itp.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.position.$valid ? 'has-success' : (newEmployee.position.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="position">Stanowisko</label>
                         <input name="position" type="text" data-ng-model="ECC.employeeDetails.position" class="form-control" data-ng-blur="positionBlur = true" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Stanowisko" required>
-                        <p class="help-block" data-ng-show="positionBlur && new_employee.position.$error.minlength">
-                            Wprowadź stanowisko pracownika, składające się z minimum 3 znaków.
+                        <p class="help-block" data-ng-show="positionBlur && newEmployee.position.$error.minlength">
+                            Wprowadź stanowisko pracownika składające się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="positionBlur && new_employee.position.$error.maxlength">
-                            Wprowadź stanowisko pracownika, składające się z maksymalnie 64 znaków.
+                        <p class="help-block" data-ng-show="positionBlur && newEmployee.position.$error.maxlength">
+                            Wprowadź stanowisko pracownika składające się z maksymalnie 64 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.sex.$valid ? 'has-success' : (newEmployee.sex.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="sex">Płeć</label>
                         <div class="radio">
                             <label>
-                                <input value="K" data-ng-model="ECC.employeeDetails.sex" type="radio" data-ng-required="!ECC.employeeDetails.sex">Kobieta
+                                <input name="sex" value="K" data-ng-model="ECC.employeeDetails.sex" type="radio" data-ng-required="!ECC.employeeDetails.sex">Kobieta
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input value="M" data-ng-model="ECC.employeeDetails.sex" type="radio" data-ng-required="!ECC.employeeDetails.sex">Mężczyzna
+                                <input name="sex" value="M" data-ng-model="ECC.employeeDetails.sex" type="radio" data-ng-required="!ECC.employeeDetails.sex">Mężczyzna
                             </label>
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.dob.$valid ? 'has-success' : (newEmployee.dob.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="dob">Data urodzenia</label>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="ECC.dateOptions" is-open="ECC.opened" placeholder="Data urodzenia" data-ng-click="ECC.open()"  data-ng-model="ECC.employeeDetails.dob" required>
+                                    <input type="text" name="dob" class="form-control" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="ECC.dateOptions" is-open="ECC.opened" placeholder="Data urodzenia" data-ng-click="ECC.open()" data-ng-model="ECC.employeeDetails.dob" required>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-click="ECC.open()">
                                             <i class="fa fa-calendar"></i>
@@ -86,49 +86,49 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.email.$valid ? 'has-success' : (newEmployee.email.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="email">E-mail</label>
                         <input name="email" type="email" data-ng-model="ECC.employeeDetails.email" data-ng-blur="emailBlur = true" data-ng-minlength="5" data-ng-maxlength="64" class="form-control" placeholder="E-mail" required>
-                        <p class="help-block" data-ng-show="emailBlur && new_employee.email.$error.minlength && !new_employee.email.$error.email">
-                            Wprowadź e-mail pracownika, składający się z minimum 5 znaków.
+                        <p class="help-block" data-ng-show="emailBlur && newEmployee.email.$error.minlength && !newEmployee.email.$error.email">
+                            Wprowadź e-mail pracownika składający się z minimum 5 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="emailBlur && new_employee.email.$error.maxlength && !new_employee.email.$error.email">
-                            Wprowadź e-mail pracownika, składający się z maksymalnie 64 znaków.
+                        <p class="help-block" data-ng-show="emailBlur && newEmployee.email.$error.maxlength && !newEmployee.email.$error.email">
+                            Wprowadź e-mail pracownika składający się z maksymalnie 64 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="emailBlur && new_employee.email.$error.email">
+                        <p class="help-block" data-ng-show="emailBlur && newEmployee.email.$error.email">
                             Wprowadź poprawny format e-maila pracownika, np. przyklad@rehapp.pl 
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.phone.$valid ? 'has-success' : (newEmployee.phone.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="phone">Telefon kontaktowy</label>
-                        <input name="phone" type="text" data-ng-model="ECC.employeeDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy" required>
-                        <p class="help-block" data-ng-show="phoneBlur && new_employee.phone.$error.pattern">
+                        <input name="phone" type="tel" data-ng-model="ECC.employeeDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy" required>
+                        <p class="help-block" data-ng-show="phoneBlur && newEmployee.phone.$error.pattern">
                             Wprowadź poprawny format telefonu pracownika (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.password.$valid ? 'has-success' : (newEmployee.password.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="password">Hasło</label>
                         <input name="password" type="password" data-ng-model="ECC.employeeDetails.password" class="form-control" data-ng-blur="passwordBlur = true" data-ng-minlength="6" data-ng-maxlength="32" placeholder="Hasło" required>
-                        <p class="help-block" data-ng-show="passwordBlur && new_employee.password.$error.minlength">
+                        <p class="help-block" data-ng-show="passwordBlur && newEmployee.password.$error.minlength">
                             Wprowadź hasło składające się z minimum 6 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="passwordBlur && new_employee.password.$error.maxlength">
+                        <p class="help-block" data-ng-show="passwordBlur && newEmployee.password.$error.maxlength">
                             Wprowadź hasło składające się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="(ECC.employeeDetails.password==ECC.confirmPassword) ? 'has-success' : (newEmployee.confirmPassword.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="confirmPassword">Potwierdź hasło</label>
-                        <input name="confirmPassword" type="password" data-ng-model="ECC.confirmPassword" class="form-control" data-ng-blur="confirmPasswordBlur = true" data-ng-minlength="6" data-ng-maxlength="32" data-ng-disabled="new_employee.password.$invalid" placeholder="Potwierdź hasło" required>
+                        <input name="confirmPassword" type="password" data-ng-model="ECC.confirmPassword" class="form-control" data-ng-blur="confirmPasswordBlur = true" data-ng-minlength="6" data-ng-maxlength="32" data-ng-disabled="newEmployee.password.$invalid" placeholder="Potwierdź hasło" required>
                         <p class="help-block" data-ng-show="confirmPasswordBlur && ECC.employeeDetails.password!==ECC.confirmPassword">
                             Wprowadź takie same hasła.
                         </p>
                     </div>
-                    <div class="form-group required">
-                        <label class="control-label" for="employmentdate">Data zatrudnienia</label>
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.employmentDate.$valid ? 'has-success' : (newEmployee.employmentDate.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="employmentDate">Data zatrudnienia</label>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="ECC.dateOptions" is-open="ECC.opened2" placeholder="Data zatrudnienia" data-ng-click="ECC.open2()" data-ng-model="ECC.employeeDetails.employmentdate" required>
+                                    <input type="text" name="employmentDate" class="form-control" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="ECC.dateOptions" is-open="ECC.opened2" placeholder="Data zatrudnienia" data-ng-click="ECC.open2()" data-ng-model="ECC.employeeDetails.employmentdate" required>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-click="ECC.open2()">
                                             <i class="fa fa-calendar"></i>
@@ -140,9 +140,9 @@
                     </div>
                     <div class="form-group">
                         <label>Zdjęcie</label>
-                        <input name="image" type="file" data-ng-model="ECC.employeeDetails.image" placeholder="Zdjęcie">
+                        <input name="image" accept="image/gif, image/jpeg" type="file" data-ng-model="ECC.employeeDetails.image" placeholder="Zdjęcie">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-feedback" data-ng-class="newEmployee.informations.$valid ? 'has-success' : (newEmployee.informations.$dirty ? '' : 'has-error')">
                         <label class="control-label" for="informations">Dodatkowe informacje</label>
                         <textarea name="informations" class="form-control" data-ng-model="ECC.employeeDetails.informations" maxlength="512" rows="5" placeholder="Dodatkowe informacje"></textarea>
                     </div>
@@ -155,40 +155,40 @@
                     <h3 class="panel-title">Adres zamieszkania</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.street.$valid ? 'has-success' : (newEmployee.street.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="street">Ulica</label>
                         <input name="street" type="text" class="form-control" data-ng-model="ECC.employeeDetails.street" data-ng-blur="streetBlur = true" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required>
-                        <p class="help-block" data-ng-show="streetBlur && new_employee.street.$error.minlength">
+                        <p class="help-block" data-ng-show="streetBlur && newEmployee.street.$error.minlength">
                             Nazwa ulicy powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="streetBlur && new_employee.street.$error.maxlength">
+                        <p class="help-block" data-ng-show="streetBlur && newEmployee.street.$error.maxlength">
                             Nazwa ulicy powinna składać się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
-                        <label class="control-label" for="postal_code">Kod pocztowy</label>
-                        <input name="postal_code" type="text" class="form-control" data-ng-model="ECC.employeeDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
-                        <p class="help-block" data-ng-show="postalCodeBlur && new_employee.postal_code.$error.pattern">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.postalCode.$valid ? 'has-success' : (newEmployee.postalCode.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="postalCode">Kod pocztowy</label>
+                        <input name="postalCode" type="text" class="form-control" data-ng-model="ECC.employeeDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
+                        <p class="help-block" data-ng-show="postalCodeBlur && newEmployee.postalCode.$error.pattern">
                             Wprowadź poprawny format kodu pocztowego, np. 87-800.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.city.$valid ? 'has-success' : (newEmployee.city.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="city">Miejscowość</label>
                         <input name="city" type="text" class="form-control" data-ng-model="ECC.employeeDetails.city" data-ng-blur="cityBlur = true" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required>
-                        <p class="help-block" data-ng-show="cityBlur && new_employee.city.$error.minlength">
+                        <p class="help-block" data-ng-show="cityBlur && newEmployee.city.$error.minlength">
                             Nazwa miejscowości powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="cityBlur && new_employee.city.$error.maxlength">
+                        <p class="help-block" data-ng-show="cityBlur && newEmployee.city.$error.maxlength">
                             Nazwa miejscowości powinna składać się z maksymalnie 32 znaków.
                         </p>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group has-feedback required" data-ng-class="newEmployee.country.$valid ? 'has-success' : (newEmployee.country.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="country">Kraj</label>
                         <input name="country" type="text" class="form-control" data-ng-model="ECC.employeeDetails.country" data-ng-blur="countryBlur = true" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required>
-                        <p class="help-block" data-ng-show="countryBlur && new_employee.country.$error.minlength">
+                        <p class="help-block" data-ng-show="countryBlur && newEmployee.country.$error.minlength">
                             Nazwa państwa powinna składać się z minimum 3 znaków.
                         </p>
-                        <p class="help-block" data-ng-show="countryBlur && new_employee.country.$error.maxlength">
+                        <p class="help-block" data-ng-show="countryBlur && newEmployee.country.$error.maxlength">
                             Nazwa państwa powinna składać się z maksymalnie 64 znaków.
                         </p>
                     </div>
@@ -196,7 +196,7 @@
             </div>
         </div>
     </form>
-    <button type="submit" class="btn btn-primary" data-ng-click="ECC.saveEmployeeDetails()" data-ng-hide="ECC.submitting" data-ng-disabled="new_employee.$invalid || ECC.employeeDetails.password!==ECC.confirmPassword" data-toggle="tooltip" title="Dodaj nowego pracownika"><i class="fa fa-plus"></i> Dodaj</button>
+    <button type="submit" class="btn btn-primary" data-ng-click="ECC.saveEmployeeDetails()" data-ng-hide="ECC.submitting" data-ng-disabled="newEmployee.$invalid || ECC.employeeDetails.password!==ECC.confirmPassword" data-toggle="tooltip" title="Dodaj nowego pracownika"><i class="fa fa-plus"></i> Dodaj</button>
     <button class="btn btn-default" data-ui-sref="root.employees.list" data-ng-hide="ECC.submitting" data-toggle="tooltip" title="Wróć na listę pracowników"><i class="fa fa-times"></i> Anuluj</button>
     <p align="center" data-ng-show="ECC.submitting"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
 </div>

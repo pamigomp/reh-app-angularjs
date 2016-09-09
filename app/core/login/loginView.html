@@ -12,7 +12,7 @@
                     <div class="alert alert-danger" role="alert" data-ng-show="LC.loginError">
                         <strong>Błąd!</strong> Wystąpił błąd w połączeniu z serwerem.
                     </div>
-                    <form name="form" role="form">
+                    <form name="loginForm" role="form">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email" data-ng-model="LC.data.email" autofocus required>
@@ -21,7 +21,7 @@
                                 <input class="form-control" placeholder="Hasło" name="password" type="password" data-ng-model="LC.data.password" required>
                             </div>
                         </fieldset>
-                        <button data-ng-click="LC.login(LC.data)" class="btn btn-lg btn-primary btn-block" data-ng-disabled="form.$invalid">
+                        <button data-ng-click="LC.login(LC.data)" class="btn btn-lg btn-primary btn-block" data-ng-disabled="loginForm.$invalid">
                             Zaloguj się
                         </button>
                     </form>
