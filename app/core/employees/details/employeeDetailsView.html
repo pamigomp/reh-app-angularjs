@@ -32,6 +32,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.surname.$valid ? 'has-success' : (employeeDetails.surname.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="surname">Nazwisko</label>
                         <input name="surname" type="text" class="form-control" data-ng-blur="surnameBlur = true" data-ng-model="EDC.employeeDetails.surname" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Nazwisko" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.surname.$valid ? 'fa-check' : (employeeDetails.surname.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="surnameBlur && employeeDetails.surname.$error.minlength">
                             Wprowadź nazwisko pracownika składające się z minimum 2 znaków.
                         </p>
@@ -42,6 +43,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.name.$valid ? 'has-success' : (employeeDetails.name.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="name">Imię</label>
                         <input name="name" type="text" class="form-control" data-ng-blur="nameBlur = true" data-ng-model="EDC.employeeDetails.name" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Imię" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.name.$valid ? 'fa-check' : (employeeDetails.name.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="nameBlur && employeeDetails.name.$error.minlength">
                             Wprowadź imię pracownika składające się z minimum 2 znaków.
                         </p>
@@ -52,6 +54,7 @@
                     <div class="form-group has-feedback" data-ng-class="employeeDetails.degree.$valid ? 'has-success' : (employeeDetails.degree.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="degree">Stopień</label>
                         <input name="degree" type="text" class="form-control" data-ng-blur="degreeBlur = true" data-ng-model="EDC.employeeDetails.degree" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="2" data-ng-maxlength="16" placeholder="Stopień">
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.degree.$valid ? 'fa-check' : (employeeDetails.degree.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="degreeBlur && employeeDetails.degree.$error.minlength">
                             Wprowadź stopień pracownika składający się z minimum 2 znaków. Np. mgr, lek. itp.
                         </p>
@@ -62,6 +65,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.position.$valid ? 'has-success' : (employeeDetails.position.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="position">Stanowisko</label>
                         <input name="position" type="text" data-ng-model="EDC.employeeDetails.position" class="form-control" data-ng-blur="positionBlur = true" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Stanowisko" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.position.$valid ? 'fa-check' : (employeeDetails.position.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="positionBlur && employeeDetails.position.$error.minlength">
                             Wprowadź stanowisko pracownika składające się z minimum 3 znaków.
                         </p>
@@ -69,7 +73,7 @@
                             Wprowadź stanowisko pracownika składające się z maksymalnie 64 znaków.
                         </p>
                     </div>
-                    <div class="form-group has-feedback required" data-ng-class="employeeDetails.sex.$valid ? 'has-success' : (employeeDetails.sex.$pristine ? '' : 'has-error')">
+                    <div class="form-group required" data-ng-class="employeeDetails.sex.$valid ? 'has-success' : (employeeDetails.sex.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="sex">Płeć</label>
                         <div class="radio">
                             <label>
@@ -88,6 +92,7 @@
                             <div class="col-xs-12">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="dob" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="EDC.dateOptions" is-open="EDC.opened" placeholder="Data urodzenia" data-ng-click="EDC.open()" data-ng-model="EDC.employeeDetails.dob" data-ng-disabled="!EDC.allowEdit" required>
+                                    <span class="fa form-control-feedback" style="right: 38px;" data-ng-class="employeeDetails.dob.$valid ? 'fa-check' : (employeeDetails.dob.$pristine ? '' : 'fa-times')"></span>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!EDC.allowEdit" data-ng-click="EDC.open()">
                                             <i class="fa fa-calendar"></i>
@@ -100,6 +105,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.email.$valid ? 'has-success' : (employeeDetails.email.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="email">E-mail</label>
                         <input name="email" type="email" data-ng-model="EDC.employeeDetails.email" data-ng-blur="emailBlur = true" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="5" data-ng-maxlength="64" class="form-control" placeholder="E-mail" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.email.$valid ? 'fa-check' : (employeeDetails.email.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="emailBlur && employeeDetails.email.$error.minlength && !employeeDetails.email.$error.email">
                             Wprowadź e-mail pracownika składający się z minimum 5 znaków.
                         </p>
@@ -113,11 +119,12 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.phone.$valid ? 'has-success' : (employeeDetails.phone.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="phone">Telefon kontaktowy</label>
                         <input name="phone" type="tel" data-ng-model="EDC.employeeDetails.phonenumber" class="form-control" data-ng-blur="phoneBlur = true" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="9" data-ng-maxlength="9" data-ng-pattern="/^[0-9]{9}$/" placeholder="Telefon kontaktowy" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.phone.$valid ? 'fa-check' : (employeeDetails.phone.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="phoneBlur && employeeDetails.phone.$error.pattern">
                             Wprowadź poprawny format telefonu pracownika (9 cyfr, bez spacji!), np. 600123456 lub 542361234.
                         </p>
                     </div>
-                    <div class="form-group has-feedback required" data-ng-class="employeeDetails.status.$valid ? 'has-success' : (employeeDetails.status.$pristine ? '' : 'has-error')">
+                    <div class="form-group required" data-ng-class="employeeDetails.status.$valid ? 'has-success' : (employeeDetails.status.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="status">Status</label>
                         <select class="form-control" data-ng-model="EDC.employeeDetails.status" name="status" data-ng-blur="statusBlur = true" data-ng-disabled="!EDC.allowEdit" required>
                             <option selected disabled style="display: none" value=''>Proszę wybrać status</option>
@@ -129,17 +136,18 @@
                         <label>Zdjęcie</label>
                         <input name="image" accept="image/gif, image/jpeg" type="file" data-ng-model="EDC.employeeDetails.image" data-ng-disabled="!EDC.allowEdit" placeholder="Zdjęcie">
                     </div>
-                    <div class="form-group has-feedback">
+                    <div class="form-group">
                         <label>Data zatrudnienia</label>
                         <p class="form-control-static">{{::EDC.employeeDetails.employmentdate|date:'dd.MM.yyyy'}}</p>
                     </div>
-                    <div class="form-group has-feedback" data-ng-hide="EDC.employeeDetails.dismissdate === undefined">
+                    <div class="form-group" data-ng-hide="EDC.employeeDetails.dismissdate === undefined">
                         <label>Data rezygnacji</label>
                         <p class="form-control-static">{{::EDC.employeeDetails.dismissdate|date:'dd.MM.yyyy'}}</p>
                     </div>
                     <div class="form-group has-feedback" data-ng-class="employeeDetails.informations.$valid ? 'has-success' : (employeeDetails.informations.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="informations">Dodatkowe informacje</label>
                         <textarea name="informations" class="form-control" data-ng-model="EDC.employeeDetails.informations" data-ng-disabled="!EDC.allowEdit" maxlength="512" rows="5" placeholder="Dodatkowe informacje"></textarea>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.informations.$valid ? 'fa-check' : (employeeDetails.informations.$pristine ? '' : 'fa-times')"></span>
                     </div>
                 </div>
             </div>
@@ -153,6 +161,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.street.$valid ? 'has-success' : (employeeDetails.street.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="street">Ulica</label>
                         <input name="street" type="text" class="form-control" data-ng-model="EDC.employeeDetails.street" data-ng-blur="streetBlur = true" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Ulica" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.street.$valid ? 'fa-check' : (employeeDetails.street.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="streetBlur && employeeDetails.street.$error.minlength">
                             Nazwa ulicy powinna składać się z minimum 3 znaków.
                         </p>
@@ -163,6 +172,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.postalCode.$valid ? 'has-success' : (employeeDetails.postalCode.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="postalCode">Kod pocztowy</label>
                         <input name="postalCode" type="text" class="form-control" data-ng-model="EDC.employeeDetails.postalcode" data-ng-blur="postalCodeBlur = true" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="6" data-ng-maxlength="6" data-ng-pattern="/^[0-9]{2}\-[0-9]{3}$/" placeholder="Kod pocztowy" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.postalCode.$valid ? 'fa-check' : (employeeDetails.postalCode.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="postalCodeBlur && employeeDetails.postalCode.$error.pattern">
                             Wprowadź poprawny format kodu pocztowego, np. 87-800.
                         </p>
@@ -170,6 +180,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.city.$valid ? 'has-success' : (employeeDetails.city.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="city">Miejscowość</label>
                         <input name="city" type="text" class="form-control" data-ng-model="EDC.employeeDetails.city" data-ng-blur="cityBlur = true" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="32" placeholder="Miejscowość" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.city.$valid ? 'fa-check' : (employeeDetails.city.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="cityBlur && employeeDetails.city.$error.minlength">
                             Nazwa miejscowości powinna składać się z minimum 3 znaków.
                         </p>
@@ -180,6 +191,7 @@
                     <div class="form-group has-feedback required" data-ng-class="employeeDetails.country.$valid ? 'has-success' : (employeeDetails.country.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="country">Kraj</label>
                         <input name="country" type="text" class="form-control" data-ng-model="EDC.employeeDetails.country" data-ng-blur="countryBlur = true" data-ng-disabled="!EDC.allowEdit" data-ng-minlength="3" data-ng-maxlength="64" placeholder="Kraj" required>
+                        <span class="fa form-control-feedback" data-ng-class="employeeDetails.country.$valid ? 'fa-check' : (employeeDetails.country.$pristine ? '' : 'fa-times')"></span>
                         <p class="help-block" data-ng-show="countryBlur && employeeDetails.country.$error.minlength">
                             Nazwa państwa powinna składać się z minimum 3 znaków.
                         </p>
