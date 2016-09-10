@@ -17,24 +17,28 @@
             getEmployees: getEmployees,
             getIcds: getIcds,
             getPatient: getPatient,
-            getRooms: getRooms,
             getPatients: getPatients,
             getPatientTermsCancelled: getPatientTermsCancelled,
             getPatientTermsCompleted: getPatientTermsCompleted,
             getPatientTermsPending: getPatientTermsPending,
+            getRooms: getRooms,
             getTermPending: getTermPending,
             getTermsCancelled: getTermsCancelled,
             getTermsCompleted: getTermsCompleted,
             getTermsPending: getTermsPending,
+            getTreatment: getTreatment,
             getTreatments: getTreatments,
             removeEmployee: removeEmployee,
             removePatient: removePatient,
+            removeTreatment: removeTreatment,
             resetPatientPassword: resetPatientPassword,
             saveEmployee: saveEmployee,
             savePatient: savePatient,
             saveTerms: saveTerms,
+            saveTreatment: saveTreatment,
             updateEmployee: updateEmployee,
             updatePatient: updatePatient,
+            updateTreatment: updateTreatment,
             verifyCredentials: verifyCredentials,
             updateTermPending: updateTermPending
         };
@@ -75,17 +79,17 @@
             });
         }
 
-        function cancelTerm(patienttreatmentid) {
+        function cancelTerm(treatmentId) {
             return $http({
                 method: 'PUT',
-                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancel/' + patienttreatmentid
+                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/cancel/' + treatmentId
             });
         }
 
-        function completeTerm(patienttreatmentid) {
+        function completeTerm(treatmentId) {
             return $http({
                 method: 'PUT',
-                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/complete/' + patienttreatmentid
+                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/complete/' + treatmentId
             });
         }
 
@@ -176,11 +180,26 @@
             });
         }
 
+        function removeTreatment(treatmentId) {
+            return $http({
+                method: 'DELETE',
+                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments/' + treatmentId
+            });
+        }
+
         function updatePatient(patientDetails) {
             return $http({
                 method: 'PUT',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/patients/' + patientDetails.pesel,
                 data: patientDetails
+            });
+        }
+
+        function updateTreatment(treatmentDetails) {
+            return $http({
+                method: 'PUT',
+                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments/' + treatmentDetails.treatmentId,
+                data: treatmentDetails
             });
         }
 
@@ -233,11 +252,19 @@
             });
         }
 
-        function saveTerms(terms) {
+        function saveTerms(term) {
             return $http({
                 method: 'POST',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/terms/pending',
-                data: terms
+                data: term
+            });
+        }
+
+        function saveTreatment(treatment) {
+            return $http({
+                method: 'POST',
+                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments',
+                data: treatment
             });
         }
 
@@ -245,6 +272,13 @@
             return $http({
                 method: 'GET',
                 url: 'https://apex.oracle.com/pls/apex/pwr/webapp/verify/' + email
+            });
+        }
+
+        function getTreatment(treatmentId) {
+            return $http({
+                method: 'GET',
+                url: 'https://apex.oracle.com/pls/apex/pwr/webapp/treatments/' + treatmentId
             });
         }
     }

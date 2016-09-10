@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.employees.create', ['rehApp.employeesService'])
+    angular.module('rehApp.employees.create', ['rehApp.employeesService', 'ui.bootstrap'])
 
             .controller('EmployeeCreateController', EmployeeCreateController);
 

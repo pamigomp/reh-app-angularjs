@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('rehApp.patients.details', ['rehApp.patientsService', 'ui.router'])
+    angular.module('rehApp.patients.details', ['rehApp.patientsService', 'ui.router', 'ui.bootstrap'])
 
             .controller('PatientDetailsController', PatientDetailsController);
 
@@ -63,7 +63,8 @@
             vm.successReset = false;
 
             if (angular.isDefined($stateParams.patientPesel)) {
-                patientsService.resetPatientPassword(vm.patientDetails.pesel).then(resetPatientPasswordSuccess, resetPatientPasswordFailure);
+                patientsService.resetPatientPassword(vm.patientDetails.pesel)
+                        .then(resetPatientPasswordSuccess, resetPatientPasswordFailure);
             }
 
             function resetPatientPasswordSuccess() {

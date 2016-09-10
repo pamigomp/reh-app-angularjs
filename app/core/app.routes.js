@@ -312,7 +312,7 @@
                 .state('root.patients.list', {
                     url: '/list',
                     data: {
-                        title: 'Lista Pacjentów',
+                        title: 'Lista pacjentów',
                         breadcrumb: 'Lista'
                     },
                     views: {
@@ -327,7 +327,7 @@
                 .state('root.patients.list_empty', {
                     url: '/list',
                     data: {
-                        title: 'Lista Pacjentów',
+                        title: 'Lista pacjentów',
                         breadcrumb: 'Lista'
                     },
                     views: {
@@ -342,7 +342,7 @@
                 .state('root.patients.list_error', {
                     url: '/list',
                     data: {
-                        title: 'Lista Pacjentów',
+                        title: 'Lista pacjentów',
                         breadcrumb: 'Lista'
                     },
                     views: {
@@ -430,7 +430,7 @@
                 .state('root.employees.list', {
                     url: '/list',
                     data: {
-                        title: 'Lista Pracowników',
+                        title: 'Lista pracowników',
                         breadcrumb: 'Lista'
                     },
                     views: {
@@ -445,7 +445,7 @@
                 .state('root.employees.list_empty', {
                     url: '/list',
                     data: {
-                        title: 'Lista Pracowników',
+                        title: 'Lista pracowników',
                         breadcrumb: 'Lista'
                     },
                     views: {
@@ -460,7 +460,7 @@
                 .state('root.employees.list_error', {
                     url: '/list',
                     data: {
-                        title: 'Lista Pracowników',
+                        title: 'Lista pracowników',
                         breadcrumb: 'Lista'
                     },
                     views: {
@@ -548,7 +548,7 @@
                 .state('root.charts.general', {
                     url: '/general',
                     data: {
-                        title: 'Wykresy Ogólne',
+                        title: 'Wykresy ogólne',
                         breadcrumb: 'Ogólne'
                     },
                     views: {
@@ -563,7 +563,7 @@
                 .state('root.charts.patients', {
                     url: '/patients',
                     data: {
-                        title: 'Wykresy Pacjentów',
+                        title: 'Wykresy pacjentów',
                         breadcrumb: 'Pacjenci'
                     },
                     views: {
@@ -578,7 +578,7 @@
                 .state('root.charts.treatments', {
                     url: '/treatments',
                     data: {
-                        title: 'Wykresy Zabiegów',
+                        title: 'Wykresy zabiegów',
                         breadcrumb: 'Zabiegi'
                     },
                     views: {
@@ -606,6 +606,109 @@
                             templateUrl: 'core/login/loginView.html',
                             controller: 'LoginController',
                             controllerAs: 'LC'
+                        }
+                    }
+                })
+
+                .state('root.treatments', {
+                    abstract: true,
+                    url: '/treatments',
+                    data: {
+                        title: 'Zabiegi',
+                        breadcrumb: 'Zabiegi'
+                    },
+                    views: {
+                        'content@': {
+                            template: '<div data-ui-view=\'\'></div>'
+                        }
+                    }
+                })
+
+                .state('root.treatments.list', {
+                    url: '/list',
+                    data: {
+                        title: 'Lista zabiegów',
+                        breadcrumb: 'Lista'
+                    },
+                    views: {
+                        '': {
+                            templateUrl: 'core/treatments/list/treatmentsListView.html',
+                            controller: 'TreatmentsListController',
+                            controllerAs: 'TLC'
+                        }
+                    }
+                })
+
+                .state('root.treatments.list_empty', {
+                    url: '/list',
+                    data: {
+                        title: 'Lista zabiegów',
+                        breadcrumb: 'Lista'
+                    },
+                    views: {
+                        '': {
+                            templateUrl: 'core/treatments/list/treatmentsListEmptyView.html',
+                            controller: 'TreatmentsListController',
+                            controllerAs: 'TLC'
+                        }
+                    }
+                })
+
+                .state('root.treatments.list_error', {
+                    url: '/list',
+                    data: {
+                        title: 'Lista zabiegów',
+                        breadcrumb: 'Lista'
+                    },
+                    views: {
+                        '': {
+                            templateUrl: 'core/treatments/list/treatmentsListErrorView.html',
+                            controller: 'TreatmentsListController',
+                            controllerAs: 'TLC'
+                        }
+                    }
+                })
+
+                .state('root.treatments.new', {
+                    url: '/new',
+                    data: {
+                        title: 'Nowy zabieg',
+                        breadcrumb: 'Nowy zabieg'
+                    },
+                    views: {
+                        '': {
+                            templateUrl: 'core/treatments/create/treatmentCreateView.html',
+                            controller: 'TreatmentCreateController',
+                            controllerAs: 'TCC'
+                        }
+                    }
+                })
+
+                .state('root.treatments.treatment', {
+                    abstract: true,
+                    url: '/:treatmentId',
+                    data: {
+                        title: '[ID]',
+                        breadcrumb: '[ID]'
+                    },
+                    views: {
+                        'content@': {
+                            template: '<div data-ui-view=\'\'></div>'
+                        }
+                    }
+                })
+
+                .state('root.treatments.treatment.details', {
+                    url: '/details',
+                    data: {
+                        title: 'Szczegóły zabiegu',
+                        breadcrumb: 'Szczegóły'
+                    },
+                    views: {
+                        '': {
+                            templateUrl: 'core/treatments/details/treatmentDetailsView.html',
+                            controller: 'TreatmentDetailsController',
+                            controllerAs: 'TDC'
                         }
                     }
                 });

@@ -3,8 +3,6 @@
 
     angular.module('rehApp', [
         'ngMockE2E',
-        'ui.bootstrap',
-        'ngAnimate',
         'rehApp.directives.modal',
         'rehApp.pageTitle',
         'rehApp.charts.general',
@@ -29,6 +27,9 @@
         'rehApp.terms.completed.list',
         'rehApp.terms.create',
         'rehApp.terms.pending.list',
-        'rehApp.terms.pending.details'
+        'rehApp.terms.pending.details',
+        'rehApp.treatments.create',
+        'rehApp.treatments.details',
+        'rehApp.treatments.list'
     ]);
 })();

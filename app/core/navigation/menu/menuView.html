@@ -83,20 +83,20 @@
                         </li>
                     </ul>
                 </li>
-                <li class="disabled" data-ng-class="{active: $state.includes('root.treatments')}">
+                <li data-ng-class="{active: $state.includes('root.treatments')}">
                     <a href="#" data-ng-class="{active: $state.includes('root.treatments')}">
                         <i class="fa fa-list-alt fa-fw"></i>
                         Zabiegi
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level" data-ng-class="{in: $state.includes('root.treatments')}">
-                        <li class="disabled" data-ng-class="{active: $state.includes('root.treatments.list')}">
+                        <li data-ng-class="{active: $state.includes('root.treatments.list')}">
                             <a href="#/treatments/list" data-ng-class="{active: $state.includes('root.treatments.list')}">
                                 <i class="fa fa-list fa-fw"></i> 
                                 Lista
                             </a>
                         </li>
-                        <li class="disabled" data-ng-class="{active: $state.includes('root.treatments.new')}">
+                        <li data-ng-class="{active: $state.includes('root.treatments.new')}">
                             <a href="#/treatments/new" data-ng-class="{active: $state.includes('root.treatments.new')}">
                                 <i class="fa fa-plus fa-fw"></i>
                                 Nowy
@@ -117,7 +117,7 @@
                                 Ogólne
                             </a>
                         </li>
-                        <li href="#/charts/patients" data-ng-class="{active: $state.includes('root.charts.patients')}">
+                        <li data-ng-class="{active: $state.includes('root.charts.patients')}">
                             <a href="#/charts/patients" data-ng-class="{active: $state.includes('root.charts.patients')}">
                                 <i class="fa fa-pie-chart fa-fw"></i>
                                 Pacjenci

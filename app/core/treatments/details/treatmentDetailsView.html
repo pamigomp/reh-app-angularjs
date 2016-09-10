@@ -1,0 +1,91 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Szczegóły zabiegu</h1>
+        </div>
+    </div>
+    <div class="row" data-ng-show="TDC.errorEdit">
+        <div class="col-lg-12">
+            <div class="alert alert-danger" role="alert">
+                <strong>Błąd!</strong> Wystąpił problem podczas edytowania zabiegu.
+            </div>
+        </div>
+    </div>
+    <div class="row" data-ng-show="TDC.errorLoading">
+        <div class="col-lg-12">
+            <div class="alert alert-danger" role="alert">
+                <strong>Błąd!</strong> Wystąpił problem podczas pobierania szczegółów zabiegu.
+            </div>
+        </div>
+    </div>
+    <form class="row" role="form" name="treatmentDetails" data-ng-init="TDC.loadTreatmentDetails()">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Szczegóły zabiegu</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group has-feedback required" data-ng-class="treatmentDetails.kindOfTreatment.$valid ? 'has-success' : (treatmentDetails.kindOfTreatment.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="kindOfTreatment">Rodzaj zabiegu</label>
+                        <input name="kindOfTreatment" type="text" class="form-control" data-ng-blur="kindOfTreatmentBlur = true" data-ng-model="TDC.treatmentDetails.kindoftreatment" data-ng-minlength="2" data-ng-maxlength="32" placeholder="Rodzaj zabiegu" data-ng-disabled="!TDC.allowEdit" required>
+                        <span class="fa form-control-feedback" data-ng-class="treatmentDetails.kindOfTreatment.$valid ? 'fa-check' : (treatmentDetails.kindOfTreatment.$pristine ? '' : 'fa-times')"></span>
+                        <p class="help-block" data-ng-show="kindOfTreatmentBlur && treatmentDetails.kindOfTreatment.$error.minlength">
+                            Wprowadź rodzaj zabiegu składający się z minimum 2 znaków.
+                        </p>
+                        <p class="help-block" data-ng-show="kindOfTreatmentBlur && treatmentDetails.kindOfTreatment.$error.maxlength">
+                            Wprowadź rodzaj zabiegu składający się z maksymalnie 32 znaków.
+                        </p>
+                    </div>
+                    <div class="form-group has-feedback required" data-ng-class="(treatmentDetails.price.$valid) ? 'has-success' : (treatmentDetails.price.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="price">Cena</label>
+                        <div class="input-group">
+                            <input name="price" type="number" class="form-control" data-ng-blur="priceBlur = true" data-ng-model="TDC.treatmentDetails.price" placeholder="Cena" min="0" max="999.99" data-ng-disabled="!TDC.allowEdit" required>
+                            <span class="fa form-control-feedback" style="right: 39px;" data-ng-class="(treatmentDetails.price.$valid) ? 'fa-check' : (treatmentDetails.price.$pristine ? '' : 'fa-times')"></span>
+                            <span class="input-group-addon">zł.</span>
+                        </div>
+                        <p class="help-block" data-ng-show="priceBlur && treatmentDetails.price.$error.min">
+                            Cena musi być wartością dodatnią.
+                        </p>
+                        <p class="help-block" data-ng-show="priceBlur && treatmentDetails.price.$error.max">
+                            Wprowadź cenę nieprzekraczającą 999,99 złotych.
+                        </p>
+                    </div>
+                    <div class="form-group has-feedback" data-ng-class="treatmentDetails.duration.$valid ? 'has-success' : (treatmentDetails.duration.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="duration">Czas trwania</label>
+                        <div class="input-group">
+                            <input name="duration" type="number" class="form-control" data-ng-blur="durationBlur = true" data-ng-model="TDC.treatmentDetails.duration" placeholder="Czas trwania" min="0" max="480" data-ng-disabled="!TDC.allowEdit">
+                            <span class="fa form-control-feedback" style="right: 54px;" data-ng-class="treatmentDetails.duration.$valid ? 'fa-check' : (treatmentDetails.duration.$pristine ? '' : 'fa-times')"></span>
+                            <span class="input-group-addon">min.</span>
+                        </div>
+                        <p class="help-block" data-ng-show="durationBlur && treatmentDetails.duration.$error.min">
+                            Czas trwania zabiegu musi być wartością dodatnią.
+                        </p>
+                        <p class="help-block" data-ng-show="durationBlur && treatmentDetails.duration.$error.max">
+                            Wprowadź czas trwania nieprzekraczający 480 minut (8h).
+                        </p>
+                    </div>
+                    <div class="form-group has-feedback" data-ng-class="treatmentDetails.description.$valid ? 'has-success' : (treatmentDetails.description.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="description">Opis</label>
+                        <textarea name="description" class="form-control" data-ng-model="TDC.treatmentDetails.description" data-ng-disabled="!TDC.allowEdit" maxlength="1024" rows="10" placeholder="Opis"></textarea>
+                        <span class="fa form-control-feedback" data-ng-class="treatmentDetails.description.$valid ? 'fa-check' : (treatmentDetails.description.$pristine ? '' : 'fa-times')"></span>
+                    </div>
+                    <div class="form-group has-feedback required" data-ng-class="treatmentDetails.recommendations.$valid ? 'has-success' : (treatmentDetails.recommendations.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="recommendations">Wskazania</label>
+                        <textarea name="recommendations" class="form-control" data-ng-model="TDC.treatmentDetails.recommendations" data-ng-disabled="!TDC.allowEdit" maxlength="1024" rows="10" placeholder="Wskazania" required></textarea>
+                        <span class="fa form-control-feedback" data-ng-class="treatmentDetails.recommendations.$valid ? 'fa-check' : (treatmentDetails.recommendations.$pristine ? '' : 'fa-times')"></span>
+                    </div>
+                    <div class="form-group has-feedback required" data-ng-class="treatmentDetails.contraindications.$valid ? 'has-success' : (treatmentDetails.contraindications.$pristine ? '' : 'has-error')">
+                        <label class="control-label" for="contraindications">Przeciwwskazania</label>
+                        <textarea name="contraindications" class="form-control" data-ng-model="TDC.treatmentDetails.contraindications" data-ng-disabled="!TDC.allowEdit" maxlength="1024" rows="10" placeholder="Przeciwwskazania" required></textarea>
+                        <span class="fa form-control-feedback" data-ng-class="treatmentDetails.contraindications.$valid ? 'fa-check' : (treatmentDetails.contraindications.$pristine ? '' : 'fa-times')"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button type="submit" class="btn btn-primary" data-ng-show="!TDC.allowEdit && !TDC.updating" data-ng-click="TDC.startEdit()" data-toggle="tooltip" title="Edytuj szczegóły zabiegu"><i class="fa fa-pencil"></i> Edytuj</button>
+    <button class="btn btn-primary" data-ng-show="TDC.allowEdit && !TDC.updating" data-ng-click="TDC.updateTreatmentDetails()" data-ng-disabled="treatmentDetails.$invalid" data-toggle="tooltip" title="Zapisz wprowadzone zmiany"><i class="fa fa-check"></i> Zapisz</button>
+    <button class="btn btn-warning" data-ng-show="TDC.allowEdit && !TDC.updating" data-ng-click="TDC.cancelEdit()" data-toggle="tooltip" title="Anuluj wprowadzone zmiany"><i class="fa fa-times"></i> Anuluj</button>
+    <button class="btn btn-default pull-right" data-ng-hide="TDC.updating" data-ui-sref="root.treatments.list" data-toggle="tooltip" title="Wróć na listę zabiegów"><i class="fa fa-arrow-left"></i> Wróć</button>
+    <p align="center" data-ng-show="TDC.updating"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+</div>

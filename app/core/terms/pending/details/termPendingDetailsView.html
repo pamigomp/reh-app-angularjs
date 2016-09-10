@@ -74,10 +74,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group required" data-ng-disabled="!TPDC.allowEdit">
+                    <div class="form-group required">
                         <label class="control-label" for="hour">Godzina</label>
-                        <fieldset data-ng-disabled="!TPDC.allowEdit">
-                            <div uib-timepicker  data-ng-model="TPDC.termPendingDetails.datehour" hour-step="TPDC.hstep" minute-step="TPDC.mstep" show-meridian="false" data-ng-disabled="!TPDC.allowEdit" required></div>
+                        <fieldset>
+                            <div uib-timepicker data-ng-model="TPDC.termPendingDetails.datehour" hour-step="TPDC.hstep" minute-step="TPDC.mstep" show-meridian="false" data-ng-disabled="!TPDC.allowEdit" required></div>
                         </fieldset>
                     </div>
                     <div class="form-group required" data-ng-init="TPDC.loadTreatmentsList()">
