@@ -34,6 +34,7 @@
         vm.loadTreatmentsList = loadTreatmentsList;
         vm.saveTerm = saveTerm;
         vm.saveTerms = saveTerms;
+        vm.today = new Date().getTime();
 
         function saveTerms() {
             vm.errorCreate = false;
