@@ -92,7 +92,7 @@
                             <div class="col-xs-12">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="dob" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="EDC.dateOptions" is-open="EDC.opened" placeholder="Data urodzenia" data-ng-click="EDC.open()" data-ng-model="EDC.employeeDetails.dob" data-ng-disabled="!EDC.allowEdit" required>
-                                    <span class="fa form-control-feedback" style="right: 38px;" data-ng-class="employeeDetails.dob.$valid ? 'fa-check' : (employeeDetails.dob.$pristine ? '' : 'fa-times')"></span>
+                                    <span class="fa form-control-feedback datepicker-validation-icon" data-ng-class="employeeDetails.dob.$valid ? 'fa-check' : (employeeDetails.dob.$pristine ? '' : 'fa-times')"></span>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-disabled="!EDC.allowEdit" data-ng-click="EDC.open()">
                                             <i class="fa fa-calendar"></i>
@@ -127,7 +127,6 @@
                     <div class="form-group required" data-ng-class="employeeDetails.status.$valid ? 'has-success' : (employeeDetails.status.$pristine ? '' : 'has-error')">
                         <label class="control-label" for="status">Status</label>
                         <select class="form-control" data-ng-model="EDC.employeeDetails.status" name="status" data-ng-blur="statusBlur = true" data-ng-disabled="!EDC.allowEdit" required>
-                            <option selected disabled style="display: none" value=''>Proszę wybrać status</option>
                             <option value="Aktywny">Aktywny</option>
                             <option value="Nieaktywny">Nieaktywny</option>
                         </select>

@@ -1,40 +1,40 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="min-height: 0">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="navbar-default sidebar" role="navigation">
         <div id="navbar" class="sidebar-nav navbar-collapse collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li data-ng-class="{active: $state.includes('root.dashboard')}">
-                    <a href="#/dashboard">
+                    <a href="#/dashboard" data-ng-class="{active: $state.includes('root.dashboard')}">
                         <i class="fa fa-dashboard fa-fw"></i>
                         Panel
                     </a>
                 </li>
                 <li data-ng-class="{active: $state.includes('root.terms')}">
-                    <a href="#">
+                    <a href="#" data-ng-class="{active: $state.includes('root.terms')}">
                         <i class="fa fa-calendar fa-fw"></i>
                         Terminy
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level" data-ng-class="{in: $state.includes('root.terms')}">
                         <li data-ng-class="{active: $state.includes('root.terms.pending')}">
-                            <a href="#/terms/pending">
+                            <a href="#/terms/pending" data-ng-class="{active: $state.includes('root.terms.pending')}">
                                 <i class="fa fa-spinner fa-fw"></i>
                                 Oczekujące
                             </a>
                         </li>
                         <li data-ng-class="{active: $state.includes('root.terms.cancelled')}">
-                            <a href="#/terms/cancelled">
+                            <a href="#/terms/cancelled" data-ng-class="{active: $state.includes('root.terms.cancelled')}">
                                 <i class="fa fa-ban fa-fw"></i>
                                 Odwołane
                             </a>
                         </li>
                         <li data-ng-class="{active: $state.includes('root.terms.completed')}">
-                            <a href="#/terms/completed">
+                            <a href="#/terms/completed" data-ng-class="{active: $state.includes('root.terms.completed')}">
                                 <i class="fa fa-check-circle-o fa-fw"></i>
                                 Zrealizowane
                             </a>
                         </li>
                         <li data-ng-class="{active: $state.includes('root.terms.new')}">
-                            <a href="#/terms/new">
+                            <a href="#/terms/new" data-ng-class="{active: $state.includes('root.terms.new')}">
                                 <i class="fa fa-plus fa-fw"></i>
                                 Nowy
                             </a>
@@ -42,20 +42,20 @@
                     </ul>
                 </li>
                 <li data-ng-class="{active: $state.includes('root.patients')}">
-                    <a href="#">
+                    <a href="#" data-ng-class="{active: $state.includes('root.patients')}">
                         <i class="fa fa-wheelchair fa-fw"></i>
                         Pacjenci
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level" data-ng-class="{in: $state.includes('root.patients')}">
                         <li data-ng-class="{active: $state.includes('root.patients.list')}">
-                            <a href="#/patients/list">
+                            <a href="#/patients/list" data-ng-class="{active: $state.includes('root.patients.list')}">
                                 <i class="fa fa-list fa-fw"></i>
                                 Lista
                             </a>
                         </li>
                         <li data-ng-class="{active: $state.includes('root.patients.new')}">
-                            <a href="#/patients/new">
+                            <a href="#/patients/new" data-ng-class="{active: $state.includes('root.patients.new')}">
                                 <i class="fa fa-plus fa-fw"></i>
                                 Nowy
                             </a>
@@ -63,20 +63,20 @@
                     </ul>
                 </li>
                 <li data-ng-class="{active: $state.includes('root.employees')}">
-                    <a href="#">
+                    <a href="#" data-ng-class="{active: $state.includes('root.employees')}">
                         <i class="fa fa-users fa-fw"></i>
                         Pracownicy
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level" data-ng-class="{in: $state.includes('root.employees')}">
                         <li data-ng-class="{active: $state.includes('root.employees.list')}">
-                            <a href="#/employees/list">
+                            <a href="#/employees/list" data-ng-class="{active: $state.includes('root.employees.list')}">
                                 <i class="fa fa-list fa-fw"></i>
                                 Lista
                             </a>
                         </li>
                         <li data-ng-class="{active: $state.includes('root.employees.new')}">
-                            <a href="#/employees/new">
+                            <a href="#/employees/new" data-ng-class="{active: $state.includes('root.employees.new')}">
                                 <i class="fa fa-plus fa-fw"></i>
                                 Nowy
                             </a>
@@ -84,20 +84,20 @@
                     </ul>
                 </li>
                 <li class="disabled" data-ng-class="{active: $state.includes('root.treatments')}">
-                    <a href="#">
+                    <a href="#" data-ng-class="{active: $state.includes('root.treatments')}">
                         <i class="fa fa-list-alt fa-fw"></i>
                         Zabiegi
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level" data-ng-class="{in: $state.includes('root.treatments')}">
                         <li class="disabled" data-ng-class="{active: $state.includes('root.treatments.list')}">
-                            <a href="#/treatments/list">
+                            <a href="#/treatments/list" data-ng-class="{active: $state.includes('root.treatments.list')}">
                                 <i class="fa fa-list fa-fw"></i> 
                                 Lista
                             </a>
                         </li>
                         <li class="disabled" data-ng-class="{active: $state.includes('root.treatments.new')}">
-                            <a href="#/treatments/new">
+                            <a href="#/treatments/new" data-ng-class="{active: $state.includes('root.treatments.new')}">
                                 <i class="fa fa-plus fa-fw"></i>
                                 Nowy
                             </a>
@@ -105,26 +105,26 @@
                     </ul>
                 </li>
                 <li data-ng-class="{active: $state.includes('root.charts')}">
-                    <a href="#">
+                    <a href="#" data-ng-class="{active: $state.includes('root.charts')}">
                         <i class="fa fa-bar-chart fa-fw"></i>
                         Wykresy
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level" data-ng-class="{in: $state.includes('root.charts')}">
                         <li data-ng-class="{active: $state.includes('root.charts.general')}">
-                            <a href="#/charts/general">
+                            <a href="#/charts/general" data-ng-class="{active: $state.includes('root.charts.general')}">
                                 <i class="fa fa-line-chart fa-fw"></i>
                                 Ogólne
                             </a>
                         </li>
-                        <li data-ng-class="{active: $state.includes('root.charts.patients')}">
-                            <a href="#/charts/patients">
+                        <li href="#/charts/patients" data-ng-class="{active: $state.includes('root.charts.patients')}">
+                            <a href="#/charts/patients" data-ng-class="{active: $state.includes('root.charts.patients')}">
                                 <i class="fa fa-pie-chart fa-fw"></i>
                                 Pacjenci
                             </a>
                         </li>
                         <li data-ng-class="{active: $state.includes('root.charts.treatments')}">
-                            <a href="#/charts/treatments">
+                            <a href="#/charts/treatments" data-ng-class="{active: $state.includes('root.charts.treatments')}">
                                 <i class="fa fa-bar-chart fa-fw"></i>
                                 Zabiegi
                             </a>

@@ -67,7 +67,7 @@
                             <div class="col-xs-12">
                                 <div class="input-group">
                                     <input type="text" name="dob" class="form-control" uib-datepicker-popup="dd.MM.yyyy" show-button-bar="false" datepicker-options="PCC.dateOptions" is-open="PCC.opened" placeholder="Data urodzenia" data-ng-click="PCC.open()" data-ng-model="PCC.patientDetails.dob" required>
-                                    <span class="fa form-control-feedback" style="right: 38px;" data-ng-class="newPatient.dob.$valid ? 'fa-check' : (newPatient.dob.$pristine ? '' : 'fa-times')"></span>
+                                    <span class="fa form-control-feedback datepicker-validation-icon" data-ng-class="newPatient.dob.$valid ? 'fa-check' : (newPatient.dob.$pristine ? '' : 'fa-times')"></span>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" data-ng-click="PCC.open()">
                                             <i class="fa fa-calendar"></i>
