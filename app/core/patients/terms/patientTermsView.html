@@ -80,7 +80,7 @@
                                                 <td class="col-xs-1" title="'Numer pokoju'" filter="{roomnumber: 'number'}" sortable="'roomnumber'">{{term.roomnumber}}</td>
                                                 <td class="col-xs-2" title="'Pracownik'" filter="PTC.employeeFilters" sortable="'surname'">{{term.degree + ' ' + term.surname + ' ' + term.name}}</td>
                                                 <td class="col-xs-1" title="'Rodzaj wizyty'" filter="{kindofvisit: 'select'}" filter-data="PTC.kindsOfVisit" sortable="'kindofvisit'">{{term.kindofvisit}}</td>
-                                                <td class="col-xs-1" title="'Cena'" filter="{price: 'number'}" sortable="'price'"><span data-ng-if="term.kindofvisit === 'Prywatna'">{{term.price|currency}}</span><span data-ng-if="term.kindofvisit === 'NFZ'">{{0|currency}}</span></td>
+                                                <td class="col-xs-1" title="'Cena'" filter="{price: 'number'}" sortable="'price'"><span data-ng-if="term.kindofvisit === 'Prywatna'">{{term.price|currency}}</span><span data-ng-if="term.kindofvisit === 'NFZ'">{{::0|currency}}</span></td>
                                                 <td class="col-xs-2" title="'Dodatkowe informacje'" filter="{additionalinformations: 'text'}" sortable="'additionalinformations'">{{term.additionalinformations}}</td></tr>
                                         </table>
                                     </div>
@@ -107,7 +107,7 @@
                                                 <td class="col-xs-1" title="'Numer pokoju'" filter="{roomnumber: 'number'}" sortable="'roomnumber'">{{term.roomnumber}}</td>
                                                 <td class="col-xs-2" title="'Pracownik'" filter="PTC.employeeFilters" sortable="'surname'">{{term.degree + ' ' + term.surname + ' ' + term.name}}</td>
                                                 <td class="col-xs-1" title="'Rodzaj wizyty'" filter="{kindofvisit: 'select'}" filter-data="PTC.kindsOfVisit" sortable="'kindofvisit'">{{term.kindofvisit}}</td>
-                                                <td class="col-xs-1" title="'Cena'" filter="{price: 'number'}" sortable="'price'"><span data-ng-if="term.kindofvisit === 'Prywatna'">{{term.price|currency}}</span><span data-ng-if="term.kindofvisit === 'NFZ'">{{0|currency}}</span></td>
+                                                <td class="col-xs-1" title="'Cena'" filter="{price: 'number'}" sortable="'price'"><span data-ng-if="term.kindofvisit === 'Prywatna'">{{term.price|currency}}</span><span data-ng-if="term.kindofvisit === 'NFZ'">{{::0|currency}}</span></td>
                                                 <td class="col-xs-2" title="'Dodatkowe informacje'" filter="{additionalinformations: 'text'}" sortable="'additionalinformations'">{{term.additionalinformations}}</td>
                                             </tr>
                                         </table>
