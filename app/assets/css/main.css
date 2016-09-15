@@ -1,5 +1,9 @@
 .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+textarea.form-control {
+    text-align: justify;
+}
+
 .logo {
     width: 26px;
 }
