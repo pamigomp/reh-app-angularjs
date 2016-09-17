@@ -11,10 +11,12 @@
         var vm = this;
 
         vm.login = login;
+        vm.logging = false;
 
         function login(data) {
             vm.credentialsError = false;
             vm.loginError = false;
+            vm.logging = true;
 
             loginService.verifyEmployeeCredentials(data.email)
                     .then(verifyEmployeeCredentialsSuccess, verifyEmployeeCredentialsFailure);
@@ -26,7 +28,7 @@
                     vm.credentialsError = true;
                     vm.loginError = false;
                 }
-
+                vm.logging = false;
                 function loginSuccess(authenticated) {
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     $state.go('root.dashboard', {}, {reload: true});
@@ -46,6 +48,7 @@
             function verifyEmployeeCredentialsFailure() {
                 vm.credentialsError = false;
                 vm.loginError = true;
+                vm.logging = false;
             }
         }
     }
