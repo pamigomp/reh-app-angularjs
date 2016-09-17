@@ -39,14 +39,16 @@
     function config($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.when('', '/dashboard');
         $urlRouterProvider.when('/', '/dashboard');
+        $urlRouterProvider.when('/terms', '/terms/pending');
+        $urlRouterProvider.when('/terms/', '/terms/pending');
         $urlRouterProvider.when('/patients', '/patients/list');
         $urlRouterProvider.when('/patients/', '/patients/list');
         $urlRouterProvider.when('/employees', '/employees/list');
         $urlRouterProvider.when('/employees/', '/employees/list');
+        $urlRouterProvider.when('/treatments', '/treatments/list');
+        $urlRouterProvider.when('/treatments/', '/treatments/list');
         $urlRouterProvider.when('/charts', '/charts/general');
         $urlRouterProvider.when('/charts/', '/charts/general');
-        $urlRouterProvider.when('/terms', '/terms/pending');
-        $urlRouterProvider.when('/terms/', '/terms/pending');
         $urlRouterProvider.otherwise(function ($injector) {
             var $state = $injector.get('$state');
             $state.go('root.dashboard');
